@@ -1,0 +1,39 @@
+{
+    "Languages": [
+        {
+            "category": "Programming",
+            "items": [
+                "Python",
+                "R",
+                "Javascript",
+                "SQL",
+                "Bash",
+                "MATLAB",
+                "HTML",
+                "CSS"
+            ]
+        },
+        {
+            "category": "Natural",
+            "items": [
+                "English",
+                "Vietnamese"
+            ]
+        }
+    ],
+    "Technical skills": [
+        {
+
+        }
+    ],
+    "Soft skills": [
+        {
+
+        }
+    ],
+    "Cognitive & Analytical Skills": [
+        {
+
+        }
+    ]
+}

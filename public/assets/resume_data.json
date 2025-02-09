@@ -1,0 +1,36 @@
+{
+    "first name": "Le",
+    "middle name": "Ngoc",
+    "last name": "Duc",
+    "email": "lengocduc195@gmail.com",
+    "phone": "0822.182.195",
+    "website": "https://lengocduc195.github.io/",
+    "github": "https://github.com/lengocduc195",
+    "education": [
+        {
+            "name": "Ho Chi Minh City University of Science",
+            "degree": "Bs",
+            "date": "AUG 2020 - DEC 2024",
+            "area": "Technology (Computer Science)",
+            "summary": "Developing predictive methods for disease risk assessment based on patient's medical history.",
+            "location": "Ho Chi Minh, VN"
+        },
+        {
+            "name": "AI Vietnam",
+            "degree": "Certificate",
+            "date": "AUG 2023 - AUG 2024",
+            "area": "Computer Science",
+            "summary": "AI Vietnam offers beginner-level training in AI, covering Time Series, NLP, and Computer Vision with a hands-on approach.",
+            "location": "Ho Chi Minh, VN"
+        }
+    ],
+    "work": [
+        {
+            "name": "Computer Science Lab",
+            "position": "AI Researcher",
+            "date": "SEP 2023 - PRESENT",
+            "summary": "Advising AI research on XAI approaches in computer vision",
+            "location": "Ho Chi Minh, VN"
+        }
+    ]
+}

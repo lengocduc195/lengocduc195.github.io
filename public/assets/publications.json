@@ -1,0 +1,29 @@
+{
+    "Conference": [
+        {
+            "abstract": "Graphs (or networks) are ubiquitous representation in life sciences and medicine, from molecular interactions maps, signaling transduction pathways, to graphs of scientific knowledge and patient- disease-intervention relationships derived from population studies and/or real-world data, such as electronic health records and insurance claims. Recent advance in graph machine learning (ML) approaches such as graph neural networks (GNNs) has transformed a diverse set of problems relying on biomedical networks that traditionally depend on descriptive topological data analyses. Small- and macro- molecules that were not modeled as graphs also saw a bloom in GNN-based algorithms improving the state-of-the-art performance for learning their properties. Comparing to graph ML applications from other domains, life sciences offer many unique problems and nuances ranging from graph construction to graph- level, and bi-graph-level supervision tasks.",
+            "contributors": [
+                "Wang, Zichen",
+                "Ioannidis, Vassilis N",
+                "Rangwala, Huzefa",
+                "Arai, Tatsuya",
+                "Brand, Ryan",
+                "Li, Mufei",
+                "Nakayama, Yohei"
+            ],
+            "dates": {
+                "pub-dates": "August 27",
+                "year": "2022"
+            },
+            "doi": "10.1145/3534678.3542628",
+            "periodical": "Proceedings of the 28th ACM SIGKDD Conference on Knowledge Discovery and Data Mining",
+            "titles": {
+                "secondary-title": "Proceedings of the 28th ACM SIGKDD Conference on Knowledge Discovery and Data Mining",
+                "title": "Graph Neural Networks in Life Sciences: Opportunities and Solutions"
+            }
+        }
+    ],
+    "Journal": [
+
+    ]
+}
