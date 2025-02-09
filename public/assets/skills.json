@@ -16,14 +16,24 @@
         {
             "category": "Natural",
             "items": [
-                "English",
-                "Vietnamese"
+                {
+                    "name": "English",
+                    "fluency": "IELTS 5.5"
+                },
+                {
+                    "name": "Vietnamese",
+                    "fluency": "Native"
+                }
             ]
         }
     ],
     "Technical skills": [
         {
-
+            "Machine Learning & Deep Learning": "PyTorch, Scikit-learn, Spacy, NLTK",
+            "AI Testing & Quality Assurance": "LIME, SHAP, Grad-CAM",
+            "Data Engineering & Processing": "Pandas, NumPy, Matplotlib, Seaborn, Dask",
+            "Software Engineering & Deployment": "FastAPI, Docker",
+            "Cloud & Infrastructure": "PostgreSQL, MongoDB, Azure ML"
         }
     ],
     "Soft skills": [

@@ -1,21 +1,102 @@
-[
-    {
-        "title": "Contrastive representation learning",
-        "desc": "In this work, I compared various contrastive loss functions used for contrastive representation learning (aka metric learning). Through experiments on MNIST and Fashion MNIST datasets, I found supervised contrastive loss improves the learned representation by providing informative projections for classification task. The figure shows the t-SNE embeddings of the representations learned by neural networks equipped with different contrastive objectives.",
-        "tags": [
-            "contrastive learning",
-            "representation learning"
-        ],
-        "img": "assets/projects/contrastive-loss.png",
-        "links": [
-            {
-                "url": "https://github.com/wangz10/contrastive_loss",
-                "type": "code"
-            },
-            {
-                "url": "https://towardsdatascience.com/contrasting-contrastive-loss-functions-3c13ca5f055e?source=friends_link&sk=e39379f0e1ac469d6ebb455e65c46eea",
-                "type": "blog post"
-            }
-        ]
-    }
-]
+{
+    "XAI": [
+        {
+            "title": "Contrastive representation learning",
+            "organization": "",
+            "tags": [
+                "contrastive learning",
+                "representation learning"
+            ],
+            "date": "",
+            "role": "",
+            "description": "In this work, I compared various contrastive loss functions used for contrastive representation learning (aka metric learning). Through experiments on MNIST and Fashion MNIST datasets, I found supervised contrastive loss improves the learned representation by providing informative projections for classification task. The figure shows the t-SNE embeddings of the representations learned by neural networks equipped with different contrastive objectives.",
+            "challenges": "",
+            "solutions": "",
+            "impacts": "",
+            "publications": [
+    
+            ],
+            "img": "assets/projects/contrastive-loss.png",
+            "links": [
+                {
+                    "url": "https://github.com/wangz10/contrastive_loss",
+                    "type": "code"
+                }
+            ]
+        }
+    ],
+    "Generative AI": [
+
+    ],
+    "Causal AI": [
+
+    ],
+    "AI for Healthcare & Digital Twins": [
+        {
+            "title": "AI-driven disease modeling",
+            "organization": "",
+            "tags": [
+            ],
+            "date": "",
+            "role": "",
+            "description": "",
+            "challenges": "",
+            "solutions": "",
+            "impacts": "",
+            "publications": [
+    
+            ],
+            "img": "",
+            "links": [
+                {
+                    "url": "https://github.com/wangz10/contrastive_loss",
+                    "type": "code"
+                }
+            ]
+        },
+        {
+            "title": "Early disease prediction",
+            "organization": "",
+            "tags": [
+            ],
+            "date": "",
+            "role": "",
+            "description": "",
+            "challenges": "",
+            "solutions": "",
+            "impacts": "",
+            "publications": [
+    
+            ],
+            "img": "",
+            "links": [
+                {
+                    "url": "https://github.com/wangz10/contrastive_loss",
+                    "type": "code"
+                }
+            ]
+        },
+        {
+            "title": "Personalized medicine using digital twins",
+            "organization": "",
+            "tags": [
+            ],
+            "date": "",
+            "role": "",
+            "description": "",
+            "challenges": "",
+            "solutions": "",
+            "impacts": "",
+            "publications": [
+    
+            ],
+            "img": "",
+            "links": [
+                {
+                    "url": "https://github.com/wangz10/contrastive_loss",
+                    "type": "code"
+                }
+            ]
+        }
+    ]
+}
