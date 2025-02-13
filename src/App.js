@@ -12,11 +12,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDownload } from '@fortawesome/free-solid-svg-icons'
 import {
   faLinkedinIn,
-  faTwitter,
   faGithub,
-  faMediumM,
   faGoogle,
-  faResearchgate,
   faGoogleScholar,
   faOrcid
 } from '@fortawesome/free-brands-svg-icons'
@@ -30,7 +27,7 @@ import { Publications, parsePublication } from './publications'
 import './publications.css'
 import Projects from './projects'
 import Social_Activities from './social_activities'
-import Softwares from './softwares'
+// import Softwares from './softwares'
 class NavLink extends Component {
   constructor(props) {
     super(props)

@@ -1,15 +1,11 @@
 import React from 'react'
-import { Jumbotron } from "reactstrap"; 
 // import Jumbotron from 'react-bootstrap/Jumbotron'; 
-import { Container, Row, Col, Image} from 'react-bootstrap'
+import { Row, Col} from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faLinkedinIn,
-  faTwitter,
   faGithub,
-  faMediumM,
   faGoogle,
-  faResearchgate,
   faGoogleScholar,
   faOrcid
 } from '@fortawesome/free-brands-svg-icons'

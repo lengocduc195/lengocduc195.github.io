@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Row, Col, Card, Badge } from 'react-bootstrap'
-import { Container } from 'reactstrap'
 
 function LiAnchorItem(props) {
   return (

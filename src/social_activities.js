@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-import { Row, Col, Card, Badge } from 'react-bootstrap'
-import { Container } from 'reactstrap'
+import { Row, Col, Card } from 'react-bootstrap'
 
-function LiAnchorItem(props) {
-  return (
-    <li className='list-inline-item'>[<a href={props.link.url} target='_blank' rel='noopener noreferrer'>{props.link.type}</a>]</li>
-  )
-}
+// function LiAnchorItem(props) {
+//   return (
+//     <li className='list-inline-item'>[<a href={props.link.url} target='_blank' rel='noopener noreferrer'>{props.link.type}</a>]</li>
+//   )
+// }
 
 class Social_Activity extends Component {
   render() {
