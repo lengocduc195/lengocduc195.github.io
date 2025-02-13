@@ -118,7 +118,7 @@ class Publications extends Component {
       return (
         <section>
           <div>
-            <a href='https://scholar.google.com/citations?user=bwLMCp4AAAAJ&hl=en' target='_blank' rel='noopener noreferrer'>Google Scholar</a>
+            <a href='https://scholar.google.com/citations?user=s6oA5t8AAAAJ&hl=en' target='_blank' rel='noopener noreferrer'>Google Scholar</a>
           </div>
           <Button variant='outline-primary' onClick={this.handleBtnClick} className='my-2'>Sort by {this.state.nextSortKey}</Button>
           <ol>

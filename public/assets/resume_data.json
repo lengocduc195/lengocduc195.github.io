@@ -11,9 +11,9 @@
             "name": "Nguyen Du Gifted High School",
             "degree": "High School",
             "date": "AUG 2017 - July 2020",
-            "area": "Technology (Computer Science)",
-            "summary": "Developing predictive methods for disease risk assessment based on patient's medical history.",
-            "location": "Ho Chi Minh, VN"
+            "area": "Mathematics",
+            "summary": "",
+            "location": "Dak Lak, VN"
         },
         {
             "name": "Ho Chi Minh City University of Science",
@@ -36,9 +36,16 @@
         {
             "name": "Computer Science Lab",
             "position": "AI Researcher",
-            "date": "SEP 2023 - PRESENT",
-            "summary": "Advising AI research on XAI approaches in computer vision",
+            "date": "JUN 2023 - PRESENT",
+            "summary": "My work involves mentoring and advising research groups specializing in Explainable AI (XAI) for Computer Vision. I guide researchers in developing interpretability techniques, evaluating AI model explanations, and identifying reasoning vulnerabilities in deep learning systems. My focus is on enhancing the transparency, reliability, and accountability of AI-driven vision models. Through this role, I contribute to advancing XAI research, fostering collaboration, and ensuring that AI systems provide meaningful and trustworthy explanations.",
             "location": "Ho Chi Minh, VN"
+        },
+        {
+            "name": "AI Vietnam Lab",
+            "position": "AI Researcher",
+            "date": "OCT 2023 - MAR 2024",
+            "summary": "Our research focuses on developing and evaluating Large Language Models (LLMs) for the Vietnamese language. We aim to enhance the understanding, generation, and adaptation of LLMs to Vietnamese by addressing linguistic challenges such as tone variations, complex syntax, and limited high-quality datasets. ",
+            "location": "Ho Chi Minh, VN (Remote)"
         }
     ]
 }

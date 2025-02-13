@@ -17,6 +17,7 @@ import {
   faMediumM,
   faGoogle,
   faResearchgate,
+  faGoogleScholar,
   faOrcid
 } from '@fortawesome/free-brands-svg-icons'
 import './App.css'
@@ -28,6 +29,7 @@ import './resume.css'
 import { Publications, parsePublication } from './publications'
 import './publications.css'
 import Projects from './projects'
+import Social_Activities from './social_activities'
 import Softwares from './softwares'
 class NavLink extends Component {
   constructor(props) {
@@ -58,12 +60,12 @@ class NavLink extends Component {
 }
 // navbar with scrollspy
 const navbar = (
-  <Navbar fixed='top' variant='dark' style={{ backgroundColor: '#0089A7' }} expand='sm'>
-    <Navbar.Brand href='#'>Zichen Wang, PhD</Navbar.Brand>
+  <Navbar fixed='top' variant='dark' style={{ backgroundColor: '#0089A7' }}>
+    <Navbar.Brand href='#' className='ms-5'>Duc Le</Navbar.Brand>
     <Navbar.Toggle aria-controls='responsive-navbar-nav' />
     <Navbar.Collapse id='responsive-navbar-nav'>
       <Scrollspy
-        items={['about', 'resume', 'softwares', 'publications']}
+        items={['about', 'resume', 'project', 'publications', 'social_activities']}
         offset={-72}
         currentClassName='nav-item active'
         className='navbar-nav mr-auto'
@@ -74,11 +76,17 @@ const navbar = (
         <Nav.Item as='li'>
           <NavLink href='#resume' name='Resume' />
         </Nav.Item>
-        <Nav.Item as='li'>
+        {/* <Nav.Item as='li'>
           <NavLink href='#softwares' name='Softwares' />
+        </Nav.Item> */}
+        <Nav.Item as='li'>
+          <NavLink href='#projects' name='Project' />
         </Nav.Item>
         <Nav.Item as='li'>
           <NavLink href='#publications' name='Publications' />
+        </Nav.Item>
+        <Nav.Item as='li'>
+          <NavLink href='#social_activities' name='Social' />
         </Nav.Item>
       </Scrollspy>
     </Navbar.Collapse>
@@ -157,6 +165,19 @@ class App extends Component {
     })
   }
 
+
+  getSocialActivitiesData() {
+    fetch('./assets/social_activities.json').then(response => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        throw new Error('Something went wrong when fetching data ...')
+      }
+    }).then(data => {
+      this.setState({ socialData: data })
+    })
+  }
+
   handleSortBtnClick(nextSortKey) {
     let sortedPubData = [].concat(this.state.pubData).sort((a, b) => b.year - a.year)
     if (nextSortKey === 'myRank') {
@@ -168,7 +189,9 @@ class App extends Component {
   componentDidMount() {
     this.getResumeData()
     this.getPublicationData()
+    this.getProjectData()
     this.getSoftwareData()
+    this.getSocialActivitiesData()
   }
 
   render() {
@@ -179,23 +202,23 @@ class App extends Component {
         <Container fluid={true}>
           <Row id='resume' className='justify-content-md-center'>
             <Col md={10} sm={12}>
-              <Button variant='outline-info' href='./assets/Zichen_Wang_Resume-04172021.pdf' className='my-2 mr-2' download>
+              {/* <Button variant='outline-info' href='./assets/Duc_Le_Resume-04172021.pdf' className='my-2 mr-2' download>
                 Resume <FontAwesomeIcon icon={faDownload} />
-              </Button>
-              <Button variant='outline-info' href='./assets/Zichen_Wang_CV-11062022.pdf' className='my-2 ml-2' download>
+              </Button> */}
+              <Button variant='outline-info' href='./assets/Duc_Le_CV-14022025.pdf' className='my-2 ml-2' download>
                 CV <FontAwesomeIcon icon={faDownload} />
               </Button>
               <Resume data={this.state.resumeData} />
 
             </Col>
           </Row>
-          {/* <Row id='projects' className='justify-content-md-center'>
+          <Row id='projects' className='justify-content-md-center'>
             <Col md={10} sm={12}>
               <h1>Selected Projects</h1>
               <Projects data={this.state.projData} />
             </Col>
           </Row>
-          <Row id='softwares' className='justify-content-md-center'>
+          {/* <Row id='softwares' className='justify-content-md-center'>
             <Col md={10} sm={12}>
               <h1>Softwares</h1>
               <Softwares data={this.state.softwareData} />
@@ -207,17 +230,24 @@ class App extends Component {
               <Publications data={this.state.pubData} onSortBtnClick={this.handleSortBtnClick} maxHeight={window.innerHeight} />
             </Col>
           </Row>
+          <Row id='social_activities' className='justify-content-md-center'>
+            <Col md={10} sm={12}>
+              <h1>Social Activities</h1>
+              <Social_Activities data={this.state.socialData} />
+            </Col>
+          </Row>
         </Container>
         <footer className='py-5'>
           <Container>
             <ul className='social-links text-center'>
-              <li><a target='_blank' rel='noopener noreferrer' href='https://twitter.com/ZichenWangPhD' title='Twitter'><FontAwesomeIcon icon={faTwitter} /></a></li>
-              <li><a target='_blank' rel='noopener noreferrer' href='https://github.com/wangz10' title='GitHub'><FontAwesomeIcon icon={faGithub} /></a></li>
-              <li><a target='_blank' rel='noopener noreferrer' href='https://www.linkedin.com/in/zichenwang/' title='LinkedIn'><FontAwesomeIcon icon={faLinkedinIn} /></a></li>
-              <li><a target='_blank' rel='noopener noreferrer' href='https://wangz10.medium.com/' title='Medium'><FontAwesomeIcon icon={faMediumM} /></a></li>
-              <li><a target='_blank' rel='noopener noreferrer' href='https://scholar.google.com/citations?user=bwLMCp4AAAAJ&hl=en' title='Google Scholar'><FontAwesomeIcon icon={faGoogle} /></a></li>
-              <li><a target='_blank' rel='noopener noreferrer' href='https://www.researchgate.net/profile/Zichen_Wang' title='ResearchGate'><FontAwesomeIcon icon={faResearchgate} /></a></li>
-              <li><a target='_blank' rel='noopener noreferrer' href='http://orcid.org/0000-0002-1415-1286' title='ORCID'><FontAwesomeIcon icon={faOrcid} /></a></li>
+              {/* <li><a target='_blank' rel='noopener noreferrer' href='https://twitter.com/ZichenWangPhD' title='Twitter'><FontAwesomeIcon icon={faTwitter} /></a></li> */}
+              <li><a target='_blank' rel='noopener noreferrer' href='https://github.com/lengocduc195' title='GitHub'><FontAwesomeIcon icon={faGithub} /></a></li>
+              <li><a target='_blank' rel='noopener noreferrer' href='https://www.linkedin.com/in/lengocduc195/' title='LinkedIn'><FontAwesomeIcon icon={faLinkedinIn} /></a></li>
+              {/* <li><a target='_blank' rel='noopener noreferrer' href='https://wangz10.medium.com/' title='Medium'><FontAwesomeIcon icon={faMediumM} /></a></li> */}
+              <li><a target='_blank' rel='noopener noreferrer' href='https://scholar.google.com/citations?user=s6oA5t8AAAAJ' title='Google Scholar'><FontAwesomeIcon icon={faGoogleScholar} /></a></li>
+              <li><a target='_blank' rel='noopener noreferrer' href='mailto:lengocduc195@gmail.com' title='Email'><FontAwesomeIcon icon={faGoogle} /></a></li>
+              {/* <li><a target='_blank' rel='noopener noreferrer' href='https://www.researchgate.net/profile/Zichen_Wang' title='ResearchGate'><FontAwesomeIcon icon={faResearchgate} /></a></li> */}
+              <li><a target='_blank' rel='noopener noreferrer' href='https://orcid.org/0009-0006-1574-1743' title='ORCID'><FontAwesomeIcon icon={faOrcid} /></a></li>
             </ul>
             <p className='m-0 text-center text-white'>All rights reserved.</p>
           </Container>

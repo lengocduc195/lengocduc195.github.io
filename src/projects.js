@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Row, Col, Card, Badge } from 'react-bootstrap'
+import { Container } from 'reactstrap'
 
 function LiAnchorItem(props) {
   return (
@@ -11,15 +12,15 @@ class Project extends Component {
   render() {
     const { data } = this.props
     return (
-      <Col md={6} className='d-flex flex-row align-items-stretch'>
-        <Card className='mb-3 shadow-sm h-md-250'>
+      <Col  md={{span:3, offset:3}} className='d-flex flex-row align-items-stretch'>
+        <Card className='mb-3 shadow-sm h-md-250' style={{width:"40rem"}}>
           <Card.Header>{data.title}</Card.Header>
           <Card.Img variant='top' src={data.img} />
           <Card.Body className='d-flex flex-column align-items-start'>
             <div>
               {data.tags.map((tag, i) => { return (<Badge key={i} variant='secondary' className='mr-1'>{tag}</Badge>) })}
             </div>
-            <Card.Text className='mb-auto'>{data.desc}</Card.Text>
+            <Card.Text className='mb-auto'>{data.description}</Card.Text>
             <ul className='list-unstyled list-inline'>
               {
                 data.links.map((link, i) => <LiAnchorItem key={i} link={link} />)

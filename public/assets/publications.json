@@ -1,18 +1,18 @@
 [
     {
-        "abstract": "",
+        "abstract": "Deep learning methods have recorded unexpected results for risk prediction on longitudinal patient data. In this task, many significant difficulties and challenges still need to be entirely resolved, one of which is that the correlation between codes has not been exploited in a thorough and organized manner. This paper proposes a multi-level, multi-scale attention model based on external knowledge. The model reasonably mimicked the prediction process of doctors by exploiting general to detailed correlations in the input data. As a result, the model used the inherent differences in the dataset and achieved more than 2% in F1 scores with baselines based on the MIMIC-IV dataset, demonstrating the effectiveness of the proposed model and the need to understand the correlation between codes.",
         "contributors": [
             "Duc, Le",
             "Bac, Le"
         ],
         "dates": {
             "pub-dates": "",
-            "year": "2025"
+            "year": "2024"
         },
-        "doi": "10",
-        "periodical": "Proceedings of the ",
+        "doi": "https://doi.org/10.1007/978-981-97-5937-8_10",
+        "periodical": "Proceedings of the Asian Conference on Intelligent Information and Database Systems",
         "titles": {
-            "secondary-title": "Proceedings of ",
+            "secondary-title": "Proceedings of the Asian Conference on Intelligent Information and Database Systems",
             "title": "Multi-scale and Multi-level Attention based on External knowledge in EHRs"
         }
     },
@@ -28,28 +28,28 @@
             "pub-dates": "",
             "year": "2025"
         },
-        "doi": "10.114",
+        "doi": "https://doi.org/10.1109/WACV61041.2025.00051",
         "periodical": "Proceedings of IEEE/CVF Winter Conference on Applications of Computer Vision",
         "titles": {
-            "secondary-title": "Proceedings of IEEE/CVF Winter Conference on Applications of Computer Vision",
+            "secondary-title": "Proceedings of IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)",
             "title": "From Visual Explanations to Counterfactual Explanations with Latent Diffusion"
         }
     },
     {
         "abstract": "",
         "contributors": [
-            "Ngoc Duc, Le",
+            "Duc, Le",
             "Minh Hung, Le",
             "Quang Vinh, Dinh"
         ],
         "dates": {
             "pub-dates": "",
-            "year": "2025"
+            "year": "2024"
         },
-        "doi": "10.114",
-        "periodical": "Proceedings of ",
+        "doi": "https://ceur-ws.org/Vol-3658/",
+        "periodical": "Proceedings of the 30th International Conference on Multimedia Modeling Workshop",
         "titles": {
-            "secondary-title": "Proceedings of ",
+            "secondary-title": "Proceedings of the 30th International Conference on Multimedia Modeling Workshop",
             "title": "Handle the problem of ample label space by using the image-guided feature extractor on the musti dataset"
         }
     }
