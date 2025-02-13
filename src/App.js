@@ -97,7 +97,7 @@ class App extends Component {
   }
 
   getResumeData() {
-    fetch('./assets/resumeData.json').then(response => {
+    fetch('./assets/resume_data.json').then(response => {
       if (response.ok) {
         return response.json()
       } else {
@@ -107,7 +107,17 @@ class App extends Component {
       this.setState({ resumeData: data })
     })
   }
-
+  // getPublicationData() {
+  //   fetch('./assets/publications.json').then(response => {
+  //     if (response.ok) {
+  //       return response.json()
+  //     } else {
+  //       throw new Error('Something went wrong when fetching data ...')
+  //     }
+  //   }).then(data => {
+  //     this.setState({ publication: data })
+  //   })
+  // }
   getPublicationData() {
     fetch('./assets/publications.json').then(response => {
       if (response.ok) {
@@ -184,13 +194,13 @@ class App extends Component {
               <h1>Selected Projects</h1>
               <Projects data={this.state.projData} />
             </Col>
-          </Row> */}
+          </Row>
           <Row id='softwares' className='justify-content-md-center'>
             <Col md={10} sm={12}>
               <h1>Softwares</h1>
               <Softwares data={this.state.softwareData} />
             </Col>
-          </Row>
+          </Row> */}
           <Row id='publications' className='justify-content-md-center'>
             <Col md={10} sm={12}>
               <h1>Publications</h1>

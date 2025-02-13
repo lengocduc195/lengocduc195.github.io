@@ -1,5 +1,6 @@
 import React from 'react'
-import { Container, Row, Col, Jumbotron } from 'react-bootstrap'
+import { Jumbotron } from "reactstrap"; 
+import { Container, Row, Col, ButtonToolbar} from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faLinkedinIn,
@@ -13,16 +14,16 @@ import {
 
 function About() {
   return (
-    <Jumbotron fluid id='about'>
+    // <ButtonToolbar fluid id='about'>
       <Container fluid>
         <Row className='justify-content-md-center'>
           <Col md={10} sm={12} className='mt-3'>
             <Row>
               <Col md={4} xs={12}>
                 <div style={{ display: 'block' }}>
-                  <img className='portrait' src='./assets/Zichen_Wang_1x1.jpg' alt='Zichen Wang' />
-                  <h3 className='text-center'>Zichen Wang, PhD</h3>
-                  <h4 className='text-center'>Sr Applied Scientist @ Amazon</h4>
+                  <img className='portrait' src='./assets/Duc_Le.jpg' alt='Duc Le' />
+                  <h3 className='text-center'>Duc Le, Bs</h3>
+                  <h4 className='text-center'>AI Researcher @ Computer Science Lab</h4>
                   <ul className='social-links text-center'>
                     <li><a target='_blank' rel='noopener noreferrer' href='https://twitter.com/ZichenWangPhD' title='Twitter'><FontAwesomeIcon icon={faTwitter} /></a></li>
                     <li><a target='_blank' rel='noopener noreferrer' href='https://github.com/wangz10' title='GitHub'><FontAwesomeIcon icon={faGithub} /></a></li>
@@ -51,7 +52,9 @@ function About() {
           </Col>
         </Row>
       </Container>
-    </Jumbotron>
+    // </ButtonToolbar>
+
+
   )
 }
 export default About

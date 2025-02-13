@@ -124,7 +124,7 @@ class Resume extends Component {
         <section className='resume'>
           <ResumeWork data={data.work} />
           <ResumeEducation data={data.education} />
-          <ResumeSkills data={data.skills} />
+          {/* <ResumeSkills data={data.skills} /> */}
         </section>
       )
     } else {

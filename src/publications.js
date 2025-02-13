@@ -17,9 +17,9 @@ function parsePublication(obj) {
   })
 
   // I am the n-th author
-  let myRank = parsedObj.authors.indexOf('Zichen Wang') + 1
+  let myRank = parsedObj.authors.indexOf('Duc Le') + 1
   if (myRank === 0) {
-    myRank = parsedObj.authors.indexOf('Zi-Chen Wang') + 1
+    myRank = parsedObj.authors.indexOf('Duc Le') + 1
   }
   parsedObj.myRank = myRank
 
@@ -56,7 +56,7 @@ class Publication extends Component {
     const authorsP = (<p className='authors'>
       {data.authors.map((a, i) => {
         let className = ''
-        if (a === 'Zichen Wang' || a === 'Zi-Chen Wang') {
+        if (a === 'Duc Le' || a === 'Ngoc Duc Le') {
           className = 'author-self'
         }
         if (i !== nAuthors - 1) {
