@@ -1,29 +1,63 @@
 {
     "Conference": [
         {
-            "abstract": "Graphs (or networks) are ubiquitous representation in life sciences and medicine, from molecular interactions maps, signaling transduction pathways, to graphs of scientific knowledge and patient- disease-intervention relationships derived from population studies and/or real-world data, such as electronic health records and insurance claims. Recent advance in graph machine learning (ML) approaches such as graph neural networks (GNNs) has transformed a diverse set of problems relying on biomedical networks that traditionally depend on descriptive topological data analyses. Small- and macro- molecules that were not modeled as graphs also saw a bloom in GNN-based algorithms improving the state-of-the-art performance for learning their properties. Comparing to graph ML applications from other domains, life sciences offer many unique problems and nuances ranging from graph construction to graph- level, and bi-graph-level supervision tasks.",
+            "abstract": "",
             "contributors": [
-                "Wang, Zichen",
-                "Ioannidis, Vassilis N",
-                "Rangwala, Huzefa",
-                "Arai, Tatsuya",
-                "Brand, Ryan",
-                "Li, Mufei",
-                "Nakayama, Yohei"
+                "Duc, Le",
+                "Bac, Le"
             ],
             "dates": {
-                "pub-dates": "August 27",
-                "year": "2022"
+                "pub-dates": "",
+                "year": "2025"
             },
-            "doi": "10.1145/3534678.3542628",
-            "periodical": "Proceedings of the 28th ACM SIGKDD Conference on Knowledge Discovery and Data Mining",
+            "doi": "10",
+            "periodical": "Proceedings of the ",
             "titles": {
-                "secondary-title": "Proceedings of the 28th ACM SIGKDD Conference on Knowledge Discovery and Data Mining",
-                "title": "Handle the problem of ample label space by using the image-guided feature extractor on the musti dataset"
+                "secondary-title": "Proceedings of ",
+                "title": "Multi-scale and Multi-level Attention based on External knowledge in EHRs"
+            }
+        },
+        {
+            "abstract": "Visual counterfactual explanations are ideal hypothetical images that change the decision-making of the classifier with high confidence toward the desired class while remaining visually plausible and close to the initial image. In this paper, we propose a new approach to tackle two key challenges in recent prominent works: i) determining which specific counterfactual features are crucial for distinguishing the “concept” of the target class from the original class, and ii) supplying valuable explanations for the non-robust classifier without relying on the support of an adversarially robust model. Our method identifies the essential region for modification through algorithms that provide visual explanations, and then our framework generates realistic counterfactual explanations by combining adversarial attacks based on pruning the adversarial gradient of the target classifier and the latent diffusion model. The proposed method outperforms previous state-of-the-art results on various evaluation criteria on ImageNet and CelebA-HQ datasets. In general, our method can be applied to arbitrary classifiers, highlight the strong association between visual and counterfactual explanations, make semantically meaningful changes from the target classifier, and provide observers with subtle counterfactual images.",
+            "contributors": [
+                "Tung, Luu",
+                "Nam, Le",
+                "Duc, Le",
+                "Bac, Le"
+            ],
+            "dates": {
+                "pub-dates": "",
+                "year": "2025"
+            },
+            "doi": "10.114",
+            "periodical": "Proceedings of IEEE/CVF Winter Conference on Applications of Computer Vision",
+            "titles": {
+                "secondary-title": "Proceedings of IEEE/CVF Winter Conference on Applications of Computer Vision",
+                "title": "From Visual Explanations to Counterfactual Explanations with Latent Diffusion"
             }
         }
     ],
     "Journal": [
 
+    ],
+    "Workshop": [
+        {
+            "abstract": "",
+            "contributors": [
+                "Ngoc Duc, Le",
+                "Minh Hung, Le",
+                "Quang Vinh, Dinh"
+            ],
+            "dates": {
+                "pub-dates": "",
+                "year": "2025"
+            },
+            "doi": "10.114",
+            "periodical": "Proceedings of ",
+            "titles": {
+                "secondary-title": "Proceedings of ",
+                "title": "Handle the problem of ample label space by using the image-guided feature extractor on the musti dataset"
+            }
+        }
     ]
 }

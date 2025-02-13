@@ -8,6 +8,14 @@
     "github": "https://github.com/lengocduc195",
     "education": [
         {
+            "name": "Nguyen Du Gifted High School",
+            "degree": "High School",
+            "date": "AUG 2017 - July 2020",
+            "area": "Technology (Computer Science)",
+            "summary": "Developing predictive methods for disease risk assessment based on patient's medical history.",
+            "location": "Ho Chi Minh, VN"
+        },
+        {
             "name": "Ho Chi Minh City University of Science",
             "degree": "Bs",
             "date": "AUG 2020 - DEC 2024",

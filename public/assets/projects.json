@@ -1,20 +1,20 @@
 {
     "XAI": [
         {
-            "title": "Contrastive representation learning",
-            "organization": "",
+            "title": "Visual Explanations to Counterfactual Explanations",
+            "organization": "KUBA",
             "tags": [
-                "contrastive learning",
-                "representation learning"
+                "counterfactual explanation",
+                "blended diffusion model"
             ],
             "date": "",
             "role": "",
-            "description": "In this work, I compared various contrastive loss functions used for contrastive representation learning (aka metric learning). Through experiments on MNIST and Fashion MNIST datasets, I found supervised contrastive loss improves the learned representation by providing informative projections for classification task. The figure shows the t-SNE embeddings of the representations learned by neural networks equipped with different contrastive objectives.",
+            "description": "",
             "challenges": "",
             "solutions": "",
             "impacts": "",
             "publications": [
-    
+                "From Visual Explanations to Counterfactual Explanations with Latent Diffusion"
             ],
             "img": "assets/projects/contrastive-loss.png",
             "links": [
@@ -66,7 +66,7 @@
             "solutions": "",
             "impacts": "",
             "publications": [
-    
+                "Multi-scale and Multi-level Attention based on External knowledge in EHRs"
             ],
             "img": "",
             "links": [
