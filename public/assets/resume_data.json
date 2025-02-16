@@ -35,6 +35,13 @@
     "work": [
         {
             "name": "Computer Science Lab",
+            "position": "Lead Generative AI Engineer",
+            "date": "MAR 2025 - PRESENT",
+            "summary": "Utilizing AI to enhance customer support systems and chatbot functionalities, while leveraging advanced data analysis techniques to optimize customer interactions and improve overall service efficiency. The AI-driven system is designed to provide personalized recommendations, automate responses, and analyze customer data to identify trends, preferences, and areas for improvement, ensuring a seamless and intelligent customer experience.",
+            "location": "Ha Noi, VN"
+        },
+        {
+            "name": "Computer Science Lab",
             "position": "AI Researcher",
             "date": "JUN 2023 - PRESENT",
             "summary": "My work involves mentoring and advising research groups specializing in Explainable AI (XAI) for Computer Vision. I guide researchers in developing interpretability techniques, evaluating AI model explanations, and identifying reasoning vulnerabilities in deep learning systems. My focus is on enhancing the transparency, reliability, and accountability of AI-driven vision models. Through this role, I contribute to advancing XAI research, fostering collaboration, and ensuring that AI systems provide meaningful and trustworthy explanations.",
