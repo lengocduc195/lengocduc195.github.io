@@ -1,0 +1,39 @@
+[
+    {
+        "title": "FairMind: AI Explainability & Robustness Evaluation",
+        "organization": "KUBA",
+        "tags": [
+            "counterfactual explanation",
+            "blended diffusion model"
+        ],
+        "date": "Mar 2024",
+        "role": "Mentor",
+        "description": "Our research focuses on evaluating AI models using Explainable AI (XAI) techniques and identifying reasoning vulnerabilities. We develop systematic methods to assess the reliability, consistency, and interpretability of AI-generated explanations. Additionally, we investigate potential weaknesses in AI reasoning, uncovering biases, inconsistencies, and exploitable flaws. Our goal is to enhance the transparency and trustworthiness of AI systems, ensuring their explanations are meaningful and reliable in real-world applications.",
+        "challenges": "",
+        "solutions": "",
+        "impacts": "",
+        "publications": [
+            "From Visual Explanations to Counterfactual Explanations with Latent Diffusion"
+        ],
+        "img": "assets/projects/From Visual Explanations to Counterfactual Explanations with Latent Diffusion.png",
+        "links": [
+        ]
+    },
+    {
+        "title": "MediRiskAI – AI-driven Medical Risk Prediction",
+        "organization": "",
+        "tags": [],
+        "date": "",
+        "role": "",
+        "description": "Our research focuses on predicting medical risk factors using AI-driven methodologies. We develop advanced models to analyze medical data, identify potential health risks, and provide early warnings for disease progression. By leveraging machine learning and explainable AI (XAI), we aim to enhance the interpretability and reliability of medical predictions, supporting healthcare professionals in making informed decisions. Our goal is to improve patient outcomes through accurate and transparent risk assessment.",
+        "challenges": "",
+        "solutions": "",
+        "impacts": "",
+        "publications": [
+            "Multi-scale and Multi-level Attention based on External knowledge in EHRs"
+        ],
+        "img": "assets/projects/MedRisk.jpeg",
+        "links": [
+        ]
+    }
+]
