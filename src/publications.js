@@ -7,7 +7,8 @@ function parsePublication(obj) {
     title: obj.titles.title,
     doi: obj.doi.replace('https://doi.org/', ''),
     abstract: obj.abstract,
-    journal: obj.titles['secondary-title']
+    journal: obj.titles['secondary-title'],
+    rank: obj.rank
   }
 
   parsedObj.authors = obj.contributors.map(name => {
@@ -67,6 +68,7 @@ class Publication extends Component {
       })}
                       </p>)
 
+    const rankP = <p className='rank-journal'><span className='rank' style={{fontWeight: 'bold'}}>{data.rank}</span></p>
     const journalP = <p className='p-journal'><span className='journal'>{data.journal}</span>, <span className='year'>{data.year}</span></p>
     const abstractP = <p>{data.abstract}</p>
     const abstractBtn = <p>[<span className='abs-btn' onClick={this.toggleAbstract}>abstract</span>]</p>
@@ -77,6 +79,7 @@ class Publication extends Component {
           {titleP}
           {authorsP}
           {journalP}
+          {rankP}
           {abstractBtn}
           {abstractP}
         </li>
@@ -87,6 +90,7 @@ class Publication extends Component {
           {titleP}
           {authorsP}
           {journalP}
+          {rankP}
           {abstractBtn}
         </li>
       )
