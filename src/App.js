@@ -105,77 +105,84 @@ class App extends Component {
   }
 
   getResumeData() {
-    fetch('./assets/resume_data.json').then(response => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        throw new Error('Something went wrong when fetching data ...')
-      }
-    }).then(data => {
-      this.setState({ resumeData: data })
-    })
-  }
-  // getPublicationData() {
-  //   fetch('./assets/publications.json').then(response => {
-  //     if (response.ok) {
-  //       return response.json()
-  //     } else {
-  //       throw new Error('Something went wrong when fetching data ...')
-  //     }
-  //   }).then(data => {
-  //     this.setState({ publication: data })
-  //   })
-  // }
-  getPublicationData() {
-    fetch('./assets/publications.json').then(response => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        throw new Error('Something went wrong when fetching data ...')
-      }
-    }).then(data => {
-      const parsedData = data.map((datum, i) => {
-        return parsePublication(datum)
+    fetch(`${process.env.PUBLIC_URL}/assets/resume_data.json`)
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error('Failed to fetch resume data');
       })
-      this.setState({ pubData: parsedData })
-    })
+      .then(data => {
+        this.setState({ resumeData: data });
+      })
+      .catch(error => {
+        console.error('Error loading resume data:', error);
+      });
+  }
+
+  getPublicationData() {
+    fetch(`${process.env.PUBLIC_URL}/assets/publications.json`)
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error('Failed to fetch publications');
+      })
+      .then(data => {
+        const parsedData = data.map(datum => parsePublication(datum));
+        this.setState({ pubData: parsedData });
+      })
+      .catch(error => {
+        console.error('Error loading publications:', error);
+      });
   }
 
   getProjectData() {
-    fetch('./assets/projects.json').then(response => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        throw new Error('Something went wrong when fetching data ...')
-      }
-    }).then(data => {
-      this.setState({ projData: data })
-    })
+    fetch(`${process.env.PUBLIC_URL}/assets/projects.json`)
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error('Failed to fetch project data');
+      })
+      .then(data => {
+        this.setState({ projData: data });
+      })
+      .catch(error => {
+        console.error('Error loading project data:', error);
+      });
   }
 
   getSoftwareData() {
-    fetch('./assets/softwares.json').then(response => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        throw new Error('Something went wrong when fetching data ...')
-      }
-    }).then(data => {
-      this.setState({ softwareData: data })
-    })
+    fetch(`${process.env.PUBLIC_URL}/assets/softwares.json`)
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error('Failed to fetch software data');
+      })
+      .then(data => {
+        this.setState({ softwareData: data });
+      })
+      .catch(error => {
+        console.error('Error loading software data:', error);
+      });
   }
 
-
   getSocialActivitiesData() {
-    fetch('./assets/social_activities.json').then(response => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        throw new Error('Something went wrong when fetching data ...')
-      }
-    }).then(data => {
-      this.setState({ socialData: data })
-    })
+    fetch(`${process.env.PUBLIC_URL}/assets/social_activities.json`)
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error('Failed to fetch social activities data');
+      })
+      .then(data => {
+        this.setState({ socialData: data });
+      })
+      .catch(error => {
+        console.error('Error loading social activities data:', error);
+      });
   }
 
   handleSortBtnClick(nextSortKey) {

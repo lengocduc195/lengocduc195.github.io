@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Row, Col, Card, Badge } from 'react-bootstrap'
-import { Container } from 'reactstrap'
 
 function LiAnchorItem(props) {
   return (
@@ -12,8 +11,8 @@ class Project extends Component {
   render() {
     const { data } = this.props
     return (
-      <Col  md={{span:3, offset:3}} className='d-flex flex-row align-items-stretch'>
-        <Card className='mb-3 shadow-sm h-md-250' style={{width:"40rem"}}>
+      <Col className='d-flex flex-row align-items-stretch'>
+        <Card className='mb-3 shadow-sm h-md-250' style={{width:"100%"}}>
           <Card.Header>{data.title}</Card.Header>
           <Card.Img variant='top' src={data.img} />
           <Card.Body className='d-flex flex-column align-items-start'>
@@ -47,14 +46,16 @@ class Projects extends Component {
       const cards = []
       for (let i = 0; i < data.length; i++) {
         cards.push(<Project data={data[i]} key={i} />)
-        if (i % 2 === 1) {
-          cards.push(<div key={'w-' + i} className='w-100' />)
-        }
+        // if (i % 2 === 1) {
+        //   cards.push(<div key={'w-' + i} className='w-100' />)
+        // }
       }
       return (
         <Row>
+          <Col md={{span:3}}>
+          </Col>
           {cards}
-        </Row>
+          </Row>
       )
     } else {
       return <Row />
