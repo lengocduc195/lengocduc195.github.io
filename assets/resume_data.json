@@ -10,7 +10,7 @@
         {
             "name": "Nguyen Du Gifted High School",
             "degree": "High School",
-            "date": "AUG 2017 - July 2020",
+            "date": "AUG 2017 - JUL 2020",
             "area": "Mathematics",
             "summary": "",
             "location": "Dak Lak, VN"
@@ -45,7 +45,7 @@
             "position": "AI Researcher",
             "date": "JUN 2023 - PRESENT",
             "summary": "My work involves mentoring and advising research groups specializing in Explainable AI (XAI) for Computer Vision. I guide researchers in developing interpretability techniques, evaluating AI model explanations, and identifying reasoning vulnerabilities in deep learning systems. My focus is on enhancing the transparency, reliability, and accountability of AI-driven vision models. Through this role, I contribute to advancing XAI research, fostering collaboration, and ensuring that AI systems provide meaningful and trustworthy explanations.",
-            "location": "Ho Chi Minh, VN"
+            "location": "Ho Chi Minh, VN (Remote)"
         },
         {
             "name": "AI Vietnam Lab",
