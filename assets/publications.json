@@ -1,0 +1,59 @@
+[
+    {
+        "abstract": "Visual counterfactual explanations are ideal hypothetical images that change the decision-making of the classifier with high confidence toward the desired class while remaining visually plausible and close to the initial image. In this paper, we propose a new approach to tackle two key challenges in recent prominent works: i) determining which specific counterfactual features are crucial for distinguishing the “concept” of the target class from the original class, and ii) supplying valuable explanations for the non-robust classifier without relying on the support of an adversarially robust model. Our method identifies the essential region for modification through algorithms that provide visual explanations, and then our framework generates realistic counterfactual explanations by combining adversarial attacks based on pruning the adversarial gradient of the target classifier and the latent diffusion model. The proposed method outperforms previous state-of-the-art results on various evaluation criteria on ImageNet and CelebA-HQ datasets. In general, our method can be applied to arbitrary classifiers, highlight the strong association between visual and counterfactual explanations, make semantically meaningful changes from the target classifier, and provide observers with subtle counterfactual images.",
+        "contributors": [
+            "Tung, Luu",
+            "Nam, Le",
+            "Duc, Le",
+            "Bac, Le"
+        ],
+        "dates": {
+            "pub-dates": "",
+            "year": "2025"
+        },
+        "doi": "https://doi.org/10.1109/WACV61041.2025.00051",
+        "rank": "A Rank",
+        "periodical": "Proceedings of IEEE/CVF Winter Conference on Applications of Computer Vision",
+        "titles": {
+            "secondary-title": "Proceedings of IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)",
+            "title": "From Visual Explanations to Counterfactual Explanations with Latent Diffusion"
+        }
+    },
+    {
+        "abstract": "Deep learning methods have recorded unexpected results for risk prediction on longitudinal patient data. In this task, many significant difficulties and challenges still need to be entirely resolved, one of which is that the correlation between codes has not been exploited in a thorough and organized manner. This paper proposes a multi-level, multi-scale attention model based on external knowledge. The model reasonably mimicked the prediction process of doctors by exploiting general to detailed correlations in the input data. As a result, the model used the inherent differences in the dataset and achieved more than 2% in F1 scores with baselines based on the MIMIC-IV dataset, demonstrating the effectiveness of the proposed model and the need to understand the correlation between codes.",
+        "contributors": [
+            "Duc, Le",
+            "Bac, Le"
+        ],
+        "dates": {
+            "pub-dates": "",
+            "year": "2024"
+        },
+        "doi": "https://doi.org/10.1007/978-981-97-5937-8_10",
+        "rank": "B Rank",
+        "periodical": "Proceedings of the Asian Conference on Intelligent Information and Database Systems",
+        "titles": {
+            "secondary-title": "Proceedings of the Asian Conference on Intelligent Information and Database Systems",
+            "title": "Multi-scale and Multi-level Attention based on External knowledge in EHRs"
+        }
+    },
+    {
+        "abstract": "",
+        "contributors": [
+            "Duc, Le",
+            "Minh Hung, Le",
+            "Quang Vinh, Dinh"
+        ],
+        "dates": {
+            "pub-dates": "",
+            "year": "2024"
+        },
+        "doi": "https://ceur-ws.org/Vol-3658/",
+        "rank": "B Rank",
+        "periodical": "Proceedings of the 30th International Conference on Multimedia Modeling Workshop",
+        "titles": {
+            "secondary-title": "Proceedings of the 30th International Conference on Multimedia Modeling Workshop",
+            "title": "Handle the problem of ample label space by using the image-guided feature extractor on the musti dataset"
+        }
+    }
+]
