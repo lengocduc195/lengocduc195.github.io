@@ -1,0 +1,19 @@
+{
+    "id": 3,
+    "author": [
+        "Your Name"
+    ],
+    "highlight": true,
+    "date": "2022-05-15",
+    "title": "Another Cool App",
+    "description": "A mobile-friendly application built with React Native.",
+    "images": [],
+    "videoUrl": null,
+    "githubUrl": "https://github.com/yourusername/cool-app",
+    "technologies": [
+        "React Native",
+        "JavaScript",
+        "Firebase"
+    ],
+    "content": "Detailed description or markdown content for the cool app."
+}

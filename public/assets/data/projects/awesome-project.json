@@ -1,0 +1,13 @@
+{
+  "id": 2,
+  "author": ["Your Name"],
+  "highlight": true,
+  "date": "2023-10-26",
+  "title": "My Awesome Project",
+  "description": "An amazing project that solves a real-world problem using cutting-edge technology.",
+  "images": [],
+  "videoUrl": "https://awesome-project.example.com",
+  "githubUrl": "https://github.com/yourusername/awesome-project",
+  "technologies": ["Next.js", "TypeScript", "Tailwind CSS", "Node.js"],
+  "content": "Detailed description or markdown content for the awesome project goes here."
+}

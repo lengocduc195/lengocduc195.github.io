@@ -1,0 +1,32 @@
+{
+  "id": 3,
+  "rank": "CORE A*",
+  "title": "Novel Approach to Machine Learning Optimization",
+  "authors": [
+    "Collaborator 3",
+    "Your Name",
+    "Collaborator 4"
+  ],
+  "isFirstAuthor": false,
+  "venue": "International Conference on Machine Learning (ICML)",
+  "year": 2023,
+  "abstract": "Abstract for the ML Optimization paper.",
+  "content": "Full text content for the ML Optimization paper.",
+  "topics": [
+    "Optimization",
+    "Deep Learning"
+  ],
+  "doi": null,
+  "link": "https://example.com/publication2",
+  "citationCount": 0,
+  "citationFormat": "Collaborator 3, Your Name, Collaborator 4 (2023). Novel Approach to Machine Learning Optimization. International Conference on Machine Learning (ICML).",
+  "videoUrl": null,
+  "github": null,
+  "images": [],
+  "url": "https://example.com/publication2",
+  "technologies": [
+    "Python",
+    "TensorFlow",
+    "Scikit-learn"
+  ]
+}

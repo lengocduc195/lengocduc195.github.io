@@ -1,0 +1,40 @@
+{
+    "id": 1,
+    "rank": "A",
+    "title": "Deep Learning for Computer Vision: A Comprehensive Survey",
+    "authors": [
+        "Duc Le",
+        "John Smith",
+        "Jane Doe"
+    ],
+    "isFirstAuthor": true,
+    "venue": "IEEE Transactions on Pattern Analysis and Machine Intelligence",
+    "year": 2023,
+    "abstract": "This paper presents a comprehensive survey of deep learning techniques in computer vision, covering recent advances in convolutional neural networks, transformers, and their applications in various vision tasks.",
+    "content": "This paper presents a comprehensive survey of deep learning techniques in computer vision, covering recent advances in convolutional neural networks, transformers, and their applications in various vision tasks. We discuss the evolution of deep learning architectures, from traditional CNNs to modern transformer-based models, and their impact on computer vision applications. The survey also includes detailed discussions on training strategies, optimization techniques, and future directions in the field.",
+    "topics": [
+        "Deep Learning",
+        "Computer Vision",
+        "Survey",
+        "NLP",
+        "Heathcare"
+    ],
+    "doi": "10.1109/TPAMI.2023.1234567",
+    "link": "https://ieeexplore.ieee.org/document/1234567",
+    "citationCount": 42,
+    "citationFormat": "Le, D., Smith, J., & Doe, J. (2023). Deep Learning for Computer Vision: A Comprehensive Survey. IEEE Transactions on Pattern Analysis and Machine Intelligence, 45(3), 123-145.",
+    "videoUrl": "https://www.youtube.com/watch?v=h9tTBymR7xY",
+    "github": "https://github.com/lengocduc195/deep-learning-cv",
+    "images": [
+        {
+            "url": "/images/project-1.jpg",
+            "caption": "Deep Learning for Computer Vision"
+        },
+        {
+            "url": "/images/project-2.jpg",
+            "caption": "Survey of Deep Learning Techniques"
+        }
+    ],
+    "url": "https://example.com/publication4",
+    "technologies": ["Python", "TensorFlow", "Scikit-learn"]
+}

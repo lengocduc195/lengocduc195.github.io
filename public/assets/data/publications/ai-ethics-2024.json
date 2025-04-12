@@ -1,0 +1,21 @@
+{
+  "id": 2,
+  "rank": "Q1",
+  "title": "Groundbreaking Research on AI Ethics",
+  "authors": ["Your Name", "Collaborator 1", "Collaborator 2"],
+  "isFirstAuthor": true,
+  "venue": "Journal of Important AI Research (JIAIR)",
+  "year": 2024,
+  "abstract": "Abstract for the AI Ethics paper.",
+  "content": "Full text content for the AI Ethics paper.",
+  "topics": ["AI Ethics"],
+  "doi": "10.1234/jiair.2024.001",
+  "link": "https://example.com/publication1",
+  "citationCount": 0, 
+  "citationFormat": "Your Name, Collaborator 1, Collaborator 2 (2024). Groundbreaking Research on AI Ethics. Journal of Important AI Research (JIAIR).",
+  "videoUrl": null,
+  "github": null,
+  "images": [],
+  "url": "https://example.com/publication1", 
+  "technologies": ["Python", "PyTorch", "LaTeX"] 
+} 

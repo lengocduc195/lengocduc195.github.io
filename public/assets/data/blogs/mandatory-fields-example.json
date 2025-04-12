@@ -1,0 +1,35 @@
+{
+    "id": "spatial",
+    "title": "Spatial-based Augmentation",
+    "github": "",
+    "description": "This is a spatial-based augmentation technique that uses the spatial information of the input data to enhance the performance of the model. It is particularly useful in tasks where the spatial arrangement of the data is important, such as image classification and object detection.",
+    "author": "Ngoc Duc",
+    "date": "2023-10-01",
+    "content": "Introduction",
+    "tags": [
+        "Spatial-based Augmentation",
+        "Machine Learning",
+        "Data Augmentation",
+        "Computer Vision"
+    ],
+    "demo": {
+        "title": "Demo",
+        "url": "/demos/spatial-based-augmentation.html"
+    },
+    "images": [
+        {
+            "title": "Spatial-based Augmentation",
+            "url": "/images/spatial-based-augmentation.png"
+        }
+    ],
+    "related": [
+        {
+            "title": "Data Augmentation",
+            "url": "/demos/data-augmentation.html"
+        },
+        {
+            "title": "Image Classification",
+            "url": "/demos/image-classification.html"
+        }
+    ]
+}
