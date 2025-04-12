@@ -19,16 +19,25 @@ export default function BlogList({ initialBlogs }: BlogListProps) {
 
     let filtered = initialBlogs.filter(blog => {
       const titleMatch = typeof blog.title === 'string' && blog.title.toLowerCase().includes(lowerSearchTerm);
+      const descriptionMatch = typeof blog.description === 'string' && blog.description.toLowerCase().includes(lowerSearchTerm);
+      const contentMatch = typeof blog.content === 'string' && blog.content.toLowerCase().includes(lowerSearchTerm);
+      const topicMatch = Array.isArray(blog.topics) && blog.topics.some(
+        topic => typeof topic === 'string' && topic.toLowerCase().includes(lowerSearchTerm)
+      );
+      const techMatch = Array.isArray(blog.technologies) && blog.technologies.some(
+        tech => typeof tech === 'string' && tech.toLowerCase().includes(lowerSearchTerm)
+      );
+      // Giữ lại các trường cũ để tương thích ngược
       const excerptMatch = typeof blog.excerpt === 'string' && blog.excerpt.toLowerCase().includes(lowerSearchTerm);
       const tagMatch = Array.isArray(blog.tags) && blog.tags.some(
         tag => typeof tag === 'string' && tag.toLowerCase().includes(lowerSearchTerm)
       );
-       const keywordMatch = Array.isArray(blog.keywords) && blog.keywords.some(
+      const keywordMatch = Array.isArray(blog.keywords) && blog.keywords.some(
         keyword => typeof keyword === 'string' && keyword.toLowerCase().includes(lowerSearchTerm)
       );
-       const categoryMatch = typeof blog.category === 'string' && blog.category.toLowerCase().includes(lowerSearchTerm);
+      const categoryMatch = typeof blog.category === 'string' && blog.category.toLowerCase().includes(lowerSearchTerm);
 
-      return titleMatch || excerptMatch || tagMatch || keywordMatch || categoryMatch;
+      return titleMatch || descriptionMatch || contentMatch || topicMatch || techMatch || excerptMatch || tagMatch || keywordMatch || categoryMatch;
     });
 
     switch (sortCriteria) {
@@ -134,20 +143,29 @@ export default function BlogList({ initialBlogs }: BlogListProps) {
                 <article key={itemKey} className="group bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col h-full border border-gray-200 dark:border-gray-700 hover:border-pink-300 dark:hover:border-pink-700 transform hover:-translate-y-1">
                   {/* Blog Header */}
                   <div className="relative">
-                    {/* Featured Image (placeholder) */}
+                    {/* Featured Image */}
                     <div className="h-48 bg-gradient-to-r from-pink-500 to-purple-600 relative">
-                      {/* If we had actual images, we would use them here */}
-                      <div className="absolute inset-0 flex items-center justify-center text-white text-opacity-30">
-                        <svg className="w-24 h-24" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                          <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
-                        </svg>
-                      </div>
+                      {blog.images && Array.isArray(blog.images) && blog.images.length > 0 ? (
+                        <div className="absolute inset-0 bg-cover bg-center"
+                          style={{
+                            backgroundImage: `url(${typeof blog.images[0] === 'string'
+                              ? blog.images[0]
+                              : blog.images[0]?.url || '/images/blog-placeholder.jpg'})`
+                          }}
+                        />
+                      ) : (
+                        <div className="absolute inset-0 flex items-center justify-center text-white text-opacity-30">
+                          <svg className="w-24 h-24" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                          </svg>
+                        </div>
+                      )}
 
-                      {/* Category Badge */}
-                      {blog.category && (
+                      {/* Topics Badge */}
+                      {blog.topics && blog.topics.length > 0 && (
                         <div className="absolute top-4 left-4">
                           <span className="bg-white/20 backdrop-blur-sm text-white text-xs font-medium px-2.5 py-1 rounded-full">
-                            {blog.category}
+                            {blog.topics[0]}
                           </span>
                         </div>
                       )}
@@ -189,19 +207,33 @@ export default function BlogList({ initialBlogs }: BlogListProps) {
                       </div>
                     )}
 
-                    {/* Excerpt */}
+                    {/* Description/Excerpt */}
                     <p className="text-gray-600 dark:text-gray-300 mb-4 flex-grow line-clamp-3">
-                      {blog.excerpt ?? 'No excerpt available.'}
+                      {blog.description || blog.excerpt || (blog.content && blog.content.substring(0, 150) + '...') || 'No description available.'}
                     </p>
 
-                    {/* Tags */}
-                    {Array.isArray(blog.tags) && blog.tags.length > 0 && (
+                    {/* Topics or Tags */}
+                    {(Array.isArray(blog.topics) && blog.topics.length > 0) || (Array.isArray(blog.tags) && blog.tags.length > 0) ? (
                       <div className="flex flex-wrap gap-2 mb-4">
-                        {blog.tags.map((tag) => (
+                        {/* Show topics first if available */}
+                        {Array.isArray(blog.topics) && blog.topics.map((topic) => (
+                          typeof topic === 'string' && (
+                            <span
+                              key={topic}
+                              className="bg-pink-100 text-pink-800 text-xs font-medium px-2.5 py-1 rounded-full dark:bg-pink-900 dark:text-pink-300 hover:bg-pink-200 dark:hover:bg-pink-800 transition-colors cursor-pointer"
+                              onClick={() => setSearchTerm(topic)}
+                            >
+                              #{topic}
+                            </span>
+                          )
+                        ))}
+
+                        {/* Show tags if topics not available or as additional items */}
+                        {Array.isArray(blog.tags) && blog.tags.map((tag) => (
                           typeof tag === 'string' && (
                             <span
                               key={tag}
-                              className="bg-pink-100 text-pink-800 text-xs font-medium px-2.5 py-1 rounded-full dark:bg-pink-900 dark:text-pink-300 hover:bg-pink-200 dark:hover:bg-pink-800 transition-colors cursor-pointer"
+                              className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-1 rounded-full dark:bg-blue-900 dark:text-blue-300 hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors cursor-pointer"
                               onClick={() => setSearchTerm(tag)}
                             >
                               #{tag}
@@ -209,7 +241,7 @@ export default function BlogList({ initialBlogs }: BlogListProps) {
                           )
                         ))}
                       </div>
-                    )}
+                    ) : null}
 
                     {/* Read More Button */}
                     <div className="mt-auto pt-4 border-t border-gray-200 dark:border-gray-700">

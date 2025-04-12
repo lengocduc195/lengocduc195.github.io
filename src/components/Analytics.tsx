@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 interface AnalyticsData {
   page: string;
@@ -14,7 +14,7 @@ interface AnalyticsData {
 
 export default function Analytics() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
+  // const searchParams = useSearchParams();
   const [startTime, setStartTime] = useState<number>(Date.now());
   const [sessionId, setSessionId] = useState<string>('');
   const [interests, setInterests] = useState<string[]>([]);
@@ -29,9 +29,31 @@ export default function Analytics() {
     setSessionId(sid);
   }, []);
 
+  // Function to save analytics data to localStorage
+  const saveAnalyticsToLocalStorage = (type: string, data: any) => {
+    try {
+      if (typeof window === 'undefined') return;
+
+      // Get existing data from localStorage
+      const existingData = localStorage.getItem(`analytics_${type}`) || '[]';
+      const parsedData = JSON.parse(existingData);
+
+      // Add new data
+      parsedData.push({
+        ...data,
+        timestamp: Date.now()
+      });
+
+      // Save back to localStorage
+      localStorage.setItem(`analytics_${type}`, JSON.stringify(parsedData));
+    } catch (error) {
+      console.error(`Failed to save ${type} data to localStorage:`, error);
+    }
+  };
+
   // Track page view on mount
   useEffect(() => {
-    if (!sessionId) return;
+    if (!sessionId || typeof window === 'undefined') return;
 
     // Reset start time when page changes
     setStartTime(Date.now());
@@ -44,19 +66,13 @@ export default function Analytics() {
       sessionId,
     };
 
-    // Send to API
-    fetch('/api/analytics/pageview', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(pageViewData),
-    }).catch(err => console.error('Failed to send page view data:', err));
+    // Save to localStorage
+    saveAnalyticsToLocalStorage('pageview', pageViewData);
 
     // Cleanup function to track time spent
     return () => {
       const timeSpent = Math.floor((Date.now() - startTime) / 1000); // in seconds
-      
+
       if (timeSpent > 1) { // Only track if spent more than 1 second
         const analyticsData: AnalyticsData = {
           page: pathname,
@@ -67,17 +83,11 @@ export default function Analytics() {
           sessionId,
         };
 
-        // Send to API
-        fetch('/api/analytics/timespent', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(analyticsData),
-        }).catch(err => console.error('Failed to send time spent data:', err));
+        // Save to localStorage
+        saveAnalyticsToLocalStorage('timespent', analyticsData);
       }
     };
-  }, [pathname, sessionId, searchParams]);
+  }, [pathname, sessionId, startTime, interests]);
 
   // Track user interests based on scroll depth and clicks
   useEffect(() => {
@@ -85,7 +95,7 @@ export default function Analytics() {
 
     const handleScroll = () => {
       const scrollDepth = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
-      
+
       // If user scrolls more than 70% of the page, they're interested
       if (scrollDepth > 70) {
         const pageType = pathname.split('/')[1] || 'home';
@@ -98,7 +108,7 @@ export default function Analytics() {
     const handleClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const clickedElement = target.closest('a, button, .clickable');
-      
+
       if (clickedElement) {
         const dataInterest = clickedElement.getAttribute('data-interest');
         if (dataInterest && !interests.includes(dataInterest)) {

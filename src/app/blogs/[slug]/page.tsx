@@ -6,8 +6,11 @@ import { notFound } from 'next/navigation';
 // import fs from 'fs/promises';
 // import path from 'path';
 
-interface BlogDetailPageProps {
-  params: { slug: string };
+interface PageProps {
+  params: {
+    slug: string;
+  };
+  searchParams?: { [key: string]: string | string[] | undefined };
 }
 
 // Helper Component để render Links (giữ nguyên)
@@ -67,7 +70,7 @@ export async function generateStaticParams() {
   }).filter(Boolean);
 }
 
-export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
+export default async function BlogDetailPage({ params }: PageProps) {
   // Đảm bảo params đã được await trước khi sử dụng
   const slug = params.slug;
   const blog = await getBlogDetails(slug);
@@ -77,25 +80,51 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
     notFound();
   }
 
-  // Ưu tiên content, sau đó đến excerpt
-  const displayContent = blog.content ?? blog.excerpt;
+  // Ưu tiên content, sau đó đến excerpt hoặc description
+  const displayContent = blog.content ?? blog.excerpt ?? blog.description;
 
   return (
     <main className="container mx-auto px-4 py-12">
       <article className="max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md p-8 border border-gray-200 dark:border-gray-700">
         {/* Header */}
          <div className="mb-6 border-b border-gray-200 dark:border-gray-700 pb-6">
-             {blog.category && <span className="bg-indigo-100 text-indigo-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">{blog.category}</span>}
+             {blog.topics && blog.topics.length > 0 && (
+               <span className="bg-indigo-100 text-indigo-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">
+                 {blog.topics[0]}
+               </span>
+             )}
+             {blog.category && !blog.topics && (
+               <span className="bg-indigo-100 text-indigo-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">
+                 {blog.category}
+               </span>
+             )}
             <h1 className="text-3xl md:text-4xl font-bold mt-4 mb-2 text-gray-900 dark:text-white">{blog.title ?? 'Untitled Blog Post'}</h1>
              <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-gray-500 dark:text-gray-400">
-                {Array.isArray(blog.authors) && <span>By {blog.authors.join(', ')}</span>}
-                 {blog.date && <span>on {blog.date}</span>}
-                 {blog.readingTime && <span>· {blog.readingTime}</span>}
+                {blog.author && <span>By {blog.author}</span>}
+                {Array.isArray(blog.authors) && !blog.author && <span>By {blog.authors.join(', ')}</span>}
+                {blog.date && <span>on {new Date(blog.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>}
+                {blog.readingTime && <span>· {blog.readingTime}</span>}
              </div>
          </div>
 
         {/* Featured Image */}
         {blog.featuredImage && <img src={blog.featuredImage} alt={blog.title ?? ''} className="w-full h-auto rounded-md mb-6 shadow-lg" />}
+
+        {/* Display first image from images array if no featuredImage */}
+        {!blog.featuredImage && blog.images && Array.isArray(blog.images) && blog.images.length > 0 && (
+          <figure className="mb-6">
+            <img
+              src={typeof blog.images[0] === 'string' ? blog.images[0] : blog.images[0]?.url}
+              alt={blog.title ?? ''}
+              className="w-full h-auto rounded-md shadow-lg"
+            />
+            {typeof blog.images[0] !== 'string' && blog.images[0]?.caption && (
+              <figcaption className="text-center text-sm text-gray-500 dark:text-gray-400 mt-2">
+                {blog.images[0].caption}
+              </figcaption>
+            )}
+          </figure>
+        )}
 
         {/* Content */}
         {displayContent && (
@@ -127,9 +156,39 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
             </div>
         )}
 
-        {/* Tags & Keywords */}
-        {(Array.isArray(blog.tags) && blog.tags.length > 0) || (Array.isArray(blog.keywords) && blog.keywords.length > 0) ? (
+        {/* Topics, Tags & Keywords */}
+        {(Array.isArray(blog.topics) && blog.topics.length > 0) || (Array.isArray(blog.tags) && blog.tags.length > 0) || (Array.isArray(blog.keywords) && blog.keywords.length > 0) ? (
             <div className="mb-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+              {Array.isArray(blog.topics) && blog.topics.length > 0 && (
+                  <div className="mb-3">
+                      <h3 className="font-semibold mb-2 text-gray-700 dark:text-gray-300 inline-block mr-2">Topics:</h3>
+                      <div className="inline-flex flex-wrap gap-2">
+                        {blog.topics.map((topic) => (
+                          typeof topic === 'string' && (
+                            <span key={topic} className="bg-indigo-100 text-indigo-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">
+                              #{topic}
+                            </span>
+                          )
+                        ))}
+                      </div>
+                  </div>
+              )}
+
+              {Array.isArray(blog.technologies) && blog.technologies.length > 0 && (
+                  <div className="mb-3">
+                      <h3 className="font-semibold mb-2 text-gray-700 dark:text-gray-300 inline-block mr-2">Technologies:</h3>
+                      <div className="inline-flex flex-wrap gap-2">
+                        {blog.technologies.map((tech) => (
+                          typeof tech === 'string' && (
+                            <span key={tech} className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
+                              {tech}
+                            </span>
+                          )
+                        ))}
+                      </div>
+                  </div>
+              )}
+
               {Array.isArray(blog.tags) && blog.tags.length > 0 && (
                   <div className="mb-3">
                       <h3 className="font-semibold mb-2 text-gray-700 dark:text-gray-300 inline-block mr-2">Tags:</h3>
@@ -144,7 +203,8 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
                       </div>
                   </div>
               )}
-               {Array.isArray(blog.keywords) && blog.keywords.length > 0 && (
+
+              {Array.isArray(blog.keywords) && blog.keywords.length > 0 && (
                  <div>
                       <h3 className="font-semibold mb-2 text-gray-700 dark:text-gray-300 inline-block mr-2">Keywords:</h3>
                       <div className="inline-flex flex-wrap gap-2">
@@ -161,7 +221,26 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
             </div>
         ): null}
 
-        <RelatedLinksSection title="Related Internal Content" links={blog.related} />
+        {/* External Links */}
+        {blog.videoUrl && (
+          <div className="mb-6">
+            <h3 className="font-semibold mb-2 text-lg text-gray-700 dark:text-gray-300">Video Demo:</h3>
+            <a href={blog.videoUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors">
+              Watch Video Demo
+            </a>
+          </div>
+        )}
+
+        {blog.githubUrl && (
+          <div className="mb-6">
+            <h3 className="font-semibold mb-2 text-lg text-gray-700 dark:text-gray-300">GitHub Repository:</h3>
+            <a href={blog.githubUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors">
+              View Source Code
+            </a>
+          </div>
+        )}
+
+        <RelatedLinksSection title="Related Content" links={blog.related} />
         <RelatedLinksSection title="External Resources" links={blog.links} />
 
          {/* Back Button */}

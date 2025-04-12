@@ -2,8 +2,11 @@ import { getProducts } from '@/lib/dataUtils';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-interface ProductDetailPageProps {
-  params: { slug: string };
+interface PageProps {
+  params: {
+    slug: string;
+  };
+  searchParams?: { [key: string]: string | string[] | undefined };
 }
 
 const RelatedLinksSection: React.FC<{ title: string, links: { title: string, url: string }[] | undefined }> = ({ title, links }) => {
@@ -47,7 +50,7 @@ export async function generateStaticParams() {
   }).filter(Boolean);
 }
 
-export default async function ProductDetailPage({ params }: ProductDetailPageProps) {
+export default async function ProductDetailPage({ params }: PageProps) {
   // Đảm bảo params đã được await trước khi sử dụng
   const slug = params.slug;
   const product = await getProductDetails(slug);

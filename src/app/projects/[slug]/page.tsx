@@ -1,11 +1,15 @@
 import { getProjects } from '@/lib/dataUtils';
+import { getYouTubeEmbedUrl } from '@/lib/videoUtils';
 import Link from 'next/link';
 import { notFound } from 'next/navigation'; // Để xử lý trường hợp không tìm thấy project
 // import ReactMarkdown from 'react-markdown'; // Bỏ comment nếu dùng Markdown
 // import remarkGfm from 'remark-gfm';
 
-interface ProjectDetailPageProps {
-  params: { slug: string };
+interface PageProps {
+  params: {
+    slug: string;
+  };
+  searchParams?: { [key: string]: string | string[] | undefined };
 }
 
 // Hàm để lấy dữ liệu chi tiết của một project dựa trên slug (ID)
@@ -65,7 +69,7 @@ const RelatedLinksSection: React.FC<{ title: string, links: { title: string, url
   );
 }
 
-export default async function ProjectDetailPage({ params }: ProjectDetailPageProps) {
+export default async function ProjectDetailPage({ params }: PageProps) {
   // Đảm bảo params đã được await trước khi sử dụng
   const slug = params.slug;
   const project = await getProjectDetails(slug);
@@ -103,19 +107,42 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
               <img src={project.images[0]} alt={project.title ?? 'Project image'} className="w-full h-auto rounded-md shadow-lg"/>
             )}
             {Array.isArray(project.images) && project.images.length > 0 && typeof project.images[0] === 'object' && project.images[0]?.url && (
-                 <img src={project.images[0].url} alt={project.images[0].caption || project.title || 'Project image'} className="w-full h-auto rounded-md shadow-lg"/>
+              <figure>
+                <img
+                  src={project.images[0].url}
+                  alt={project.images[0].caption || project.title || 'Project image'}
+                  className="w-full h-auto rounded-md shadow-lg"
+                />
+                {project.images[0].caption && (
+                  <figcaption className="text-center text-sm text-gray-500 dark:text-gray-400 mt-2">
+                    {project.images[0].caption}
+                  </figcaption>
+                )}
+              </figure>
             )}
             {project.videoUrl && (
-                 <div className="aspect-w-16 aspect-h-9">
-                     <iframe
-                         src={project.videoUrl.includes('youtube.com/embed') ? project.videoUrl : `https://www.youtube.com/embed/${project.videoUrl.split('v=')[1]}`}
-                         title={project.title ?? "Project Video"}
-                         frameBorder="0"
-                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                         referrerPolicy="strict-origin-when-cross-origin"
-                         allowFullScreen
-                         className="w-full h-full rounded-md shadow-lg"
-                     ></iframe>
+                <div className="mb-6">
+                    <h3 className="font-semibold mb-2 text-lg text-gray-700 dark:text-gray-300">Video Demo:</h3>
+                    <div className="aspect-w-16 rounded-lg overflow-hidden shadow-lg">
+                        <iframe
+                            src={getYouTubeEmbedUrl(project.videoUrl)}
+                            title={project.title ?? "Project Video"}
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerPolicy="strict-origin-when-cross-origin"
+                            allowFullScreen
+                        ></iframe>
+                    </div>
+                    <div className="mt-2 text-sm text-gray-500 dark:text-gray-400 text-center">
+                        <a
+                            href={project.videoUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
+                        >
+                            Xem trên YouTube
+                        </a>
+                    </div>
                 </div>
             )}
         </div>

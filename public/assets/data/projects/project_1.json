@@ -9,11 +9,16 @@
     "description": "A deep learning model for recognizing objects in images with high accuracy using convolutional neural networks.",
     "content": "This project implements a state-of-the-art convolutional neural network for image recognition tasks. The model is trained on a large dataset of labeled images and can recognize objects across multiple categories with high accuracy.\n\nThe architecture uses a combination of convolutional layers, pooling layers, and fully connected layers to extract features from input images and classify them into predefined categories. Transfer learning techniques were applied by fine-tuning a pre-trained model on custom datasets to improve performance.\n\nKey features of this project include:\n- Real-time object detection with bounding boxes\n- Multi-class classification with confidence scores\n- Web interface for uploading and processing images\n- REST API for integration with other applications",
     "images": [
-        "/images/project-1.jpg",
-        "/images/project-2.jpg",
-        "/images/project-3.jpg"
+        {
+            "url": "/images/project-1.jpg",
+            "caption": "Deep Learning for Computer Vision"
+        },
+        {
+            "url": "/images/project-2.jpg",
+            "caption": "Survey of Deep Learning Techniques"
+        }
     ],
-    "videoUrl": "https://demo-url-1.com",
+    "videoUrl": "https://www.youtube.com/watch?v=eelI4mYxKsE",
     "githubUrl": "https://github.com/yourusername/image-recognition",
     "technologies": [
         "Python",

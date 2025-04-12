@@ -2,8 +2,11 @@ import { getPublications } from '@/lib/dataUtils';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-interface PublicationDetailPageProps {
-  params: { slug: string };
+interface PageProps {
+  params: {
+    slug: string;
+  };
+  searchParams?: { [key: string]: string | string[] | undefined };
 }
 
 // Helper Component để render Links (tránh lặp code)
@@ -58,7 +61,7 @@ export async function generateStaticParams() {
 
 export const dynamic = 'force-static';
 
-export default async function PublicationDetailPage({ params }: PublicationDetailPageProps) {
+export default async function PublicationDetailPage({ params }: PageProps) {
   // Đảm bảo params đã được await trước khi sử dụng
   const slug = params.slug;
   const pub = await getPublicationDetails(slug);

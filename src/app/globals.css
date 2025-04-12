@@ -115,3 +115,22 @@ body {
 .hover-lift:hover {
   transform: translateY(-5px);
 }
+
+/* Aspect ratio utilities */
+.aspect-w-16 {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio (9 / 16 = 0.5625 or 56.25%) */
+  height: 0;
+  overflow: hidden;
+}
+
+.aspect-w-16 iframe,
+.aspect-w-16 video,
+.aspect-w-16 .aspect-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}

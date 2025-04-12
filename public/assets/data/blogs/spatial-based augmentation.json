@@ -1,25 +1,33 @@
 {
-    "id": "spatial-based-augmentation",
+    "id": "augmentation_1",
     "title": "Spatial-based Augmentation",
-    "github": "",
     "description": "This is a spatial-based augmentation technique that uses the spatial information of the input data to enhance the performance of the model. It is particularly useful in tasks where the spatial arrangement of the data is important, such as image classification and object detection.",
     "author": "Ngoc Duc",
     "date": "2023-10-01",
     "content": "Elastic Transformation is a data augmentation which simulates the stretching and compressing of different parts of an image. in various directions. The implementation typically involves generating random displacement fields that are convolved with a Gaussian kernel. This process craetes natural-looking variations that preserve the essential characteristics of the original image while introducing meaningful diversity.",
-    "tags": [
+    "topics": [
         "Spatial-based Augmentation",
         "Machine Learning",
         "Data Augmentation",
         "Computer Vision"
     ],
-    "demo": {
-        "title": "Demo",
-        "url": "/demos/spatial-based-augmentation.html"
-    },
+    "videoUrl": "https://www.youtube.com/watch?v=eelI4mYxKsE",
+    "githubUrl": "https://github.com/yourusername/image-recognition",
+    "technologies": [
+        "Python",
+        "TensorFlow",
+        "Keras",
+        "OpenCV",
+        "Flask"
+    ],
     "images": [
         {
-            "title": "Spatial-based Augmentation",
-            "url": "/images/spatial-based-augmentation.png"
+            "url": "/images/project-1.jpg",
+            "caption": "Deep Learning for Computer Vision"
+        },
+        {
+            "url": "/images/project-2.jpg",
+            "caption": "Survey of Deep Learning Techniques"
         }
     ],
     "related": [

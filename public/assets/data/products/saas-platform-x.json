@@ -14,8 +14,9 @@
         "AWS",
         "SaaS"
     ],
-    "demoUrl": "https://platform-x.example.com",
-    "link": "https://platform-x.example.com",
+    "demoUrl": "https://www.youtube.com/watch?v=eelI4mYxKsE",
+    "productUrl": "https://langchain-ai.github.io/langgraph/tutorials/sql-agent/#utility-functions",
+    "githubUrl": "https://github.com/yourusername/image-recognition",
     "lab": null,
     "social reviews": [],
     "date": "2023-08-01"

@@ -2,23 +2,23 @@
 
 import Script from 'next/script';
 import { useEffect } from 'react';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 // Replace with your actual Google Analytics ID
-const GA_MEASUREMENT_ID = 'G-XXXXXXXXXX'; 
+const GA_MEASUREMENT_ID = 'G-6JR3FNWRVM';
 
 export default function GoogleAnalytics() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
+  // const searchParams = useSearchParams();
 
   useEffect(() => {
     if (pathname && window.gtag) {
       // Send page view with the new URL
       window.gtag('config', GA_MEASUREMENT_ID, {
-        page_path: pathname + (searchParams?.toString() ? `?${searchParams.toString()}` : ''),
+        page_path: pathname,
       });
     }
-  }, [pathname, searchParams]);
+  }, [pathname]);
 
   return (
     <>

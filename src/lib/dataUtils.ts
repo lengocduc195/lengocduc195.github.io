@@ -370,22 +370,29 @@ export async function getProducts(): Promise<Product[]> {
 
 // Interface Blog (Cập nhật để khớp file mẫu spatial-based augmentation.json)
 export interface Blog {
-    id: number;
+    id: string | number;
     title: string;
+    description?: string;
+    author?: string;
     date: string; // YYYY-MM-DD
+    content?: string;
+    topics?: string[];
+    videoUrl?: string;
+    githubUrl?: string;
+    technologies?: string[];
+    images?: Array<{ url: string; caption?: string; title?: string }> | string[];
+    related?: RelatedLink[];
+    // Giữ lại các trường cũ để tương thích ngược
     authors?: string[];
     excerpt?: string;
     tags?: string[];
     keywords?: string[];
-    url: string;
+    url?: string;
     featuredImage?: string;
-    images?: { url: string; caption: string }[] | string[];
     contentFile?: string;
-    content?: string; // Thêm trường content nếu cần lưu text trực tiếp
     category?: string;
     readingTime?: string;
-    related?: RelatedLink[]; // Thêm related links
-    links?: RelatedLink[]; // Thêm external links
+    links?: RelatedLink[];
 }
 
 export function getBlogs(): Promise<Blog[]> {

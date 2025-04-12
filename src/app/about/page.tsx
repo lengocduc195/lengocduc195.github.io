@@ -4,7 +4,7 @@ import { FaGithub, FaLinkedin, FaTwitter, FaGoogle, FaResearchgate, FaOrcid } fr
 import Link from 'next/link';
 
 // Map social keys to icons and names
-const socialIconMap: { [key: string]: { icon: React.ComponentType<any>, name: string, colorClass: string, iconSize?: string } } = {
+const socialIconMap: { [key: string]: { icon: React.ComponentType<React.SVGProps<SVGSVGElement>>, name: string, colorClass: string, iconSize?: string } } = {
   github: { icon: FaGithub, name: 'GitHub', colorClass: 'hover:text-gray-900 dark:hover:text-white' },
   linkedin: { icon: FaLinkedin, name: 'LinkedIn', colorClass: 'hover:text-blue-700 dark:hover:text-blue-500' },
   twitter: { icon: FaTwitter, name: 'Twitter', colorClass: 'hover:text-sky-500 dark:hover:text-sky-400' },
@@ -24,7 +24,7 @@ export default async function AboutPage() {
   const allSkillsLower = allSkills.map(s => s.toLowerCase());
   const skillOriginalCaseMap = new Map(allSkills.map(s => [s.toLowerCase(), s]));
   const groupedSkills: { [category: string]: string[] } = {};
-  let categorizedSkills = new Set<string>();
+  const categorizedSkills = new Set<string>();
 
   for (const category in skillRequirements) {
     groupedSkills[category] = [];
@@ -83,7 +83,7 @@ export default async function AboutPage() {
             )}
             <div className="flex-grow text-center md:text-left">
               <div className="inline-block mb-2 px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm font-medium rounded-full">
-                Hello, I'm
+                Hello, I&apos;m
               </div>
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-3 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
                 {aboutData.name || 'Your Name'}
@@ -109,7 +109,7 @@ export default async function AboutPage() {
               )}
               {aboutData.bio && (
                 <div className="mt-6 p-6 bg-gray-50 dark:bg-gray-700/50 rounded-xl border border-gray-100 dark:border-gray-700 shadow-inner">
-                  <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line italic">"{aboutData.bio}"</p>
+                  <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line italic">&ldquo;{aboutData.bio}&rdquo;</p>
                 </div>
               )}
             </div>

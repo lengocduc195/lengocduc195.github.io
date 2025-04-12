@@ -8,7 +8,7 @@
     "title": "Another Cool App",
     "description": "A mobile-friendly application built with React Native.",
     "images": [],
-    "videoUrl": null,
+    "videoUrl": "https://awesome-project.example.com",
     "githubUrl": "https://github.com/yourusername/cool-app",
     "technologies": [
         "React Native",
