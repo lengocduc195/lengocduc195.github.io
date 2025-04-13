@@ -1,10 +1,31 @@
 "use client";
 
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  
+  const [sloganFooter, setSloganFooter] = useState<string>(
+    "Researcher, developer, and innovator passionate about creating impactful solutions with cutting-edge technologies."
+  );
+
+  useEffect(() => {
+    // Fetch about data to get the slogan_footer
+    const fetchAboutData = async () => {
+      try {
+        const response = await fetch('/assets/data/about.json');
+        const data = await response.json();
+        if (data.slogan_footer) {
+          setSloganFooter(data.slogan_footer);
+        }
+      } catch (error) {
+        console.error('Error fetching about data:', error);
+      }
+    };
+
+    fetchAboutData();
+  }, []);
+
   return (
     <footer className="bg-gray-900 text-gray-300 py-12">
       <div className="container mx-auto px-4">
@@ -13,7 +34,7 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-bold mb-4 text-white">Duc Le</h3>
             <p className="mb-4">
-              Researcher, developer, and innovator passionate about creating impactful solutions with cutting-edge technologies.
+              {sloganFooter}
             </p>
             <div className="flex space-x-4">
               <a href="https://github.com/lengocduc195" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
@@ -34,7 +55,7 @@ const Footer = () => {
               </a>
             </div>
           </div>
-          
+
           {/* Quick Links */}
           <div>
             <h3 className="text-xl font-bold mb-4 text-white">Quick Links</h3>
@@ -53,7 +74,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          
+
           {/* More Links */}
           <div>
             <h3 className="text-xl font-bold mb-4 text-white">More</h3>
@@ -72,7 +93,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          
+
           {/* Contact */}
           <div>
             <h3 className="text-xl font-bold mb-4 text-white">Contact</h3>
@@ -82,7 +103,7 @@ const Footer = () => {
             </a>
           </div>
         </div>
-        
+
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p>&copy; {currentYear} Duc Le. All rights reserved.</p>
         </div>

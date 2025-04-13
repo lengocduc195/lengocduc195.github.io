@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import type { Publication } from '@/lib/dataUtils'; // Import kiểu Publication
 
@@ -15,14 +15,62 @@ export default function PublicationList({ initialPublications, yourName }: Publi
   const [searchTerm, setSearchTerm] = useState('');
   const [sortCriteria, setSortCriteria] = useState<SortCriteria>('year_desc');
 
-  // Định nghĩa rankOrder ở ngoài để không cần đưa vào dependencies của useMemo
-  const rankOrder: { [key: string]: number } = useMemo(() => ({
-    'CORE A*': 1,
-    'Q1': 2,
-    'CORE A': 3,
-    'Q2': 4,
-    // Thêm các rank khác nếu cần
-  }), []);
+  // State để lưu trữ thông tin rank từ file ranks.json
+  const [rankOrder, setRankOrder] = useState<{ [key: string]: number }>({});
+
+  // Tải dữ liệu rank từ file ranks.json
+  useEffect(() => {
+    async function loadRanks() {
+      try {
+        const response = await fetch('/assets/data/ranks.json');
+        if (!response.ok) {
+          throw new Error(`Failed to fetch ranks: ${response.status}`);
+        }
+        const data = await response.json();
+
+        // Tạo một object chứa tất cả các rank từ cả conference và journal
+        const combinedRanks: { [key: string]: number } = {};
+
+        // Thêm conference ranks
+        if (data.conference) {
+          Object.entries(data.conference).forEach(([rank, value]) => {
+            // Thêm cả hai phiên bản: có và không có tiền tố "CORE"
+            combinedRanks[`CORE ${rank}`] = value as number;
+            combinedRanks[rank] = value as number;
+          });
+        }
+
+        // Thêm journal ranks
+        if (data.journal) {
+          Object.entries(data.journal).forEach(([rank, value]) => {
+            combinedRanks[rank] = value as number;
+          });
+        }
+
+        // Cập nhật state
+        setRankOrder(combinedRanks);
+      } catch (error) {
+        console.error('Error loading ranks:', error);
+        // Fallback to default ranks if loading fails
+        setRankOrder({
+          'CORE A*': 1,
+          'A*': 1,
+          'Q1': 1,
+          'CORE A': 2,
+          'A': 2,
+          'Q2': 2,
+          'CORE B': 3,
+          'B': 3,
+          'Q3': 3,
+          'CORE C': 4,
+          'C': 4,
+          'Q4': 4,
+        });
+      }
+    }
+
+    loadRanks();
+  }, []);
 
   // Tính toán lowerYourName một lần bên ngoài useMemo
   const lowerYourName = useMemo(() => yourName.toLowerCase(), [yourName]);
@@ -56,11 +104,38 @@ export default function PublicationList({ initialPublications, yourName }: Publi
         break;
       case 'rank':
         filtered.sort((a, b) => {
-          const rankA = (typeof a.rank === 'string' ? rankOrder[a.rank] : undefined) ?? 99;
-          const rankB = (typeof b.rank === 'string' ? rankOrder[b.rank] : undefined) ?? 99;
-          if (rankA !== rankB) {
-            return rankA - rankB;
+          // Lấy giá trị rank từ rankOrder
+          let rankA = 99; // Giá trị mặc định là thấp nhất
+          let rankB = 99;
+
+          if (typeof a.rank === 'string') {
+            // Kiểm tra trực tiếp
+            if (a.rank in rankOrder) {
+              rankA = rankOrder[a.rank];
+            }
+            // Kiểm tra với tiền tố CORE
+            else if (`CORE ${a.rank}` in rankOrder) {
+              rankA = rankOrder[`CORE ${a.rank}`];
+            }
           }
+
+          if (typeof b.rank === 'string') {
+            // Kiểm tra trực tiếp
+            if (b.rank in rankOrder) {
+              rankB = rankOrder[b.rank];
+            }
+            // Kiểm tra với tiền tố CORE
+            else if (`CORE ${b.rank}` in rankOrder) {
+              rankB = rankOrder[`CORE ${b.rank}`];
+            }
+          }
+
+          // So sánh rank
+          if (rankA !== rankB) {
+            return rankA - rankB; // Rank thấp hơn (giá trị nhỏ hơn) sẽ được xếp trước
+          }
+
+          // Nếu rank bằng nhau, sắp xếp theo năm giảm dần
           return (b.year ?? 0) - (a.year ?? 0);
         });
         break;
@@ -68,10 +143,45 @@ export default function PublicationList({ initialPublications, yourName }: Publi
         filtered.sort((a, b) => {
           const isFirstA = a.isFirstAuthor === true || (Array.isArray(a.authors) && a.authors.length > 0 && typeof a.authors[0] === 'string' && a.authors[0].toLowerCase() === lowerYourName);
           const isFirstB = b.isFirstAuthor === true || (Array.isArray(b.authors) && b.authors.length > 0 && typeof b.authors[0] === 'string' && b.authors[0].toLowerCase() === lowerYourName);
+
+          // Nếu một bài có tác giả đầu tiên là bạn và bài kia không, ưu tiên bài có bạn là tác giả đầu tiên
           if (isFirstA !== isFirstB) {
-            return isFirstB ? 1 : -1;
+            return isFirstA ? -1 : 1; // Đảm bảo bài có bạn là tác giả đầu tiên được xếp trước
           }
-          return (b.year ?? 0) - (a.year ?? 0);
+
+          // Nếu cả hai bài đều có bạn là tác giả đầu tiên hoặc đều không có, sắp xếp theo năm (mới nhất trước)
+          const yearComparison = (b.year ?? 0) - (a.year ?? 0);
+          if (yearComparison !== 0) {
+            return yearComparison;
+          }
+
+          // Nếu cùng năm, sắp xếp theo rank (cao nhất trước)
+          let rankA = 99; // Giá trị mặc định là thấp nhất
+          let rankB = 99;
+
+          if (typeof a.rank === 'string') {
+            // Kiểm tra trực tiếp
+            if (a.rank in rankOrder) {
+              rankA = rankOrder[a.rank];
+            }
+            // Kiểm tra với tiền tố CORE
+            else if (`CORE ${a.rank}` in rankOrder) {
+              rankA = rankOrder[`CORE ${a.rank}`];
+            }
+          }
+
+          if (typeof b.rank === 'string') {
+            // Kiểm tra trực tiếp
+            if (b.rank in rankOrder) {
+              rankB = rankOrder[b.rank];
+            }
+            // Kiểm tra với tiền tố CORE
+            else if (`CORE ${b.rank}` in rankOrder) {
+              rankB = rankOrder[`CORE ${b.rank}`];
+            }
+          }
+
+          return rankA - rankB;
         });
         break;
       case 'year_desc':
@@ -124,7 +234,7 @@ export default function PublicationList({ initialPublications, yourName }: Publi
             <option value="year_desc">Sort by Year (Newest)</option>
             <option value="year_asc">Sort by Year (Oldest)</option>
             <option value="rank">Sort by Rank (Highest)</option>
-            <option value="first_author">Sort by My First Author</option>
+            <option value="first_author">Sort by First Author, Year, Rank</option>
           </select>
           <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
             <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

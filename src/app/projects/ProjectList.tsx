@@ -1,32 +1,115 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import type { Project } from '@/lib/dataUtils'; // Import kiểu Project
+import ProjectCard from '@/components/ProjectCard';
 
 interface ProjectListProps {
   initialProjects: Project[];
 }
 
 export default function ProjectList({ initialProjects }: ProjectListProps) {
+  const router = useRouter();
   const [searchTerm, setSearchTerm] = useState('');
   const [sortCriteria, setSortCriteria] = useState<'date_desc' | 'date_asc' | 'name_asc'>('date_desc');
+  const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
+  const [selectedTechnologies, setSelectedTechnologies] = useState<string[]>([]);
 
+  // Lấy tất cả các topics từ projects
+  const allTopics = useMemo(() => {
+    if (!Array.isArray(initialProjects)) return [];
+
+    const topicsSet = new Set<string>();
+
+    initialProjects.forEach(project => {
+      if (Array.isArray(project.topics)) {
+        project.topics.forEach(topic => {
+          if (typeof topic === 'string') {
+            topicsSet.add(topic);
+          }
+        });
+      }
+    });
+
+    return Array.from(topicsSet).sort();
+  }, [initialProjects]);
+
+  // Lấy tất cả các technologies từ projects
+  const allTechnologies = useMemo(() => {
+    if (!Array.isArray(initialProjects)) return [];
+
+    const techSet = new Set<string>();
+
+    initialProjects.forEach(project => {
+      if (Array.isArray(project.technologies)) {
+        project.technologies.forEach(tech => {
+          if (typeof tech === 'string') {
+            techSet.add(tech);
+          }
+        });
+      }
+    });
+
+    return Array.from(techSet).sort();
+  }, [initialProjects]);
+
+  // Lọc và sắp xếp projects
   const filteredAndSortedProjects = useMemo(() => {
     // Đảm bảo initialProjects là một mảng trước khi lọc
     if (!Array.isArray(initialProjects)) return [];
 
     const lowerSearchTerm = searchTerm.toLowerCase();
 
+    // Lọc theo search term
     let filtered = initialProjects.filter(project => {
-      // Kiểm tra kỹ lưỡng trước khi truy cập thuộc tính và gọi toLowerCase
-      const nameMatch = typeof project.name === 'string' && project.name.toLowerCase().includes(lowerSearchTerm);
-      const descMatch = typeof project.description === 'string' && project.description.toLowerCase().includes(lowerSearchTerm);
-      const techMatch = Array.isArray(project.technologies) && project.technologies.some(
-        tech => typeof tech === 'string' && tech.toLowerCase().includes(lowerSearchTerm)
+      // Tìm kiếm trong title
+      const titleMatch = project.title?.toLowerCase().includes(lowerSearchTerm);
+
+      // Tìm kiếm trong description
+      const descriptionMatch = project.description?.toLowerCase().includes(lowerSearchTerm);
+
+      // Tìm kiếm trong company
+      const companyMatch = project.company?.toLowerCase().includes(lowerSearchTerm);
+
+      // Tìm kiếm trong lab
+      const labMatch = project.lab?.toLowerCase().includes(lowerSearchTerm);
+
+      // Tìm kiếm trong tags
+      const tagsMatch = Array.isArray(project.tags) && project.tags.some(tag =>
+        typeof tag === 'string' && tag.toLowerCase().includes(lowerSearchTerm)
       );
-      return nameMatch || descMatch || techMatch;
+
+      // Tìm kiếm trong topics
+      const topicsMatch = Array.isArray(project.topics) && project.topics.some(topic =>
+        typeof topic === 'string' && topic.toLowerCase().includes(lowerSearchTerm)
+      );
+
+      // Tìm kiếm trong technologies
+      const techMatch = Array.isArray(project.technologies) && project.technologies.some(tech =>
+        typeof tech === 'string' && tech.toLowerCase().includes(lowerSearchTerm)
+      );
+
+      return titleMatch || descriptionMatch || companyMatch || labMatch || tagsMatch || topicsMatch || techMatch;
     });
+
+    // Lọc theo topics
+    if (selectedTopics.length > 0) {
+      filtered = filtered.filter(project => {
+        return Array.isArray(project.topics) && selectedTopics.every(selectedTopic =>
+          project.topics.some(topic => typeof topic === 'string' && topic === selectedTopic)
+        );
+      });
+    }
+
+    // Lọc theo technologies
+    if (selectedTechnologies.length > 0) {
+      filtered = filtered.filter(project => {
+        return Array.isArray(project.technologies) && selectedTechnologies.every(selectedTech =>
+          project.technologies.some(tech => typeof tech === 'string' && tech === selectedTech)
+        );
+      });
+    }
 
     // Sắp xếp
     switch (sortCriteria) {
@@ -34,8 +117,7 @@ export default function ProjectList({ initialProjects }: ProjectListProps) {
         filtered.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
         break;
       case 'name_asc':
-        // Đảm bảo name là string trước khi so sánh
-        filtered.sort((a, b) => (a.name ?? '').localeCompare(b.name ?? ''));
+        filtered.sort((a, b) => (a.title ?? '').localeCompare(b.title ?? ''));
         break;
       case 'date_desc':
       default:
@@ -43,12 +125,19 @@ export default function ProjectList({ initialProjects }: ProjectListProps) {
         break;
     }
     return filtered;
-  }, [initialProjects, searchTerm, sortCriteria]);
+  }, [initialProjects, searchTerm, sortCriteria, selectedTopics, selectedTechnologies]);
+
+  // Hàm xử lý chuyển hướng đến trang chi tiết dự án
+  const handleProjectClick = (slug: string | null) => {
+    if (slug) {
+      router.push(`/projects/${slug}`);
+    }
+  };
 
   return (
     <div>
-      {/* Thanh tìm kiếm và sắp xếp */}
-      <div className="mb-8 flex flex-col md:flex-row md:items-center gap-4 bg-gray-50 dark:bg-gray-900 p-4 rounded-lg">
+      {/* Search and Sort Controls */}
+      <div className="mb-4 flex flex-col md:flex-row md:items-center gap-4 bg-gray-50 dark:bg-gray-900 p-4 rounded-lg">
         <div className="flex-grow relative">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
             <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -57,7 +146,7 @@ export default function ProjectList({ initialProjects }: ProjectListProps) {
           </div>
           <input
             type="text"
-            placeholder="Search by name, description, or technology..."
+            placeholder="Search projects by title, description, or tag..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 shadow-sm"
@@ -96,19 +185,152 @@ export default function ProjectList({ initialProjects }: ProjectListProps) {
         </div>
       </div>
 
-      {/* Danh sách dự án */}
+      {/* Filters Section */}
+      <div className="mb-8">
+        <div className="bg-gray-50 dark:bg-gray-900 p-5 rounded-lg">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Filters</h3>
+            {(selectedTopics.length > 0 || selectedTechnologies.length > 0) && (
+              <button
+                onClick={() => {
+                  setSelectedTopics([]);
+                  setSelectedTechnologies([]);
+                }}
+                className="px-3 py-1 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-md text-sm font-medium transition-colors"
+              >
+                Clear All Filters
+              </button>
+            )}
+          </div>
+
+          {/* Two-column layout for filters */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Topics Filter - Left Column */}
+            {allTopics.length > 0 && (
+              <div>
+                <div className="mb-3">
+                  <div className="flex items-center justify-between mb-1">
+                    <h4 className="text-md font-medium text-gray-800 dark:text-gray-200 flex items-center">
+                      <svg className="w-5 h-5 mr-2 text-pink-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fillRule="evenodd" d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+                      </svg>
+                      Topics
+                      {selectedTopics.length > 0 && (
+                        <span className="ml-2 text-xs bg-pink-100 text-pink-800 py-1 px-2 rounded-full dark:bg-pink-900 dark:text-pink-200">
+                          {selectedTopics.length}
+                        </span>
+                      )}
+                    </h4>
+                    {selectedTopics.length > 0 && (
+                      <button
+                        onClick={() => setSelectedTopics([])}
+                        className="text-xs text-pink-600 hover:text-pink-800 dark:text-pink-400 dark:hover:text-pink-300"
+                      >
+                        Clear
+                      </button>
+                    )}
+                  </div>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+                    Projects must contain all selected topics
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {allTopics.map(topic => (
+                    <button
+                      key={topic}
+                      onClick={() => {
+                        setSelectedTopics(prev => {
+                          const newTopics = prev.includes(topic)
+                            ? prev.filter(t => t !== topic)
+                            : [...prev, topic];
+                          return newTopics;
+                        });
+                      }}
+                      className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                        selectedTopics.includes(topic)
+                          ? 'bg-pink-600 text-white hover:bg-pink-700'
+                          : 'bg-gray-200 text-gray-800 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600'
+                      }`}
+                    >
+                      {topic}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Technologies Filter - Right Column */}
+            {allTechnologies.length > 0 && (
+              <div>
+                <div className="mb-3">
+                  <div className="flex items-center justify-between mb-1">
+                    <h4 className="text-md font-medium text-gray-800 dark:text-gray-200 flex items-center">
+                      <svg className="w-5 h-5 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fillRule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                      </svg>
+                      Technologies
+                      {selectedTechnologies.length > 0 && (
+                        <span className="ml-2 text-xs bg-blue-100 text-blue-800 py-1 px-2 rounded-full dark:bg-blue-900 dark:text-blue-200">
+                          {selectedTechnologies.length}
+                        </span>
+                      )}
+                    </h4>
+                    {selectedTechnologies.length > 0 && (
+                      <button
+                        onClick={() => setSelectedTechnologies([])}
+                        className="text-xs text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+                      >
+                        Clear
+                      </button>
+                    )}
+                  </div>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+                    Projects must contain all selected technologies
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {allTechnologies.map(tech => (
+                    <button
+                      key={tech}
+                      onClick={() => {
+                        setSelectedTechnologies(prev => {
+                          const newTechs = prev.includes(tech)
+                            ? prev.filter(t => t !== tech)
+                            : [...prev, tech];
+                          return newTechs;
+                        });
+                      }}
+                      className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                        selectedTechnologies.includes(tech)
+                          ? 'bg-blue-600 text-white hover:bg-blue-700'
+                          : 'bg-gray-200 text-gray-800 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600'
+                      }`}
+                    >
+                      {tech}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
       {filteredAndSortedProjects.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-12 text-center">
           <svg className="w-16 h-16 text-gray-300 dark:text-gray-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 11v4M9 12h6" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
           </svg>
           <p className="text-xl text-gray-500 dark:text-gray-400 mb-4">No projects match your criteria</p>
           <button
-            onClick={() => setSearchTerm('')}
+            onClick={() => {
+              setSearchTerm('');
+              setSelectedTopics([]);
+              setSelectedTechnologies([]);
+            }}
             className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
           >
-            Clear Search
+            Clear All Filters
           </button>
         </div>
       ) : (
@@ -116,157 +338,28 @@ export default function ProjectList({ initialProjects }: ProjectListProps) {
           <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
             Showing {filteredAndSortedProjects.length} project{filteredAndSortedProjects.length !== 1 ? 's' : ''}
             {searchTerm && <span> matching "{searchTerm}"</span>}
+            {selectedTopics.length > 0 && (
+              <span> in topics: {selectedTopics.map((topic, index) => (
+                <span key={topic}>
+                  <span className="text-pink-600 dark:text-pink-400 font-medium">{topic}</span>
+                  {index < selectedTopics.length - 1 ? ', ' : ''}
+                </span>
+              ))}</span>
+            )}
+            {selectedTechnologies.length > 0 && (
+              <span> with technologies: {selectedTechnologies.map((tech, index) => (
+                <span key={tech}>
+                  <span className="text-blue-600 dark:text-blue-400 font-medium">{tech}</span>
+                  {index < selectedTechnologies.length - 1 ? ', ' : ''}
+                </span>
+              ))}</span>
+            )}
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredAndSortedProjects.map((project) => {
-              const displayTags = project.tags ?? project.technologies;
-
-              // Chỉ sử dụng ID làm slug để đảm bảo tính nhất quán với trang chi tiết
-              let slug: string | null = null;
-              if (project.id !== null && project.id !== undefined) {
-                slug = project.id.toString();
-              }
-
-              // Nếu không tạo được slug hợp lệ, không render Link
-              const projectDetailUrl = slug ? `/projects/${slug}` : null;
-              // Key nên luôn dùng ID nếu có, nếu không thì mới fallback
-              const itemKey = project.id?.toString() ?? slug ?? `project-fallback-${Math.random()}`; // Dùng random ở đây ít ảnh hưởng hơn
-
-              // Xác định màu gradient dựa trên tags hoặc technologies
-              let gradientClass = "from-blue-500 to-indigo-600";
-              if (Array.isArray(displayTags) && displayTags.length > 0) {
-                const firstTag = displayTags[0].toLowerCase();
-                if (firstTag.includes('react') || firstTag.includes('javascript')) {
-                  gradientClass = "from-blue-400 to-cyan-500";
-                } else if (firstTag.includes('python') || firstTag.includes('data')) {
-                  gradientClass = "from-green-500 to-teal-500";
-                } else if (firstTag.includes('design') || firstTag.includes('ui')) {
-                  gradientClass = "from-purple-500 to-pink-500";
-                } else if (firstTag.includes('mobile') || firstTag.includes('app')) {
-                  gradientClass = "from-orange-500 to-red-500";
-                } else if (firstTag.includes('ai') || firstTag.includes('machine')) {
-                  gradientClass = "from-indigo-500 to-purple-600";
-                }
-              }
-
-              return (
-                <div key={itemKey} className="group bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col h-full border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-700 transform hover:-translate-y-1">
-                  {/* Project Header with Gradient */}
-                  <div className={`bg-gradient-to-r ${gradientClass} p-6 relative`}>
-                    <div className="absolute top-0 right-0 mt-4 mr-4">
-                      {project.date && (
-                        <div className="bg-white/20 backdrop-blur-sm text-white text-xs font-medium px-2.5 py-1 rounded-full">
-                          {new Date(project.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short' })}
-                        </div>
-                      )}
-                    </div>
-                    <h2 className="text-xl font-bold mb-2 text-white">
-                      {/* Chỉ render Link nếu có URL hợp lệ */}
-                      {projectDetailUrl ? (
-                        <Link href={projectDetailUrl} className="hover:text-white/90 transition-colors">
-                          {project.title ?? project.name ?? 'Unnamed Project'}
-                        </Link>
-                      ) : (
-                        <span>{project.title ?? project.name ?? 'Unnamed Project'}</span>
-                      )}
-                    </h2>
-                    {/* Kiểm tra project.technologies là mảng */}
-                    {Array.isArray(displayTags) && displayTags.length > 0 && (
-                      <div className="flex flex-wrap gap-2 mt-3">
-                        {displayTags.slice(0, 3).map((tag) => (
-                          typeof tag === 'string' && (
-                            <span
-                              key={tag}
-                              className="bg-white/20 backdrop-blur-sm text-white text-xs font-medium px-2.5 py-1 rounded-full hover:bg-white/30 transition-colors cursor-pointer"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                setSearchTerm(tag);
-                              }}
-                            >
-                              {tag}
-                            </span>
-                          )
-                        ))}
-                        {displayTags.length > 3 && (
-                          <span className="bg-white/10 text-white text-xs font-medium px-2.5 py-1 rounded-full">
-                            +{displayTags.length - 3} more
-                          </span>
-                        )}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Project Content */}
-                  <div className="p-6 flex-grow flex flex-col">
-                    <p className="text-gray-600 dark:text-gray-300 mb-4 flex-grow line-clamp-3">
-                      {project.description ?? 'No description available.'}
-                    </p>
-
-                    {/* Project Links */}
-                    <div className="mt-auto pt-4 flex justify-between items-center">
-                      {/* Chỉ render Link nếu có URL hợp lệ */}
-                      {projectDetailUrl ? (
-                        <Link
-                          href={projectDetailUrl}
-                          className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-sm font-medium rounded-full hover:from-blue-600 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 shadow-md hover:shadow-lg"
-                        >
-                          View Project
-                          <svg className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                          </svg>
-                        </Link>
-                      ) : (
-                        <span className="text-gray-400 dark:text-gray-600 text-sm italic">Details unavailable</span>
-                      )}
-
-                      {/* External Links */}
-                      <div className="flex space-x-2">
-                        {project.githubUrl && (
-                          <a
-                            href={project.githubUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
-                            title="GitHub Repository"
-                          >
-                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                              <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
-                            </svg>
-                          </a>
-                        )}
-                        {project.videoUrl && (
-                          <a
-                            href={project.videoUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition-colors"
-                            title="Video Demo"
-                          >
-                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path>
-                            </svg>
-                          </a>
-                        )}
-                        {(project.demoUrl || project.liveUrl) && (
-                          <a
-                            href={project.demoUrl || project.liveUrl || '#'}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
-                            title="Live Demo"
-                          >
-                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
-                            </svg>
-                          </a>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+            {filteredAndSortedProjects.map((project) => (
+              <ProjectCard key={project.id || `project-${Math.random()}`} project={project} />
+            ))}
           </div>
         </div>
       )}

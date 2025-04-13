@@ -1,0 +1,37 @@
+{
+  "id": 12,
+  "rank": "C",
+  "title": "Reinforcement Learning from Human Feedback for Robotics Manipulation",
+  "authors": [
+    "Duc Le",
+    "Olivia Chen",
+    "Daniel Park",
+    "Rachel Kim"
+  ],
+  "type": "Workshop",
+  "isFirstAuthor": true,
+  "venue": "Workshop on Robot Learning at NeurIPS",
+  "year": 2023,
+  "abstract": "This paper explores reinforcement learning from human feedback (RLHF) for robotic manipulation tasks, demonstrating improved sample efficiency and task performance.",
+  "content": "This paper explores reinforcement learning from human feedback (RLHF) for robotic manipulation tasks, demonstrating improved sample efficiency and task performance. We present a framework that efficiently incorporates different forms of human feedback, including demonstrations, preferences, and corrections, into the reinforcement learning process. Our approach addresses key challenges in robotics, such as reward specification, exploration, and safety constraints. Experiments on a range of manipulation tasks show that our method significantly reduces the number of physical interactions required while improving success rates compared to traditional reinforcement learning approaches.",
+  "topics": [
+    "Reinforcement Learning",
+    "Human-Robot Interaction",
+    "Robotics",
+    "RLHF",
+    "Manipulation"
+  ],
+  "doi": null,
+  "link": "https://robotlearning.ml/2023/papers/paper_123.pdf",
+  "citationCount": 3,
+  "citationFormat": "Le, D., Chen, O., Park, D., & Kim, R. (2023). Reinforcement Learning from Human Feedback for Robotics Manipulation. In Workshop on Robot Learning at NeurIPS 2023.",
+  "videoUrl": "https://www.youtube.com/watch?v=abcdef54321",
+  "github": "https://github.com/lengocduc195/rlhf-robotics",
+  "images": [
+    {
+      "url": "/images/rlhf-robotics.jpg",
+      "caption": "RLHF for Robotic Manipulation"
+    }
+  ],
+  "technologies": ["Python", "PyTorch", "ROS", "MuJoCo", "OpenAI Gym"]
+}

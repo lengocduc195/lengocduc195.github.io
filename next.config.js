@@ -12,19 +12,15 @@ const nextConfig = {
     // Tắt kiểm tra TypeScript trong quá trình build
     ignoreBuildErrors: true,
   },
-  // Loại bỏ các API route khỏi quá trình build
-  webpack: (config, { isServer }) => {
-    if (process.env.NEXT_PUBLIC_DISABLE_API === 'true') {
-      // Loại bỏ các API route khỏi quá trình build
-      if (!isServer) {
-        config.resolve.fallback = {
-          ...config.resolve.fallback,
-          fs: false,
-          path: false,
-        };
-      }
-    }
-    return config;
+  // Cấu hình Turbopack
+  turbopack: {
+    // Cấu hình Turbopack cho Next.js 15.3.0
+    resolveAlias: {
+      // Ví dụ: '@/components': './src/components'
+    },
+    // Không sử dụng cấu hình webpack khi dùng Turbopack
+    // Để tránh cảnh báo "Webpack is configured while Turbopack is not"
+    // Turbopack sẽ tự động xử lý các tài nguyên mà không cần cấu hình thêm
   },
 };
 

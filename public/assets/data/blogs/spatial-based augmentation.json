@@ -4,7 +4,7 @@
     "description": "This is a spatial-based augmentation technique that uses the spatial information of the input data to enhance the performance of the model. It is particularly useful in tasks where the spatial arrangement of the data is important, such as image classification and object detection.",
     "author": "Ngoc Duc",
     "date": "2023-10-01",
-    "content": "Elastic Transformation is a data augmentation which simulates the stretching and compressing of different parts of an image. in various directions. The implementation typically involves generating random displacement fields that are convolved with a Gaussian kernel. This process craetes natural-looking variations that preserve the essential characteristics of the original image while introducing meaningful diversity.",
+    "content": "Elastic Transformation **is a data** augmentation which simulates the stretching and compressing of different parts of an image. in various directions. The implementation typically involves generating random displacement fields that are convolved with a Gaussian kernel. This process craetes natural-looking variations that preserve the essential characteristics of the original image while introducing meaningful diversity.",
     "topics": [
         "Spatial-based Augmentation",
         "Machine Learning",

@@ -7,13 +7,46 @@
     "date": "2022-05-15",
     "title": "Another Cool App",
     "description": "A mobile-friendly application built with React Native.",
+    "main_image": {
+        "url": "/images/projects/mobile-app.jpg",
+        "caption": "Cool App Interface"
+    },
+    "content": [
+        {
+            "type": "text",
+            "text": "This mobile application was built using **React Native** to provide a seamless cross-platform experience. The app features a modern UI design with intuitive navigation and responsive layouts."
+        },
+        {
+            "type": "text",
+            "text": "The backend is powered by **Firebase**, providing real-time database functionality, user authentication, and cloud storage capabilities. This allows for a scalable and reliable infrastructure without the need for a custom server setup."
+        },
+        {
+            "type": "text",
+            "text": "Key features include:\n- User authentication and profile management\n- Real-time data synchronization\n- Offline support with local caching\n- Push notifications for important updates\n- Integration with device features like camera and location"
+        }
+    ],
+    "notableObservations": [
+        "User engagement increased by 45% after implementing the new UI design.",
+        "Firebase integration reduced backend development time by approximately 60%."
+    ],
+    "unexpectedInsights": [
+        "Users spent more time on profile customization than anticipated, suggesting a strong desire for personalization.",
+        "The offline mode became one of the most appreciated features, especially for users in areas with poor connectivity."
+    ],
     "images": [],
+    "productUrl": "https://secomus.com/ai-platform",
     "videoUrl": "https://awesome-project.example.com",
     "githubUrl": "https://github.com/yourusername/cool-app",
+    "topics": [
+        "Mobile App",
+        "React Native",
+        "Firebase"
+    ],
     "technologies": [
         "React Native",
         "JavaScript",
         "Firebase"
     ],
-    "content": "Detailed description or markdown content for the cool app."
+    "company": null,
+    "lab": null
 }

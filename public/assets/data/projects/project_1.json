@@ -7,24 +7,62 @@
     "date": "2023-10-01",
     "title": "AI-Powered Image Recognition",
     "description": "A deep learning model for recognizing objects in images with high accuracy using convolutional neural networks.",
-    "content": "This project implements a state-of-the-art convolutional neural network for image recognition tasks. The model is trained on a large dataset of labeled images and can recognize objects across multiple categories with high accuracy.\n\nThe architecture uses a combination of convolutional layers, pooling layers, and fully connected layers to extract features from input images and classify them into predefined categories. Transfer learning techniques were applied by fine-tuning a pre-trained model on custom datasets to improve performance.\n\nKey features of this project include:\n- Real-time object detection with bounding boxes\n- Multi-class classification with confidence scores\n- Web interface for uploading and processing images\n- REST API for integration with other applications",
+    "main_image": {
+        "url": "/images/projects/project-1.jpg",
+        "caption": "Deep Learning for Computer Vision"
+    },
+    "content": [
+        {
+            "type": "text",
+            "text": "This project implements a state-of-the-art **convolutional neural network** for image recognition tasks. The model is trained on a large dataset of labeled images and can recognize objects across multiple categories with high accuracy."
+        },
+        {
+            "type": "text",
+            "text": "The architecture uses a combination of convolutional layers, pooling layers, and fully connected layers to extract features from input images and classify them into predefined categories. **Transfer learning** techniques were applied by fine-tuning a pre-trained model on custom datasets to improve performance."
+        },
+        {
+            "type": "image",
+            "url": "/images/projects/project-2.jpg",
+            "caption": "Survey of Deep Learning Techniques"
+        },
+        {
+            "type": "text",
+            "text": "Key features of this project include:\n- Real-time object detection with bounding boxes\n- Multi-class classification with confidence scores\n- Web interface for uploading and processing images\n- REST API for integration with other applications"
+        }
+    ],
+    "notableObservations": [
+        "The model achieved 95% accuracy on the test dataset, outperforming previous approaches by 7%.",
+        "Using transfer learning reduced training time by 60% while maintaining similar accuracy levels."
+    ],
+    "unexpectedInsights": [
+        "The model performed better on blurry images than expected, suggesting it learned robust feature representations.",
+        "Adding slight noise to training images improved performance on real-world data significantly."
+    ],
     "images": [
         {
-            "url": "/images/project-1.jpg",
+            "url": "/images/projects/project-1.jpg",
             "caption": "Deep Learning for Computer Vision"
         },
         {
-            "url": "/images/project-2.jpg",
+            "url": "/images/projects/project-2.jpg",
             "caption": "Survey of Deep Learning Techniques"
         }
     ],
+    "productUrl": "https://secomus.com/ai-platform",
     "videoUrl": "https://www.youtube.com/watch?v=eelI4mYxKsE",
     "githubUrl": "https://github.com/yourusername/image-recognition",
+    "topics": [
+        "AI",
+        "Computer Vision",
+        "Deep Learning"
+    ],
     "technologies": [
         "Python",
         "TensorFlow",
         "Keras",
         "OpenCV",
         "Flask"
-    ]
-    }
+    ],
+    "company": null,
+    "lab": "Computer Science"
+}

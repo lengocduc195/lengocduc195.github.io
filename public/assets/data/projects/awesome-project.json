@@ -1,13 +1,53 @@
 {
   "id": 2,
-  "author": ["Your Name"],
+  "author": [
+    "Your Name"
+  ],
   "highlight": true,
   "date": "2023-10-26",
   "title": "My Awesome Project",
   "description": "An amazing project that solves a real-world problem using cutting-edge technology.",
+  "main_image": {
+    "url": "/images/projects/web-project.jpg",
+    "caption": "Awesome Project Screenshot"
+  },
+  "content": [
+    {
+      "type": "text",
+      "text": "This web application was built using **Next.js** and **TypeScript** to create a modern, type-safe, and performant user experience. The project leverages the power of server-side rendering and static site generation to deliver fast page loads and excellent SEO performance."
+    },
+    {
+      "type": "text",
+      "text": "**Tailwind CSS** was used for styling, allowing for rapid UI development with a consistent design system. The utility-first approach made it easy to create responsive layouts and maintain a cohesive visual identity throughout the application."
+    },
+    {
+      "type": "text",
+      "text": "Key features include:\n- Server-side rendering for improved performance\n- API routes for backend functionality\n- Responsive design that works on all devices\n- Dark mode support with theme persistence\n- Authentication and user management"
+    }
+  ],
+  "notableObservations": [
+    "Page load times decreased by 65% after implementing Next.js static generation for key pages.",
+    "Development velocity increased significantly with Tailwind CSS, allowing for faster iterations."
+  ],
+  "unexpectedInsights": [
+    "Users spent more time on the site when dark mode was enabled, suggesting a preference for reduced eye strain.",
+    "The TypeScript implementation caught several critical bugs during development that would have been difficult to identify otherwise."
+  ],
   "images": [],
+  "productUrl": "https://secomus.com/ai-platform",
   "videoUrl": "https://awesome-project.example.com",
   "githubUrl": "https://github.com/yourusername/awesome-project",
-  "technologies": ["Next.js", "TypeScript", "Tailwind CSS", "Node.js"],
-  "content": "Detailed description or markdown content for the awesome project goes here."
+  "topics": [
+    "Web Development",
+    "Next.js",
+    "Tailwind CSS"
+  ],
+  "technologies": [
+    "Next.js",
+    "TypeScript",
+    "Tailwind CSS",
+    "Node.js"
+  ],
+  "company": null,
+  "lab": null
 }

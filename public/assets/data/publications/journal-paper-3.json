@@ -1,0 +1,35 @@
+{
+  "id": 9,
+  "rank": "Q3",
+  "title": "Energy-Efficient Deep Learning for IoT Devices: Algorithms and Implementation",
+  "authors": [
+    "Duc Le",
+    "Robert Johnson"
+  ],
+  "type": "Journal",
+  "isFirstAuthor": true,
+  "venue": "IEEE Internet of Things Journal",
+  "year": 2021,
+  "abstract": "This paper presents novel algorithms and implementation strategies for energy-efficient deep learning on resource-constrained IoT devices.",
+  "content": "This paper presents novel algorithms and implementation strategies for energy-efficient deep learning on resource-constrained IoT devices. We introduce a systematic approach to model compression, quantization, and hardware-aware neural architecture search that significantly reduces energy consumption while maintaining acceptable accuracy. Our experimental evaluation on various IoT platforms demonstrates up to 85% reduction in energy usage compared to baseline implementations. We also provide a comprehensive analysis of the trade-offs between model accuracy, inference latency, and energy consumption across different IoT applications and hardware configurations.",
+  "topics": [
+    "Energy-Efficient Computing",
+    "IoT",
+    "Deep Learning",
+    "Model Compression",
+    "Edge Computing"
+  ],
+  "doi": "10.1109/JIOT.2021.3056789",
+  "link": "https://ieeexplore.ieee.org/document/3056789",
+  "citationCount": 35,
+  "citationFormat": "Le, D., & Johnson, R. (2021). Energy-Efficient Deep Learning for IoT Devices: Algorithms and Implementation. IEEE Internet of Things Journal, 8(5), 3456-3470.",
+  "videoUrl": "https://www.youtube.com/watch?v=efghijklmno",
+  "github": "https://github.com/lengocduc195/energy-efficient-dl",
+  "images": [
+    {
+      "url": "/images/energy-efficient-dl.jpg",
+      "caption": "Energy Consumption Comparison"
+    }
+  ],
+  "technologies": ["Python", "TensorFlow Lite", "PyTorch Mobile", "Arduino", "Raspberry Pi"]
+}

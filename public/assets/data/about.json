@@ -1,6 +1,6 @@
 {
   "name": "Duc Le",
-  "main role": "Research Scientist",
+  "main role": "AI Lead",
   "roles": [
     "Research Scientist",
     "Machine Learning Engineer"
@@ -47,33 +47,6 @@
       "description": "Conducted research on AI and machine learning"
     }
   ],
-  "interests": [
-    "Machine Learning",
-    "Computer Vision",
-    "Full-stack Development",
-    "Cloud Computing",
-    "Open Source"
-  ],
-  "technologyCategories": {
-    "programmingLanguages": [
-      "Python",
-      "JavaScript",
-      "TypeScript",
-      "Java",
-      "C++",
-      "C#",
-      "Rust",
-      "Go"
-    ],
-    "frameworksAndLibraries": [
-      "React",
-      "Next.js",
-      "Node.js",
-      "TensorFlow",
-      "PyTorch",
-      "Django",
-      "Flask",
-      "Express"
-    ]
-  }
-} 
+  "slogan": "I believe one good line of code can change how we think.",
+  "slogan_footer": "Researcher, developer, and innovator passionate about creating impactful solutions with cutting-edge technologies."
+}

@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation'; // Để xử lý trường hợp không tìm thấy project
 // import ReactMarkdown from 'react-markdown'; // Bỏ comment nếu dùng Markdown
 // import remarkGfm from 'remark-gfm';
+import ProjectContent from './ProjectContent';
+import ProjectImages from './ProjectImages';
 
 interface PageProps {
   params: {
@@ -12,11 +14,23 @@ interface PageProps {
   searchParams?: { [key: string]: string | string[] | undefined };
 }
 
-// Hàm để lấy dữ liệu chi tiết của một project dựa trên slug (ID)
+// Hàm để lấy dữ liệu chi tiết của một project dựa trên slug (ID hoặc title)
 async function getProjectDetails(slug: string) {
   const allProjects = await getProjects();
-  // Tìm project theo ID
-  const project = allProjects.find(p => p.id?.toString() === slug);
+  // Tìm project theo ID hoặc title được chuyển đổi thành slug
+  const project = allProjects.find(p => {
+    // Kiểm tra theo ID
+    if (p.id?.toString() === slug) return true;
+
+    // Kiểm tra theo title được chuyển đổi thành slug
+    if (p.title) {
+      const titleSlug = p.title.toLowerCase().replace(/\s+/g, '-');
+      return titleSlug === slug;
+    }
+
+    return false;
+  });
+
   return project;
 }
 
@@ -30,17 +44,39 @@ export async function generateStaticParams() {
     return [];
   }
 
-  return projects.map((project) => {
-    // Use project ID as slug for simplicity and reliability
+  const params = [];
+
+  for (const project of projects) {
+    // Generate slug from ID
     if (project.id !== null && project.id !== undefined) {
-      const slug = project.id.toString();
-      return { slug };
-    } else {
-      // Skip generating params if no valid identifier found
-      console.warn("generateStaticParams: Skipping project due to missing id:", project);
-      return null; // Will be filtered out later
+      params.push({ slug: project.id.toString() });
     }
-  }).filter(Boolean); // Remove any null entries
+
+    // Generate slug from title
+    if (project.title) {
+      const titleSlug = project.title.toLowerCase().replace(/\s+/g, '-');
+      // Avoid duplicates if ID and title generate the same slug
+      if (!params.some(p => p.slug === titleSlug)) {
+        params.push({ slug: titleSlug });
+      }
+    }
+  }
+
+  // Thêm các slug cụ thể mà chúng ta biết sẽ được sử dụng
+  const additionalSlugs = [
+    'ai-powered-image-recognition',
+    'ai-powered-image-recognition-system',
+    'my-awesome-project',
+    'another-cool-app'
+  ];
+
+  for (const slug of additionalSlugs) {
+    if (!params.some(p => p.slug === slug)) {
+      params.push({ slug });
+    }
+  }
+
+  return params;
 }
 
 // Helper Component để render Links (tránh lặp code)
@@ -71,7 +107,8 @@ const RelatedLinksSection: React.FC<{ title: string, links: { title: string, url
 
 export default async function ProjectDetailPage({ params }: PageProps) {
   // Đảm bảo params đã được await trước khi sử dụng
-  const slug = params.slug;
+  const resolvedParams = await Promise.resolve(params);
+  const slug = resolvedParams.slug;
   const project = await getProjectDetails(slug);
 
   if (!project) {
@@ -88,10 +125,12 @@ export default async function ProjectDetailPage({ params }: PageProps) {
       <article className="max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md p-8 border border-gray-200 dark:border-gray-700">
         <h1 className="text-3xl md:text-4xl font-bold mb-2 text-gray-900 dark:text-white">{project.title ?? project.name ?? 'Untitled Project'}</h1>
 
-        {/* Hiển thị Author và Date */}
-        <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-6">
+        {/* Hiển thị Author, Date, Company và Lab */}
+        <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-6">
             {Array.isArray(project.author) && <span>By {project.author.join(', ')}</span>}
             {project.date && <span>on {project.date}</span>}
+            {project.company && <span className="font-medium text-blue-600 dark:text-blue-400">· Company: {project.company}</span>}
+            {project.lab && <span className="font-medium text-green-600 dark:text-green-400">· Lab: {project.lab}</span>}
         </div>
 
         {/* Hiển thị Description trước */}
@@ -101,112 +140,65 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           </p>
         )}
 
-        {/* Hiển thị hình ảnh chính (nếu có) */}
-        <div className="mb-6 space-y-6">
-            {Array.isArray(project.images) && project.images.length > 0 && typeof project.images[0] === 'string' && (
-              <img src={project.images[0]} alt={project.title ?? 'Project image'} className="w-full h-auto rounded-md shadow-lg"/>
-            )}
-            {Array.isArray(project.images) && project.images.length > 0 && typeof project.images[0] === 'object' && project.images[0]?.url && (
-              <figure>
-                <img
-                  src={project.images[0].url}
-                  alt={project.images[0].caption || project.title || 'Project image'}
-                  className="w-full h-auto rounded-md shadow-lg"
-                />
-                {project.images[0].caption && (
-                  <figcaption className="text-center text-sm text-gray-500 dark:text-gray-400 mt-2">
-                    {project.images[0].caption}
-                  </figcaption>
+
+
+        <ProjectContent project={project} />
+
+
+        {/* Project Links Section */}
+        <div className="mb-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+            <h3 className="font-semibold mb-4 text-lg text-gray-700 dark:text-gray-300">Links</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Website */}
+                {project.productUrl && (
+                    <a href={project.productUrl} target="_blank" rel="noopener noreferrer"
+                       className="flex items-center p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors">
+                        <div className="bg-blue-100 dark:bg-blue-800 p-2 rounded-full mr-3">
+                            <svg className="w-5 h-5 text-blue-600 dark:text-blue-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                                <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <div className="font-medium text-gray-700 dark:text-gray-200">Website</div>
+                            <div className="text-xs text-gray-500 dark:text-gray-400">Visit the project website</div>
+                        </div>
+                    </a>
                 )}
-              </figure>
-            )}
-            {project.videoUrl && (
-                <div className="mb-6">
-                    <h3 className="font-semibold mb-2 text-lg text-gray-700 dark:text-gray-300">Video Demo:</h3>
-                    <div className="aspect-w-16 rounded-lg overflow-hidden shadow-lg">
-                        <iframe
-                            src={getYouTubeEmbedUrl(project.videoUrl)}
-                            title={project.title ?? "Project Video"}
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            referrerPolicy="strict-origin-when-cross-origin"
-                            allowFullScreen
-                        ></iframe>
-                    </div>
-                    <div className="mt-2 text-sm text-gray-500 dark:text-gray-400 text-center">
-                        <a
-                            href={project.videoUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
-                        >
-                            Xem trên YouTube
-                        </a>
-                    </div>
-                </div>
-            )}
+
+                {/* Video Demo */}
+                {project.videoUrl && (
+                    <a href={project.videoUrl} target="_blank" rel="noopener noreferrer"
+                       className="flex items-center p-3 bg-red-50 dark:bg-red-900/20 rounded-lg hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors">
+                        <div className="bg-red-100 dark:bg-red-800 p-2 rounded-full mr-3">
+                            <svg className="w-5 h-5 text-red-600 dark:text-red-300" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <div className="font-medium text-gray-700 dark:text-gray-200">YouTube Demo</div>
+                            <div className="text-xs text-gray-500 dark:text-gray-400">Watch project demonstration on YouTube</div>
+                        </div>
+                    </a>
+                )}
+
+                {/* GitHub Repository */}
+                {project.githubUrl && (
+                    <a href={project.githubUrl} target="_blank" rel="noopener noreferrer"
+                       className="flex items-center p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800/80 transition-colors">
+                        <div className="bg-gray-100 dark:bg-gray-700 p-2 rounded-full mr-3">
+                            <svg className="w-5 h-5 text-gray-700 dark:text-gray-300" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+                            </svg>
+                        </div>
+                        <div>
+                            <div className="font-medium text-gray-700 dark:text-gray-200">GitHub Repository</div>
+                            <div className="text-xs text-gray-500 dark:text-gray-400">View source code</div>
+                        </div>
+                    </a>
+                )}
+            </div>
         </div>
-
-        {/* Hiển thị Content chi tiết */}
-        {project.content && (
-             <div className="prose dark:prose-invert max-w-none mb-6">
-                 <h2 className="text-2xl font-semibold mb-3">Details</h2>
-                 {/* <ReactMarkdown remarkPlugins={[remarkGfm]}>{project.content}</ReactMarkdown> */}
-                 <p className="whitespace-pre-wrap">{project.content}</p>
-            </div>
-        )}
-
-         {/* Hiển thị các hình ảnh khác (nếu có và là object) */}
-         {Array.isArray(project.images) && project.images.length > 1 && (
-             <div className="mb-6">
-                 <h3 className="font-semibold mb-2 text-lg text-gray-700 dark:text-gray-300">More Images:</h3>
-                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                     {project.images.slice(1).map((img, index) => (
-                         typeof img === 'object' && img.url && (
-                            <div key={index}>
-                                <img src={img.url} alt={img.caption || `Project image ${index + 2}`} className="w-full h-auto rounded-md shadow"/>
-                                {img.caption && <p className="text-xs text-center mt-1 text-gray-500 dark:text-gray-400">{img.caption}</p>}
-                            </div>
-                         )
-                     ))}
-                 </div>
-             </div>
-         )}
-
-         {/* Hiển thị Tags/Technologies */}
-        {Array.isArray(displayTags) && displayTags.length > 0 && (
-             <div className="mb-6 pt-4 border-t border-gray-200 dark:border-gray-700">
-              <h3 className="font-semibold mb-2 text-lg text-gray-700 dark:text-gray-300">Tags/Technologies:</h3>
-              <div className="flex flex-wrap gap-2">
-                {displayTags.map((tag) => (
-                  typeof tag === 'string' && (
-                    <span key={tag} className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
-                      {tag}
-                    </span>
-                  )
-                ))}
-              </div>
-            </div>
-        )}
-
-        {/* Links (Repo/Demo) */}
-        {(repoLink || demoLink) && (
-             <div className="mb-6 pt-4 border-t border-gray-200 dark:border-gray-700">
-              <h3 className="font-semibold mb-2 text-lg text-gray-700 dark:text-gray-300">Project Links:</h3>
-                <div className="flex justify-start space-x-4">
-                    {repoLink && (
-                      <Link href={repoLink} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors font-medium">
-                        View Code
-                      </Link>
-                    )}
-                    {demoLink && (
-                      <Link href={demoLink} target="_blank" rel="noopener noreferrer" className="text-green-600 hover:text-green-800 dark:text-green-400 dark:hover:text-green-300 transition-colors font-medium">
-                        Live Demo / View Product
-                      </Link>
-                    )}
-                </div>
-            </div>
-        )}
 
         {/* Related & External Links Sections */}
         <RelatedLinksSection title="Related Internal Content" links={project.related} />

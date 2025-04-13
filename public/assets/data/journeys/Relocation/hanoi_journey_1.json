@@ -4,7 +4,16 @@
     "date": "2025-4-01",
     "description": "About my roommate at 44, 66/18 Dich Vong Hau, Cau Giay, Hanoi",
     "author": "Ngoc Duc",
-    "images": [],
+    "images": [
+        {
+            "url": "/images/project-3.jpg",
+            "caption": "Giao diện chính của Secomus AI Platform"
+        },
+        {
+            "url": "/images/project-4.jpg",
+            "caption": "Bảng điều khiển phân tích dữ liệu"
+        }
+    ],
     "tags": [
         "Accommodation",
         "Roommate",

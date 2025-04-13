@@ -4,7 +4,16 @@
     "date": "2024-01-01",
     "description": "A journey through Secomus Technology as a core AI Engineer",
     "author": "Ngoc Duc",
-    "images": [],
+    "images": [
+        {
+            "url": "/images/project-3.jpg",
+            "caption": "Giao diện chính của Secomus AI Platform"
+        },
+        {
+            "url": "/images/project-4.jpg",
+            "caption": "Bảng điều khiển phân tích dữ liệu"
+        }
+    ],
     "tags": [
         "Secomus",
         "My job"

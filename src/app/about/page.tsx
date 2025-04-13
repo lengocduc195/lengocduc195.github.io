@@ -1,4 +1,4 @@
-import { getAllSkills, getSkillRequirements, getPublicationTopicsWithCounts, getAboutData } from '@/lib/dataUtils';
+import { getPublicationTopicsWithCounts, getAboutData, getOngoingExplorationTopics, getAllTechnologies } from '@/lib/dataUtils';
 import Image from 'next/image'; // Import Next Image
 import { FaGithub, FaLinkedin, FaTwitter, FaGoogle, FaResearchgate, FaOrcid } from 'react-icons/fa';
 import Link from 'next/link';
@@ -14,42 +14,12 @@ const socialIconMap: { [key: string]: { icon: React.ComponentType<React.SVGProps
 };
 
 export default async function AboutPage() {
-  const [allSkills, skillRequirements, publicationTopics, aboutData] = await Promise.all([
-    getAllSkills(),
-    getSkillRequirements(),
+  const [publicationTopics, aboutData, explorationTopics, allTechnologies] = await Promise.all([
     getPublicationTopicsWithCounts(),
-    getAboutData()
+    getAboutData(),
+    getOngoingExplorationTopics(),
+    getAllTechnologies()
   ]);
-
-  const allSkillsLower = allSkills.map(s => s.toLowerCase());
-  const skillOriginalCaseMap = new Map(allSkills.map(s => [s.toLowerCase(), s]));
-  const groupedSkills: { [category: string]: string[] } = {};
-  const categorizedSkills = new Set<string>();
-
-  for (const category in skillRequirements) {
-    groupedSkills[category] = [];
-    if (Array.isArray(skillRequirements[category])) {
-      skillRequirements[category].forEach(reqSkill => {
-        const lowerReqSkill = reqSkill.toLowerCase();
-        if (allSkillsLower.includes(lowerReqSkill)) {
-          groupedSkills[category].push(skillOriginalCaseMap.get(lowerReqSkill)!);
-          categorizedSkills.add(lowerReqSkill);
-        }
-      });
-      groupedSkills[category].sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
-    }
-  }
-
-  groupedSkills['Other'] = allSkills
-    .filter(skill => !categorizedSkills.has(skill.toLowerCase()))
-    .sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
-
-  const displayCategories = Object.keys(groupedSkills).filter(cat => groupedSkills[cat].length > 0);
-  displayCategories.sort((a, b) => {
-    if (a === 'Other') return 1;
-    if (b === 'Other') return -1;
-    return a.localeCompare(b);
-  });
   console.log('publicationTopics', publicationTopics);
   return (
     <main className="min-h-screen">
@@ -146,6 +116,45 @@ export default async function AboutPage() {
           </section>
         )}
 
+        {/* Ongoing Explorations Section */}
+        {explorationTopics.length > 0 && (
+          <section className="mb-16">
+            <div className="flex flex-col md:flex-row items-center justify-between mb-6">
+              <div className="inline-block mb-4 md:mb-0 px-4 py-1.5 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full">
+                <h2 className="text-2xl font-bold text-white">Ongoing Explorations</h2>
+              </div>
+              <div className="flex gap-4">
+                <Link href="/blogs" className="text-pink-600 hover:text-pink-800 dark:text-pink-400 dark:hover:text-pink-300 font-medium flex items-center">
+                  View my blogs
+                  <svg className="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+                </Link>
+                <Link href="/projects" className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-medium flex items-center">
+                  View my projects
+                  <svg className="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+                </Link>
+              </div>
+            </div>
+            <div className="bg-gray-50 dark:bg-gray-700/50 p-6 rounded-xl border border-gray-100 dark:border-gray-700">
+              <div className="flex flex-wrap gap-3">
+                {explorationTopics.map(({ topic, count, source }) => (
+                  <span
+                    key={topic}
+                    className="bg-gradient-to-r from-purple-100 to-pink-100 text-purple-800 text-sm font-medium px-4 py-2 rounded-full dark:from-purple-900 dark:to-pink-900 dark:text-purple-300 shadow-md hover:shadow-lg transition-shadow duration-300 cursor-default flex items-center"
+                    title={`${count} item(s) from ${source.join(', ')}`}
+                  >
+                    <span className="bg-gradient-to-r from-purple-200 to-pink-200 dark:from-purple-800 dark:to-pink-800 text-purple-800 dark:text-purple-200 w-6 h-6 rounded-full flex items-center justify-center mr-2 text-xs font-bold">{count}</span>
+                    {topic}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
         {publicationTopics.length > 0 && (
           <section className="mb-16">
             <div className="flex flex-col md:flex-row items-center justify-between mb-6">
@@ -176,34 +185,71 @@ export default async function AboutPage() {
           </section>
         )}
 
+        {/* Skills & Technologies Section */}
         <section className="mb-16">
-          <div className="inline-block mb-6 px-4 py-1.5 bg-gradient-to-r from-blue-600 to-indigo-700 rounded-full">
-            <h2 className="text-2xl font-bold text-white">Skills & Technologies</h2>
-          </div>
-          {displayCategories.length > 0 ? (
-            <div className="space-y-8 bg-gray-50 dark:bg-gray-700/50 p-6 rounded-xl border border-gray-100 dark:border-gray-700">
-              {displayCategories.map((category) => (
-                <div key={category}>
-                  <div className="flex items-center mb-4">
-                    <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200">{category}</h3>
-                    <div className="flex-grow ml-4 h-0.5 bg-gray-200 dark:bg-gray-600"></div>
-                  </div>
-                  <div className="flex flex-wrap gap-3">
-                    {groupedSkills[category].map((skill) => (
-                      <span
-                        key={skill}
-                        className="bg-indigo-100 text-indigo-800 text-sm font-medium px-4 py-2 rounded-lg dark:bg-indigo-900 dark:text-indigo-300 shadow-md hover:shadow-lg transition-all duration-300 hover:bg-indigo-200 dark:hover:bg-indigo-800"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
+          <div className="flex flex-col md:flex-row items-center justify-between mb-6">
+            <div className="inline-block mb-4 md:mb-0 px-4 py-1.5 bg-gradient-to-r from-blue-600 to-indigo-700 rounded-full">
+              <h2 className="text-2xl font-bold text-white">Skills & Technologies</h2>
             </div>
-          ) : (
-            <p className="text-gray-500 dark:text-gray-400">No skills data found or processed yet.</p>
-          )}
+          </div>
+
+          {/* Technologies by Category */}
+          <div className="space-y-8 bg-gray-50 dark:bg-gray-700/50 p-6 rounded-xl border border-gray-100 dark:border-gray-700">
+            {/* Main Categories */}
+            {Object.keys(allTechnologies.categorizedTechs).map(mainCategory => (
+              <div key={mainCategory} className="mb-8">
+                <div className="flex items-center mb-6">
+                  <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200">{mainCategory}</h3>
+                  <div className="flex-grow ml-4 h-0.5 bg-gray-200 dark:bg-gray-600"></div>
+                </div>
+
+                {/* Sub Categories */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {Object.keys(allTechnologies.categorizedTechs[mainCategory]).map(subCategory => (
+                    <div key={`${mainCategory}-${subCategory}`} className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700">
+                      <div className="flex items-center mb-3">
+                        <h4 className="text-lg font-semibold text-gray-700 dark:text-gray-300">{subCategory}</h4>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {allTechnologies.categorizedTechs[mainCategory][subCategory].map(tech => (
+                          <span
+                            key={tech.technology}
+                            className="bg-gradient-to-r from-green-100 to-teal-100 text-green-800 text-sm font-medium px-3 py-1.5 rounded-full dark:from-green-900 dark:to-teal-900 dark:text-green-300 shadow-sm hover:shadow-md transition-shadow duration-300 cursor-default flex items-center"
+                            title={`Used in ${tech.count} item(s) from ${tech.sources.join(', ')}`}
+                          >
+                            <span className="bg-gradient-to-r from-green-200 to-teal-200 dark:from-green-800 dark:to-teal-800 text-green-800 dark:text-green-200 w-5 h-5 rounded-full flex items-center justify-center mr-1.5 text-xs font-bold">{tech.count}</span>
+                            {tech.technology}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+
+            {/* Uncategorized Technologies */}
+            {allTechnologies.uncategorizedTechs.length > 0 && (
+              <div>
+                <div className="flex items-center mb-4">
+                  <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200">Other Technologies</h3>
+                  <div className="flex-grow ml-4 h-0.5 bg-gray-200 dark:bg-gray-600"></div>
+                </div>
+                <div className="flex flex-wrap gap-3">
+                  {allTechnologies.uncategorizedTechs.map(tech => (
+                    <span
+                      key={tech.technology}
+                      className="bg-indigo-100 text-indigo-800 text-sm font-medium px-4 py-2 rounded-lg dark:bg-indigo-900 dark:text-indigo-300 shadow-md hover:shadow-lg transition-all duration-300 hover:bg-indigo-200 dark:hover:bg-indigo-800"
+                      title={`Used in ${tech.count} item(s) from ${tech.sources.join(', ')}`}
+                    >
+                      <span className="bg-indigo-200 dark:bg-indigo-800 text-indigo-800 dark:text-indigo-200 w-5 h-5 rounded-full inline-flex items-center justify-center mr-1.5 text-xs font-bold">{tech.count}</span>
+                      {tech.technology}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
         </section>
 
         {aboutData.education && aboutData.education.length > 0 && (
