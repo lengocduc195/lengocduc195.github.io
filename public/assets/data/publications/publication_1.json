@@ -25,7 +25,7 @@
         },
         {
             "type": "text",
-            "text": "As models become increasingly complex and diverse, from CNNs to Vision Transformers and beyond, there is an urgent need for a comprehensive framework to understand their relationships, trade-offs, and appropriate use cases."
+            "text": "As models [ref:1] become increasingly complex and diverse, from CNNs to Vision Transformers and beyond, there is an urgent need for a comprehensive framework to understand their relationships, trade-offs, and appropriate use cases."
         }
     ],
     "gap": [
@@ -145,5 +145,9 @@
         "Python",
         "TensorFlow",
         "Scikit-learn"
-    ]
+    ],
+    "references":{
+      "1": "Xun Zheng, Bryon Aragam, Pradeep K Ravikumar, and Eric P Xing. Dags with no tears: Continuous optimization for structure learning. Advances in Neural Information Processing Systems, 31,2018.",
+      "2": "Kun Zhang, Zhikun Wang, Jiji Zhang, and Bernhard Scholkopf. On estimation of functional causal models: general results and application to the post-nonlinear causal model. ACM Transactions on Intelligent Systems and Technology (TIST), 7(2):1–22, 2015."
+    }
 }

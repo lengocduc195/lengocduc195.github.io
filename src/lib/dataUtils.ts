@@ -317,6 +317,7 @@ export interface Publication {
     images?: { url: string; caption: string }[] | string[];
     topics?: string[]; // Add topics field for categorization
     content?: string; // Add content field (alternative to abstract/fullText)
+    references?: Record<string, string>; // Thêm trường references để lưu trữ thông tin trích dẫn
     // Giữ lại nếu cần
     url?: string;
     technologies?: string[];
@@ -731,6 +732,7 @@ export interface Blog {
     // Các trường mới
     unexpectedInsights?: string[];
     notableObservations?: string[];
+    references?: Record<string, string>; // Thêm trường references để lưu trữ thông tin trích dẫn
     // Giữ lại các trường cũ để tương thích ngược
     authors?: string[];
     excerpt?: string;

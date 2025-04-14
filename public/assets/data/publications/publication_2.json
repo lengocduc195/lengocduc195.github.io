@@ -56,7 +56,7 @@
     "contributions": [
         {
             "type": "text",
-            "text": "Our main contributions include: (1) A novel hybrid architecture that effectively combines transformers and CNNs; (2) A comprehensive evaluation across multiple vision tasks; (3) An analysis of the complementary strengths of attention and convolution operations."
+            "text": "Our main contributions include: [ref:1] (1) A novel hybrid architecture that effectively combines transformers and CNNs; (2) A comprehensive evaluation across multiple vision tasks; (3) An analysis of the complementary strengths of attention and convolution operations."
         }
     ],
     "doi": "10.1109/CVPR.2022.123456",
@@ -84,5 +84,9 @@
         "PyTorch",
         "CUDA",
         "Python"
-    ]
+    ],
+    "references":{
+      "1": "Xun Zheng, Bryon Aragam, Pradeep K Ravikumar, and Eric P Xing. Dags with no tears: Continuous optimization for structure learning. Advances in Neural Information Processing Systems, 31,2018.",
+      "2": "Kun Zhang, Zhikun Wang, Jiji Zhang, and Bernhard Scholkopf. On estimation of functional causal models: general results and application to the post-nonlinear causal model. ACM Transactions on Intelligent Systems and Technology (TIST), 7(2):1–22, 2015."
+    }
 }

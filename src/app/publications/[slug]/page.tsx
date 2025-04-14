@@ -80,6 +80,33 @@ export default async function PublicationDetailPage({ params }: PageProps) {
   };
   const youtubeVideoId = videoUrl ? getYouTubeId(videoUrl) : null;
 
+  // Helper function to format text with references
+  const formatTextWithReferences = (text: string): string => {
+    // First replace all [ref:X] with placeholders to avoid processing them twice
+    let processedText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+    // Then replace each [ref:X] with a link that has a title attribute
+    if (pub.references) {
+      Object.entries(pub.references).forEach(([key, value]) => {
+        const refPattern = new RegExp(`\\[ref:${key}\\]`, 'g');
+        // Escape the value for use in title attribute
+        const escapedValue = value.replace(/"/g, '&quot;');
+        processedText = processedText.replace(
+          refPattern,
+          `<a href="#reference-${key}" class="text-blue-600 dark:text-blue-400 hover:underline tooltip-reference" title="${escapedValue}">[ref:${key}]</a>`
+        );
+      });
+    } else {
+      // Fallback if no references object is available
+      processedText = processedText.replace(
+        /\[ref:(\d+)\]/g,
+        '<a href="#reference-$1" class="text-blue-600 dark:text-blue-400 hover:underline">[ref:$1]</a>'
+      );
+    }
+
+    return processedText;
+  };
+
   return (
     <main className="container mx-auto px-4 py-12">
       <article className="max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md p-8 border border-gray-200 dark:border-gray-700">
@@ -137,7 +164,7 @@ export default async function PublicationDetailPage({ params }: PageProps) {
               </h3>
               <div className="prose dark:prose-invert max-w-none text-gray-600 dark:text-gray-300">
                 {typeof pub.problem === 'string' ? (
-                  <div className="whitespace-pre-wrap">{pub.problem}</div>
+                  <div className="whitespace-pre-wrap" dangerouslySetInnerHTML={{ __html: formatTextWithReferences(pub.problem) }}></div>
                 ) : Array.isArray(pub.problem) ? (
                   <div className="space-y-6">
                     {pub.problem.map((item, index) => (
@@ -146,7 +173,7 @@ export default async function PublicationDetailPage({ params }: PageProps) {
                           <div
                             className="whitespace-pre-wrap"
                             dangerouslySetInnerHTML={{
-                              __html: item.text ? item.text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') : ''
+                              __html: item.text ? formatTextWithReferences(item.text) : ''
                             }}
                           />
                         )}
@@ -207,7 +234,7 @@ export default async function PublicationDetailPage({ params }: PageProps) {
               </h3>
               <div className="prose dark:prose-invert max-w-none text-gray-600 dark:text-gray-300 pl-4 ml-2 border-l border-gray-200 dark:border-gray-700">
                 {typeof pub.gap === 'string' ? (
-                  <div className="whitespace-pre-wrap">{pub.gap}</div>
+                  <div className="whitespace-pre-wrap" dangerouslySetInnerHTML={{ __html: formatTextWithReferences(pub.gap) }}></div>
                 ) : Array.isArray(pub.gap) ? (
                   <div className="space-y-6">
                     {pub.gap.map((item, index) => (
@@ -216,7 +243,7 @@ export default async function PublicationDetailPage({ params }: PageProps) {
                           <div
                             className="whitespace-pre-wrap"
                             dangerouslySetInnerHTML={{
-                              __html: item.text ? item.text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') : ''
+                              __html: item.text ? formatTextWithReferences(item.text) : ''
                             }}
                           />
                         )}
@@ -277,7 +304,7 @@ export default async function PublicationDetailPage({ params }: PageProps) {
               </h3>
               <div className="prose dark:prose-invert max-w-none text-gray-600 dark:text-gray-300 pl-4 ml-2 border-l border-gray-200 dark:border-gray-700">
                 {typeof pub.solution === 'string' ? (
-                  <div className="whitespace-pre-wrap">{pub.solution}</div>
+                  <div className="whitespace-pre-wrap" dangerouslySetInnerHTML={{ __html: formatTextWithReferences(pub.solution) }}></div>
                 ) : Array.isArray(pub.solution) ? (
                   <div className="space-y-6">
                     {pub.solution.map((item, index) => (
@@ -286,7 +313,7 @@ export default async function PublicationDetailPage({ params }: PageProps) {
                           <div
                             className="whitespace-pre-wrap"
                             dangerouslySetInnerHTML={{
-                              __html: item.text ? item.text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') : ''
+                              __html: item.text ? formatTextWithReferences(item.text) : ''
                             }}
                           />
                         )}
@@ -347,7 +374,7 @@ export default async function PublicationDetailPage({ params }: PageProps) {
               </h3>
               <div className="prose dark:prose-invert max-w-none text-gray-600 dark:text-gray-300 pl-4 ml-2 border-l border-gray-200 dark:border-gray-700">
                 {typeof pub.results === 'string' ? (
-                  <div className="whitespace-pre-wrap">{pub.results}</div>
+                  <div className="whitespace-pre-wrap" dangerouslySetInnerHTML={{ __html: formatTextWithReferences(pub.results) }}></div>
                 ) : Array.isArray(pub.results) ? (
                   <div className="space-y-6">
                     {pub.results.map((item, index) => (
@@ -356,7 +383,7 @@ export default async function PublicationDetailPage({ params }: PageProps) {
                           <div
                             className="whitespace-pre-wrap"
                             dangerouslySetInnerHTML={{
-                              __html: item.text ? item.text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') : ''
+                              __html: item.text ? formatTextWithReferences(item.text) : ''
                             }}
                           />
                         )}
@@ -417,7 +444,7 @@ export default async function PublicationDetailPage({ params }: PageProps) {
               </h3>
               <div className="prose dark:prose-invert max-w-none text-gray-600 dark:text-gray-300 pl-4 ml-2 border-l border-gray-200 dark:border-gray-700">
                 {typeof pub.insights === 'string' ? (
-                  <div className="whitespace-pre-wrap">{pub.insights}</div>
+                  <div className="whitespace-pre-wrap" dangerouslySetInnerHTML={{ __html: formatTextWithReferences(pub.insights) }}></div>
                 ) : Array.isArray(pub.insights) ? (
                   <div className="space-y-6">
                     {pub.insights.map((item, index) => (
@@ -426,7 +453,7 @@ export default async function PublicationDetailPage({ params }: PageProps) {
                           <div
                             className="whitespace-pre-wrap"
                             dangerouslySetInnerHTML={{
-                              __html: item.text ? item.text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') : ''
+                              __html: item.text ? formatTextWithReferences(item.text) : ''
                             }}
                           />
                         )}
@@ -487,7 +514,7 @@ export default async function PublicationDetailPage({ params }: PageProps) {
               </h3>
               <div className="prose dark:prose-invert max-w-none text-gray-600 dark:text-gray-300 pl-4 ml-2 border-l border-gray-200 dark:border-gray-700">
                 {typeof pub.contributions === 'string' ? (
-                  <div className="whitespace-pre-wrap">{pub.contributions}</div>
+                  <div className="whitespace-pre-wrap" dangerouslySetInnerHTML={{ __html: formatTextWithReferences(pub.contributions) }}></div>
                 ) : Array.isArray(pub.contributions) ? (
                   <div className="space-y-6">
                     {pub.contributions.map((item, index) => (
@@ -496,7 +523,7 @@ export default async function PublicationDetailPage({ params }: PageProps) {
                           <div
                             className="whitespace-pre-wrap"
                             dangerouslySetInnerHTML={{
-                              __html: item.text ? item.text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') : ''
+                              __html: item.text ? formatTextWithReferences(item.text) : ''
                             }}
                           />
                         )}
@@ -626,6 +653,25 @@ export default async function PublicationDetailPage({ params }: PageProps) {
                 ) : null
               ))}
             </div>
+          </div>
+        )}
+
+        {/* References Section */}
+        {pub.references && Object.keys(pub.references).length > 0 && (
+          <div className="mt-8 mb-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+            <h3 className="font-semibold mb-4 text-lg text-gray-700 dark:text-gray-300 flex items-center">
+              <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
+              </svg>
+              References
+            </h3>
+            <ol className="space-y-3 list-decimal list-inside text-gray-700 dark:text-gray-300">
+              {Object.entries(pub.references).map(([key, value]) => (
+                <li id={`reference-${key}`} key={key} className="pl-2 py-2 border-l-2 border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800/30 rounded-r-md scroll-mt-24">
+                  {value}
+                </li>
+              ))}
+            </ol>
           </div>
         )}
 

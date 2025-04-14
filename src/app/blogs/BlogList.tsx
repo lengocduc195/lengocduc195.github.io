@@ -524,7 +524,13 @@ export default function BlogList({ initialBlogs }: BlogListProps) {
 
                     {/* Description/Excerpt */}
                     <p className="text-gray-600 dark:text-gray-300 mb-4 flex-grow line-clamp-3">
-                      {blog.description || blog.excerpt || (blog.content && blog.content.substring(0, 150) + '...') || 'No description available.'}
+                      {blog.description || blog.excerpt ||
+                        (blog.content && typeof blog.content === 'string'
+                          ? blog.content.substring(0, 150) + '...'
+                          : Array.isArray(blog.content) && blog.content.length > 0 && blog.content[0].type === 'text' && blog.content[0].text
+                            ? blog.content[0].text.substring(0, 150) + '...'
+                            : 'No description available.'
+                        ) || 'No description available.'}
                     </p>
 
                     {/* Technologies */}

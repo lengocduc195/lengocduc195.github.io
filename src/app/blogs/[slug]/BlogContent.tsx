@@ -12,7 +12,7 @@ export default function BlogContent({ blog }: BlogContentProps) {
   const [modalImage, setModalImage] = useState<{ url: string; caption?: string } | null>(null);
 
   // Function to open modal with image
-  const openImageModal = (url: string, caption?: string) => {
+  const openImageModal = (url: string, caption?: string | undefined) => {
     setModalImage({ url, caption });
   };
 
@@ -23,6 +23,33 @@ export default function BlogContent({ blog }: BlogContentProps) {
 
   // Ưu tiên content, sau đó đến excerpt hoặc description
   const displayContent = blog.content ?? blog.excerpt ?? blog.description;
+
+  // Helper function to format text with references
+  const formatTextWithReferences = (text: string): string => {
+    // First replace all [ref:X] with placeholders to avoid processing them twice
+    let processedText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+    // Then replace each [ref:X] with a link that has a title attribute
+    if (blog.references) {
+      Object.entries(blog.references).forEach(([key, value]) => {
+        const refPattern = new RegExp(`\\[ref:${key}\\]`, 'g');
+        // Escape the value for use in title attribute
+        const escapedValue = value.replace(/"/g, '&quot;');
+        processedText = processedText.replace(
+          refPattern,
+          `<a href="#reference-${key}" class="text-blue-600 dark:text-blue-400 hover:underline tooltip-reference" title="${escapedValue}">[ref:${key}]</a>`
+        );
+      });
+    } else {
+      // Fallback if no references object is available
+      processedText = processedText.replace(
+        /\[ref:(\d+)\]/g,
+        '<a href="#reference-$1" class="text-blue-600 dark:text-blue-400 hover:underline">[ref:$1]</a>'
+      );
+    }
+
+    return processedText;
+  };
 
   return (
     <>
@@ -37,12 +64,12 @@ export default function BlogContent({ blog }: BlogContentProps) {
                     <div
                       className="whitespace-pre-wrap"
                       dangerouslySetInnerHTML={{
-                        __html: item.text ? item.text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') : ''
+                        __html: item.text ? formatTextWithReferences(item.text) : ''
                       }}
                     />
                   )}
                   {item.type === 'image' && item.url && (
-                    <figure className="my-6 cursor-pointer" onClick={() => openImageModal(item.url, item.caption)}>
+                    <figure className="my-6 cursor-pointer" onClick={() => item.url ? openImageModal(item.url, item.caption) : null}>
                       <div className="relative group overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300">
                         <img
                           src={item.url}
@@ -71,9 +98,7 @@ export default function BlogContent({ blog }: BlogContentProps) {
             <div
               className="whitespace-pre-wrap"
               dangerouslySetInnerHTML={{
-                __html: typeof displayContent === 'string'
-                  ? displayContent.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                  : ''
+                __html: typeof displayContent === 'string' ? formatTextWithReferences(displayContent) : ''
               }}
             />
           )}
@@ -173,6 +198,25 @@ export default function BlogContent({ blog }: BlogContentProps) {
               return null;
             })}
           </div>
+        </div>
+      )}
+
+      {/* References Section */}
+      {blog.references && Object.keys(blog.references).length > 0 && (
+        <div className="mb-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+          <h3 className="font-semibold mb-4 text-lg text-gray-700 dark:text-gray-300 flex items-center">
+            <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
+            </svg>
+            References
+          </h3>
+          <ol className="space-y-3 list-decimal list-inside text-gray-700 dark:text-gray-300">
+            {Object.entries(blog.references).map(([key, value]) => (
+              <li id={`reference-${key}`} key={key} className="pl-2 py-2 border-l-2 border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800/30 rounded-r-md scroll-mt-24">
+                {value}
+              </li>
+            ))}
+          </ol>
         </div>
       )}
 

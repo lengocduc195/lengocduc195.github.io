@@ -30,5 +30,9 @@
   "github": null,
   "images": [],
   "url": "https://example.com/publication1",
-  "technologies": ["Python", "PyTorch", "LaTeX"]
+  "technologies": ["Python", "PyTorch", "LaTeX"],
+  "references":{
+    "1": "Xun Zheng, Bryon Aragam, Pradeep K Ravikumar, and Eric P Xing. Dags with no tears: Continuous optimization for structure learning. Advances in Neural Information Processing Systems, 31,2018.",
+    "2": "Kun Zhang, Zhikun Wang, Jiji Zhang, and Bernhard Scholkopf. On estimation of functional causal models: general results and application to the post-nonlinear causal model. ACM Transactions on Intelligent Systems and Technology (TIST), 7(2):1–22, 2015."
+  }
 }
