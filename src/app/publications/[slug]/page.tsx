@@ -1,4 +1,4 @@
-import { getPublications } from '@/lib/dataUtils';
+import { getPublications, createSlug } from '@/lib/dataUtils';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import CitationWithCopy from '@/components/CitationWithCopy';
@@ -38,11 +38,9 @@ const RelatedLinksSection: React.FC<{ title: string, links: { title: string, url
 
 async function getPublicationDetails(slug: string) {
   const allPublications = await getPublications();
-  const pubId = parseInt(slug, 10);
-  const publication = allPublications.find(p =>
-    (p.id?.toString() === slug) ||
-    (typeof p.title === 'string' && p.title.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-') === slug)
-  );
+  // Không cần chuyển đổi slug thành số nếu id có thể là string
+  // const pubId = parseInt(slug, 10);
+  const publication = allPublications.find(p => createSlug(p.title, p.id) === slug);
   return publication;
 }
 
@@ -51,14 +49,9 @@ export async function generateStaticParams() {
   if (!Array.isArray(publications)) return [];
 
   return publications.map((pub) => {
-    let slug: string | null = null;
-    if (typeof pub.title === 'string' && pub.title.trim() !== '') {
-      slug = pub.title.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-');
-    } else if (pub.id !== null && pub.id !== undefined) {
-      slug = pub.id.toString();
-    }
-    return slug ? { slug } : null;
-  }).filter(Boolean);
+    const slug = createSlug(pub.title, pub.id);
+    return { slug };
+  });
 }
 
 export const dynamic = 'force-static';

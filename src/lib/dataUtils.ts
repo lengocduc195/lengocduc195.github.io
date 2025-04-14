@@ -328,6 +328,16 @@ export async function getPublications(): Promise<Publication[]> {
     return readDataFiles<Publication>('publications');
 }
 
+// Hàm tạo slug từ title hoặc id
+export function createSlug(title: string | undefined, id: string | number | undefined): string {
+    if (typeof title === 'string' && title.trim() !== '') {
+        return title.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-');
+    } else if (id !== null && id !== undefined) {
+        return id.toString();
+    }
+    return 'unknown';
+}
+
 // Hàm lấy các publication nổi bật
 export async function getHighlightedPublications(limit: number = 2): Promise<Publication[]> {
     const publications = await getPublications();
@@ -336,7 +346,7 @@ export async function getHighlightedPublications(limit: number = 2): Promise<Pub
         .filter(pub => pub.highlight)
         .sort((a, b) => (b.year || 0) - (a.year || 0));
 
-    
+
     // Nếu không có publication nào có highlight, trả về các publication mới nhất
     if (highlightedPublications.length === 0) {
         console.warn("No highlighted publications found. Returning latest publications instead.", publications);
