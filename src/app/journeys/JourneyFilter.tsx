@@ -19,7 +19,7 @@ export default function JourneyFilter({ journeys }: JourneyFilterProps) {
   // Get unique categories for filter
   const categories = useMemo(() => {
     if (!Array.isArray(journeys)) return ['all'];
-    const uniqueCategories = new Set<string>(journeys.map(j => j.category).filter(Boolean));
+    const uniqueCategories = new Set<string>(journeys.map(j => j.category || '').filter(Boolean));
     return ['all', ...Array.from(uniqueCategories).sort()];
   }, [journeys]);
 
@@ -81,7 +81,7 @@ export default function JourneyFilter({ journeys }: JourneyFilterProps) {
               className="w-full pl-10 px-4 py-3 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
             />
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="relative">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Category</label>
@@ -102,7 +102,7 @@ export default function JourneyFilter({ journeys }: JourneyFilterProps) {
                 </div>
               </div>
             </div>
-            
+
             <div className="relative">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Sort By</label>
               <div className="relative">
@@ -155,7 +155,7 @@ export default function JourneyFilter({ journeys }: JourneyFilterProps) {
           {/* Timeline decorative elements */}
           <div className="absolute -left-3 -top-3 w-6 h-6 bg-blue-500 dark:bg-blue-700 rounded-full shadow-md z-10"></div>
           <div className="absolute -left-3 -bottom-3 w-6 h-6 bg-blue-500 dark:bg-blue-700 rounded-full shadow-md z-10"></div>
-          
+
           {filteredJourneys.map((journey, index) => {
             // Create slug from title or id
             let slug = '';
@@ -164,7 +164,7 @@ export default function JourneyFilter({ journeys }: JourneyFilterProps) {
             } else if (journey.id) {
               slug = journey.id.toString();
             }
-            
+
             // Choose gradient color based on category
             let gradientClass = "from-blue-500 to-purple-500";
             if (journey.category === 'Education') gradientClass = "from-blue-500 to-cyan-400";
@@ -172,7 +172,8 @@ export default function JourneyFilter({ journeys }: JourneyFilterProps) {
             if (journey.category === 'Volunteer') gradientClass = "from-green-500 to-emerald-400";
             if (journey.category === 'Family') gradientClass = "from-red-500 to-orange-400";
             if (journey.category === 'Relocation') gradientClass = "from-amber-500 to-yellow-400";
-            
+            if (journey.category === 'Travel') gradientClass = "from-teal-500 to-blue-400";
+
             // Choose icon based on category
             let categoryIcon = (
               <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -193,6 +194,12 @@ export default function JourneyFilter({ journeys }: JourneyFilterProps) {
                   <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
                 </svg>
               );
+            } else if (journey.category === 'Travel') {
+              categoryIcon = (
+                <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9.302 1.256a1.5 1.5 0 0 0-2.604 0l-1.704 2.98a.5.5 0 0 0 .869.501l1.703-2.982a.5.5 0 0 1 .868 0l2.54 4.444-1.256-.337a.5.5 0 1 0-.26.966l2.415.647a.5.5 0 0 0 .613-.353l.647-2.415a.5.5 0 1 0-.966-.259l-.333 1.242-2.532-4.431zM2.973 7.773l-1.255.337a.5.5 0 1 1-.26-.966l2.416-.647a.5.5 0 0 1 .612.353l.647 2.415a.5.5 0 0 1-.966.259l-.333-1.242-2.545 4.454a.5.5 0 0 0 .434.748H5a.5.5 0 0 1 0 1H1.723A1.5 1.5 0 0 1 .421 12.57l2.552-4.467zm10.89 1.463a.5.5 0 1 0-.868.496l1.716 3.004a.5.5 0 0 1-.434.748h-5.57l.647-.646a.5.5 0 1 0-.708-.707l-1.5 1.5a.498.498 0 0 0 0 .707l1.5 1.5a.5.5 0 1 0 .708-.707l-.647-.647h5.57a1.5 1.5 0 0 0 1.302-2.244l-1.716-3.004z"/>
+                </svg>
+              );
             } else if (journey.category === 'Volunteer') {
               categoryIcon = (
                 <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -200,10 +207,10 @@ export default function JourneyFilter({ journeys }: JourneyFilterProps) {
                 </svg>
               );
             }
-            
+
             // Add animation delay based on index for staggered appearance
             const animationDelay = `${index * 0.1}s`;
-            
+
             return (
               <div key={journey.id || index} className="ml-10 relative group" style={{ animationDelay }}>
                 {/* Timeline dot with animation */}
@@ -214,7 +221,7 @@ export default function JourneyFilter({ journeys }: JourneyFilterProps) {
                 </span>
 
                 {/* Animated pulse effect around timeline dot */}
-                <span className={`absolute w-10 h-10 -left-14 rounded-full bg-gradient-to-br ${gradientClass} opacity-30 animate-ping`} 
+                <span className={`absolute w-10 h-10 -left-14 rounded-full bg-gradient-to-br ${gradientClass} opacity-30 animate-ping`}
                   style={{ animationDuration: '3s', animationIterationCount: 'infinite' }}></span>
 
                 {/* Timeline connector line with animation */}
@@ -227,25 +234,25 @@ export default function JourneyFilter({ journeys }: JourneyFilterProps) {
                       <h3 className="text-xl font-bold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                         {journey.title || 'Untitled Journey'}
                       </h3>
-                      
+
                       {journey.category && (
                         <span className={`bg-gradient-to-r ${gradientClass} text-white text-sm font-medium px-4 py-1.5 rounded-full shadow-md`}>
                           {journey.category}
                         </span>
                       )}
                     </div>
-                    
+
                     <div className="flex items-center gap-2 mb-3 text-gray-500 dark:text-gray-400">
                       <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
                       </svg>
                       <time className="text-sm">{journey.date || 'N/A'}</time>
                     </div>
-                    
+
                     <p className="text-gray-700 dark:text-gray-300 mb-4">
                       {journey.description || 'No description available.'}
                     </p>
-                    
+
                     {journey.tags && journey.tags.length > 0 && (
                       <div className="flex flex-wrap gap-2">
                         {journey.tags.map((tag) => (

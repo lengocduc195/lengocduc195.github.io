@@ -1,8 +1,8 @@
-import { getPublications, generateSlug } from '@/lib/dataUtils';
+import { getPublications } from '@/lib/dataUtils';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import CitationWithCopy from '@/components/CitationWithCopy';
-import PublicationContent from './PublicationContent';
+import PublicationImageViewer from '@/components/PublicationImageViewer';
 
 interface PageProps {
   params: {
@@ -38,7 +38,11 @@ const RelatedLinksSection: React.FC<{ title: string, links: { title: string, url
 
 async function getPublicationDetails(slug: string) {
   const allPublications = await getPublications();
-  const publication = allPublications.find(p => generateSlug(p) === slug);
+  const pubId = parseInt(slug, 10);
+  const publication = allPublications.find(p =>
+    (p.id?.toString() === slug) ||
+    (typeof p.title === 'string' && p.title.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-') === slug)
+  );
   return publication;
 }
 
@@ -46,10 +50,15 @@ export async function generateStaticParams() {
   const publications = await getPublications();
   if (!Array.isArray(publications)) return [];
 
-  // Sử dụng hàm generateSlug để tạo slug cho mỗi publication
-  return publications.map(pub => ({
-    slug: generateSlug(pub)
-  }));
+  return publications.map((pub) => {
+    let slug: string | null = null;
+    if (typeof pub.title === 'string' && pub.title.trim() !== '') {
+      slug = pub.title.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-');
+    } else if (pub.id !== null && pub.id !== undefined) {
+      slug = pub.id.toString();
+    }
+    return slug ? { slug } : null;
+  }).filter(Boolean);
 }
 
 export const dynamic = 'force-static';
@@ -122,8 +131,429 @@ export default async function PublicationDetailPage({ params }: PageProps) {
           </div>
         )}
 
-        {/* Publication Content with interactive images and videos */}
-        <PublicationContent publication={pub} />
+        {/* 6 phần quan trọng của publication */}
+        <div className="space-y-6">
+          {/* 1. Vấn đề (Problem) */}
+          {pub.problem && (
+            <div className="mb-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+              <h3 className="font-semibold mb-3 text-lg bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 p-2 rounded-md shadow-sm border-l-4 border-red-500 flex items-center">
+                <svg className="w-5 h-5 mr-2 text-red-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                </svg>
+                Problem
+              </h3>
+              <div className="prose dark:prose-invert max-w-none text-gray-600 dark:text-gray-300">
+                {typeof pub.problem === 'string' ? (
+                  <div className="whitespace-pre-wrap">{pub.problem}</div>
+                ) : Array.isArray(pub.problem) ? (
+                  <div className="space-y-6">
+                    {pub.problem.map((item, index) => (
+                      <div key={index}>
+                        {item.type === 'text' && (
+                          <div
+                            className="whitespace-pre-wrap"
+                            dangerouslySetInnerHTML={{
+                              __html: item.text ? item.text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') : ''
+                            }}
+                          />
+                        )}
+                        {item.type === 'image' && item.url && (
+                          <div className="my-4 mx-auto" style={{ width: '70%' }}>
+                            <PublicationImageViewer
+                              url={item.url}
+                              caption={item.caption}
+                              className="w-full h-auto rounded-md shadow-md"
+                            />
+                            {item.caption && (
+                              <p className="text-sm text-center mt-2 text-gray-500 dark:text-gray-400">{item.caption}</p>
+                            )}
+                          </div>
+                        )}
+                        {item.type === 'video' && (
+                          <div className="my-4 mx-auto aspect-video" style={{ width: '70%' }}>
+                            {item.videoId ? (
+                              <iframe
+                                className="w-full h-full rounded-md shadow-md"
+                                src={`https://www.youtube.com/embed/${item.videoId}`}
+                                title={item.caption || 'Video'}
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                              ></iframe>
+                            ) : item.url ? (
+                              <video
+                                className="w-full h-auto rounded-md shadow-md"
+                                controls
+                                poster={item.url.replace(/\.[^/.]+$/, '') + '-thumbnail.jpg'}
+                              >
+                                <source src={item.url} type="video/mp4" />
+                                Your browser does not support the video tag.
+                              </video>
+                            ) : null}
+                            {item.caption && (
+                              <p className="text-sm text-center mt-2 text-gray-500 dark:text-gray-400">{item.caption}</p>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+            </div>
+          )}
+
+          {/* 2. Khoảng trống (Gap / Limitation) */}
+          {pub.gap && (
+            <div className="mb-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+              <h3 className="font-semibold mb-3 text-lg bg-orange-50 dark:bg-orange-900/20 text-orange-700 dark:text-orange-300 p-2 rounded-md shadow-sm border-l-4 border-orange-500 flex items-center">
+                <svg className="w-5 h-5 mr-2 text-orange-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <path fillRule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732l-3.354 1.935-1.18 4.455a1 1 0 01-1.933 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732l3.354-1.935 1.18-4.455A1 1 0 0112 2z" clipRule="evenodd" />
+                </svg>
+                Research Gap
+              </h3>
+              <div className="prose dark:prose-invert max-w-none text-gray-600 dark:text-gray-300 pl-4 ml-2 border-l border-gray-200 dark:border-gray-700">
+                {typeof pub.gap === 'string' ? (
+                  <div className="whitespace-pre-wrap">{pub.gap}</div>
+                ) : Array.isArray(pub.gap) ? (
+                  <div className="space-y-6">
+                    {pub.gap.map((item, index) => (
+                      <div key={index}>
+                        {item.type === 'text' && (
+                          <div
+                            className="whitespace-pre-wrap"
+                            dangerouslySetInnerHTML={{
+                              __html: item.text ? item.text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') : ''
+                            }}
+                          />
+                        )}
+                        {item.type === 'image' && item.url && (
+                          <div className="my-4 mx-auto" style={{ width: '70%' }}>
+                            <PublicationImageViewer
+                              url={item.url}
+                              caption={item.caption}
+                              className="w-full h-auto rounded-md shadow-md"
+                            />
+                            {item.caption && (
+                              <p className="text-sm text-center mt-2 text-gray-500 dark:text-gray-400">{item.caption}</p>
+                            )}
+                          </div>
+                        )}
+                        {item.type === 'video' && (
+                          <div className="my-4 mx-auto aspect-video" style={{ width: '70%' }}>
+                            {item.videoId ? (
+                              <iframe
+                                className="w-full h-full rounded-md shadow-md"
+                                src={`https://www.youtube.com/embed/${item.videoId}`}
+                                title={item.caption || 'Video'}
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                              ></iframe>
+                            ) : item.url ? (
+                              <video
+                                className="w-full h-auto rounded-md shadow-md"
+                                controls
+                                poster={item.url.replace(/\.[^/.]+$/, '') + '-thumbnail.jpg'}
+                              >
+                                <source src={item.url} type="video/mp4" />
+                                Your browser does not support the video tag.
+                              </video>
+                            ) : null}
+                            {item.caption && (
+                              <p className="text-sm text-center mt-2 text-gray-500 dark:text-gray-400">{item.caption}</p>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+            </div>
+          )}
+
+          {/* 3. Giải pháp đề xuất (Proposed Method) */}
+          {pub.solution && (
+            <div className="mb-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+              <h3 className="font-semibold mb-3 text-lg bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 p-2 rounded-md shadow-sm border-l-4 border-blue-500 flex items-center">
+                <svg className="w-5 h-5 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1h4v1a2 2 0 11-4 0zM12 14c.015-.34.208-.646.477-.859a4 4 0 10-4.954 0c.27.213.462.519.476.859h4.002z" />
+                </svg>
+                Proposed Method
+              </h3>
+              <div className="prose dark:prose-invert max-w-none text-gray-600 dark:text-gray-300 pl-4 ml-2 border-l border-gray-200 dark:border-gray-700">
+                {typeof pub.solution === 'string' ? (
+                  <div className="whitespace-pre-wrap">{pub.solution}</div>
+                ) : Array.isArray(pub.solution) ? (
+                  <div className="space-y-6">
+                    {pub.solution.map((item, index) => (
+                      <div key={index}>
+                        {item.type === 'text' && (
+                          <div
+                            className="whitespace-pre-wrap"
+                            dangerouslySetInnerHTML={{
+                              __html: item.text ? item.text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') : ''
+                            }}
+                          />
+                        )}
+                        {item.type === 'image' && item.url && (
+                          <div className="my-4 mx-auto" style={{ width: '70%' }}>
+                            <PublicationImageViewer
+                              url={item.url}
+                              caption={item.caption}
+                              className="w-full h-auto rounded-md shadow-md"
+                            />
+                            {item.caption && (
+                              <p className="text-sm text-center mt-2 text-gray-500 dark:text-gray-400">{item.caption}</p>
+                            )}
+                          </div>
+                        )}
+                        {item.type === 'video' && (
+                          <div className="my-4 mx-auto aspect-video" style={{ width: '70%' }}>
+                            {item.videoId ? (
+                              <iframe
+                                className="w-full h-full rounded-md shadow-md"
+                                src={`https://www.youtube.com/embed/${item.videoId}`}
+                                title={item.caption || 'Video'}
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                              ></iframe>
+                            ) : item.url ? (
+                              <video
+                                className="w-full h-auto rounded-md shadow-md"
+                                controls
+                                poster={item.url.replace(/\.[^/.]+$/, '') + '-thumbnail.jpg'}
+                              >
+                                <source src={item.url} type="video/mp4" />
+                                Your browser does not support the video tag.
+                              </video>
+                            ) : null}
+                            {item.caption && (
+                              <p className="text-sm text-center mt-2 text-gray-500 dark:text-gray-400">{item.caption}</p>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+            </div>
+          )}
+
+          {/* 4. Kết quả chính (Key Results) */}
+          {pub.results && (
+            <div className="mb-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+              <h3 className="font-semibold mb-3 text-lg bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 p-2 rounded-md shadow-sm border-l-4 border-green-500 flex items-center">
+                <svg className="w-5 h-5 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                Key Results
+              </h3>
+              <div className="prose dark:prose-invert max-w-none text-gray-600 dark:text-gray-300 pl-4 ml-2 border-l border-gray-200 dark:border-gray-700">
+                {typeof pub.results === 'string' ? (
+                  <div className="whitespace-pre-wrap">{pub.results}</div>
+                ) : Array.isArray(pub.results) ? (
+                  <div className="space-y-6">
+                    {pub.results.map((item, index) => (
+                      <div key={index}>
+                        {item.type === 'text' && (
+                          <div
+                            className="whitespace-pre-wrap"
+                            dangerouslySetInnerHTML={{
+                              __html: item.text ? item.text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') : ''
+                            }}
+                          />
+                        )}
+                        {item.type === 'image' && item.url && (
+                          <div className="my-4 mx-auto" style={{ width: '70%' }}>
+                            <PublicationImageViewer
+                              url={item.url}
+                              caption={item.caption}
+                              className="w-full h-auto rounded-md shadow-md"
+                            />
+                            {item.caption && (
+                              <p className="text-sm text-center mt-2 text-gray-500 dark:text-gray-400">{item.caption}</p>
+                            )}
+                          </div>
+                        )}
+                        {item.type === 'video' && (
+                          <div className="my-4 mx-auto aspect-video" style={{ width: '70%' }}>
+                            {item.videoId ? (
+                              <iframe
+                                className="w-full h-full rounded-md shadow-md"
+                                src={`https://www.youtube.com/embed/${item.videoId}`}
+                                title={item.caption || 'Video'}
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                              ></iframe>
+                            ) : item.url ? (
+                              <video
+                                className="w-full h-auto rounded-md shadow-md"
+                                controls
+                                poster={item.url.replace(/\.[^/.]+$/, '') + '-thumbnail.jpg'}
+                              >
+                                <source src={item.url} type="video/mp4" />
+                                Your browser does not support the video tag.
+                              </video>
+                            ) : null}
+                            {item.caption && (
+                              <p className="text-sm text-center mt-2 text-gray-500 dark:text-gray-400">{item.caption}</p>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+            </div>
+          )}
+
+          {/* 5. Phát hiện / Hiểu biết thú vị (Insight / Observation) */}
+          {pub.insights && (
+            <div className="mb-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+              <h3 className="font-semibold mb-3 text-lg bg-yellow-50 dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-300 p-2 rounded-md shadow-sm border-l-4 border-yellow-500 flex items-center">
+                <svg className="w-5 h-5 mr-2 text-yellow-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1h4v1a2 2 0 11-4 0zM12 14c.015-.34.208-.646.477-.859a4 4 0 10-4.954 0c.27.213.462.519.476.859h4.002z" />
+                </svg>
+                Insights & Observations
+              </h3>
+              <div className="prose dark:prose-invert max-w-none text-gray-600 dark:text-gray-300 pl-4 ml-2 border-l border-gray-200 dark:border-gray-700">
+                {typeof pub.insights === 'string' ? (
+                  <div className="whitespace-pre-wrap">{pub.insights}</div>
+                ) : Array.isArray(pub.insights) ? (
+                  <div className="space-y-6">
+                    {pub.insights.map((item, index) => (
+                      <div key={index}>
+                        {item.type === 'text' && (
+                          <div
+                            className="whitespace-pre-wrap"
+                            dangerouslySetInnerHTML={{
+                              __html: item.text ? item.text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') : ''
+                            }}
+                          />
+                        )}
+                        {item.type === 'image' && item.url && (
+                          <div className="my-4 mx-auto" style={{ width: '70%' }}>
+                            <PublicationImageViewer
+                              url={item.url}
+                              caption={item.caption}
+                              className="w-full h-auto rounded-md shadow-md"
+                            />
+                            {item.caption && (
+                              <p className="text-sm text-center mt-2 text-gray-500 dark:text-gray-400">{item.caption}</p>
+                            )}
+                          </div>
+                        )}
+                        {item.type === 'video' && (
+                          <div className="my-4 mx-auto aspect-video" style={{ width: '70%' }}>
+                            {item.videoId ? (
+                              <iframe
+                                className="w-full h-full rounded-md shadow-md"
+                                src={`https://www.youtube.com/embed/${item.videoId}`}
+                                title={item.caption || 'Video'}
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                              ></iframe>
+                            ) : item.url ? (
+                              <video
+                                className="w-full h-auto rounded-md shadow-md"
+                                controls
+                                poster={item.url.replace(/\.[^/.]+$/, '') + '-thumbnail.jpg'}
+                              >
+                                <source src={item.url} type="video/mp4" />
+                                Your browser does not support the video tag.
+                              </video>
+                            ) : null}
+                            {item.caption && (
+                              <p className="text-sm text-center mt-2 text-gray-500 dark:text-gray-400">{item.caption}</p>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+            </div>
+          )}
+
+          {/* 6. Đóng góp chính + Hướng phát triển (Contributions & Future Work) */}
+          {pub.contributions && (
+            <div className="mb-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+              <h3 className="font-semibold mb-3 text-lg bg-purple-50 dark:bg-purple-900/20 text-purple-700 dark:text-purple-300 p-2 rounded-md shadow-sm border-l-4 border-purple-500 flex items-center">
+                <svg className="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z" />
+                </svg>
+                Contributions & Future Work
+              </h3>
+              <div className="prose dark:prose-invert max-w-none text-gray-600 dark:text-gray-300 pl-4 ml-2 border-l border-gray-200 dark:border-gray-700">
+                {typeof pub.contributions === 'string' ? (
+                  <div className="whitespace-pre-wrap">{pub.contributions}</div>
+                ) : Array.isArray(pub.contributions) ? (
+                  <div className="space-y-6">
+                    {pub.contributions.map((item, index) => (
+                      <div key={index}>
+                        {item.type === 'text' && (
+                          <div
+                            className="whitespace-pre-wrap"
+                            dangerouslySetInnerHTML={{
+                              __html: item.text ? item.text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') : ''
+                            }}
+                          />
+                        )}
+                        {item.type === 'image' && item.url && (
+                          <div className="my-4 mx-auto" style={{ width: '70%' }}>
+                            <PublicationImageViewer
+                              url={item.url}
+                              caption={item.caption}
+                              className="w-full h-auto rounded-md shadow-md"
+                            />
+                            {item.caption && (
+                              <p className="text-sm text-center mt-2 text-gray-500 dark:text-gray-400">{item.caption}</p>
+                            )}
+                          </div>
+                        )}
+                        {item.type === 'video' && (
+                          <div className="my-4 mx-auto aspect-video" style={{ width: '70%' }}>
+                            {item.videoId ? (
+                              <iframe
+                                className="w-full h-full rounded-md shadow-md"
+                                src={`https://www.youtube.com/embed/${item.videoId}`}
+                                title={item.caption || 'Video'}
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                              ></iframe>
+                            ) : item.url ? (
+                              <video
+                                className="w-full h-auto rounded-md shadow-md"
+                                controls
+                                poster={item.url.replace(/\.[^/.]+$/, '') + '-thumbnail.jpg'}
+                              >
+                                <source src={item.url} type="video/mp4" />
+                                Your browser does not support the video tag.
+                              </video>
+                            ) : null}
+                            {item.caption && (
+                              <p className="text-sm text-center mt-2 text-gray-500 dark:text-gray-400">{item.caption}</p>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+            </div>
+          )}
+        </div>
+
 
 
         <div className="mt-8 mb-6 pt-4 border-t border-gray-200 dark:border-gray-700">
@@ -188,7 +618,23 @@ export default async function PublicationDetailPage({ params }: PageProps) {
           </div>
         </div>
 
-
+        {Array.isArray(pub.images) && pub.images.length > 0 && (
+          <div className="mt-8 mb-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+            <h3 className="font-semibold mb-3 text-lg text-gray-700 dark:text-gray-300">Images:</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {pub.images.map((img, index) => (
+                typeof img === 'object' && img.url ? (
+                  <div key={index}>
+                    <img src={img.url} alt={img.caption || `Publication illustration ${index + 1}`} className="w-full h-auto rounded-md shadow" />
+                    {img.caption && <p className="text-xs text-center mt-1 text-gray-500 dark:text-gray-400">{img.caption}</p>}
+                  </div>
+                ) : typeof img === 'string' ? (
+                  <img key={index} src={img} alt={`Publication illustration ${index + 1}`} className="w-full h-auto rounded-md shadow" />
+                ) : null
+              ))}
+            </div>
+          </div>
+        )}
 
         {Array.isArray(displayTags) && displayTags.length > 0 && (
           <div className="mt-8 mb-6 pt-4 border-t border-gray-200 dark:border-gray-700">

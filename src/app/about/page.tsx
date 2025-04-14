@@ -196,28 +196,113 @@ export default async function AboutPage() {
           {/* Technologies by Category */}
           <div className="space-y-8 bg-gray-50 dark:bg-gray-700/50 p-6 rounded-xl border border-gray-100 dark:border-gray-700">
             {/* Main Categories */}
-            {Object.keys(allTechnologies.categorizedTechs).map(mainCategory => (
-              <div key={mainCategory} className="mb-8">
+            {Object.keys(allTechnologies.categorizedTechs)
+              .filter(mainCategory => mainCategory !== 'Skills Overview') // Xử lý Skills Overview riêng
+              .map(mainCategory => (
+              <div key={mainCategory} className="mb-12">
                 <div className="flex items-center mb-6">
-                  <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200">{mainCategory}</h3>
-                  <div className="flex-grow ml-4 h-0.5 bg-gray-200 dark:bg-gray-600"></div>
+                  <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200 bg-blue-100 dark:bg-blue-900/40 px-4 py-2 rounded-lg">{mainCategory}</h3>
+                  <div className="flex-grow ml-4 h-0.5 bg-blue-200 dark:bg-blue-700"></div>
                 </div>
 
                 {/* Sub Categories */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {Object.keys(allTechnologies.categorizedTechs[mainCategory]).map(subCategory => (
-                    <div key={`${mainCategory}-${subCategory}`} className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  {Object.keys(allTechnologies.categorizedTechs[mainCategory]).map(subCategory => {
+                    // Kiểm tra xem subCategory có phải là một object với các sub-categories khác không
+                    const isNestedCategory = subCategory === 'Foundation Models' ||
+                                           subCategory === 'Model Serving' ||
+                                           subCategory === 'Advanced Serving' ||
+                                           subCategory === 'Inference APIs' ||
+                                           subCategory === 'Monitoring' ||
+                                           subCategory === 'Ethics & Safety' ||
+                                           subCategory === 'Fairness & Inclusion' ||
+                                           subCategory === 'Explainability & Governance' ||
+                                           subCategory === 'RAG' ||
+                                           subCategory === 'Agents' ||
+                                           subCategory === 'Multi-Modal' ||
+                                           subCategory === 'Edge AI' ||
+                                           subCategory === 'Neural Databases' ||
+                                           subCategory === 'Neuromorphic Computing';
+
+                    if (isNestedCategory) {
+                      // Xử lý nested category
+                      return (
+                        <div key={`${mainCategory}-${subCategory}`} className="bg-white dark:bg-gray-800 p-5 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
+                          <div className="flex items-center mb-4">
+                            <h4 className="text-lg font-semibold text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-900/30 px-3 py-1 rounded-md">{subCategory}</h4>
+                            <div className="flex-grow ml-3 h-px bg-indigo-100 dark:bg-indigo-800"></div>
+                          </div>
+
+                          <div className="space-y-4 pl-2">
+                            {Object.keys(allTechnologies.categorizedTechs[mainCategory][subCategory]).map(nestedSubCategory => (
+                              <div key={`${mainCategory}-${subCategory}-${nestedSubCategory}`} className="mb-4">
+                                <h5 className="text-md font-medium text-gray-700 dark:text-gray-300 mb-2 border-l-4 border-indigo-400 pl-2">{nestedSubCategory}</h5>
+                                <div className="flex flex-wrap gap-2 pl-3">
+                                  {allTechnologies.categorizedTechs[mainCategory][subCategory][nestedSubCategory].map(tech => (
+                                    <span
+                                      key={tech.technology}
+                                      className="bg-gradient-to-r from-green-100 to-teal-100 text-green-800 text-sm font-medium px-3 py-1.5 rounded-full dark:from-green-900 dark:to-teal-900 dark:text-green-300 shadow-sm hover:shadow-md transition-shadow duration-300 cursor-default flex items-center"
+                                      title={`Used in ${tech.count} item(s) from ${tech.sources.join(', ')}`}
+                                    >
+                                      <span className="bg-gradient-to-r from-green-200 to-teal-200 dark:from-green-800 dark:to-teal-800 text-green-800 dark:text-green-200 w-5 h-5 rounded-full flex items-center justify-center mr-1.5 text-xs font-bold">{tech.count}</span>
+                                      {tech.technology}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      );
+                    } else {
+                      // Xử lý regular category
+                      return (
+                        <div key={`${mainCategory}-${subCategory}`} className="bg-white dark:bg-gray-800 p-5 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
+                          <div className="flex items-center mb-3">
+                            <h4 className="text-lg font-semibold text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-md">{subCategory}</h4>
+                          </div>
+                          <div className="flex flex-wrap gap-2">
+                            {allTechnologies.categorizedTechs[mainCategory][subCategory].map(tech => (
+                              <span
+                                key={tech.technology}
+                                className="bg-gradient-to-r from-green-100 to-teal-100 text-green-800 text-sm font-medium px-3 py-1.5 rounded-full dark:from-green-900 dark:to-teal-900 dark:text-green-300 shadow-sm hover:shadow-md transition-shadow duration-300 cursor-default flex items-center"
+                                title={`Used in ${tech.count} item(s) from ${tech.sources.join(', ')}`}
+                              >
+                                <span className="bg-gradient-to-r from-green-200 to-teal-200 dark:from-green-800 dark:to-teal-800 text-green-800 dark:text-green-200 w-5 h-5 rounded-full flex items-center justify-center mr-1.5 text-xs font-bold">{tech.count}</span>
+                                {tech.technology}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      );
+                    }
+                  })}
+                </div>
+              </div>
+            ))}
+
+            {/* Skills Overview Section */}
+            {allTechnologies.categorizedTechs['Skills Overview'] && (
+              <div className="mb-12">
+                <div className="flex items-center mb-6">
+                  <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200 bg-purple-100 dark:bg-purple-900/40 px-4 py-2 rounded-lg">Skills Overview</h3>
+                  <div className="flex-grow ml-4 h-0.5 bg-purple-200 dark:bg-purple-700"></div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {Object.keys(allTechnologies.categorizedTechs['Skills Overview']).map(skillCategory => (
+                    <div key={`Skills-${skillCategory}`} className="bg-white dark:bg-gray-800 p-5 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
                       <div className="flex items-center mb-3">
-                        <h4 className="text-lg font-semibold text-gray-700 dark:text-gray-300">{subCategory}</h4>
+                        <h4 className="text-lg font-semibold text-purple-700 dark:text-purple-300 bg-purple-50 dark:bg-purple-900/30 px-3 py-1 rounded-md">{skillCategory}</h4>
                       </div>
                       <div className="flex flex-wrap gap-2">
-                        {allTechnologies.categorizedTechs[mainCategory][subCategory].map(tech => (
+                        {allTechnologies.categorizedTechs['Skills Overview'][skillCategory].map(tech => (
                           <span
                             key={tech.technology}
-                            className="bg-gradient-to-r from-green-100 to-teal-100 text-green-800 text-sm font-medium px-3 py-1.5 rounded-full dark:from-green-900 dark:to-teal-900 dark:text-green-300 shadow-sm hover:shadow-md transition-shadow duration-300 cursor-default flex items-center"
+                            className="bg-gradient-to-r from-purple-100 to-pink-100 text-purple-800 text-sm font-medium px-3 py-1.5 rounded-full dark:from-purple-900 dark:to-pink-900 dark:text-purple-300 shadow-sm hover:shadow-md transition-shadow duration-300 cursor-default flex items-center"
                             title={`Used in ${tech.count} item(s) from ${tech.sources.join(', ')}`}
                           >
-                            <span className="bg-gradient-to-r from-green-200 to-teal-200 dark:from-green-800 dark:to-teal-800 text-green-800 dark:text-green-200 w-5 h-5 rounded-full flex items-center justify-center mr-1.5 text-xs font-bold">{tech.count}</span>
+                            <span className="bg-gradient-to-r from-purple-200 to-pink-200 dark:from-purple-800 dark:to-pink-800 text-purple-800 dark:text-purple-200 w-5 h-5 rounded-full flex items-center justify-center mr-1.5 text-xs font-bold">{tech.count}</span>
                             {tech.technology}
                           </span>
                         ))}
@@ -226,13 +311,13 @@ export default async function AboutPage() {
                   ))}
                 </div>
               </div>
-            ))}
+            )}
 
             {/* Uncategorized Technologies */}
             {allTechnologies.uncategorizedTechs.length > 0 && (
               <div>
                 <div className="flex items-center mb-4">
-                  <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200">Other Technologies</h3>
+                  <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200 bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded-lg">Other Technologies</h3>
                   <div className="flex-grow ml-4 h-0.5 bg-gray-200 dark:bg-gray-600"></div>
                 </div>
                 <div className="flex flex-wrap gap-3">

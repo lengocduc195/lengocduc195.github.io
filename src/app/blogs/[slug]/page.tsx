@@ -1,4 +1,4 @@
-import { getBlogs, generateBlogSlug } from '@/lib/dataUtils';
+import { getBlogs } from '@/lib/dataUtils';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import BlogContent from './BlogContent';
@@ -34,8 +34,29 @@ const RelatedLinksSection: React.FC<{ title: string, links: { title: string, url
 async function getBlogDetails(slug: string) {
   const allBlogs = await getBlogs();
 
-  // Tìm kiếm blog dựa trên slug được tạo bởi hàm generateBlogSlug
-  const entry = allBlogs.find(blog => generateBlogSlug(blog) === slug);
+  // Tìm kiếm blog theo ID, tiêu đề hoặc URL
+  const entry = allBlogs.find(blog => {
+    // Kiểm tra theo ID
+    if (blog.id?.toString() === slug) return true;
+
+    // Kiểm tra theo tiêu đề
+    if (typeof blog.title === 'string') {
+      const titleSlug = blog.title.toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, '') // Loại bỏ các ký tự không phải chữ cái, số hoặc dấu gạch ngang
+        .replace(/\s+/g, '-') // Thay thế khoảng trắng bằng dấu gạch ngang
+        .replace(/-+/g, '-'); // Loại bỏ các dấu gạch ngang liên tiếp
+
+      if (titleSlug === slug) return true;
+    }
+
+    // Kiểm tra theo URL
+    if (typeof blog.url === 'string' && blog.url.startsWith('/blog/')) {
+      const urlSlug = blog.url.substring(6);
+      if (urlSlug === slug) return true;
+    }
+
+    return false;
+  });
 
   return entry;
 }
@@ -57,10 +78,39 @@ export async function generateStaticParams() {
   const blogs = await getBlogs();
   if (!Array.isArray(blogs)) return [];
 
-  // Sử dụng hàm generateBlogSlug để tạo slug cho mỗi blog
-  return blogs.map(blog => ({
-    slug: generateBlogSlug(blog)
-  }));
+  // Tạo các tham số tĩnh cho cả ID và tiêu đề blog
+  const params = [];
+
+  for (const blog of blogs) {
+    // Thêm slug dựa trên ID
+    if (blog.id !== null && blog.id !== undefined) {
+      params.push({ slug: blog.id.toString() });
+    }
+
+    // Thêm slug dựa trên tiêu đề (cho URL hiện tại)
+    if (typeof blog.title === 'string' && blog.title.trim() !== '') {
+      const titleSlug = blog.title.toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, '') // Loại bỏ các ký tự không phải chữ cái, số hoặc dấu gạch ngang
+        .replace(/\s+/g, '-') // Thay thế khoảng trắng bằng dấu gạch ngang
+        .replace(/-+/g, '-'); // Loại bỏ các dấu gạch ngang liên tiếp
+
+      // Tránh trùng lập với slug dựa trên ID
+      if (titleSlug !== blog.id?.toString()) {
+        params.push({ slug: titleSlug });
+      }
+    }
+
+    // Thêm slug dựa trên URL (nếu có)
+    if (typeof blog.url === 'string' && blog.url.startsWith('/blog/')) {
+      const urlSlug = blog.url.substring(6);
+      // Tránh trùng lập
+      if (urlSlug !== blog.id?.toString()) {
+        params.push({ slug: urlSlug });
+      }
+    }
+  }
+
+  return params;
 }
 
 export default async function BlogDetailPage({ params }: PageProps) {

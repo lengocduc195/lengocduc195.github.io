@@ -1,13 +1,13 @@
 {
-  "id": "chat-sentiment-analysis",
-  "title": "Sentiment Analysis with Large Language Model for chat",
-  "description": "Sentiment analysis plays a crucial role in customer support tasks because it helps companies understand customer feedback, which allows them to improve their products and services.",
+  "id": "nlp-transformers",
+  "title": "The Transformer Revolution in NLP",
+  "description": "How transformer architectures have revolutionized natural language processing and what's coming next.",
   "author": "Duc Le",
-  "date": "2025-04-14",
+  "date": "2023-09-22",
   "content": [
     {
       "type": "text",
-      "text": ""
+      "text": "# The Transformer Revolution in Natural Language Processing\n\nNatural Language Processing (NLP) has undergone a dramatic transformation in recent years, largely due to the introduction and refinement of transformer architectures. This blog post examines the impact of transformers on NLP and explores emerging trends in the field."
     },
     {
       "type": "text",
@@ -59,9 +59,15 @@
     "caption": "Transformer Architecture Visualization"
   },
   "notableObservations": [
-    "Visual language model is not necessary for sentiment analysis."
+      "The model performs exceptionally well on landscape and nature scenes, achieving a 92% user satisfaction rating for these categories.",
+      "Fine-tuning the model on domain-specific data improved generation quality by 35% for specialized domains like medical imaging.",
+      "Users spent an average of 45 minutes per session exploring different text prompts and variations."
   ],
-  "unexpectedInsights": null,
+  "unexpectedInsights": [
+      "The model occasionally generates images that combine concepts in ways not explicitly stated in the prompt, showing emergent creative capabilities.",
+      "When given ambiguous prompts, the system tends to favor interpretations that align with more common training examples, revealing potential dataset biases.",
+      "Users reported that the generated images often sparked new creative ideas they hadn't considered before."
+  ],
   "images": [
     {
       "url": "/images/project-1.jpg",

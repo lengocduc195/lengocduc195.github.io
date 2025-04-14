@@ -1,14 +1,15 @@
 {
-    "title": "Roommate at 44, 66/18 Dich Vong Hau, Cau Giay, Hanoi",
+    "title": "Family Gathering in Hanoi",
     "id": "family_1",
-    "date": "2025-4-01",
-    "description": "About my roommate at 44, 66/18 Dich Vong Hau, Cau Giay, Hanoi",
+    "date": "2025-09-01",
+    "description": "A wonderful family gathering in Hanoi during Tet holiday",
     "author": "Ngoc Duc",
+    "category": "Family",
     "images": [],
     "tags": [
-        "Accommodation",
-        "Roommate",
-        "Life"
+        "Family",
+        "Gathering",
+        "Tet Holiday"
     ],
-    "content": "Hi family"
+    "content": "We had a wonderful family gathering during Tet holiday in Hanoi. Everyone was present and we shared many stories and laughter. The food was amazing and the atmosphere was filled with joy and love."
 }

@@ -294,6 +294,7 @@ export interface Publication {
     title: string;
     authors: string[];
     isFirstAuthor?: boolean;
+    highlight?: boolean; // Thêm trường highlight để đánh dấu publication nổi bật
     type?: 'Conference' | 'Journal' | 'Workshop'; // Thêm trường type để phân loại
     venue?: string;
     year: number;
@@ -327,17 +328,7 @@ export async function getPublications(): Promise<Publication[]> {
     return readDataFiles<Publication>('publications');
 }
 
-// Hàm để tạo slug từ tiêu đề hoặc ID
-export function generateSlug(publication: Publication): string {
-    if (typeof publication.title === 'string' && publication.title.trim() !== '') {
-        return publication.title.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-');
-    } else if (publication.id !== null && publication.id !== undefined) {
-        return publication.id.toString();
-    }
-    return '';
-}
-
-// Hàm mới để lấy các publication có highlight
+// Hàm lấy các publication nổi bật
 export async function getHighlightedPublications(limit: number = 2): Promise<Publication[]> {
     const publications = await getPublications();
     // Lọc các publication có highlight và sắp xếp theo năm mới nhất
@@ -345,18 +336,18 @@ export async function getHighlightedPublications(limit: number = 2): Promise<Pub
         .filter(pub => pub.highlight)
         .sort((a, b) => (b.year || 0) - (a.year || 0));
 
+    
     // Nếu không có publication nào có highlight, trả về các publication mới nhất
     if (highlightedPublications.length === 0) {
+        console.warn("No highlighted publications found. Returning latest publications instead.", publications);
         return publications
             .sort((a, b) => (b.year || 0) - (a.year || 0))
             .slice(0, limit);
     }
+    // console.log("Highlighted publications:", highlightedPublications);
 
-    // Thêm slug vào mỗi publication
-    return highlightedPublications.slice(0, limit).map(pub => ({
-        ...pub,
-        slug: generateSlug(pub)
-    }));
+    // Đảm bảo trả về các publication mới nhất trong số các publication được highlight
+    return highlightedPublications.slice(0, limit);
 }
 
 // Hàm mới để lấy topics từ publications và đếm số lượng
@@ -459,16 +450,40 @@ export async function getTechnologyCategories(): Promise<Record<string, Record<s
 }
 
 // Hàm để tìm danh mục cho một công nghệ
-function findCategoryForTechnology(tech: string, categories: Record<string, Record<string, string[]>>): { mainCategory: string; subCategory: string } | null {
+function findCategoryForTechnology(tech: string, categories: Record<string, Record<string, any>>): { mainCategory: string; subCategory: string; nestedSubCategory?: string } | null {
     const techLower = tech.toLowerCase();
 
+    // Danh sách các subCategory có cấu trúc lồng nhau
+    const nestedSubCategories = [
+        'Foundation Models', 'Model Serving', 'Advanced Serving', 'Inference APIs',
+        'Monitoring', 'Ethics & Safety', 'Fairness & Inclusion', 'Explainability & Governance',
+        'RAG', 'Agents', 'Multi-Modal', 'Edge AI', 'Neural Databases', 'Neuromorphic Computing'
+    ];
+
+    // Kiểm tra trong tất cả các danh mục
     for (const mainCategory in categories) {
         for (const subCategory in categories[mainCategory]) {
-            const techList = categories[mainCategory][subCategory];
-            if (Array.isArray(techList)) {
-                for (const item of techList) {
-                    if (item.toLowerCase() === techLower) {
-                        return { mainCategory, subCategory };
+            // Kiểm tra xem subCategory có phải là một object lồng nhau không
+            if (nestedSubCategories.includes(subCategory)) {
+                // Xử lý các subCategory lồng nhau
+                for (const nestedSubCategory in categories[mainCategory][subCategory]) {
+                    const techList = categories[mainCategory][subCategory][nestedSubCategory];
+                    if (Array.isArray(techList)) {
+                        for (const item of techList) {
+                            if (item.toLowerCase() === techLower) {
+                                return { mainCategory, subCategory, nestedSubCategory };
+                            }
+                        }
+                    }
+                }
+            } else {
+                // Xử lý các subCategory thông thường
+                const techList = categories[mainCategory][subCategory];
+                if (Array.isArray(techList)) {
+                    for (const item of techList) {
+                        if (item.toLowerCase() === techLower) {
+                            return { mainCategory, subCategory };
+                        }
                     }
                 }
             }
@@ -494,7 +509,7 @@ function findCategoryForTechnology(tech: string, categories: Record<string, Reco
 
 // Hàm để lấy tất cả technologies từ các nguồn khác nhau và phân loại chúng
 export async function getAllTechnologies(): Promise<{
-    categorizedTechs: Record<string, Record<string, { technology: string; count: number; sources: string[] }[]>>;
+    categorizedTechs: Record<string, Record<string, any>>;
     uncategorizedTechs: { technology: string; count: number; sources: string[] }[];
 }> {
     const [projects, publications, blogs, products, categories] = await Promise.all([
@@ -589,24 +604,45 @@ export async function getAllTechnologies(): Promise<{
         .sort((a, b) => b.count - a.count || a.technology.localeCompare(b.technology));
 
     // Phân loại các công nghệ
-    const categorizedTechs: Record<string, Record<string, { technology: string; count: number; sources: string[] }[]>> = {};
+    const categorizedTechs: Record<string, Record<string, any>> = {};
     const uncategorizedTechs: { technology: string; count: number; sources: string[] }[] = [];
+
+    // Danh sách các subCategory có cấu trúc lồng nhau
+    const nestedSubCategories = [
+        'Foundation Models', 'Model Serving', 'Advanced Serving', 'Inference APIs',
+        'Monitoring', 'Ethics & Safety', 'Fairness & Inclusion', 'Explainability & Governance',
+        'RAG', 'Agents', 'Multi-Modal', 'Edge AI', 'Neural Databases', 'Neuromorphic Computing'
+    ];
 
     allTechs.forEach(tech => {
         const category = findCategoryForTechnology(tech.technology, categories);
 
         if (category) {
-            const { mainCategory, subCategory } = category;
+            const { mainCategory, subCategory, nestedSubCategory } = category;
 
             if (!categorizedTechs[mainCategory]) {
                 categorizedTechs[mainCategory] = {};
             }
 
-            if (!categorizedTechs[mainCategory][subCategory]) {
-                categorizedTechs[mainCategory][subCategory] = [];
-            }
+            if (nestedSubCategory) {
+                // Xử lý các công nghệ thuộc cấp độ lồng nhau
+                if (!categorizedTechs[mainCategory][subCategory]) {
+                    categorizedTechs[mainCategory][subCategory] = {};
+                }
 
-            categorizedTechs[mainCategory][subCategory].push(tech);
+                if (!categorizedTechs[mainCategory][subCategory][nestedSubCategory]) {
+                    categorizedTechs[mainCategory][subCategory][nestedSubCategory] = [];
+                }
+
+                categorizedTechs[mainCategory][subCategory][nestedSubCategory].push(tech);
+            } else {
+                // Xử lý các công nghệ thuộc cấp độ thông thường
+                if (!categorizedTechs[mainCategory][subCategory]) {
+                    categorizedTechs[mainCategory][subCategory] = [];
+                }
+
+                categorizedTechs[mainCategory][subCategory].push(tech);
+            }
         } else {
             uncategorizedTechs.push(tech);
         }
@@ -704,70 +740,134 @@ export function getBlogs(): Promise<Blog[]> {
 
 // Hàm tạo slug cho blog
 export function generateBlogSlug(blog: Blog): string {
-    if (typeof blog.title === 'string' && blog.title.trim() !== '') {
-        return blog.title.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-');
-    } else if (blog.id !== null && blog.id !== undefined) {
-        return blog.id.toString();
-    }
-    return '';
+  if (typeof blog.title === 'string' && blog.title.trim() !== '') {
+    return blog.title.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-');
+  } else if (blog.id !== null && blog.id !== undefined) {
+    return blog.id.toString();
+  }
+  return '';
 }
 
-// Hàm mới để lấy các Notable Observations từ blogs
-export async function getLatestNotableObservations(limit: number = 2): Promise<{blogTitle: string; observation: string; blogSlug: string}[]> {
-    const blogs = await getBlogs();
-    const observations: {blogTitle: string; observation: string; blogSlug: string}[] = [];
+// Hàm lấy các Notable Observations từ blogs, products và projects
+export async function getLatestNotableObservations(limit: number = 2): Promise<{title: string; observation: string; slug: string; date: string; type: 'blog' | 'product' | 'project'}[]> {
+  const [blogs, products, projects] = await Promise.all([
+    getBlogs(),
+    getProducts(),
+    getProjects()
+  ]);
 
-    // Lọc các blog có notableObservations và sắp xếp theo ngày mới nhất
-    const sortedBlogs = blogs
-        .filter(blog => Array.isArray(blog.notableObservations) && blog.notableObservations.length > 0)
-        .sort((a, b) => new Date(b.date || '').getTime() - new Date(a.date || '').getTime());
+  const allObservations: {title: string; observation: string; slug: string; date: string; type: 'blog' | 'product' | 'project'}[] = [];
 
-    // Lấy một observation từ mỗi blog mới nhất
-    for (const blog of sortedBlogs) {
-        if (Array.isArray(blog.notableObservations) && blog.notableObservations.length > 0) {
-            // Chỉ lấy observation đầu tiên từ mỗi blog
-            observations.push({
-                blogTitle: blog.title,
-                observation: blog.notableObservations[0],
-                blogSlug: generateBlogSlug(blog)
-            });
+  // Lấy observations từ blogs
+  blogs
+    .filter(blog => Array.isArray(blog.notableObservations) && blog.notableObservations.length > 0)
+    .forEach(blog => {
+      if (Array.isArray(blog.notableObservations) && blog.notableObservations.length > 0) {
+        allObservations.push({
+          title: blog.title,
+          observation: blog.notableObservations[0],
+          slug: generateBlogSlug(blog),
+          date: blog.date || '',
+          type: 'blog'
+        });
+      }
+    });
 
-            if (observations.length >= limit) {
-                return observations;
-            }
-        }
-    }
+  // Lấy observations từ products
+  products
+    .filter(product => Array.isArray(product.notableObservations) && product.notableObservations.length > 0)
+    .forEach(product => {
+      if (Array.isArray(product.notableObservations) && product.notableObservations.length > 0) {
+        allObservations.push({
+          title: product.name,
+          observation: product.notableObservations[0],
+          slug: product.id.toString(),
+          date: product.date || '',
+          type: 'product'
+        });
+      }
+    });
 
-    return observations;
+  // Lấy observations từ projects
+  projects
+    .filter(project => Array.isArray(project.notableObservations) && project.notableObservations.length > 0)
+    .forEach(project => {
+      if (Array.isArray(project.notableObservations) && project.notableObservations.length > 0) {
+        allObservations.push({
+          title: project.title,
+          observation: project.notableObservations[0],
+          slug: project.id.toString(),
+          date: project.date || '',
+          type: 'project'
+        });
+      }
+    });
+
+  // Sắp xếp tất cả observations theo ngày mới nhất và lấy limit phần tử đầu tiên
+  return allObservations
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, limit);
 }
 
-// Hàm mới để lấy các Unexpected Insights từ blogs
-export async function getLatestUnexpectedInsights(limit: number = 2): Promise<{blogTitle: string; insight: string; blogSlug: string}[]> {
-    const blogs = await getBlogs();
-    const insights: {blogTitle: string; insight: string; blogSlug: string}[] = [];
+// Hàm lấy các Unexpected Insights từ blogs, products và projects
+export async function getLatestUnexpectedInsights(limit: number = 2): Promise<{title: string; insight: string; slug: string; date: string; type: 'blog' | 'product' | 'project'}[]> {
+  const [blogs, products, projects] = await Promise.all([
+    getBlogs(),
+    getProducts(),
+    getProjects()
+  ]);
 
-    // Lọc các blog có unexpectedInsights và sắp xếp theo ngày mới nhất
-    const sortedBlogs = blogs
-        .filter(blog => Array.isArray(blog.unexpectedInsights) && blog.unexpectedInsights.length > 0)
-        .sort((a, b) => new Date(b.date || '').getTime() - new Date(a.date || '').getTime());
+  const allInsights: {title: string; insight: string; slug: string; date: string; type: 'blog' | 'product' | 'project'}[] = [];
 
-    // Lấy một insight từ mỗi blog mới nhất
-    for (const blog of sortedBlogs) {
-        if (Array.isArray(blog.unexpectedInsights) && blog.unexpectedInsights.length > 0) {
-            // Chỉ lấy insight đầu tiên từ mỗi blog
-            insights.push({
-                blogTitle: blog.title,
-                insight: blog.unexpectedInsights[0],
-                blogSlug: generateBlogSlug(blog)
-            });
+  // Lấy insights từ blogs
+  blogs
+    .filter(blog => Array.isArray(blog.unexpectedInsights) && blog.unexpectedInsights.length > 0)
+    .forEach(blog => {
+      if (Array.isArray(blog.unexpectedInsights) && blog.unexpectedInsights.length > 0) {
+        allInsights.push({
+          title: blog.title,
+          insight: blog.unexpectedInsights[0],
+          slug: generateBlogSlug(blog),
+          date: blog.date || '',
+          type: 'blog'
+        });
+      }
+    });
 
-            if (insights.length >= limit) {
-                return insights;
-            }
-        }
-    }
+  // Lấy insights từ products
+  products
+    .filter(product => Array.isArray(product.unexpectedInsights) && product.unexpectedInsights.length > 0)
+    .forEach(product => {
+      if (Array.isArray(product.unexpectedInsights) && product.unexpectedInsights.length > 0) {
+        allInsights.push({
+          title: product.name,
+          insight: product.unexpectedInsights[0],
+          slug: product.id.toString(),
+          date: product.date || '',
+          type: 'product'
+        });
+      }
+    });
 
-    return insights;
+  // Lấy insights từ projects
+  projects
+    .filter(project => Array.isArray(project.unexpectedInsights) && project.unexpectedInsights.length > 0)
+    .forEach(project => {
+      if (Array.isArray(project.unexpectedInsights) && project.unexpectedInsights.length > 0) {
+        allInsights.push({
+          title: project.title,
+          insight: project.unexpectedInsights[0],
+          slug: project.id.toString(),
+          date: project.date || '',
+          type: 'project'
+        });
+      }
+    });
+
+  // Sắp xếp tất cả insights theo ngày mới nhất và lấy limit phần tử đầu tiên
+  return allInsights
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, limit);
 }
 
 // Interface JourneyEntry (Cập nhật để phù hợp với dữ liệu thực tế)

@@ -4,7 +4,7 @@
         "Ngoc Duc"
     ],
     "highlight": true,
-    "date": "2023-10-01",
+    "date": "2021-10-01",
     "title": "AI-Powered Image Recognition",
     "description": "A deep learning model for recognizing objects in images with high accuracy using convolutional neural networks.",
     "main_image": {
@@ -34,10 +34,7 @@
         "The model achieved 95% accuracy on the test dataset, outperforming previous approaches by 7%.",
         "Using transfer learning reduced training time by 60% while maintaining similar accuracy levels."
     ],
-    "unexpectedInsights": [
-        "The model performed better on blurry images than expected, suggesting it learned robust feature representations.",
-        "Adding slight noise to training images improved performance on real-world data significantly."
-    ],
+    "unexpectedInsights": null,
     "images": [
         {
             "url": "/images/projects/project-1.jpg",

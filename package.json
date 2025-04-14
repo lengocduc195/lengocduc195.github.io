@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "touch out/.nojekyll && gh-pages -d out -t true"
+    "create-nojekyll": "node -e \"const fs=require('fs');const dir='out';if(!fs.existsSync(dir)){fs.mkdirSync(dir);}fs.writeFileSync('out/.nojekyll', '')\"",
+    "predeploy": "npm run create-nojekyll",
+    "deploy": "push-dir --dir=out --branch=gh-pages --cleanup",
+    "build-and-deploy": "npm run build && npm run deploy"
   },
   "dependencies": {
     "chart.js": "^4.4.1",
@@ -29,6 +32,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.3.0",
     "gh-pages": "^6.3.0",
+    "push-dir": "^0.4.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

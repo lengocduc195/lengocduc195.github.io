@@ -1,5 +1,5 @@
 {
-    "id": "publication1",
+    "id": 1,
     "rank": "A",
     "title": "Deep Learning for Computer Vision: A Comprehensive Survey",
     "authors": [
@@ -7,11 +7,10 @@
         "John Smith",
         "Jane Doe"
     ],
-    "type": "Conference",
+    "type": "Workshop",
     "isFirstAuthor": true,
-    "highlight": "Comprehensive survey of deep learning techniques in computer vision with analysis of 20+ state-of-the-art models",
     "venue": "IEEE Transactions on Pattern Analysis and Machine Intelligence",
-    "year": "2023-05-05",
+    "year": 2023,
     "abstract": "This paper presents a comprehensive survey of deep learning techniques in computer vision, covering recent advances in convolutional neural networks, transformers, and their applications in various vision tasks.",
     "problem": [
         {
@@ -131,6 +130,7 @@
     },
     "citationCount": 42,
     "citationFormat": "Le, D., Smith, J., & Doe, J. (2023). Deep Learning for Computer Vision: A Comprehensive Survey. IEEE Transactions on Pattern Analysis and Machine Intelligence, 45(3), 123-145.",
+    "highlight": "First comprehensive survey connecting CNNs and Transformers with practical implementation guidelines",
     "images": [
         {
             "url": "https://media.assettype.com/analyticsinsight%2F2024-07%2Fc3ab0b8f-73cc-4245-a2a2-f78148c0077f%2FTop-10-Best-Free-AI-Image-Generator.jpg",

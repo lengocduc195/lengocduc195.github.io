@@ -43,7 +43,7 @@ export default async function JourneyDetailPage({ params }: JourneyDetailPagePro
   if (entry.category === 'Volunteer') gradientClass = "from-green-500 to-emerald-400";
   if (entry.category === 'Family') gradientClass = "from-red-500 to-orange-400";
   if (entry.category === 'Relocation') gradientClass = "from-amber-500 to-yellow-400";
-
+  if (entry.category === 'Travel') gradientClass = "from-purple-500 to-pink-500";
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="max-w-3xl mx-auto">

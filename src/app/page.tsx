@@ -1,9 +1,8 @@
 import Link from 'next/link';
 import { getHighlightedProjects, getAboutData, getHighlightedPublications, getLatestNotableObservations, getLatestUnexpectedInsights } from '@/lib/dataUtils';
-import ProjectCard from '@/components/ProjectCard';
 
 export default async function HomePage() {
-  // Lấy danh sách các dự án nổi bật, thông tin about, và các highlights khác
+  // Lấy danh sách các dự án nổi bật, thông tin about, publications nổi bật, và insights từ blogs
   const [highlightedProjects, aboutData, highlightedPublications, notableObservations, unexpectedInsights] = await Promise.all([
     getHighlightedProjects(),
     getAboutData(),
@@ -14,7 +13,7 @@ export default async function HomePage() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative h-screen flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/70 to-black/30">
           {/* Background image */}
           <div className="absolute inset-0 bg-gradient-to-br from-blue-900 to-purple-900 opacity-80" />
@@ -22,7 +21,7 @@ export default async function HomePage() {
         </div>
 
         <div className="container mx-auto px-4 z-10 flex flex-col md:flex-row items-center justify-between">
-          {/* Left side - Name and Role */}
+          {/* Left side - Personal Info */}
           <div className="text-left md:w-1/2 mb-10 md:mb-0">
             <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white animate-fade-in-down">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600">
@@ -32,7 +31,7 @@ export default async function HomePage() {
             <p className="text-xl md:text-2xl text-gray-200 mb-8 animate-fade-in">
               {aboutData.roles && aboutData.roles.length > 0
                 ? aboutData.roles.join(' • ')
-                : 'Research Scientist • Developer'}
+                : 'Research Scientist • Machine Learning Engineer'}
             </p>
 
             {/* Social Links */}
@@ -61,18 +60,28 @@ export default async function HomePage() {
           </div>
 
           {/* Right side - Highlights */}
-          <div className="md:w-1/2 bg-gray-900/70 backdrop-blur-sm p-6 rounded-lg shadow-xl border border-gray-700 animate-fade-in">
-            {/* Publication Highlights */}
-            {highlightedPublications.length > 0 && (
+          <div className="md:w-1/2 bg-gray-900/60 p-6 rounded-lg backdrop-blur-sm border border-gray-700">
+            {/* Latest Publications */}
+            {highlightedPublications && highlightedPublications.length > 0 && (
               <div className="mb-6">
-                <h3 className="text-xl font-bold mb-3 text-blue-400">Recent Publication Highlights</h3>
+                <h3 className="text-xl font-semibold text-blue-400 mb-3">Latest Publications</h3>
                 <ul className="space-y-3">
-                  {highlightedPublications.map((pub, index) => (
-                    <li key={index} className="bg-gray-800/70 p-3 rounded-md border-l-4 border-blue-500">
-                      <Link href={`/publications/${pub.slug}`} className="text-white hover:text-blue-300 transition-colors font-medium">
+                  {highlightedPublications.slice(0, 1).map((pub, index) => (
+                    <li key={`pub-${index}`} className="border-l-2 border-blue-500 pl-4 py-1">
+                      <Link href={`/publications/${pub.id}`} className="text-white hover:text-blue-300 transition-colors font-medium">
                         {pub.title}
                       </Link>
-                      <p className="text-gray-300 text-sm mt-1">{pub.highlight}</p>
+
+                      <p className="text-gray-300 mt-1">
+                        {pub.highlight || (pub.abstract && pub.abstract.length > 120
+                          ? `${pub.abstract.substring(0, 120)}...`
+                          : pub.abstract || 'A publication in ' + pub.venue)}
+                      </p>
+
+                      <div className="flex justify-between items-center mt-2">
+                        <span className="text-blue-300 text-sm">{pub.authors?.[0] || 'Duc Le'} et al.</span>
+                        <span className="text-gray-400 text-sm">{pub.year}</span>
+                      </div>
                     </li>
                   ))}
                 </ul>
@@ -80,17 +89,37 @@ export default async function HomePage() {
             )}
 
             {/* Notable Observations */}
-            {notableObservations.length > 0 && (
+            {notableObservations && notableObservations.length > 0 && (
               <div className="mb-6">
-                <h3 className="text-xl font-bold mb-3 text-green-400">Notable Observations</h3>
+                <h3 className="text-xl font-semibold text-purple-400 mb-3">Notable Observations</h3>
                 <ul className="space-y-3">
                   {notableObservations.map((item, index) => (
-                    <li key={index} className="bg-gray-800/70 p-3 rounded-md border-l-4 border-green-500">
-                      <Link href={`/blogs/${item.blogSlug}`} className="block hover:bg-gray-700/50 transition-colors rounded-sm p-1">
-                        <p className="text-gray-300 text-sm">
-                          <span className="text-white font-medium">{item.blogTitle}:</span> {item.observation}
-                        </p>
-                      </Link>
+                    <li key={`obs-${index}`} className="border-l-2 border-purple-500 pl-4 py-1">
+                      <p className="text-gray-200">{item.observation}</p>
+                      <div className="flex justify-between items-center mt-2">
+                        <Link
+                          href={`/${item.type}s/${item.slug}`}
+                          className="text-purple-300 hover:text-purple-200 text-sm flex items-center"
+                        >
+                          {item.type === 'blog' && (
+                            <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H5zm0 2h10v10H5V5zm2 4h6v1H7V9zm0 2h6v1H7v-1zm0 2h3v1H7v-1z"></path>
+                            </svg>
+                          )}
+                          {item.type === 'project' && (
+                            <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path>
+                            </svg>
+                          )}
+                          {item.type === 'product' && (
+                            <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z"></path>
+                            </svg>
+                          )}
+                          {item.title}
+                        </Link>
+                        <span className="text-gray-400 text-sm">{new Date(item.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
+                      </div>
                     </li>
                   ))}
                 </ul>
@@ -98,30 +127,50 @@ export default async function HomePage() {
             )}
 
             {/* Unexpected Insights */}
-            {unexpectedInsights.length > 0 && (
+            {unexpectedInsights && unexpectedInsights.length > 0 && (
               <div>
-                <h3 className="text-xl font-bold mb-3 text-purple-400">Unexpected Insights</h3>
+                <h3 className="text-xl font-semibold text-green-400 mb-3">Unexpected Insights</h3>
                 <ul className="space-y-3">
                   {unexpectedInsights.map((item, index) => (
-                    <li key={index} className="bg-gray-800/70 p-3 rounded-md border-l-4 border-purple-500">
-                      <Link href={`/blogs/${item.blogSlug}`} className="block hover:bg-gray-700/50 transition-colors rounded-sm p-1">
-                        <p className="text-gray-300 text-sm">
-                          <span className="text-white font-medium">{item.blogTitle}:</span> {item.insight}
-                        </p>
-                      </Link>
+                    <li key={`ins-${index}`} className="border-l-2 border-green-500 pl-4 py-1">
+                      <p className="text-gray-200">{item.insight}</p>
+                      <div className="flex justify-between items-center mt-2">
+                        <Link
+                          href={`/${item.type}s/${item.slug}`}
+                          className="text-green-300 hover:text-green-200 text-sm flex items-center"
+                        >
+                          {item.type === 'blog' && (
+                            <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H5zm0 2h10v10H5V5zm2 4h6v1H7V9zm0 2h6v1H7v-1zm0 2h3v1H7v-1z"></path>
+                            </svg>
+                          )}
+                          {item.type === 'project' && (
+                            <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path>
+                            </svg>
+                          )}
+                          {item.type === 'product' && (
+                            <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z"></path>
+                            </svg>
+                          )}
+                          {item.title}
+                        </Link>
+                        <span className="text-gray-400 text-sm">{new Date(item.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
+                      </div>
                     </li>
                   ))}
                 </ul>
               </div>
             )}
           </div>
-        </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <svg className="w-6 h-6 text-white" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
-            <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-          </svg>
+          {/* Scroll indicator */}
+          <div className="absolute bottom-10 left-1/4 transform -translate-x-1/2 animate-bounce">
+            <svg className="w-6 h-6 text-white" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
+              <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+          </div>
         </div>
       </section>
 
@@ -144,7 +193,33 @@ export default async function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {highlightedProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
+              <div key={project.id} className="bg-gradient-to-b from-gray-800 to-gray-900 rounded-xl overflow-hidden shadow-xl transform transition duration-500 hover:scale-105 hover:shadow-2xl border border-gray-700 group">
+                <div className="h-48 relative overflow-hidden">
+                  {/* Sử dụng hình ảnh đầu tiên từ mảng images nếu có */}
+                  <div
+                    className="absolute inset-0 bg-cover bg-center transform group-hover:scale-110 transition-transform duration-700"
+                    style={{
+                      backgroundImage: project.main_image && project.main_image.url
+                        ? `url(${project.main_image.url})`
+                        : Array.isArray(project.images) && project.images.length > 0
+                          ? `url(${typeof project.images[0] === 'string'
+                              ? project.images[0]
+                              : (project.images[0]?.url || '/images/project-1.jpg')})`
+                          : `url('/images/project-${project.id % 3 + 1}.jpg')`
+                    }}
+                  />
+                </div>
+                <div className="p-6 relative z-10">
+                  <h3 className="text-xl font-bold mb-2 text-white font-serif group-hover:text-blue-300 transition-colors duration-300">{project.title}</h3>
+                  <p className="text-gray-300 mb-4">{project.description}</p>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.technologies && project.technologies.slice(0, 3).map((tech, index) => (
+                      <span key={index} className="px-2 py-1 bg-gradient-to-r from-blue-900/50 to-purple-900/50 text-blue-300 text-xs rounded-full border border-blue-800/30">{tech}</span>
+                    ))}
+                  </div>
+                  <Link href={`/projects/${project.id}`} className="inline-block px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 transition duration-300 text-sm font-medium shadow-md group-hover:shadow-blue-500/20">Explore Project</Link>
+                </div>
+              </div>
             ))}
           </div>
 
