@@ -1,0 +1,65 @@
+{
+    "id": 2,
+    "author": [
+        "Your Company/Team Name"
+    ],
+    "name": "SaaS Platform X",
+    "description": "A comprehensive platform for managing business workflows.",
+    "main_image": {
+        "url": "/images/products/product-3.jpg",
+        "caption": "SaaS Platform X Dashboard"
+    },
+    "content": [
+        {
+            "type": "text",
+            "text": "SaaS Platform X is a **comprehensive business solution** designed to streamline workflows and improve productivity. The platform offers a suite of integrated tools that help businesses manage their operations more efficiently."
+        },
+        {
+            "type": "text",
+            "text": "Built with modern technologies like **React** and **Node.js**, the platform provides a seamless user experience across devices. The backend is powered by PostgreSQL and hosted on AWS for maximum reliability and scalability."
+        },
+        {
+            "type": "image",
+            "url": "/images/products/product-4.jpg",
+            "caption": "Workflow Management Interface"
+        },
+        {
+            "type": "text",
+            "text": "Key features include:\n- Customizable workflow automation\n- Real-time collaboration tools\n- Comprehensive reporting and analytics\n- Integration with popular business tools\n- Enterprise-grade security"
+        }
+    ],
+    "notableObservations": [
+        "Businesses using the platform reported an average 30% increase in team productivity.",
+        "The workflow automation features reduced manual processing time by up to 70%."
+    ],
+    "unexpectedInsights": [
+        "Small teams achieved greater relative productivity gains than larger organizations.",
+        "The analytics features became the most used aspect of the platform, contrary to initial expectations that workflow automation would be the primary use case."
+    ],
+    "images": [{
+        "url": "/images/products/product-3.jpg",
+        "caption": "SaaS Platform X Dashboard"
+    },
+    {
+        "url": "/images/products/product-4.jpg",
+        "caption": "Workflow Management Interface"
+    }],
+    "topics": [
+        "SaaS",
+        "Business Solutions",
+        "Workflow Automation"
+    ],
+    "technologies": [
+        "React",
+        "Node.js",
+        "PostgreSQL",
+        "AWS"
+    ],
+    "videoUrl": "https://www.youtube.com/watch?v=eelI4mYxKsE",
+    "productUrl": "https://langchain-ai.github.io/langgraph/tutorials/sql-agent/#utility-functions",
+    "githubUrl": "https://github.com/yourusername/image-recognition",
+    "company": null,
+    "lab": null,
+    "social reviews": [],
+    "date": "2023-08-01"
+}

@@ -1,0 +1,41 @@
+{
+  "id": 2,
+  "title": "First Internship",
+  "description": "Interned as a Software Engineer at Company A, working on web development.",
+  "date": "2021-06-01",
+  "tags": [
+    "Internship",
+    "Web Development",
+    "React"
+  ],
+  "category": "Career",
+  "content": [
+    {
+      "type": "text",
+      "text": "This product implements a state-of-the-art **convolutional neural network** for image recognition tasks. The model is trained on a large dataset of labeled images and can recognize objects across multiple categories with high accuracy."
+    },
+    {
+      "type": "text",
+      "text": "The architecture uses a combination of convolutional layers, pooling layers, and fully connected layers to extract features from input images and classify them into predefined categories. **Transfer learning** techniques were applied by fine-tuning a pre-trained model on custom datasets to improve performance."
+    },
+    {
+      "type": "image",
+      "url": "https://cdn-front.freepik.com/images/ai/image-generator/advantages/image-generator-freepik-7.webp?w=1920&h=1920&q=75",
+      "caption": "Survey of Deep Learning Techniques"
+    },
+    {
+      "type": "text",
+      "text": "Key features of this product include:\n- Real-time object detection with bounding boxes\n- Multi-class classification with confidence scores\n- Web interface for uploading and processing images\n- REST API for integration with other applications"
+    }
+  ],
+  "images": [
+    {
+      "url": "https://media.vietravel.com/images/Content/le-dieu-binh-30-4-tai-tphcm-1.png",
+      "caption": "Giao diện chính của Secomus AI Platform"
+    },
+    {
+      "url": "https://storage.googleapis.com/blogvxr-uploads/2025/03/378002b8-le-dieu-binh-30-4-2025-2328969-1200x715.webp",
+      "caption": "Bảng điều khiển phân tích dữ liệu"
+    }
+  ]
+}

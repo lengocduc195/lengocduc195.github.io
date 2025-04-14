@@ -1,0 +1,37 @@
+{
+  "id": 7,
+  "rank": "Q1",
+  "title": "A Comprehensive Survey of Graph Neural Networks for Molecular Property Prediction",
+  "authors": [
+    "Duc Le",
+    "Jennifer Kim",
+    "David Wang",
+    "Emily Chen"
+  ],
+  "type": "Journal",
+  "isFirstAuthor": true,
+  "venue": "Journal of Chemical Information and Modeling",
+  "year": 2023,
+  "abstract": "This survey provides a comprehensive overview of graph neural network applications in molecular property prediction, covering recent advances, challenges, and future directions.",
+  "content": "This survey provides a comprehensive overview of graph neural network applications in molecular property prediction, covering recent advances, challenges, and future directions. We systematically categorize existing approaches based on their architectural designs, training strategies, and application domains. The paper also discusses key challenges in the field, including limited labeled data, model interpretability, and out-of-distribution generalization. We conclude with a discussion of promising research directions and potential applications in drug discovery and materials science.",
+  "topics": [
+    "Graph Neural Networks",
+    "Molecular Property Prediction",
+    "Drug Discovery",
+    "Cheminformatics",
+    "Deep Learning"
+  ],
+  "doi": "10.1021/acs.jcim.3b00123",
+  "link": "https://pubs.acs.org/doi/10.1021/acs.jcim.3b00123",
+  "citationCount": 87,
+  "citationFormat": "Le, D., Kim, J., Wang, D., & Chen, E. (2023). A Comprehensive Survey of Graph Neural Networks for Molecular Property Prediction. Journal of Chemical Information and Modeling, 63(8), 2145-2168.",
+  "videoUrl": null,
+  "github": "https://github.com/lengocduc195/molecular-gnn-survey",
+  "images": [
+    {
+      "url": "/images/molecular-gnn.jpg",
+      "caption": "Graph Neural Network for Molecular Representation"
+    }
+  ],
+  "technologies": ["Python", "PyTorch", "RDKit", "DGL", "PyTorch Geometric"]
+}

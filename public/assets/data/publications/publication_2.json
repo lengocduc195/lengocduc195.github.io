@@ -1,0 +1,92 @@
+{
+    "id": "publication2",
+    "rank": "A",
+    "title": "Transformer-based Architectures for Visual Recognition Tasks",
+    "authors": [
+        "Duc Le",
+        "Sarah Johnson",
+        "Michael Brown"
+    ],
+    "type": "Conference",
+    "isFirstAuthor": true,
+    "highlight": "Novel hybrid architecture combining transformers and CNNs for state-of-the-art performance in visual recognition tasks",
+    "venue": "Conference on Computer Vision and Pattern Recognition (CVPR)",
+    "year": "2026-05-03",
+    "abstract": "This paper explores the application of transformer architectures to visual recognition tasks, demonstrating state-of-the-art performance on image classification, object detection, and semantic segmentation benchmarks.",
+    "problem": [
+        {
+            "type": "text",
+            "text": "Convolutional Neural Networks (CNNs) have dominated computer vision for nearly a decade, but they struggle with capturing long-range dependencies in images. This limitation becomes particularly problematic for tasks requiring global context understanding."
+        },
+        {
+            "type": "image",
+            "url": "/images/project-1.jpg",
+            "caption": "Limitations of CNNs in capturing global context"
+        }
+    ],
+    "gap": [
+        {
+            "type": "text",
+            "text": "While transformers have revolutionized natural language processing, their application to computer vision has been limited by computational constraints and the lack of inductive biases that make CNNs so effective for image processing."
+        }
+    ],
+    "solution": [
+        {
+            "type": "text",
+            "text": "We propose a hybrid architecture that combines the global attention mechanisms of transformers with the local processing capabilities of CNNs. Our approach divides images into patches, processes them with a transformer encoder, and then refines the features with convolutional layers."
+        },
+        {
+            "type": "image",
+            "url": "/images/project-2.jpg",
+            "caption": "Our hybrid CNN-Transformer architecture"
+        }
+    ],
+    "results": [
+        {
+            "type": "text",
+            "text": "Our hybrid model achieves state-of-the-art results on ImageNet classification (86.4% top-1 accuracy), COCO object detection (52.3% mAP), and ADE20K semantic segmentation (54.7% mIoU), while using 30% fewer parameters than comparable models."
+        }
+    ],
+    "insights": [
+        {
+            "type": "text",
+            "text": "We discovered that the transformer components are particularly effective for recognizing objects that span large portions of the image, while the convolutional components excel at capturing fine-grained details and textures."
+        }
+    ],
+    "contributions": [
+        {
+            "type": "text",
+            "text": "Our main contributions include: [ref:1] (1) A novel hybrid architecture that effectively combines transformers and CNNs; (2) A comprehensive evaluation across multiple vision tasks; (3) An analysis of the complementary strengths of attention and convolution operations."
+        }
+    ],
+    "doi": "10.1109/CVPR.2022.123456",
+    "link": "https://example.com/paper",
+    "citationCount": 245,
+    "citationFormat": "Le, D., Johnson, S., & Brown, M. (2022). Transformer-based Architectures for Visual Recognition Tasks. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (pp. 1234-1243).",
+    "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "github": "https://github.com/example/transformer-vision",
+    "images": [
+        {
+            "url": "/images/project-1.jpg",
+            "caption": "Model Architecture Overview"
+        },
+        {
+            "url": "/images/project-2.jpg",
+            "caption": "Visualization of Attention Maps"
+        }
+    ],
+    "topics": [
+        "Computer Vision",
+        "Deep Learning",
+        "Transformers"
+    ],
+    "technologies": [
+        "PyTorch",
+        "CUDA",
+        "Python"
+    ],
+    "references":{
+      "1": "Xun Zheng, Bryon Aragam, Pradeep K Ravikumar, and Eric P Xing. Dags with no tears: Continuous optimization for structure learning. Advances in Neural Information Processing Systems, 31,2018.",
+      "2": "Kun Zhang, Zhikun Wang, Jiji Zhang, and Bernhard Scholkopf. On estimation of functional causal models: general results and application to the post-nonlinear causal model. ACM Transactions on Intelligent Systems and Technology (TIST), 7(2):1–22, 2015."
+    }
+}

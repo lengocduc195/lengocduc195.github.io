@@ -1,0 +1,52 @@
+{
+  "name": "Duc Le",
+  "main role": "AI Lead",
+  "roles": [
+    "Research Scientist",
+    "Machine Learning Engineer"
+  ],
+  "bio": "I am a passionate researcher and developer specializing in machine learning and computer vision. With a background in computer science and artificial intelligence, I am dedicated to advancing the field of AI and making it more accessible to everyone.\n\nMy research interests include deep learning, computer vision, and natural language processing. I am particularly excited about the intersection of AI and healthcare, where I believe significant innovations can occur.\n\nWhen I'm not coding or researching, you can find me reading scientific papers, contributing to open-source projects, or exploring new technologies.",
+  "image": "/images/Duc_Le.jpg",
+  "location": "Ha Noi Capital, Vietnam",
+  "email": "lengocduc195@example.com",
+  "social": {
+    "github": "https://github.com/lengocduc195",
+    "linkedin": "https://linkedin.com/in/david-ducle",
+    "twitter": "https://twitter.com/david-ducle",
+    "researchgate": "https://www.researchgate.net/profile/Duc-Le",
+    "googleScholar": "https://scholar.google.com/citations?user=ABC123",
+    "orcid": "https://orcid.org/0000-0000-0000-0000"
+  },
+  "cv": {
+    "url": "/assets/cv/Duc_Le_CV.pdf",
+    "filename": "Duc_Le_CV.pdf"
+  },
+  "resume": {
+    "url": "/assets/cv/Duc_Le_resume.pdf",
+    "filename": "Duc_Le_resume.pdf"
+  },
+  "education": [
+    {
+      "degree": "B.S. in Computer Science",
+      "school": "University Name",
+      "year": "2012-2016",
+      "description": "Focus on software engineering and algorithms"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Research Scientist",
+      "company": "Research Institute",
+      "period": "2020-2023",
+      "description": "Conducted research in computer vision and deep learning"
+    },
+    {
+      "title": "Research Assistant",
+      "company": "University Lab Name",
+      "period": "2020-Present",
+      "description": "Conducted research on AI and machine learning"
+    }
+  ],
+  "slogan": "I believe one good line of code can change how we think.",
+  "slogan_footer": "Researcher, developer, and innovator passionate about creating impactful solutions with cutting-edge technologies."
+}
