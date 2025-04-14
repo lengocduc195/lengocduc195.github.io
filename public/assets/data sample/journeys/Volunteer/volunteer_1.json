@@ -1,0 +1,33 @@
+{
+    "title": "Secomus",
+    "id": "secomus_fds",
+    "date": "2023-10-01",
+    "description": "A journey through Secomus Technology as a core AI Engineer",
+    "author": "Ngoc Duc",
+    "images": [],
+    "tags": [
+        "Secomus",
+        "My job"
+    ],
+    "content": "Hi volunteer",
+    "links": [
+        {
+            "title": "Secomus Technology",
+            "url": "https://secomus.com"
+        },
+        {
+            "title": "My LinkedIn",
+            "url": "https://www.linkedin.com/in/ngoc-duc/"
+        }
+    ],
+    "related": [
+        {
+            "title": "My first job",
+            "url": "/journeys/jobs/my-first-job.json"
+        },
+        {
+            "title": "AI Engineer",
+            "url": "/journeys/jobs/ai-engineer.json"
+        }
+    ]
+}

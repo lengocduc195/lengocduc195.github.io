@@ -1,0 +1,92 @@
+{
+    "id": 3,
+    "author": [
+        "Ngoc Duc"
+    ],
+    "name": "Secomus AI Platform",
+    "description": "Nền tảng AI tích hợp cho doanh nghiệp, cung cấp các giải pháp phân tích dữ liệu và tự động hóa quy trình.",
+    "main_image": {
+        "url": "/images/products/product-5.jpg",
+        "caption": "Giao diện chính của Secomus AI Platform"
+    },
+    "content": [
+        {
+            "type": "text",
+            "text": "Secomus AI Platform là một nền tảng toàn diện được thiết kế để giúp doanh nghiệp tận dụng sức mạnh của **trí tuệ nhân tạo** trong các hoạt động hàng ngày. Nền tảng này cung cấp một bộ công cụ tích hợp cho phép các tổ chức phân tích dữ liệu, tự động hóa quy trình và đưa ra quyết định dựa trên dữ liệu."
+        },
+        {
+            "type": "image",
+            "url": "/images/products/product-6.jpg",
+            "caption": "Bảng điều khiển phân tích dữ liệu"
+        },
+        {
+            "type": "text",
+            "text": "Các tính năng chính bao gồm:\n\n1. Phân tích dữ liệu nâng cao với các thuật toán **học máy**\n2. Tự động hóa quy trình kinh doanh thông qua AI\n3. Tích hợp với các hệ thống hiện có thông qua API\n4. Bảng điều khiển trực quan để theo dõi hiệu suất\n5. Khả năng mở rộng để đáp ứng nhu cầu ngày càng tăng"
+        }
+    ],
+    "notableObservations": [
+        "Khách hàng sử dụng nền tảng đã báo cáo giảm 40% thời gian xử lý dữ liệu so với các giải pháp trước đây.",
+        "Các tính năng tự động hóa đã giúp giảm 65% lỗi do con người trong các quy trình kinh doanh."
+    ],
+    "unexpectedInsights": [
+        "Người dùng đã tìm ra cách sử dụng nền tảng để giải quyết các vấn đề ngoài dự kiến ban đầu, mở rộng phạm vi ứng dụng của sản phẩm.",
+        "Các công ty nhỏ đã áp dụng nền tảng nhanh hơn và hiệu quả hơn so với các doanh nghiệp lớn, trái ngược với dự đoán ban đầu."
+    ],
+    "images": [
+        {
+            "url": "/images/products/product-5.jpg",
+            "caption": "Giao diện chính của Secomus AI Platform"
+        },
+        {
+            "url": "/images/products/product-6.jpg",
+            "caption": "Bảng điều khiển phân tích dữ liệu"
+        }
+    ],
+    "topics": [
+        "AI Platform",
+        "Business Intelligence",
+        "Data Analytics",
+        "Process Automation"
+    ],
+    "technologies": [
+        "Machine Learning",
+        "Python",
+        "React",
+        "Node.js",
+        "TensorFlow"
+    ],
+    "date": "2023-08-15",
+    "productUrl": "https://secomus.com/ai-platform",
+    "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "githubUrl": "https://github.com/secomus/ai-platform",
+    "company": "Secomus",
+    "lab": "AI Research Lab",
+    "social reviews": [
+        {
+            "author": "Tech Review",
+            "rating": 4.8,
+            "comment": "Một nền tảng AI toàn diện cho doanh nghiệp với giao diện người dùng trực quan."
+        },
+        {
+            "author": "Business Tech Today",
+            "rating": 4.5,
+            "comment": "Secomus AI Platform mang lại giá trị đáng kể cho các doanh nghiệp muốn tận dụng AI."
+        }
+    ],
+    "related": [
+        {
+            "title": "AI-Powered Image Recognition",
+            "url": "/products/ai-powered-image-recognition"
+        }
+    ],
+    "links": [
+        {
+            "title": "Secomus Company Website",
+            "url": "https://secomus.com"
+        },
+        {
+            "title": "AI Platform Documentation",
+            "url": "https://docs.secomus.com/ai-platform"
+        }
+    ]
+}

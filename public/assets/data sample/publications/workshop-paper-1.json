@@ -1,0 +1,36 @@
+{
+  "id": 10,
+  "rank": "A",
+  "title": "Few-Shot Learning for Multilingual NLP in Low-Resource Languages",
+  "authors": [
+    "Duc Le",
+    "Sofia Garcia",
+    "Amir Khan"
+  ],
+  "type": "Workshop",
+  "isFirstAuthor": true,
+  "venue": "Workshop on NLP for Low-Resource Languages at ACL",
+  "year": 2023,
+  "abstract": "This paper presents a few-shot learning approach for multilingual NLP tasks in low-resource languages, demonstrating significant improvements over traditional transfer learning methods.",
+  "content": "This paper presents a few-shot learning approach for multilingual NLP tasks in low-resource languages, demonstrating significant improvements over traditional transfer learning methods. We introduce a novel meta-learning framework that can quickly adapt to new languages with minimal labeled examples. Our approach leverages cross-lingual representations and contrastive learning to improve generalization across typologically diverse languages. Experiments on named entity recognition, part-of-speech tagging, and sentiment analysis across 15 low-resource languages show consistent improvements over strong baselines, especially in the 10-50 examples regime.",
+  "topics": [
+    "Few-Shot Learning",
+    "Multilingual NLP",
+    "Low-Resource Languages",
+    "Meta-Learning",
+    "Transfer Learning"
+  ],
+  "doi": "10.18653/v1/2023.lowresource-1.12",
+  "link": "https://aclanthology.org/2023.lowresource-1.12/",
+  "citationCount": 8,
+  "citationFormat": "Le, D., Garcia, S., & Khan, A. (2023). Few-Shot Learning for Multilingual NLP in Low-Resource Languages. In Proceedings of the Workshop on NLP for Low-Resource Languages at ACL 2023, pp. 112-123.",
+  "videoUrl": "https://www.youtube.com/watch?v=pqrstuv1234",
+  "github": "https://github.com/lengocduc195/few-shot-multilingual",
+  "images": [
+    {
+      "url": "/images/few-shot-nlp.jpg",
+      "caption": "Few-Shot Learning Architecture"
+    }
+  ],
+  "technologies": ["Python", "PyTorch", "Hugging Face", "NLTK", "spaCy"]
+}

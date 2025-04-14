@@ -1,0 +1,78 @@
+{
+    "id": "ai-image-generator",
+    "author": ["Ngoc Duc"],
+    "highlight": true,
+    "date": "2023-06-15",
+    "title": "AI Image Generator",
+    "description": "A state-of-the-art AI image generator that uses deep learning to create realistic images from text descriptions.",
+    "main_image": {
+        "url": "https://cdn-front.freepik.com/images/ai/image-generator/advantages/image-generator-freepik-7.webp?w=1920&h=1920&q=75",
+        "caption": "Deep Learning for Computer Vision"
+    },
+    "content": [
+        {
+            "type": "text",
+            "text": "This AI image generator uses a combination of **GANs (Generative Adversarial Networks)** and **Transformers** to create high-quality images from text descriptions. The model was trained on a diverse dataset of images and their corresponding descriptions, allowing it to generate images across various domains including landscapes, portraits, abstract art, and more."
+        },
+        {
+            "type": "image",
+            "url": "https://cdn-front.freepik.com/images/ai/image-generator/advantages/image-generator-freepik-7.webp?w=1920&h=1920&q=75",
+            "caption": "Example of landscape generation from text description"
+        },
+        {
+            "type": "text",
+            "text": "The system includes a user-friendly interface that allows users to input text descriptions and receive generated images in real-time. Advanced options allow for fine-tuning of the generation process, including style control, color schemes, and composition adjustments."
+        },
+        {
+            "type": "image",
+            "url": "/images/projects/project-2.jpg",
+            "caption": "User interface showing text input and generated image"
+        }
+    ],
+    "technologies": [
+        "Python",
+        "PyTorch",
+        "React",
+        "TypeScript"
+    ],
+    "topics": [
+        "AI",
+        "Computer Vision",
+        "Deep Learning"
+    ],
+    "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "productUrl": "https://ai-image-generator.example.com",
+    "githubUrl": "https://github.com/example/ai-image-generator",
+    "company": "AI Research Lab",
+    "lab": "Computer Vision Lab",
+    "notableObservations": [
+        "The model performs exceptionally well on landscape and nature scenes, achieving a 92% user satisfaction rating for these categories.",
+        "Fine-tuning the model on domain-specific data improved generation quality by 35% for specialized domains like medical imaging.",
+        "Users spent an average of 45 minutes per session exploring different text prompts and variations."
+    ],
+    "unexpectedInsights": [
+        "The model occasionally generates images that combine concepts in ways not explicitly stated in the prompt, showing emergent creative capabilities.",
+        "When given ambiguous prompts, the system tends to favor interpretations that align with more common training examples, revealing potential dataset biases.",
+        "Users reported that the generated images often sparked new creative ideas they hadn't considered before."
+    ],
+    "related": [
+        {
+            "title": "Text-to-Speech System",
+            "url": "/projects/text-to-speech"
+        },
+        {
+            "title": "Image Recognition API",
+            "url": "/projects/image-recognition-api"
+        }
+    ],
+    "links": [
+        {
+            "title": "Research Paper",
+            "url": "https://example.com/ai-image-generator-paper"
+        },
+        {
+            "title": "Technical Documentation",
+            "url": "https://docs.example.com/ai-image-generator"
+        }
+    ]
+}

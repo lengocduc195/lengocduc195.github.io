@@ -1,0 +1,48 @@
+{
+  "id": 4,
+  "rank": "A",
+  "title": "Federated Learning for Privacy-Preserving Medical Image Analysis",
+  "authors": [
+    "Duc Le",
+    "Maria Johnson",
+    "Robert Chen"
+  ],
+  "type": "Conference",
+  "isFirstAuthor": true,
+  "venue": "IEEE Conference on Computer Vision and Pattern Recognition (CVPR)",
+  "year": 2023,
+  "abstract": "This paper introduces a novel federated learning approach for medical image analysis that preserves patient privacy while achieving state-of-the-art diagnostic accuracy.",
+  "problem": "Medical image analysis using deep learning requires large, diverse datasets to achieve high diagnostic accuracy, but sharing medical data across institutions raises serious privacy concerns and often violates regulations like HIPAA and GDPR. Current approaches either compromise on model performance by training on limited local datasets or risk privacy breaches through centralized data collection.",
+  "gap": "Existing federated learning methods for medical imaging suffer from three critical limitations: (1) significant performance degradation compared to centralized training, especially for rare conditions; (2) vulnerability to inference attacks that can compromise patient privacy; and (3) prohibitive communication costs that make deployment impractical in bandwidth-constrained clinical environments.",
+  "solution": "We propose MedFed, a novel federated learning framework specifically designed for medical imaging that incorporates three key innovations: (1) a hierarchical knowledge distillation mechanism that preserves diagnostic accuracy for rare conditions; (2) a differentially private aggregation protocol with formal privacy guarantees; and (3) a communication-efficient model update scheme that reduces bandwidth requirements by up to 90% through adaptive quantization and sparsification.",
+  "results": "Across five medical imaging datasets spanning different modalities (X-ray, CT, MRI, ultrasound, and histopathology), MedFed achieves diagnostic accuracy within 1.2% of centralized training while reducing communication costs by 87% compared to standard federated averaging. Our privacy analysis demonstrates that the system provides ε-differential privacy with ε < 3, ensuring strong protection against inference attacks. In a real-world deployment across three hospitals, MedFed successfully trained a pneumonia detection model that generalized to new institutions without requiring data sharing.",
+  "insights": "Our research revealed several unexpected findings about federated learning in medical contexts: (1) The performance gap between federated and centralized learning is highly task-dependent - nearly nonexistent for anatomical structure detection but substantial for rare pathologies; (2) Differential privacy mechanisms had asymmetric effects across institutions, with smaller hospitals experiencing disproportionately larger accuracy drops; (3) Model performance exhibited a surprising non-monotonic relationship with the number of participating institutions - performance improved up to 7 institutions but then degraded with additional participants due to increased heterogeneity; and (4) When analyzing model attention maps, we discovered that federated models focus on different anatomical regions than centralized models despite similar overall accuracy, suggesting fundamentally different learning patterns.",
+  "contributions": "Our work makes four key contributions: (1) a novel federated learning architecture optimized for medical imaging applications; (2) theoretical analysis proving convergence guarantees under non-IID medical data distributions; (3) a practical implementation that addresses real-world deployment challenges in clinical environments; and (4) extensive evaluation on diverse medical imaging tasks demonstrating state-of-the-art privacy-utility tradeoffs. Future work will focus on extending MedFed to handle multi-modal medical data (combining imaging with clinical notes and genomics) and developing adaptive privacy mechanisms that provide personalized privacy guarantees based on institutional requirements.",
+  "highlight": "Privacy-preserving federated learning framework for medical imaging with formal differential privacy guarantees",
+  "links": {
+    "website": "https://cvpr.thecvf.com/",
+    "youtube_demo": "https://www.youtube.com/watch?v=abcdefghijk",
+    "github_repository": "https://github.com/lengocduc195/federated-medical-imaging",
+    "view_publication": "https://ieeexplore.ieee.org/document/123456"
+  },
+  "topics": [
+    "Federated Learning",
+    "Medical Imaging",
+    "Privacy",
+    "Deep Learning",
+    "Healthcare"
+  ],
+  "doi": "10.1109/CVPR.2023.123456",
+  "link": "https://ieeexplore.ieee.org/document/123456",
+  "citationCount": 18,
+  "citationFormat": "Le, D., Johnson, M., & Chen, R. (2023). Federated Learning for Privacy-Preserving Medical Image Analysis. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), pp. 1234-1242.",
+  "videoUrl": "https://www.youtube.com/watch?v=abcdefghijk",
+  "github": "https://github.com/lengocduc195/federated-medical-imaging",
+  "images": [
+    {
+      "url": "/images/federated-learning.jpg",
+      "caption": "Federated Learning Architecture"
+    }
+  ],
+  "technologies": ["Python", "PyTorch", "TensorFlow", "OpenFL"]
+}

@@ -1,0 +1,9 @@
+{
+  "id": 2,
+  "title": "First Internship",
+  "description": "Interned as a Software Engineer at Company A, working on web development.",
+  "date": "2021-06-01",
+  "tags": ["Internship", "Web Development", "React"],
+  "category": "Career",
+  "content": "Hi first internship"
+} 

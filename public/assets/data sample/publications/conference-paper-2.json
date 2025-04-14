@@ -1,0 +1,36 @@
+{
+  "id": 5,
+  "rank": "B",
+  "title": "Transformer-Based Architectures for Code Generation",
+  "authors": [
+    "Alex Zhang",
+    "Duc Le",
+    "Sarah Williams"
+  ],
+  "type": "Conference",
+  "isFirstAuthor": false,
+  "venue": "International Conference on Software Engineering (ICSE)",
+  "year": 2022,
+  "abstract": "This paper explores the application of transformer-based architectures for automatic code generation, with a focus on improving accuracy and maintaining code quality.",
+  "content": "This paper explores the application of transformer-based architectures for automatic code generation, with a focus on improving accuracy and maintaining code quality. We present a novel approach that combines pre-training on large code repositories with fine-tuning on domain-specific codebases. Our model demonstrates significant improvements over previous approaches in terms of syntactic correctness, semantic accuracy, and code readability. We also introduce a new benchmark for evaluating code generation systems across multiple programming languages and problem domains.",
+  "topics": [
+    "Code Generation",
+    "Transformers",
+    "Software Engineering",
+    "Deep Learning",
+    "NLP"
+  ],
+  "doi": "10.1145/3510003.3510042",
+  "link": "https://dl.acm.org/doi/10.1145/3510003.3510042",
+  "citationCount": 24,
+  "citationFormat": "Zhang, A., Le, D., & Williams, S. (2022). Transformer-Based Architectures for Code Generation. In Proceedings of the 44th International Conference on Software Engineering (ICSE), pp. 789-800.",
+  "videoUrl": "https://www.youtube.com/watch?v=lmnopqrst",
+  "github": "https://github.com/alexzhang/code-transformer",
+  "images": [
+    {
+      "url": "/images/code-transformer.jpg",
+      "caption": "Code Transformer Architecture"
+    }
+  ],
+  "technologies": ["Python", "PyTorch", "Hugging Face", "JavaScript"]
+}

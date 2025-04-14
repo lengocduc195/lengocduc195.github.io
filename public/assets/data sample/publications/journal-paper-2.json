@@ -1,0 +1,37 @@
+{
+  "id": 8,
+  "rank": "Q2",
+  "title": "Explainable AI for Healthcare: Methods, Applications, and Ethical Considerations",
+  "authors": [
+    "Maria Rodriguez",
+    "Duc Le",
+    "John Smith",
+    "Priya Patel"
+  ],
+  "type": "Journal",
+  "isFirstAuthor": false,
+  "venue": "Artificial Intelligence in Medicine",
+  "year": 2022,
+  "abstract": "This paper reviews explainable AI methods in healthcare applications, discussing their importance for clinical adoption, regulatory compliance, and ethical practice.",
+  "content": "This paper reviews explainable AI methods in healthcare applications, discussing their importance for clinical adoption, regulatory compliance, and ethical practice. We analyze various explainability techniques, including feature attribution methods, counterfactual explanations, and attention-based approaches, evaluating their strengths and limitations in different clinical contexts. The paper also presents case studies across multiple medical domains, including radiology, pathology, and clinical decision support. We conclude with recommendations for researchers and practitioners on selecting appropriate explainability methods based on the specific healthcare application and stakeholder needs.",
+  "topics": [
+    "Explainable AI",
+    "Healthcare",
+    "Medical Imaging",
+    "Clinical Decision Support",
+    "Ethics"
+  ],
+  "doi": "10.1016/j.artmed.2022.102345",
+  "link": "https://www.sciencedirect.com/science/article/pii/S0933365722102345",
+  "citationCount": 42,
+  "citationFormat": "Rodriguez, M., Le, D., Smith, J., & Patel, P. (2022). Explainable AI for Healthcare: Methods, Applications, and Ethical Considerations. Artificial Intelligence in Medicine, 128, 102345.",
+  "videoUrl": null,
+  "github": "https://github.com/maria-rodriguez/xai-healthcare",
+  "images": [
+    {
+      "url": "/images/xai-healthcare.jpg",
+      "caption": "Explainable AI Framework for Healthcare"
+    }
+  ],
+  "technologies": ["Python", "TensorFlow", "SHAP", "LIME", "Captum"]
+}

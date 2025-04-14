@@ -1,0 +1,153 @@
+{
+    "id": "publication1",
+    "rank": "A",
+    "title": "Deep Learning for Computer Vision: A Comprehensive Survey",
+    "authors": [
+        "Duc Le",
+        "John Smith",
+        "Jane Doe"
+    ],
+    "type": "Conference",
+    "isFirstAuthor": true,
+    "highlight": "Comprehensive survey of deep learning techniques in computer vision with analysis of 20+ state-of-the-art models",
+    "venue": "IEEE Transactions on Pattern Analysis and Machine Intelligence",
+    "year": "2023-05-05",
+    "abstract": "This paper presents a comprehensive survey of deep learning techniques in computer vision, covering recent advances in convolutional neural networks, transformers, and their applications in various vision tasks.",
+    "problem": [
+        {
+            "type": "text",
+            "text": "Computer vision has seen explosive growth with **deep learning**, but the field is evolving so rapidly that researchers and practitioners struggle to keep up with the latest architectures, techniques, and best practices. The fragmentation of knowledge across thousands of papers makes it difficult to understand the big picture and identify the most promising research directions."
+        },
+        {
+            "type": "image",
+            "url": "https://imgv3.fotor.com/images/share/wonderland-girl-generated-by-Fotor-ai-art-generator.jpg",
+            "caption": "Exponential growth in computer vision papers over the last decade"
+        },
+        {
+            "type": "text",
+            "text": "As models [ref:1] become increasingly complex and diverse, from CNNs to Vision Transformers and beyond, there is an urgent need for a comprehensive framework to understand their relationships, trade-offs, and appropriate use cases."
+        }
+    ],
+    "gap": [
+        {
+            "type": "text",
+            "text": "Existing surveys either focus too narrowly on specific architectures (e.g., only CNNs or only Transformers) or fail to provide practical insights on implementation challenges. Additionally, most reviews don't adequately address the emerging convergence between vision and language models that is reshaping the field."
+        },
+        {
+            "type": "text",
+            "text": "Current literature suffers from three key limitations: (1) **Fragmentation** - knowledge is scattered across specialized papers with inconsistent terminology; (2) **Lack of practical guidance** - theoretical descriptions rarely include implementation details or best practices; and (3) **Outdated taxonomies** - existing categorization schemes don't account for recent hybrid architectures."
+        }
+    ],
+    "solution": [
+        {
+            "type": "text",
+            "text": "We present a unified framework for understanding the evolution of deep learning in computer vision, from CNNs to Vision Transformers and beyond. Our approach systematically categorizes architectures based on their inductive biases and connects theoretical advances to practical applications. We also introduce a novel taxonomy for cross-modal vision-language models that clarifies their relationships and capabilities."
+        },
+        {
+            "type": "image",
+            "url": "https://www.adobe.com/my_en/products/firefly/features/media_179810889bf1ef34a453137e0387dd9e0f4e43f05.jpeg?width=750&format=jpeg&optimize=medium",
+            "caption": "Our proposed taxonomy of vision architectures showing evolutionary relationships"
+        },
+        {
+            "type": "text",
+            "text": "The framework consists of three main components: (1) A **historical evolution map** that traces the development of key architectures; (2) A **capability matrix** that evaluates models across dimensions like efficiency, accuracy, and scalability; and (3) **Implementation guidelines** with practical code examples and optimization strategies."
+        }
+    ],
+    "results": [
+        {
+            "type": "text",
+            "text": "Our analysis reveals that hybrid architectures combining CNN-like local processing with Transformer-like global attention achieve the best performance across most vision tasks. We quantitatively demonstrate that the gap between specialized and general-purpose models is narrowing, with foundation models now matching or exceeding task-specific models on 12 out of 15 benchmark datasets."
+        },
+        {
+            "type": "image",
+            "url": "https://imggen.ai/assets/static/f6292294-1c9e-465b-8620-350604bea7ce.2fbfc1ff.webp",
+            "caption": "Performance comparison of different architecture types across vision tasks"
+        },
+        {
+            "type": "text",
+            "text": "Our experiments also show that proper pre-training strategies can reduce the data requirements by up to 70% while maintaining comparable performance. The table below summarizes key findings across architecture types:"
+        },
+        {
+            "type": "text",
+            "text": "1. **Hybrid CNN-Transformer models** consistently outperform pure CNN or pure Transformer approaches\n2. **Foundation models** show strong transfer learning capabilities, requiring only 30% of task-specific data\n3. **Attention mechanisms** provide the greatest benefit for tasks requiring global context understanding\n4. **Computational efficiency** remains highest in optimized CNN architectures for edge deployment"
+        }
+    ],
+    "insights": [
+        {
+            "type": "text",
+            "text": "During our investigation, we discovered several unexpected patterns that challenge conventional wisdom in the field:"
+        },
+        {
+            "type": "image",
+            "url": "https://sider.ai/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fdivine-beast-by-ai-image-generator.aa7f75f1.jpg&w=1920&q=75",
+            "caption": "Visualization of attention maps showing CNN-like patterns emerging in Transformer models"
+        },
+        {
+            "type": "text",
+            "text": "1. **Scale eliminates architectural differences** - The performance gap between CNNs and Transformers disappears completely when models are scaled beyond 1 billion parameters, suggesting that at sufficient scale, the inductive biases become less important than raw capacity."
+        },
+        {
+            "type": "video",
+            "videoId": "h9tTBymR7xY",
+            "caption": "Video demonstration of emergent properties in large vision models"
+        },
+        {
+            "type": "text",
+            "text": "2. **Emergent convolutional behavior** - Attention mechanisms seem to implicitly learn convolutional-like operations in early layers even without explicit inductive biases, as shown in our visualizations above.\n\n3. **Synthetic data superiority** - Models pre-trained on synthetic data generated by diffusion models transfer surprisingly well to real-world tasks, sometimes outperforming models trained on real data.\n\n4. **Inverted data efficiency** - The widely-held belief that Transformers require more data than CNNs is only true for small-scale training - at scale, they actually exhibit better sample efficiency."
+        }
+    ],
+    "contributions": [
+        {
+            "type": "text",
+            "text": "This survey makes three key contributions to the field of computer vision:"
+        },
+        {
+            "type": "text",
+            "text": "1. **Unified Taxonomy**: A comprehensive taxonomy of modern vision architectures that clarifies their relationships and trade-offs, providing researchers with a common framework for understanding the landscape.\n\n2. **Empirical Benchmarks**: Rigorous performance evaluation comparing 20+ state-of-the-art models across 15 diverse vision tasks, with standardized evaluation protocols to ensure fair comparison."
+        },
+        {
+            "type": "image",
+            "url": "https://cdn-front.freepik.com/images/ai/image-generator/advantages/image-generator-freepik-7.webp?w=1920&h=1920&q=75",
+            "caption": "Decision tree for selecting appropriate vision architectures based on task requirements"
+        },
+        {
+            "type": "text",
+            "text": "3. **Practical Guidelines**: Detailed recommendations for selecting and implementing the right architecture for specific applications, with special attention to computational efficiency and transfer learning potential.\n\n**Future Work**: Research should focus on developing hybrid architectures that combine the strengths of different approaches while addressing the computational challenges of large-scale vision models. Particularly promising directions include:\n\n- Developing more parameter-efficient attention mechanisms\n- Creating better benchmarks for evaluating model robustness across domains\n- Exploring the limits of scaling laws for vision models\n- Investigating the theoretical foundations of emergent capabilities in large vision models"
+        }
+    ],
+    "topics": [
+        "Deep Learning",
+        "Computer Vision",
+        "Survey",
+        "NLP",
+        "Heathcare"
+    ],
+    "doi": "10.1109/TPAMI.2023.1234567",
+    "links": {
+        "website": "https://www.vietjetair.com/vi/",
+        "youtube_demo": "https://www.youtube.com/watch?v=h9tTBymR7xY",
+        "github_repository": "https://github.com/lengocduc195/deep-learning-cv",
+        "view_publication": "https://ieeexplore.ieee.org/document/1234567"
+    },
+    "citationCount": 42,
+    "citationFormat": "Le, D., Smith, J., & Doe, J. (2023). Deep Learning for Computer Vision: A Comprehensive Survey. IEEE Transactions on Pattern Analysis and Machine Intelligence, 45(3), 123-145.",
+    "images": [
+        {
+            "url": "https://media.assettype.com/analyticsinsight%2F2024-07%2Fc3ab0b8f-73cc-4245-a2a2-f78148c0077f%2FTop-10-Best-Free-AI-Image-Generator.jpg",
+            "caption": "Deep Learning for Computer Vision"
+        },
+        {
+            "url": "/images/project-2.jpg",
+            "caption": "Survey of Deep Learning Techniques"
+        }
+    ],
+    "technologies": [
+        "Python",
+        "TensorFlow",
+        "Scikit-learn"
+    ],
+    "references":{
+      "1": "Xun Zheng, Bryon Aragam, Pradeep K Ravikumar, and Eric P Xing. Dags with no tears: Continuous optimization for structure learning. Advances in Neural Information Processing Systems, 31,2018.",
+      "2": "Kun Zhang, Zhikun Wang, Jiji Zhang, and Bernhard Scholkopf. On estimation of functional causal models: general results and application to the post-nonlinear causal model. ACM Transactions on Intelligent Systems and Technology (TIST), 7(2):1–22, 2015."
+    }
+}
