@@ -403,9 +403,11 @@ export async function getOngoingExplorationTopics(): Promise<{ topic: string; co
     if (Array.isArray(blogs)) {
         blogs.forEach(blog => {
             if (Array.isArray(blog.topics)) {
+                // console.log("Processing blog topics:", blog.topics);
                 blog.topics.forEach(item => {
                     if (typeof item === 'string' && item.trim() !== '') {
                         const trimmedTopic = item.trim();
+                        // console.log("Processing blog topics trimmedTopic:", trimmedTopic);
                         if (!topicCounts[trimmedTopic]) {
                             topicCounts[trimmedTopic] = { count: 0, source: new Set() };
                         }
@@ -422,8 +424,10 @@ export async function getOngoingExplorationTopics(): Promise<{ topic: string; co
         projects.forEach(project => {
             if (Array.isArray(project.topics)) {
                 project.topics.forEach(item => {
+                    // console.log("Processing project topics:", project.topics);
                     if (typeof item === 'string' && item.trim() !== '') {
                         const trimmedTopic = item.trim();
+                        // console.log("Processing project topics trimmedTopic:", trimmedTopic);
                         if (!topicCounts[trimmedTopic]) {
                             topicCounts[trimmedTopic] = { count: 0, source: new Set() };
                         }
@@ -434,7 +438,7 @@ export async function getOngoingExplorationTopics(): Promise<{ topic: string; co
             }
         });
     }
-
+    // console.log("topicCounts:", topicCounts);
     // Chuyển đổi thành mảng và sắp xếp
     const sortedTopics = Object.entries(topicCounts)
         .map(([topic, { count, source }]) => ({
@@ -453,6 +457,7 @@ export async function getTechnologyCategories(): Promise<Record<string, Record<s
         const filePath = path.join(dataPath, 'technologies.json');
         const fileContent = await fs.readFile(filePath, 'utf8');
         const data = JSON.parse(fileContent);
+        // console.log("getTechnologyCategories data:", data);
         return data.AI_Architecture || {};
     } catch (error) {
         console.error('Error reading technologies.json:', error);
@@ -460,22 +465,38 @@ export async function getTechnologyCategories(): Promise<Record<string, Record<s
     }
 }
 
+// Đọc file technologies.json để lấy cấu trúc phân loại
+export async function getTopicCategories(): Promise<Record<string, Record<string, string[]>>> {
+    try {
+        const filePath = path.join(dataPath, 'topics.json');
+        const fileContent = await fs.readFile(filePath, 'utf8');
+        const data = JSON.parse(fileContent);
+        // console.log("getTopicCategories data:", data);
+        // console.log("getTopicCategories data dddd:", data["Artificial Intelligence"]["Ethics and Philosophy"]["AI Ethics"]);
+        return data || {};
+    } catch (error) {
+        console.error('Error reading topics.json:', error);
+        return {};
+    }
+}
+
+
+
 // Hàm để tìm danh mục cho một công nghệ
 function findCategoryForTechnology(tech: string, categories: Record<string, Record<string, any>>): { mainCategory: string; subCategory: string; nestedSubCategory?: string } | null {
     const techLower = tech.toLowerCase();
-
-    // Danh sách các subCategory có cấu trúc lồng nhau
-    const nestedSubCategories = [
-        'Foundation Models', 'Model Serving', 'Advanced Serving', 'Inference APIs',
-        'Monitoring', 'Ethics & Safety', 'Fairness & Inclusion', 'Explainability & Governance',
-        'RAG', 'Agents', 'Multi-Modal', 'Edge AI', 'Neural Databases', 'Neuromorphic Computing'
-    ];
 
     // Kiểm tra trong tất cả các danh mục
     for (const mainCategory in categories) {
         for (const subCategory in categories[mainCategory]) {
             // Kiểm tra xem subCategory có phải là một object lồng nhau không
-            if (nestedSubCategories.includes(subCategory)) {
+            const isNested = typeof categories[mainCategory][subCategory] === 'object' &&
+                           !Array.isArray(categories[mainCategory][subCategory]) &&
+                           Object.keys(categories[mainCategory][subCategory]).some(key =>
+                               typeof categories[mainCategory][subCategory][key] === 'object' ||
+                               Array.isArray(categories[mainCategory][subCategory][key]));
+
+            if (isNested) {
                 // Xử lý các subCategory lồng nhau
                 for (const nestedSubCategory in categories[mainCategory][subCategory]) {
                     const techList = categories[mainCategory][subCategory][nestedSubCategory];
@@ -618,12 +639,25 @@ export async function getAllTechnologies(): Promise<{
     const categorizedTechs: Record<string, Record<string, any>> = {};
     const uncategorizedTechs: { technology: string; count: number; sources: string[] }[] = [];
 
-    // Danh sách các subCategory có cấu trúc lồng nhau
-    const nestedSubCategories = [
-        'Foundation Models', 'Model Serving', 'Advanced Serving', 'Inference APIs',
-        'Monitoring', 'Ethics & Safety', 'Fairness & Inclusion', 'Explainability & Governance',
-        'RAG', 'Agents', 'Multi-Modal', 'Edge AI', 'Neural Databases', 'Neuromorphic Computing'
-    ];
+    // Xác định các danh mục lồng nhau dựa trên cấu trúc dữ liệu
+    const detectNestedCategories = (data: Record<string, Record<string, any>>) => {
+        const nestedCategories: string[] = [];
+        for (const category in data) {
+            for (const subcategory in data[category]) {
+                const isNested = typeof data[category][subcategory] === 'object' &&
+                               !Array.isArray(data[category][subcategory]) &&
+                               Object.keys(data[category][subcategory]).some(key =>
+                                   typeof data[category][subcategory][key] === 'object' ||
+                                   Array.isArray(data[category][subcategory][key]));
+                if (isNested) {
+                    nestedCategories.push(subcategory);
+                }
+            }
+        }
+        return nestedCategories;
+    };
+
+    const nestedSubCategories = detectNestedCategories(categories);
 
     allTechs.forEach(tech => {
         const category = findCategoryForTechnology(tech.technology, categories);
@@ -658,6 +692,154 @@ export async function getAllTechnologies(): Promise<{
             uncategorizedTechs.push(tech);
         }
     });
+
+    // Sử dụng nestedSubCategories để phân loại các công nghệ
+    // console.log('Nested subcategories:', nestedSubCategories);
+
+    return { categorizedTechs, uncategorizedTechs };
+}
+
+
+// Hàm để lấy tất cả technologies từ các nguồn khác nhau và phân loại chúng
+export async function getAllTopics(): Promise<{
+    categorizedTechs: Record<string, Record<string, any>>;
+    uncategorizedTechs: { technology: string; count: number; sources: string[] }[];
+}> {
+    const [projects, blogs, categories] = await Promise.all([
+        getProjects(),
+        // getPublications(),
+        getBlogs(),
+        // getProducts(),
+        getTopicCategories()
+    ]);
+    // console.log("categories 1", categories)
+
+    const techCounts: { [key: string]: { count: number; sources: Set<string> } } = {};
+
+    // Xử lý technologies từ projects
+    if (Array.isArray(projects)) {
+        projects.forEach(project => {
+            if (Array.isArray(project.topics)) {
+                project.topics.forEach(item => {
+                    if (typeof item === 'string' && item.trim() !== '') {
+                        const trimmedTech = item.trim();
+                        if (!techCounts[trimmedTech]) {
+                            techCounts[trimmedTech] = { count: 0, sources: new Set() };
+                        }
+                        techCounts[trimmedTech].count += 1;
+                        techCounts[trimmedTech].sources.add('project');
+                    }
+                });
+            }
+        });
+    }
+
+    // Xử lý technologies từ blogs
+    if (Array.isArray(blogs)) {
+        blogs.forEach(blog => {
+            if (Array.isArray(blog.topics)) {
+                blog.topics.forEach(item => {
+                    if (typeof item === 'string' && item.trim() !== '') {
+                        const trimmedTech = item.trim();
+                        if (!techCounts[trimmedTech]) {
+                            techCounts[trimmedTech] = { count: 0, sources: new Set() };
+                        }
+                        techCounts[trimmedTech].count += 1;
+                        techCounts[trimmedTech].sources.add('blog');
+                    }
+                });
+            }
+        });
+    }
+
+    // // Xử lý technologies từ products
+    // if (Array.isArray(products)) {
+    //     products.forEach(product => {
+    //         if (Array.isArray(product.topics)) {
+    //             product.topics.forEach(item => {
+    //                 if (typeof item === 'string' && item.trim() !== '') {
+    //                     const trimmedTech = item.trim();
+    //                     if (!techCounts[trimmedTech]) {
+    //                         techCounts[trimmedTech] = { count: 0, sources: new Set() };
+    //                     }
+    //                     techCounts[trimmedTech].count += 1;
+    //                     techCounts[trimmedTech].sources.add('product');
+    //                 }
+    //             });
+    //         }
+    //     });
+    // }
+
+    // Chuyển đổi thành mảng và sắp xếp
+    const allTechs = Object.entries(techCounts)
+        .map(([technology, { count, sources }]) => ({
+            technology,
+            count,
+            sources: Array.from(sources)
+        }))
+        .sort((a, b) => b.count - a.count || a.technology.localeCompare(b.technology));
+
+    // Phân loại các công nghệ
+    const categorizedTechs: Record<string, Record<string, any>> = {};
+    const uncategorizedTechs: { technology: string; count: number; sources: string[] }[] = [];
+
+    // Xác định các danh mục lồng nhau dựa trên cấu trúc dữ liệu
+    const detectNestedCategories = (data: Record<string, Record<string, any>>) => {
+        const nestedCategories: string[] = [];
+        for (const category in data) {
+            for (const subcategory in data[category]) {
+                const isNested = typeof data[category][subcategory] === 'object' &&
+                               !Array.isArray(data[category][subcategory]) &&
+                               Object.keys(data[category][subcategory]).some(key =>
+                                   typeof data[category][subcategory][key] === 'object' ||
+                                   Array.isArray(data[category][subcategory][key]));
+                if (isNested) {
+                    nestedCategories.push(subcategory);
+                }
+            }
+        }
+        return nestedCategories;
+    };
+
+    // console.log("categories 2", categories)
+    const nestedSubCategories = detectNestedCategories(categories);
+
+    allTechs.forEach(tech => {
+        const category = findCategoryForTechnology(tech.technology, categories);
+
+        if (category) {
+            const { mainCategory, subCategory, nestedSubCategory } = category;
+
+            if (!categorizedTechs[mainCategory]) {
+                categorizedTechs[mainCategory] = {};
+            }
+
+            if (nestedSubCategory) {
+                // Xử lý các công nghệ thuộc cấp độ lồng nhau
+                if (!categorizedTechs[mainCategory][subCategory]) {
+                    categorizedTechs[mainCategory][subCategory] = {};
+                }
+
+                if (!categorizedTechs[mainCategory][subCategory][nestedSubCategory]) {
+                    categorizedTechs[mainCategory][subCategory][nestedSubCategory] = [];
+                }
+
+                categorizedTechs[mainCategory][subCategory][nestedSubCategory].push(tech);
+            } else {
+                // Xử lý các công nghệ thuộc cấp độ thông thường
+                if (!categorizedTechs[mainCategory][subCategory]) {
+                    categorizedTechs[mainCategory][subCategory] = [];
+                }
+
+                categorizedTechs[mainCategory][subCategory].push(tech);
+            }
+        } else {
+            uncategorizedTechs.push(tech);
+        }
+    });
+
+    // Sử dụng nestedSubCategories để phân loại các công nghệ
+    // console.log('Nested subcategories:', nestedSubCategories);
 
     return { categorizedTechs, uncategorizedTechs };
 }
@@ -899,4 +1081,612 @@ export interface JourneyEntry {
 
 export function getJourneys(): Promise<JourneyEntry[]> {
     return readJourneyFiles<JourneyEntry>();
+}
+
+// Interface cho cấu trúc dữ liệu topics.json
+export interface TopicsData {
+    [category: string]: {
+        [subcategory: string]: string[] | {
+            [nestedSubcategory: string]: string[]
+        }
+    }
+}
+
+// // Hàm đọc file topics.json
+// export async function getTopicsData(): Promise<TopicsData> {
+//     try {
+//         const filePath = path.join(dataPath, 'topics.json');
+//         const fileContent = await fs.readFile(filePath, 'utf8');
+//         if (fileContent.trim() === '') {
+//             console.warn("topics.json is empty.");
+//             return {};
+//         }
+//         return JSON.parse(fileContent) as TopicsData;
+//     } catch (error) {
+//         if (error instanceof Error && 'code' in error && error.code === 'ENOENT') {
+//             console.warn(`topics.json not found.`);
+//         } else {
+//             console.error(`Error reading or parsing topics.json:`, error);
+//         }
+//         return {};
+//     }
+// }
+
+// // Hàm để chuyển đổi cấu trúc topics.json thành cấu trúc phẳng cho hiển thị
+// export async function getExplorationTopicsFromFile(): Promise<{
+//     categories: {
+//         name: string;
+//         subcategories: {
+//             name: string;
+//             isNested: boolean;
+//             topics: string[] | {
+//                 name: string;
+//                 isNested?: boolean;
+//                 topics: string[] | {
+//                     name: string;
+//                     topics: string[];
+//                 }[];
+//             }[];
+//         }[];
+//     }[];
+// }> {
+//     const topicsData = await getTopicsData();
+//     const result: {
+//         categories: {
+//             name: string;
+//             subcategories: {
+//                 name: string;
+//                 isNested: boolean;
+//                 topics: string[] | {
+//                     name: string;
+//                     isNested?: boolean;
+//                     topics: string[] | {
+//                         name: string;
+//                         topics: string[];
+//                     }[];
+//                 }[];
+//             }[];
+//         }[];
+//     } = { categories: [] };
+
+//     // Xác định các danh mục lồng nhau dựa trên cấu trúc dữ liệu
+//     const detectNestedCategories = (data: Record<string, Record<string, any>>) => {
+//         const nestedCategories: string[] = [];
+//         for (const category in data) {
+//             for (const subcategory in data[category]) {
+//                 const isNested = typeof data[category][subcategory] === 'object' &&
+//                                !Array.isArray(data[category][subcategory]) &&
+//                                Object.keys(data[category][subcategory]).some(key =>
+//                                    typeof data[category][subcategory][key] === 'object' ||
+//                                    Array.isArray(data[category][subcategory][key]));
+//                 if (isNested) {
+//                     nestedCategories.push(subcategory);
+//                 }
+//             }
+//         }
+//         return nestedCategories;
+//     };
+
+//     const nestedSubCategories = detectNestedCategories(topicsData);
+
+//     // Chuyển đổi cấu trúc
+//     for (const categoryName in topicsData) {
+//         const category = {
+//             name: categoryName,
+//             subcategories: [] as {
+//                 name: string;
+//                 isNested: boolean;
+//                 topics: string[] | {
+//                     name: string;
+//                     topics: string[];
+//                 }[];
+//             }[]
+//         };
+
+//         for (const subcategoryName in topicsData[categoryName]) {
+//             const subcategoryData = topicsData[categoryName][subcategoryName];
+//             const isNested = nestedSubCategories.includes(subcategoryName);
+
+//             if (isNested) {
+//                 // Xử lý subcategory lồng nhau
+//                 try {
+//                     const nestedTopics = [] as { name: string; isNested?: boolean; topics: string[] | { name: string; topics: string[] }[] }[];
+//                     for (const nestedSubcategoryName in subcategoryData as Record<string, any>) {
+//                         try {
+//                             const nestedTopicsList = (subcategoryData as Record<string, any>)[nestedSubcategoryName];
+
+//                             // Kiểm tra xem nestedTopicsList có phải là một mảng hay là một đối tượng
+//                             if (Array.isArray(nestedTopicsList)) {
+//                                 // Nếu là mảng, xử lý như trước
+//                                 nestedTopics.push({
+//                                     name: nestedSubcategoryName,
+//                                     topics: nestedTopicsList
+//                                 });
+//                             } else if (typeof nestedTopicsList === 'object' && nestedTopicsList !== null) {
+//                                 // Nếu là đối tượng, xử lý cấu trúc lồng nhau sâu hơn
+//                                 const level4Topics = [] as { name: string; topics: string[] }[];
+
+//                                 for (const level4Name in nestedTopicsList) {
+//                                     const level4List = nestedTopicsList[level4Name];
+//                                     if (Array.isArray(level4List)) {
+//                                         level4Topics.push({
+//                                             name: level4Name,
+//                                             topics: level4List
+//                                         });
+//                                     } else {
+//                                         console.warn(`Level 4 topics for ${level4Name} is not an array:`, level4List);
+//                                         level4Topics.push({
+//                                             name: level4Name,
+//                                             topics: []
+//                                         });
+//                                     }
+//                                 }
+
+//                                 nestedTopics.push({
+//                                     name: nestedSubcategoryName,
+//                                     isNested: true,
+//                                     topics: level4Topics
+//                                 });
+//                             } else {
+//                                 console.warn(`Topics for ${nestedSubcategoryName} is not an array or object:`, nestedTopicsList);
+//                                 nestedTopics.push({
+//                                     name: nestedSubcategoryName,
+//                                     topics: []
+//                                 });
+//                             }
+//                         } catch (error) {
+//                             console.error(`Error processing nested subcategory ${nestedSubcategoryName}:`, error);
+//                             nestedTopics.push({
+//                                 name: nestedSubcategoryName,
+//                                 topics: []
+//                             });
+//                         }
+//                     }
+//                     category.subcategories.push({
+//                         name: subcategoryName,
+//                         isNested: true,
+//                         topics: nestedTopics as any
+//                     });
+//                 } catch (error) {
+//                     console.error(`Error processing nested subcategory ${subcategoryName}:`, error);
+//                     category.subcategories.push({
+//                         name: subcategoryName,
+//                         isNested: true,
+//                         topics: []
+//                     });
+//                 }
+//             } else {
+//                 // Xử lý subcategory thông thường
+//                 try {
+//                     if (Array.isArray(subcategoryData)) {
+//                         category.subcategories.push({
+//                             name: subcategoryName,
+//                             isNested: false,
+//                             topics: subcategoryData
+//                         });
+//                     } else {
+//                         console.warn(`Topics for ${subcategoryName} is not an array:`, subcategoryData);
+//                         category.subcategories.push({
+//                             name: subcategoryName,
+//                             isNested: false,
+//                             topics: []
+//                         });
+//                     }
+//                 } catch (error) {
+//                     console.error(`Error processing subcategory ${subcategoryName}:`, error);
+//                     category.subcategories.push({
+//                         name: subcategoryName,
+//                         isNested: false,
+//                         topics: []
+//                     });
+//                 }
+//             }
+//         }
+
+//         result.categories.push(category);
+//     }
+
+//     return result;
+// }
+
+// Hàm để phân loại các chủ đề từ blogs và projects vào các nhóm dựa trên cấu trúc trong file topics.json
+export async function getCategorizedExplorationTopics(): Promise<{
+    categorized: {
+        [category: string]: {
+            [subcategory: string]: {
+                isNested: boolean;
+                topics: { topic: string; count: number; source: string[] }[] | {
+                    [nestedSubcategory: string]: { topic: string; count: number; source: string[] }[]
+                };
+            };
+        };
+    };
+    uncategorized: { topic: string; count: number; source: string[] }[];
+}> {
+    const [explorationTopics, topicsData] = await Promise.all([
+        getOngoingExplorationTopics(),
+        getTopicCategories()
+    ]);
+    // console.log("topicsData", topicsData)
+    const result: {
+        categorized: {
+            [category: string]: {
+                [subcategory: string]: {
+                    isNested: boolean;
+                    topics: { topic: string; count: number; source: string[] }[] | {
+                        [nestedSubcategory: string]: { topic: string; count: number; source: string[] }[]
+                    };
+                };
+            };
+        };
+        uncategorized: { topic: string; count: number; source: string[] }[];
+    } = {
+        categorized: {},
+        uncategorized: []
+    };
+
+    // Xác định các danh mục lồng nhau dựa trên cấu trúc dữ liệu
+    const detectNestedCategories = (data: Record<string, Record<string, any>>) => {
+        const nestedCategories: string[] = [];
+        for (const category in data) {
+            for (const subcategory in data[category]) {
+                const isNested = typeof data[category][subcategory] === 'object' &&
+                               !Array.isArray(data[category][subcategory]) &&
+                               Object.keys(data[category][subcategory]).some(key =>
+                                   typeof data[category][subcategory][key] === 'object' ||
+                                   Array.isArray(data[category][subcategory][key]));
+                if (isNested) {
+                    nestedCategories.push(subcategory);
+                }
+            }
+        }
+        return nestedCategories;
+    };
+
+    const nestedSubCategories = detectNestedCategories(topicsData);
+
+    // Tạo danh sách các từ khóa và danh mục tương ứng từ file topics.json
+    // Cấu trúc: {từ khóa: {category, subcategory, nestedSubcategory?}}
+    const keywordCategories: {[key: string]: {category: string, subcategory: string, nestedSubcategory?: string, level4Category?: string}} = {};
+
+    // Duyệt qua các danh mục chính
+    for (const category in topicsData) {
+        // Duyệt qua các danh mục con
+        for (const subcategory in topicsData[category]) {
+            const subcategoryData = topicsData[category][subcategory];
+
+            // Kiểm tra xem danh mục con có lồng nhau không
+            if (typeof subcategoryData === 'object' && !Array.isArray(subcategoryData)) {
+                // Danh mục con lồng nhau (cấp 3)
+                for (const nestedSubcategory in subcategoryData) {
+                    const nestedData = subcategoryData[nestedSubcategory];
+
+                    // Kiểm tra xem danh mục cấp 3 có lồng nhau nữa không (cấp 4)
+                    if (typeof nestedData === 'object' && !Array.isArray(nestedData)) {
+                        // Danh mục cấp 4
+                        for (const level4Category in nestedData as Record<string, any>) {
+                            const level4Data = (nestedData as Record<string, any>)[level4Category];
+
+                            if (Array.isArray(level4Data)) {
+                                // Thêm các từ khóa từ danh mục cấp 4
+                                for (const topic of level4Data as string[]) {
+                                    const normalizedTopic = topic.toLowerCase().trim();
+                                    keywordCategories[normalizedTopic] = {
+                                        category,
+                                        subcategory,
+                                        nestedSubcategory,
+                                        level4Category
+                                    };
+                                }
+                            }
+                        }
+                    } else if (Array.isArray(nestedData)) {
+                        // Thêm các từ khóa từ danh mục cấp 3
+                        for (const topic of nestedData as string[]) {
+                            const normalizedTopic = topic.toLowerCase().trim();
+                            keywordCategories[normalizedTopic] = {
+                                category,
+                                subcategory,
+                                nestedSubcategory
+                            };
+                        }
+                    }
+                }
+            } else if (Array.isArray(subcategoryData)) {
+                // Danh mục con thông thường (cấp 2)
+                for (const topic of subcategoryData as string[]) {
+                    const normalizedTopic = topic.toLowerCase().trim();
+                    keywordCategories[normalizedTopic] = {
+                        category,
+                        subcategory
+                    };
+                }
+            }
+        }
+    }
+
+    // Thêm các từ khóa đặc biệt
+    // General AI terms
+    // keywordCategories['artificial intelligence'] = {category: 'Artificial Intelligence', subcategory: 'Foundations'};
+    // // 'ai' as a standalone word (with word boundaries)
+    // keywordCategories[' ai '] = {category: 'Artificial Intelligence', subcategory: 'Foundations'};
+    // keywordCategories['ai.'] = {category: 'Artificial Intelligence', subcategory: 'Foundations'};
+    // keywordCategories['ai,'] = {category: 'Artificial Intelligence', subcategory: 'Foundations'};
+    // keywordCategories['ai;'] = {category: 'Artificial Intelligence', subcategory: 'Foundations'};
+    // keywordCategories['ai:'] = {category: 'Artificial Intelligence', subcategory: 'Foundations'};
+    // keywordCategories['ai-'] = {category: 'Artificial Intelligence', subcategory: 'Foundations'};
+
+    // Tạo cấu trúc phân loại từ file topics.json
+    for (const category in topicsData) {
+        result.categorized[category] = {};
+
+        for (const subcategory in topicsData[category]) {
+            const isNested = nestedSubCategories.includes(subcategory);
+            const subcategoryData = topicsData[category][subcategory];
+
+            if (isNested) {
+                // Xử lý subcategory lồng nhau
+                result.categorized[category][subcategory] = {
+                    isNested: true,
+                    topics: {}
+                };
+
+                for (const nestedSubcategory in subcategoryData as Record<string, any>) {
+                    const nestedTopicsData = (subcategoryData as Record<string, any>)[nestedSubcategory];
+
+                    // Kiểm tra xem nestedTopicsData có phải là một mảng hay là một đối tượng
+                    if (Array.isArray(nestedTopicsData)) {
+                        // Nếu là mảng, xử lý như trước
+                        (result.categorized[category][subcategory].topics as Record<string, { topic: string; count: number; source: string[] }[]>)[nestedSubcategory] = [];
+                    } else if (typeof nestedTopicsData === 'object' && nestedTopicsData !== null) {
+                        // Xử lý cấu trúc lồng nhau sâu hơn (level 4)
+                        (result.categorized[category][subcategory].topics as Record<string, { topic: string; count: number; source: string[] }[]>)[nestedSubcategory] = [];
+
+                        // Xử lý từng danh mục con cấp 4
+                        for (const level4Category in nestedTopicsData) {
+                            const level4Topics = nestedTopicsData[level4Category];
+
+                            if (Array.isArray(level4Topics)) {
+                                // Tìm các chủ đề từ blogs và projects thuộc về nhóm này
+                                for (const topic of level4Topics) {
+                                    // Tìm kiếm chủ đề phù hợp với cách so sánh linh hoạt hơn
+                                    const matchingTopic = explorationTopics.find(t => {
+                                        // Chuẩn hóa cả hai chuỗi để so sánh
+                                        const normalizedTopic = topic.toLowerCase().trim();
+                                        const normalizedT = t.topic.toLowerCase().trim();
+
+                                        // So sánh chính xác
+                                        if (normalizedT === normalizedTopic) return true;
+
+                                        // So sánh nếu chuỗi này chứa chuỗi kia
+                                        if (normalizedT.includes(normalizedTopic) || normalizedTopic.includes(normalizedT)) return true;
+
+                                        // So sánh nếu chuỗi này là một phần của chuỗi kia (các từ riêng biệt)
+                                        const topicWords = normalizedTopic.split(/\s+/);
+                                        const tWords = normalizedT.split(/\s+/);
+
+                                        // Nếu có ít nhất 2 từ trùng nhau và chiều dài từ trùng > 3
+                                        const commonWords = topicWords.filter((word: string) => tWords.includes(word) && word.length > 3);
+                                        if (commonWords.length >= 2) return true;
+
+                                        return false;
+                                    });
+
+                                    if (matchingTopic) {
+                                        // Thêm chủ đề vào danh mục con cấp 3
+                                        // Và thêm thông tin về danh mục con cấp 4
+                                        const topicWithLevel4 = { ...matchingTopic, level4Category };
+                                        (result.categorized[category][subcategory].topics as Record<string, { topic: string; count: number; source: string[]; level4Category?: string }[]>)[nestedSubcategory].push(topicWithLevel4);
+                                    }
+                                }
+                            }
+                        }
+
+                        // Không cần xử lý nữa vì đã xử lý ở trên
+                    }
+                }
+            } else {
+                // Xử lý subcategory thông thường
+                result.categorized[category][subcategory] = {
+                    isNested: false,
+                    topics: []
+                };
+
+                if (Array.isArray(subcategoryData)) {
+                    // Tìm các chủ đề từ blogs và projects thuộc về nhóm này
+                    for (const topic of subcategoryData) {
+                        // Tìm kiếm chủ đề phù hợp với cách so sánh linh hoạt hơn
+                        const matchingTopic = explorationTopics.find(t => {
+                            // Chuẩn hóa cả hai chuỗi để so sánh
+                            const normalizedTopic = topic.toLowerCase().trim();
+                            const normalizedT = t.topic.toLowerCase().trim();
+
+                            // So sánh chính xác
+                            if (normalizedT === normalizedTopic) return true;
+
+                            // So sánh nếu chuỗi này chứa chuỗi kia
+                            if (normalizedT.includes(normalizedTopic) || normalizedTopic.includes(normalizedT)) return true;
+
+                            // So sánh nếu chuỗi này là một phần của chuỗi kia (các từ riêng biệt)
+                            const topicWords = normalizedTopic.split(/\s+/);
+                            const tWords = normalizedT.split(/\s+/);
+
+                            // Nếu có ít nhất 2 từ trùng nhau và chiều dài từ trùng > 3
+                            const commonWords = topicWords.filter((word: string) => tWords.includes(word) && word.length > 3);
+                            if (commonWords.length >= 2) return true;
+
+                            return false;
+                        });
+
+                        if (matchingTopic) {
+                            (result.categorized[category][subcategory].topics as { topic: string; count: number; source: string[] }[]).push(matchingTopic);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    // Các chủ đề không thuộc về nhóm nào
+    result.uncategorized = explorationTopics.filter(topic => {
+        // Kiểm tra xem chủ đề đã được phân loại chưa
+        for (const category in result.categorized) {
+            for (const subcategory in result.categorized[category]) {
+                const subcategoryData = result.categorized[category][subcategory];
+                if (subcategoryData.isNested) {
+                    // Kiểm tra trong các nhóm lồng nhau
+                    for (const nestedSubcategory in subcategoryData.topics as Record<string, { topic: string; count: number; source: string[] }[]>) {
+                        const nestedTopics = (subcategoryData.topics as Record<string, { topic: string; count: number; source: string[] }[]>)[nestedSubcategory];
+                        if (nestedTopics.some(t => t.topic === topic.topic)) {
+                            return false;
+                        }
+                    }
+                } else {
+                    // Kiểm tra trong các nhóm thông thường
+                    if ((subcategoryData.topics as { topic: string; count: number; source: string[] }[]).some(t => t.topic === topic.topic)) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        // Thử phân loại thêm vào các danh mục phổ biến
+        const normalizedTopic = topic.topic.toLowerCase().trim();
+
+        // Sử dụng keywordCategories đã được tạo trước đó
+
+        // Kiểm tra xem chủ đề có chứa từ khóa nào không
+        for (const [keyword, categoryInfo] of Object.entries(keywordCategories)) {
+            // Xử lý đặc biệt cho từ khóa 'ai' để tránh phân loại sai
+            if (keyword === ' ai ' || keyword === 'ai.' || keyword === 'ai,' || keyword === 'ai;' || keyword === 'ai:' || keyword === 'ai-') {
+                // Kiểm tra xem 'ai' có phải là một từ riêng biệt không
+                const aiRegex = new RegExp(`(^|\\s)ai($|\\s|\\.|,|;|:|-)`, 'i');
+                if (aiRegex.test(normalizedTopic)) {
+                    // Nếu chủ đề chính xác là 'AI' (không phân biệt chữ hoa/thường), chỉ phân loại vào Foundations
+                    if (topic.topic.toLowerCase() === 'ai') {
+                        // Chỉ phân loại vào Foundations
+                        if (categoryInfo.subcategory === 'Foundations') {
+                            // Nếu chưa có danh mục này, tạo mới
+                            if (!result.categorized[categoryInfo.category]) {
+                                result.categorized[categoryInfo.category] = {};
+                            }
+
+                            // Nếu chưa có danh mục con này, tạo mới
+                            if (!result.categorized[categoryInfo.category][categoryInfo.subcategory]) {
+                                // Kiểm tra xem có danh mục con lồng nhau không
+                                const isNested = nestedSubCategories.includes(categoryInfo.subcategory);
+                                result.categorized[categoryInfo.category][categoryInfo.subcategory] = {
+                                    isNested: isNested,
+                                    topics: isNested ? {} : []
+                                };
+                            }
+
+                            // Xử lý phân loại
+                            const subcategoryData = result.categorized[categoryInfo.category][categoryInfo.subcategory];
+
+                            if (!subcategoryData.isNested) {
+                                // Phân loại vào danh mục con thông thường
+                                const existingTopics = subcategoryData.topics as { topic: string; count: number; source: string[] }[];
+                                if (!existingTopics.some(t => t.topic === topic.topic)) {
+                                    existingTopics.push(topic);
+                                    return false; // Đã được phân loại, không cần thêm vào uncategorized
+                                }
+                            }
+                        }
+                    } else {
+                        // Xử lý phân loại cho các chủ đề khác có chứa 'ai' như một từ riêng biệt
+                        // Nếu chưa có danh mục này, tạo mới
+                        if (!result.categorized[categoryInfo.category]) {
+                            result.categorized[categoryInfo.category] = {};
+                        }
+
+                        // Nếu chưa có danh mục con này, tạo mới
+                        if (!result.categorized[categoryInfo.category][categoryInfo.subcategory]) {
+                            // Kiểm tra xem có danh mục con lồng nhau không
+                            const isNested = nestedSubCategories.includes(categoryInfo.subcategory);
+                            result.categorized[categoryInfo.category][categoryInfo.subcategory] = {
+                                isNested: isNested,
+                                topics: isNested ? {} : []
+                            };
+                        }
+
+                        // Xử lý phân loại
+                        const subcategoryData = result.categorized[categoryInfo.category][categoryInfo.subcategory];
+
+                        if (subcategoryData.isNested && categoryInfo.nestedSubcategory) {
+                            // Phân loại vào danh mục con lồng nhau
+                            const nestedTopics = subcategoryData.topics as Record<string, { topic: string; count: number; source: string[] }[]>;
+
+                            // Tạo danh mục con lồng nhau nếu chưa có
+                            if (!nestedTopics[categoryInfo.nestedSubcategory]) {
+                                nestedTopics[categoryInfo.nestedSubcategory] = [];
+                            }
+
+                            // Kiểm tra xem chủ đề đã được thêm vào danh mục này chưa
+                            if (!nestedTopics[categoryInfo.nestedSubcategory].some(t => t.topic === topic.topic)) {
+                                nestedTopics[categoryInfo.nestedSubcategory].push(topic);
+                                return false; // Đã được phân loại, không cần thêm vào uncategorized
+                            }
+                        } else if (!subcategoryData.isNested) {
+                            // Phân loại vào danh mục con thông thường
+                            const existingTopics = subcategoryData.topics as { topic: string; count: number; source: string[] }[];
+                            if (!existingTopics.some(t => t.topic === topic.topic)) {
+                                existingTopics.push(topic);
+                                return false; // Đã được phân loại, không cần thêm vào uncategorized
+                            }
+                        }
+                    }
+                } else {
+                    continue; // Bỏ qua nếu 'ai' không phải là một từ riêng biệt
+                }
+            } else if (normalizedTopic.includes(keyword)) {
+                // Nếu chưa có danh mục này, tạo mới
+                if (!result.categorized[categoryInfo.category]) {
+                    result.categorized[categoryInfo.category] = {};
+                }
+
+                // Nếu chưa có danh mục con này, tạo mới
+                if (!result.categorized[categoryInfo.category][categoryInfo.subcategory]) {
+                    // Kiểm tra xem có danh mục con lồng nhau không
+                    const isNested = nestedSubCategories.includes(categoryInfo.subcategory);
+                    result.categorized[categoryInfo.category][categoryInfo.subcategory] = {
+                        isNested: isNested,
+                        topics: isNested ? {} : []
+                    };
+                }
+
+                // Xử lý phân loại
+                const subcategoryData = result.categorized[categoryInfo.category][categoryInfo.subcategory];
+
+                if (subcategoryData.isNested && categoryInfo.nestedSubcategory) {
+                    // Phân loại vào danh mục con lồng nhau
+                    const nestedTopics = subcategoryData.topics as Record<string, { topic: string; count: number; source: string[] }[]>;
+
+                    // Tạo danh mục con lồng nhau nếu chưa có
+                    if (!nestedTopics[categoryInfo.nestedSubcategory]) {
+                        nestedTopics[categoryInfo.nestedSubcategory] = [];
+                    }
+
+                    // Kiểm tra xem chủ đề đã được thêm vào danh mục này chưa
+                    if (!nestedTopics[categoryInfo.nestedSubcategory].some(t => t.topic === topic.topic)) {
+                        nestedTopics[categoryInfo.nestedSubcategory].push(topic);
+                        return false; // Đã được phân loại, không cần thêm vào uncategorized
+                    }
+                } else if (!subcategoryData.isNested) {
+                    // Phân loại vào danh mục con thông thường
+                    const existingTopics = subcategoryData.topics as { topic: string; count: number; source: string[] }[];
+                    if (!existingTopics.some(t => t.topic === topic.topic)) {
+                        existingTopics.push(topic);
+                        return false; // Đã được phân loại, không cần thêm vào uncategorized
+                    }
+                }
+            }
+        }
+
+        return true;
+    });
+
+    return result;
 }

@@ -1,0 +1,138 @@
+{
+  "id": "hierarchical-navigable-small-world-graphs",
+  "title": "Hierarchical Navigable Small World Graphs (HNSW)",
+  "description": "Why does Google can fetch answers in milliseconds while your AI-powered chatbot takes minutes? Which can come from latency in retrieval process.",
+  "author": "Duc Le",
+  "date": "2025-04-15",
+  "content": [
+    {
+      "type": "text",
+      "text": "**A. Probability Skip List**"
+    },
+    {
+      "type": "text",
+      "text": "**1. Algorithm**"
+    },
+    {
+      "type": "text",
+      "text": "- Search the best range for each layer (layer-to-layer) from the highest layer to the lowest layer."
+    },
+    {
+      "type": "text",
+      "text": "**B. Navigable Small World Graph (NSW)**"
+    },
+    {
+      "type": "text",
+      "text": "**1. Aims**"
+    },
+    {
+      "type": "text",
+      "text": "- **Facilitates greedy routing**, enabling the shortest path between any two nodes to be found using only local information, without requiring global knowledge of the network.\n- **Supports fast approximate nearest neighbor (ANN) searches**, which are essential in high-dimensional data applications such as vector databases, recommendation systems, and image or text retrieval."
+    },
+    {
+      "type": "text",
+      "text": "**1. Architecture**"
+    },
+    {
+      "type": "text",
+      "text": "**a. Zoom-out-first approach**"
+    },
+    {
+      "type": "text",
+      "text": "In this approach, we pass through low-degree vertices and the later 'zoom-in' phase where we pass through higher-degreee vertices."
+    },
+    {
+      "type": "text",
+      "text": "**b. Zoom-in-first approach**"
+    },
+    {
+      "type": "text",
+      "text": "In this approach, we pass through high-degree vertices and the later 'zoom-out' phase where we pass through lower-degreee vertices."
+    },
+    {
+      "type": "text",
+      "text": "**B. Hierarchical Navigable Small World Graph (HNSW)**"
+    },
+    {
+      "type": "text",
+      "text": "**1. Overview**"
+    },
+    {
+      "type": "text",
+      "text": "HNSW represents a hierarchical extension of NSW, incorporating the principles of the probabilistic skip list. It features a minimal graph at the top layer, while the subsequent layers progressively increase in complexity."
+    },
+    {
+      "type": "image",
+      "url": "https://www.pinecone.io/_next/image/?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fvr8gru94%2Fproduction%2F42d4a3ffc43e5dc2758ba8e5d2ef29d4c4d78254-1920x1040.png&w=1920&q=75",
+      "caption": "Layered graph of HNSW, the top layer is our entry point and contains only the longest links, as we move down the layers, the link lengths become shorter and more numerous."
+    },
+    {
+      "type": "text",
+      "text": "At each layer, we can solve it as NSW and find the local minimal node."
+    },
+    {
+      "type": "image",
+      "url": "https://www.pinecone.io/_next/image/?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fvr8gru94%2Fproduction%2Fe63ca5c638bc3cd61cc1cd2ab33b101d82170426-1920x1080.png&w=1920&q=75",
+      "caption": "The search process through multi-layer structure of an HNSW graph."
+    },
+    {
+      "type": "text",
+      "text": "The stopping condition is finding no nearer vertices in our current vertex's friend list."
+    },
+    {
+      "type": "text",
+      "text": "**2. Aims**"
+    },
+    {
+      "type": "text",
+      "text": "- HNSW enhances retrieval speed and accuracy, especially in high-dimensional data tasks, by quickly locating the most similar document vectors in a vector database."
+    },
+    {
+      "type": "text",
+      "text": "**3. Optimization**"
+    },
+    {
+      "type": "text",
+      "text": "- Improving memory-efficiency practices to ensure seamless operation, even when working with large-scale datasets.\n- Tuning hyperparameters, such as the exploration factor (ef), to optimize performance and resource usage.\n- The creators of HNSW found that the best performance is achieved when we minimize the overlap of shared nrighbors across layers. But i don't know why. From my perspective, in the sorted linked list, the data have binary tree can have to find the solution in O(log(n))."
+    },
+    {
+      "type": "text",
+      "text": "Oh, I see! When the dataset is divided into fewer chunks per layer—such as two chunks in the case of a binary tree—this effectively minimizes the overlap of shared neighbors across layers. In such structures, only k nodes tend to overlap (typically three in a binary tree: the start, the end, and the middle point)."
+    }
+  ],
+  "topics": [
+    "Vector Database",
+    "Approximate Nearest Neighbor Search",
+    "Graph-based Data Structure"
+  ],
+  "technologies": [
+    "Python",
+    "Faiss",
+    "MongoDB"
+  ],
+  "readingTime": "10 min read",
+  "videoUrl": "",
+  "githubUrl": "",
+  "main_image": {
+    "url": "https://www.pinecone.io/_next/image/?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fvr8gru94%2Fproduction%2Fe63ca5c638bc3cd61cc1cd2ab33b101d82170426-1920x1080.png&w=3840&q=75",
+    "caption": "The search process through multi-layer structure of an HNSW graph"
+  },
+  "notableObservations": [
+    "The idea of using a probabilistic skip list in HNSW is inspired by the concept of chunking and the continuous search for the most optimal chunk.",
+    "Navigable small world models are defined as any network with poli or logarithmic complexity using greedy routing. The efficiency of greedy routing breaks down for larger networks (1-10K+ vertices) when a graph is not navigable.",
+    "For compact and navigable models, initiating the search from high-degree vertices—known as the zoom-in-first approach—has been shown to enhance performance on low-dimensional data.",
+    "Although HNSW offers high speed and accuracy, it remains suboptimal in terms of memory efficiency.",
+    "The best performance is achieved when we minimize the overlap of shared nrighbors across layers."
+  ],
+  "unexpectedInsights": [
+    "The multi-layer search algorithm in the probabilistic skip list becomes inefficient for dense databases, where there are fewer layers but a larger number of nodes."
+  ],
+  "images": null,
+  "related": [
+    {
+      "title": "Advanced Retrieval in RAG",
+      "url": "/blogs/advanced-retrieval-in-RAG"
+    }
+  ],
+  "references": {}
+}

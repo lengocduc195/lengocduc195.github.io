@@ -2,7 +2,7 @@ import { getPublications, createSlug } from '@/lib/dataUtils';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import CitationWithCopy from '@/components/CitationWithCopy';
-import PublicationImageViewer from '@/components/PublicationImageViewer';
+import PublicationContent from './PublicationContent';
 
 interface PageProps {
   params: {
@@ -80,32 +80,7 @@ export default async function PublicationDetailPage({ params }: PageProps) {
   };
   const youtubeVideoId = videoUrl ? getYouTubeId(videoUrl) : null;
 
-  // Helper function to format text with references
-  const formatTextWithReferences = (text: string): string => {
-    // First replace all [ref:X] with placeholders to avoid processing them twice
-    let processedText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
 
-    // Then replace each [ref:X] with a link that has a title attribute
-    if (pub.references) {
-      Object.entries(pub.references).forEach(([key, value]) => {
-        const refPattern = new RegExp(`\\[ref:${key}\\]`, 'g');
-        // Escape the value for use in title attribute
-        const escapedValue = value.replace(/"/g, '&quot;');
-        processedText = processedText.replace(
-          refPattern,
-          `<a href="#reference-${key}" class="text-blue-600 dark:text-blue-400 hover:underline tooltip-reference" title="${escapedValue}">[ref:${key}]</a>`
-        );
-      });
-    } else {
-      // Fallback if no references object is available
-      processedText = processedText.replace(
-        /\[ref:(\d+)\]/g,
-        '<a href="#reference-$1" class="text-blue-600 dark:text-blue-400 hover:underline">[ref:$1]</a>'
-      );
-    }
-
-    return processedText;
-  };
 
   return (
     <main className="container mx-auto px-4 py-12">
@@ -162,62 +137,9 @@ export default async function PublicationDetailPage({ params }: PageProps) {
                 </svg>
                 Problem
               </h3>
-              <div className="prose dark:prose-invert max-w-none text-gray-600 dark:text-gray-300">
-                {typeof pub.problem === 'string' ? (
-                  <div className="whitespace-pre-wrap" dangerouslySetInnerHTML={{ __html: formatTextWithReferences(pub.problem) }}></div>
-                ) : Array.isArray(pub.problem) ? (
-                  <div className="space-y-6">
-                    {pub.problem.map((item, index) => (
-                      <div key={index}>
-                        {item.type === 'text' && (
-                          <div
-                            className="whitespace-pre-wrap"
-                            dangerouslySetInnerHTML={{
-                              __html: item.text ? formatTextWithReferences(item.text) : ''
-                            }}
-                          />
-                        )}
-                        {item.type === 'image' && item.url && (
-                          <div className="my-4 mx-auto" style={{ width: '70%' }}>
-                            <PublicationImageViewer
-                              url={item.url}
-                              caption={item.caption}
-                              className="w-full h-auto rounded-md shadow-md"
-                            />
-                            {item.caption && (
-                              <p className="text-sm text-center mt-2 text-gray-500 dark:text-gray-400">{item.caption}</p>
-                            )}
-                          </div>
-                        )}
-                        {item.type === 'video' && (
-                          <div className="my-4 mx-auto aspect-video" style={{ width: '70%' }}>
-                            {item.videoId ? (
-                              <iframe
-                                className="w-full h-full rounded-md shadow-md"
-                                src={`https://www.youtube.com/embed/${item.videoId}`}
-                                title={item.caption || 'Video'}
-                                frameBorder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen
-                              ></iframe>
-                            ) : item.url ? (
-                              <video
-                                className="w-full h-auto rounded-md shadow-md"
-                                controls
-                                poster={item.url.replace(/\.[^/.]+$/, '') + '-thumbnail.jpg'}
-                              >
-                                <source src={item.url} type="video/mp4" />
-                                Your browser does not support the video tag.
-                              </video>
-                            ) : null}
-                            {item.caption && (
-                              <p className="text-sm text-center mt-2 text-gray-500 dark:text-gray-400">{item.caption}</p>
-                            )}
-                          </div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
+              <div className="prose dark:prose-invert max-w-none text-gray-600 dark:text-gray-300 pl-4 ml-2 border-l border-gray-200 dark:border-gray-700">
+                {typeof pub.problem === 'string' || Array.isArray(pub.problem) ? (
+                  <PublicationContent publication={pub} section="problem" />
                 ) : null}
               </div>
             </div>
@@ -233,61 +155,8 @@ export default async function PublicationDetailPage({ params }: PageProps) {
                 Research Gap
               </h3>
               <div className="prose dark:prose-invert max-w-none text-gray-600 dark:text-gray-300 pl-4 ml-2 border-l border-gray-200 dark:border-gray-700">
-                {typeof pub.gap === 'string' ? (
-                  <div className="whitespace-pre-wrap" dangerouslySetInnerHTML={{ __html: formatTextWithReferences(pub.gap) }}></div>
-                ) : Array.isArray(pub.gap) ? (
-                  <div className="space-y-6">
-                    {pub.gap.map((item, index) => (
-                      <div key={index}>
-                        {item.type === 'text' && (
-                          <div
-                            className="whitespace-pre-wrap"
-                            dangerouslySetInnerHTML={{
-                              __html: item.text ? formatTextWithReferences(item.text) : ''
-                            }}
-                          />
-                        )}
-                        {item.type === 'image' && item.url && (
-                          <div className="my-4 mx-auto" style={{ width: '70%' }}>
-                            <PublicationImageViewer
-                              url={item.url}
-                              caption={item.caption}
-                              className="w-full h-auto rounded-md shadow-md"
-                            />
-                            {item.caption && (
-                              <p className="text-sm text-center mt-2 text-gray-500 dark:text-gray-400">{item.caption}</p>
-                            )}
-                          </div>
-                        )}
-                        {item.type === 'video' && (
-                          <div className="my-4 mx-auto aspect-video" style={{ width: '70%' }}>
-                            {item.videoId ? (
-                              <iframe
-                                className="w-full h-full rounded-md shadow-md"
-                                src={`https://www.youtube.com/embed/${item.videoId}`}
-                                title={item.caption || 'Video'}
-                                frameBorder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen
-                              ></iframe>
-                            ) : item.url ? (
-                              <video
-                                className="w-full h-auto rounded-md shadow-md"
-                                controls
-                                poster={item.url.replace(/\.[^/.]+$/, '') + '-thumbnail.jpg'}
-                              >
-                                <source src={item.url} type="video/mp4" />
-                                Your browser does not support the video tag.
-                              </video>
-                            ) : null}
-                            {item.caption && (
-                              <p className="text-sm text-center mt-2 text-gray-500 dark:text-gray-400">{item.caption}</p>
-                            )}
-                          </div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
+                {typeof pub.gap === 'string' || Array.isArray(pub.gap) ? (
+                  <PublicationContent publication={pub} section="gap" />
                 ) : null}
               </div>
             </div>
@@ -303,61 +172,8 @@ export default async function PublicationDetailPage({ params }: PageProps) {
                 Proposed Method
               </h3>
               <div className="prose dark:prose-invert max-w-none text-gray-600 dark:text-gray-300 pl-4 ml-2 border-l border-gray-200 dark:border-gray-700">
-                {typeof pub.solution === 'string' ? (
-                  <div className="whitespace-pre-wrap" dangerouslySetInnerHTML={{ __html: formatTextWithReferences(pub.solution) }}></div>
-                ) : Array.isArray(pub.solution) ? (
-                  <div className="space-y-6">
-                    {pub.solution.map((item, index) => (
-                      <div key={index}>
-                        {item.type === 'text' && (
-                          <div
-                            className="whitespace-pre-wrap"
-                            dangerouslySetInnerHTML={{
-                              __html: item.text ? formatTextWithReferences(item.text) : ''
-                            }}
-                          />
-                        )}
-                        {item.type === 'image' && item.url && (
-                          <div className="my-4 mx-auto" style={{ width: '70%' }}>
-                            <PublicationImageViewer
-                              url={item.url}
-                              caption={item.caption}
-                              className="w-full h-auto rounded-md shadow-md"
-                            />
-                            {item.caption && (
-                              <p className="text-sm text-center mt-2 text-gray-500 dark:text-gray-400">{item.caption}</p>
-                            )}
-                          </div>
-                        )}
-                        {item.type === 'video' && (
-                          <div className="my-4 mx-auto aspect-video" style={{ width: '70%' }}>
-                            {item.videoId ? (
-                              <iframe
-                                className="w-full h-full rounded-md shadow-md"
-                                src={`https://www.youtube.com/embed/${item.videoId}`}
-                                title={item.caption || 'Video'}
-                                frameBorder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen
-                              ></iframe>
-                            ) : item.url ? (
-                              <video
-                                className="w-full h-auto rounded-md shadow-md"
-                                controls
-                                poster={item.url.replace(/\.[^/.]+$/, '') + '-thumbnail.jpg'}
-                              >
-                                <source src={item.url} type="video/mp4" />
-                                Your browser does not support the video tag.
-                              </video>
-                            ) : null}
-                            {item.caption && (
-                              <p className="text-sm text-center mt-2 text-gray-500 dark:text-gray-400">{item.caption}</p>
-                            )}
-                          </div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
+                {typeof pub.solution === 'string' || Array.isArray(pub.solution) ? (
+                  <PublicationContent publication={pub} section="solution" />
                 ) : null}
               </div>
             </div>
@@ -373,61 +189,8 @@ export default async function PublicationDetailPage({ params }: PageProps) {
                 Key Results
               </h3>
               <div className="prose dark:prose-invert max-w-none text-gray-600 dark:text-gray-300 pl-4 ml-2 border-l border-gray-200 dark:border-gray-700">
-                {typeof pub.results === 'string' ? (
-                  <div className="whitespace-pre-wrap" dangerouslySetInnerHTML={{ __html: formatTextWithReferences(pub.results) }}></div>
-                ) : Array.isArray(pub.results) ? (
-                  <div className="space-y-6">
-                    {pub.results.map((item, index) => (
-                      <div key={index}>
-                        {item.type === 'text' && (
-                          <div
-                            className="whitespace-pre-wrap"
-                            dangerouslySetInnerHTML={{
-                              __html: item.text ? formatTextWithReferences(item.text) : ''
-                            }}
-                          />
-                        )}
-                        {item.type === 'image' && item.url && (
-                          <div className="my-4 mx-auto" style={{ width: '70%' }}>
-                            <PublicationImageViewer
-                              url={item.url}
-                              caption={item.caption}
-                              className="w-full h-auto rounded-md shadow-md"
-                            />
-                            {item.caption && (
-                              <p className="text-sm text-center mt-2 text-gray-500 dark:text-gray-400">{item.caption}</p>
-                            )}
-                          </div>
-                        )}
-                        {item.type === 'video' && (
-                          <div className="my-4 mx-auto aspect-video" style={{ width: '70%' }}>
-                            {item.videoId ? (
-                              <iframe
-                                className="w-full h-full rounded-md shadow-md"
-                                src={`https://www.youtube.com/embed/${item.videoId}`}
-                                title={item.caption || 'Video'}
-                                frameBorder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen
-                              ></iframe>
-                            ) : item.url ? (
-                              <video
-                                className="w-full h-auto rounded-md shadow-md"
-                                controls
-                                poster={item.url.replace(/\.[^/.]+$/, '') + '-thumbnail.jpg'}
-                              >
-                                <source src={item.url} type="video/mp4" />
-                                Your browser does not support the video tag.
-                              </video>
-                            ) : null}
-                            {item.caption && (
-                              <p className="text-sm text-center mt-2 text-gray-500 dark:text-gray-400">{item.caption}</p>
-                            )}
-                          </div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
+                {typeof pub.results === 'string' || Array.isArray(pub.results) ? (
+                  <PublicationContent publication={pub} section="results" />
                 ) : null}
               </div>
             </div>
@@ -443,61 +206,8 @@ export default async function PublicationDetailPage({ params }: PageProps) {
                 Insights & Observations
               </h3>
               <div className="prose dark:prose-invert max-w-none text-gray-600 dark:text-gray-300 pl-4 ml-2 border-l border-gray-200 dark:border-gray-700">
-                {typeof pub.insights === 'string' ? (
-                  <div className="whitespace-pre-wrap" dangerouslySetInnerHTML={{ __html: formatTextWithReferences(pub.insights) }}></div>
-                ) : Array.isArray(pub.insights) ? (
-                  <div className="space-y-6">
-                    {pub.insights.map((item, index) => (
-                      <div key={index}>
-                        {item.type === 'text' && (
-                          <div
-                            className="whitespace-pre-wrap"
-                            dangerouslySetInnerHTML={{
-                              __html: item.text ? formatTextWithReferences(item.text) : ''
-                            }}
-                          />
-                        )}
-                        {item.type === 'image' && item.url && (
-                          <div className="my-4 mx-auto" style={{ width: '70%' }}>
-                            <PublicationImageViewer
-                              url={item.url}
-                              caption={item.caption}
-                              className="w-full h-auto rounded-md shadow-md"
-                            />
-                            {item.caption && (
-                              <p className="text-sm text-center mt-2 text-gray-500 dark:text-gray-400">{item.caption}</p>
-                            )}
-                          </div>
-                        )}
-                        {item.type === 'video' && (
-                          <div className="my-4 mx-auto aspect-video" style={{ width: '70%' }}>
-                            {item.videoId ? (
-                              <iframe
-                                className="w-full h-full rounded-md shadow-md"
-                                src={`https://www.youtube.com/embed/${item.videoId}`}
-                                title={item.caption || 'Video'}
-                                frameBorder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen
-                              ></iframe>
-                            ) : item.url ? (
-                              <video
-                                className="w-full h-auto rounded-md shadow-md"
-                                controls
-                                poster={item.url.replace(/\.[^/.]+$/, '') + '-thumbnail.jpg'}
-                              >
-                                <source src={item.url} type="video/mp4" />
-                                Your browser does not support the video tag.
-                              </video>
-                            ) : null}
-                            {item.caption && (
-                              <p className="text-sm text-center mt-2 text-gray-500 dark:text-gray-400">{item.caption}</p>
-                            )}
-                          </div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
+                {typeof pub.insights === 'string' || Array.isArray(pub.insights) ? (
+                  <PublicationContent publication={pub} section="insights" />
                 ) : null}
               </div>
             </div>
@@ -513,61 +223,8 @@ export default async function PublicationDetailPage({ params }: PageProps) {
                 Contributions & Future Work
               </h3>
               <div className="prose dark:prose-invert max-w-none text-gray-600 dark:text-gray-300 pl-4 ml-2 border-l border-gray-200 dark:border-gray-700">
-                {typeof pub.contributions === 'string' ? (
-                  <div className="whitespace-pre-wrap" dangerouslySetInnerHTML={{ __html: formatTextWithReferences(pub.contributions) }}></div>
-                ) : Array.isArray(pub.contributions) ? (
-                  <div className="space-y-6">
-                    {pub.contributions.map((item, index) => (
-                      <div key={index}>
-                        {item.type === 'text' && (
-                          <div
-                            className="whitespace-pre-wrap"
-                            dangerouslySetInnerHTML={{
-                              __html: item.text ? formatTextWithReferences(item.text) : ''
-                            }}
-                          />
-                        )}
-                        {item.type === 'image' && item.url && (
-                          <div className="my-4 mx-auto" style={{ width: '70%' }}>
-                            <PublicationImageViewer
-                              url={item.url}
-                              caption={item.caption}
-                              className="w-full h-auto rounded-md shadow-md"
-                            />
-                            {item.caption && (
-                              <p className="text-sm text-center mt-2 text-gray-500 dark:text-gray-400">{item.caption}</p>
-                            )}
-                          </div>
-                        )}
-                        {item.type === 'video' && (
-                          <div className="my-4 mx-auto aspect-video" style={{ width: '70%' }}>
-                            {item.videoId ? (
-                              <iframe
-                                className="w-full h-full rounded-md shadow-md"
-                                src={`https://www.youtube.com/embed/${item.videoId}`}
-                                title={item.caption || 'Video'}
-                                frameBorder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen
-                              ></iframe>
-                            ) : item.url ? (
-                              <video
-                                className="w-full h-auto rounded-md shadow-md"
-                                controls
-                                poster={item.url.replace(/\.[^/.]+$/, '') + '-thumbnail.jpg'}
-                              >
-                                <source src={item.url} type="video/mp4" />
-                                Your browser does not support the video tag.
-                              </video>
-                            ) : null}
-                            {item.caption && (
-                              <p className="text-sm text-center mt-2 text-gray-500 dark:text-gray-400">{item.caption}</p>
-                            )}
-                          </div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
+                {typeof pub.contributions === 'string' || Array.isArray(pub.contributions) ? (
+                  <PublicationContent publication={pub} section="contributions" />
                 ) : null}
               </div>
             </div>
@@ -667,7 +324,7 @@ export default async function PublicationDetailPage({ params }: PageProps) {
             </h3>
             <ol className="space-y-3 list-decimal list-inside text-gray-700 dark:text-gray-300">
               {Object.entries(pub.references).map(([key, value]) => (
-                <li id={`reference-${key}`} key={key} className="pl-2 py-2 border-l-2 border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800/30 rounded-r-md scroll-mt-24">
+                <li id={`reference-${key}`} key={key} className="pl-2 py-2 border-l-2 border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800/30 rounded-r-md scroll-mt-24 hover:bg-gray-100 dark:hover:bg-gray-800/50 transition-colors duration-200">
                   {value}
                 </li>
               ))}

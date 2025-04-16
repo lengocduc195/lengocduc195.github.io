@@ -1,6 +1,6 @@
 {
   "name": "Duc Le",
-  "main role": "AI Lead",
+  "main role": "Lead AI Engineer",
   "roles": [
     "Research Scientist",
     "Machine Learning Engineer"
@@ -27,24 +27,30 @@
   },
   "education": [
     {
-      "degree": "B.S. in Computer Science",
-      "school": "University Name",
-      "year": "2012-2016",
-      "description": "Focus on software engineering and algorithms"
+      "degree": "Bachelor of Technology (BTech), Honors Program",
+      "school": "VNUHCM - University of Science",
+      "year": "Sep 2020 - Dec 2024",
+      "description": "Extensive experience in Explainable AI (XAI), trustworthy AI, and management, particularly in risk detection in the medical field. Expertise in Federated Learning and security. Activities: Volleyball, badminton, karate. Grade: 8.6."
     }
   ],
   "experience": [
     {
-      "title": "Research Scientist",
-      "company": "Research Institute",
-      "period": "2020-2023",
-      "description": "Conducted research in computer vision and deep learning"
+      "title": "Lead AI Engineer",
+      "company": "Secomus Technology",
+      "period": "Mar 2025 - Present",
+      "description": "As the Lead AI Engineer, I spearhead the end-to-end lifecycle of AI-powered solutions that directly impact core business objectives. My role combines strategic vision with hands-on execution across key initiatives, including:\n   🚀 Driving the development of intelligent Chatbot systems that automate customer support, reduce response time, and significantly boost user satisfaction and engagement.\n   📊 Designing and optimizing customer intelligence platforms that unify fragmented data into actionable insights, enabling hyper-personalized services and data-driven decision-making.\n   🧠 Architecting advanced AI Agent systems for seamless exploration and management of complex enterprise databases, accelerating access to critical information across departments.\n  🧭 Leading AI research and strategy formulation, identifying innovative opportunities to enhance operational efficiency, support business growth, and establish a competitive technological edge."
     },
     {
-      "title": "Research Assistant",
-      "company": "University Lab Name",
-      "period": "2020-Present",
-      "description": "Conducted research on AI and machine learning"
+      "title": "AI Researcher",
+      "company": "Computer Science Lab - HCMUS",
+      "period": "Jun 2023 - Present",
+      "description": "Mentoring and advising research groups specializing in Explainable AI (XAI) for Computer Vision. Guiding researchers in developing interpretability techniques and evaluating AI model explanations. Focus on Natural Language Processing (NLP) and Computer Vision."
+    },
+    {
+      "title": "AI Researcher",
+      "company": "AI VIET NAM",
+      "period": "Oct 2023 - Mar 2024",
+      "description": "Developed and evaluated Large Language Models (LLMs) for the Vietnamese language. Enhanced understanding, generation, and adaptation of LLMs to Vietnamese by addressing linguistic and cultural nuances."
     }
   ],
   "slogan": "I believe one good line of code can change how we think.",
