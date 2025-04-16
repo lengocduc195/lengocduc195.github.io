@@ -27,24 +27,24 @@
   },
   "education": [
     {
-      "degree": "B.S. in Computer Science",
-      "school": "University Name",
-      "year": "2012-2016",
-      "description": "Focus on software engineering and algorithms"
+      "degree": "Bachelor of Technology (BTech), Honors Program",
+      "school": "VNUHCM - University of Science",
+      "year": "Sep 2020 - Dec 2024",
+      "description": "Extensive experience in Explainable AI (XAI), trustworthy AI, and management, particularly in risk detection in the medical field. Expertise in Federated Learning and security. Activities: Volleyball, badminton, karate. Grade: 8.6."
     }
   ],
   "experience": [
     {
-      "title": "Research Scientist",
-      "company": "Research Institute",
-      "period": "2020-2023",
-      "description": "Conducted research in computer vision and deep learning"
+      "title": "AI Researcher",
+      "company": "Computer Science Lab - HCMUS",
+      "period": "Jun 2023 - Present",
+      "description": "Mentoring and advising research groups specializing in Explainable AI (XAI) for Computer Vision. Guiding researchers in developing interpretability techniques and evaluating AI model explanations. Focus on Natural Language Processing (NLP) and Computer Vision."
     },
     {
-      "title": "Research Assistant",
-      "company": "University Lab Name",
-      "period": "2020-Present",
-      "description": "Conducted research on AI and machine learning"
+      "title": "AI Researcher",
+      "company": "AI VIET NAM",
+      "period": "Oct 2023 - Mar 2024",
+      "description": "Developed and evaluated Large Language Models (LLMs) for the Vietnamese language. Enhanced understanding, generation, and adaptation of LLMs to Vietnamese by addressing linguistic and cultural nuances."
     }
   ],
   "slogan": "I believe one good line of code can change how we think.",

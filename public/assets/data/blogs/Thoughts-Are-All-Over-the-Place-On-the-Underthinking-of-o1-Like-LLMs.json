@@ -1,89 +1,89 @@
 {
   "id": "Thoughts-Are-All-Over-the-Place-On-the-Underthinking-of-o1-Like-LLMs",
-  "title": "Literate review: Thoughts Are All Over the Place: On the Underthinking of o1-Like LLMs",
-  "description": "",
+  "title": "Thoughts Are All Over the Place: On the Underthinking of o1-Like LLMs",
+  "description": "Is it a good practice to frequently change approaches when faced with challenges in order to solve a problem?",
   "author": "Duc Le",
-  "date": "2025-04-14",
+  "date": "2025-04-15",
   "content": [
+    {
+      "type": "text",
+      "text": "**A. Overview**"
+    },
+    {
+      "type": "text",
+      "text": "The paper shows that LLMs like o1 cost many time complexity for changing between different solution paths when face with a hard problem. By experiments, they claim that approximately 220% tokens generated without correct solution. "
+    },
     {
       "type": "text",
       "text": ""
     },
     {
-      "type": "text",
-      "text": "The Rise of Transformers\n\nIntroduced in the landmark 2017 paper [ref:2] \"Attention Is All You Need,\" transformer models replaced recurrent neural networks with **self-attention mechanisms**, enabling more efficient parallel processing and better modeling of long-range dependencies in text. This architectural innovation set the stage for a series of increasingly powerful language models."
+      "type": "image",
+      "url": "https://lh3.googleusercontent.com/d/11jQbrP17QlQt1E58Xt0phVJ11d0ioalk",
+      "caption": "The LLM model persistently shifts its problem-solving approach when confronted with challenging tasks, without delving deeply into any particular solution. After more than twenty iterations of reasoning, it eventually halts and produces an irrelevant response."
     },
     {
       "type": "text",
-      "text": "From BERT to GPT-4\n\nThe evolution of transformer-based models has been remarkable:\n\n- **BERT** (2018): Bidirectional Encoders for Representations from Transformers introduced masked language modeling and revolutionized NLP benchmarks.\n- **GPT-2** (2019): Demonstrated impressive text generation capabilities and raised concerns about misuse.\n- **T5** (2020): Framed all NLP tasks as text-to-text problems, simplifying the training process.\n- **GPT-3** (2020): Scaled to 175 billion parameters and showed surprising few-shot learning abilities.\n- **BLOOM and LLaMA** (2022): Open-source alternatives to proprietary models.\n- **GPT-4** (2023): Multimodal capabilities and further improvements in reasoning."
+      "text": "**B. The novel underthinking metric**"
+    },
+    {
+      "type": "text",
+      "text": "Based on the truth that, LLMs generate too much tokens, but few of them are correct. The paper propose a new metric to measure the efficiency of token generation, which focuses on how much tokens (at the beginning of the answer) are correct."
+    },
+    {
+      "type": "text",
+      "text": "$$UT = \\frac{1}{N}\\sum_{i=1}^N \\frac{\\hat{T_i}}{T_i}$$"
     },
     {
       "type": "image",
-      "url": "https://www.spyne.ai/blogs/wp-content/uploads/2023/07/Fi.webp",
-      "caption": "Transformer Architecture Diagram"
+      "url": "https://lh3.googleusercontent.com/d/1errdip1fzFHExp9QVhJS_RiDph0ff5d_",
+      "caption": "The LLM model persistently shifts its problem-solving approach when confronted with challenging tasks, without delving deeply into any particular solution. After more than twenty iterations of reasoning, it eventually halts and produces an irrelevant response."
     },
     {
       "type": "text",
-      "text": "Impact on NLP Applications\n\nTransformer models have dramatically improved performance across numerous NLP tasks:\n\n- **Machine Translation**: Near-human quality for many language pairs\n- **Question Answering**: Sophisticated reasoning about complex questions\n- **Summarization**: More coherent and accurate text summaries\n- **Sentiment Analysis**: Better understanding of nuanced expressions\n- **Code Generation**: Ability to write and explain programming code"
+      "text": "It is fascinating to observe that, in challenging benchmarks such as MATH500-Hard (Level 5) and GPQA Diamond, methods with higher accuracy also tend to achieve higher UT scores. This phenomenon demonstrates that large-scale language models like Deepseek-671B often explore a greater number of solution paths when confronted with difficult problems, although many of these attempts result in incorrect answers. While this exploratory capability is generally considered an advantage of LLMs, it can become a drawback as computational complexity increases."
     },
     {
       "type": "text",
-      "text": "Challenges and Limitations\n\nDespite their success, transformer models face several challenges:\n\n- **Computational Requirements**: Training and inference costs remain prohibitive for many applications.\n- **Hallucinations**: Models can generate plausible but factually incorrect information.\n- **Context Window Limitations**: Most models have fixed context windows that limit their ability to process long documents.\n- **Ethical Concerns**: Issues around bias, toxicity, and potential misuse require ongoing attention."
+      "text": "**C. A novel methodology that imposes penalties on superficial reasoning**"
     },
     {
       "type": "text",
-      "text": "Emerging Trends\n\nSeveral exciting developments are shaping the future of NLP:\n\n- **Retrieval-Augmented Generation (RAG)**: Combining language models with external knowledge sources to improve factuality.\n- **Instruction Tuning and RLHF**: Aligning models with human preferences and specific instructions.\n- **Multimodal Models**: Integrating text with other modalities like images and audio.\n- **Efficient Transformers**: Architectural innovations to reduce computational requirements."
+      "text": "The paper propose the strategy to modify the frequent of token of generation process to lower the probality of 'change' tokens (like 'Alternatively',...)." 
     },
     {
       "type": "text",
-      "text": "## Conclusion\n\nThe transformer revolution [ref:1] has fundamentally changed what's possible with NLP. As these models continue to evolve and become more accessible, we can expect to see even more powerful and useful applications of language technology in the coming years."
+      "text": "**D. More ablation studies**"
+    },
+    {
+      "type": "image",
+      "url": "https://lh3.googleusercontent.com/d/1o-K7G8F3wg4dGTrvRXyhALSBieZ_Ob1t",
+      "caption": "The prompt primarily serves as a guide for the text generation process, contributing minimally to directing solutions or altering the model’s core reasoning mechanisms. This is particularly evident in complex mathematical problems requiring multi-step chains of thought, where benchmarks further highlight this limitation."
     }
   ],
   "topics": [
-    "Natural Language Processing",
-    "Transformers",
-    "AI"
+    "Inference-Time Compute Scaling",
+    "Manipulating Decoding Penalties"
   ],
   "technologies": [
-    "language models",
-    "BERT",
-    "GPT",
-    "deep learning",
-    "Stochastic Logic"
+    "Python",
+    "Hugging Face",
+    "Qwen",
+    "Llama",
+    "Deepseek"
   ],
   "readingTime": "10 min read",
-  "videoUrl": "https://www.youtube.com/watch?v=eelI4mYxKsE",
-  "githubUrl": "https://github.com/yourusername/image-recognition",
+  "videoUrl": "",
+  "githubUrl": "",
   "main_image": {
-    "url": "https://i0.wp.com/lifehacksthatwork.com/wp-content/uploads/2023/02/Free-AI-Image-Generators-A-List.png?fit=1920%2C1080&ssl=1",
-    "caption": "Transformer Architecture Visualization"
+    "url": "https://lh3.googleusercontent.com/d/11jQbrP17QlQt1E58Xt0phVJ11d0ioalk",
+    "caption": "The LLM model persistently shifts its problem-solving approach when confronted with challenging tasks, without delving deeply into any particular solution. After more than twenty iterations of reasoning, it eventually halts and produces an irrelevant response."
   },
-  "notableObservations": [
-    "Visual language model is not necessary for sentiment analysis."
-  ],
+  "notableObservations": null,
   "unexpectedInsights": null,
-  "images": [
-    {
-      "url": "/images/project-1.jpg",
-      "caption": "Transformer Architecture for NLP"
-    },
-    {
-      "url": "/images/project-2.jpg",
-      "caption": "Transformer Architecture The for NLP"
-    }
-  ],
-  "related": [
-    {
-      "title": "Fine-tuning BERT for Custom NLP Tasks",
-      "url": "/blogs/fine-tuning-bert"
-    },
-    {
-      "title": "Prompt Engineering for Large Language Models",
-      "url": "/blogs/prompt-engineering"
-    }
-  ],
-  "references":{
-    "1": "Xun Zheng, Bryon Aragam, Pradeep K Ravikumar, and Eric P Xing. Dags with no tears: Continuous optimization for structure learning. Advances in Neural Information Processing Systems, 31,2018.",
-    "2": "Kun Zhang, Zhikun Wang, Jiji Zhang, and Bernhard Scholkopf. On estimation of functional causal models: general results and application to the post-nonlinear causal model. ACM Transactions on Intelligent Systems and Technology (TIST), 7(2):1–22, 2015."
+  "images": null,
+  "related": null,
+  "references": {
+    "1": "Wang, Y., Liu, Q., Xu, J., Liang, T., Chen, X., He, Z., Song, L., Yu, D., Li, J., Zhang, Z. and Wang, R., 2025. Thoughts Are All Over the Place: On the Underthinking of o1-Like LLMs. arXiv preprint arXiv:2501.18585."
   }
 }

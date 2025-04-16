@@ -106,27 +106,12 @@
     "Model Development": {
       "Foundation Models": {
         "Model Types": [
-          "LLMs",
           "Multimodal",
-          "Diffusion",
-          "Graph Models",
-          "language models",
-          "vision transformers",
-          "multimodal learning",
-          "CLIP",
-          "GPT",
-          "BERT"
+          "Language Model",
+          "Vision Model"
         ],
         "Architectures": [
-          "Transformer",
-          "MoE",
-          "ControlNet",
-          "CLIP",
-          "Reformer",
-          "DGL",
-          "PyTorch Geometric",
-          "PyTorch Mobile",
-          "robot learning"
+          "Qwen"
         ],
         "Training Methods": [
           "Pre-training",
@@ -330,11 +315,17 @@
       }
     },
     "Advanced Architectures": {
+      "NLP": {
+        "Libraries & Concepts": [
+          "spaCy",
+          "NLTK",
+          "WordNet"
+        ]
+      },
       "RAG": {
-        "Retrieval Systems": [
-          "HNSW",
-          "IVFPQ",
-          "Hybrid Search"
+        "Retrieval Systems": [],
+        "Vector Databases": [
+          "Faiss"
         ],
         "Pipeline Design": [
           "Multi-stage Reranking",
@@ -464,17 +455,10 @@
       ],
       "Databases": [
         "PostgreSQL",
-        "Firebase"
+        "Firebase",
+        "MongoDB"
       ],
       "Libraries & Concepts": [
-        "Hugging Face",
-        "BERT",
-        "GPT",
-        "CLIP",
-        "language models",
-        "vision transformers",
-        "LIME",
-        "SHAP",
         "Captum",
         "Foolbox",
         "DGL",
@@ -483,15 +467,7 @@
         "OpenAI Gym",
         "MuJoCo",
         "OpenFL",
-        "RDKit",
-        "robot learning",
-        "ROS",
-        "sim-to-real",
-        "self-supervised learning",
-        "offline RL",
-        "imitation learning",
-        "spaCy",
-        "NLTK"
+        "RDKit"
       ]
     }
   }

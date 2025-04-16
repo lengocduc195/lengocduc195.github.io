@@ -57,6 +57,10 @@
         {
             "type": "text",
             "text": "Our main contributions include: [ref:1] (1) A novel hybrid architecture that effectively combines transformers and CNNs; (2) A comprehensive evaluation across multiple vision tasks; (3) An analysis of the complementary strengths of attention and convolution operations."
+        },
+        {
+          "type": "text",
+          "text": "$$UT = \\frac{1}{N}\\sum_{i=1}^N \\frac{\\hat{T_i}}{T_i}$$"
         }
     ],
     "doi": "10.1109/CVPR.2022.123456",

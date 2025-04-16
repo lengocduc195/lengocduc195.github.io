@@ -1,0 +1,71 @@
+{
+  "id": "model-context-protocol-overview",
+  "title": "Model Context Protocol",
+  "description": "",
+  "author": "Duc Le",
+  "date": "2025-04-15",
+  "content": [
+    {
+      "type": "text",
+      "text": "The Model Context Protocol (MCP) is an open protocol that enables seamless integration between LLM applications and external data sources and tools."
+    },
+    {
+      "type": "text",
+      "text": "**Resources** \n Resources are how you expose data to LLMs. They're similar to GET endpoints in a REST API - they provide data but shouldn't perform significantly computation, have low time complexity and have side effects."
+    },
+    {
+      "type": "text",
+      "text": "**Prompts** \n Prompts are reusable template to expose data to LLMs."
+    },
+    {
+      "type": "text",
+      "text": "**Image** \n The class that automatically handles image data."
+    },
+    {
+      "type": "text",
+      "text": "**Context** \n The Context object gives your tools and resources access to MCP capabilities."
+    }
+  ],
+  "topics": [
+    "MCP"
+  ],
+  "technologies": [
+    "Transformers"
+  ],
+  "readingTime": "10 min read",
+  "videoUrl": "https://www.youtube.com/watch?v=eelI4mYxKsE",
+  "githubUrl": "https://github.com/yourusername/image-recognition",
+  "main_image": {
+    "url": "https://cdn.prod.website-files.com/603164e08678e20760ec256c/67b80eadeddc78d9b61c907f_MCP_quality_assurance.png",
+    "caption": "Model Context Protocol Applications"
+  },
+  "notableObservations": null,
+  "unexpectedInsights": null,
+  "images": [
+    {
+      "url": "/images/project-1.jpg",
+      "caption": "Transformer Architecture for NLP"
+    },
+    {
+      "url": "/images/project-2.jpg",
+      "caption": "Transformer Architecture The for NLP"
+    }
+  ],
+  "related": [
+    {
+      "title": "Fine-tuning BERT for Custom NLP Tasks",
+      "url": "/blogs/fine-tuning-bert"
+    },
+    {
+      "title": "Prompt Engineering for Large Language Models",
+      "url": "/blogs/prompt-engineering"
+    }
+  ],
+  "links": [
+    {
+        "title": "Model Context Protocol Python SDK",
+        "url": "https://github.com/modelcontextprotocol/python-sdk?tab=readme-ov-file"
+    }
+  ],
+  "references": null
+}
