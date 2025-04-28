@@ -94,7 +94,17 @@ Trang web sẽ tự động cập nhật khi bạn thay đổi code.
 Để tạo phiên bản tối ưu cho production (bao gồm cả việc xuất file tĩnh để deploy lên GitHub Pages):
 
 ```bash
-npm run build
+# Xóa thư mục .next và out
+rm -rf .next out
+
+# Bước 1: Build và export
+npm run export
+
+# Bước 2: Tạo file .nojekyll
+npm run create-nojekyll
+
+# Bước 3: Deploy lên GitHub Pages
+npm run deploy
 ```
 
 Quá trình build sẽ tạo ra thư mục `out/` chứa các file tĩnh của trang web.

@@ -2,6 +2,12 @@
 
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
+
+interface NavItem {
+  path: string;
+  label: string;
+  highlight?: boolean;
+}
 import { usePathname } from 'next/navigation';
 
 const Navbar = () => {
@@ -41,7 +47,7 @@ const Navbar = () => {
   };
 
   // Define navigation items
-  const navItems = [
+  const navItems: NavItem[] = [
     { path: '/', label: 'Home' },
     { path: '/about', label: 'About' },
     { path: '/projects', label: 'Projects' },
@@ -49,6 +55,9 @@ const Navbar = () => {
     { path: '/publications', label: 'Publications' },
     { path: '/blogs', label: 'Blogs' },
     { path: '/journeys', label: 'Journeys' },
+    { path: '/notable-observations', label: 'Observations' },
+    { path: '/unexpected-insights', label: 'Insights' },
+    { path: '/shop', label: 'Shop', highlight: true },
   ];
 
   return (
@@ -88,14 +97,24 @@ const Navbar = () => {
             <div key={item.path} className="relative px-1">
               <Link
                 href={item.path}
-                className={`relative px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${pathname === item.path ? 'text-white' : 'text-gray-300 hover:text-white'}`}
+                className={`relative px-3 py-2 rounded-md text-sm font-medium transition-all duration-200
+                  ${pathname === item.path ? 'text-white' : item.highlight ? 'text-indigo-300 hover:text-white' : 'text-gray-300 hover:text-white'}
+                  ${item.highlight ? 'bg-gradient-to-r from-indigo-600/20 to-purple-600/20 hover:from-indigo-600/30 hover:to-purple-600/30 border-b border-indigo-500/30' : ''}
+                `}
                 onMouseEnter={() => setActiveItem(item.path)}
                 onMouseLeave={() => setActiveItem(pathname)}
               >
+                {item.highlight && (
+                  <>
+                    <span className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 rounded-md blur-sm"></span>
+                    <span className="absolute -right-1 -top-1 w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
+                  </>
+                )}
                 {item.label}
+
                 {pathname === item.path && (
                   <span
-                    className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 w-full opacity-100 transition-opacity duration-300"
+                    className={`absolute bottom-0 left-0 h-0.5 w-full opacity-100 transition-opacity duration-300 ${item.highlight ? 'bg-gradient-to-r from-indigo-500 to-purple-600' : 'bg-gradient-to-r from-blue-500 to-purple-600'}`}
                   />
                 )}
               </Link>
@@ -121,10 +140,16 @@ const Navbar = () => {
             >
               <Link
                 href={item.path}
-                className={`block px-3 py-2 rounded-md ${pathname === item.path ? 'bg-gray-800/50 text-white font-medium' : 'text-gray-300 hover:bg-gray-800/30 hover:text-white'} transition-all duration-200`}
+                className={`block px-3 py-2 rounded-md
+                  ${pathname === item.path ? 'bg-gray-800/50 text-white font-medium' : item.highlight ? 'text-indigo-300 hover:text-white' : 'text-gray-300 hover:bg-gray-800/30 hover:text-white'}
+                  ${item.highlight ? 'bg-gradient-to-r from-indigo-600/20 to-purple-600/20 border-b border-indigo-500/30' : ''}
+                  transition-all duration-200 relative`}
                 onClick={closeMenu}
               >
-                <div className="flex items-center">
+                <div className="flex items-center relative">
+                  {item.highlight && (
+                    <span className="absolute -right-1 -top-1 w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
+                  )}
                   {item.path === '/' && (
                     <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
@@ -145,6 +170,11 @@ const Navbar = () => {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                     </svg>
                   )}
+                  {item.path === '/shop' && (
+                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                  )}
                   {item.path === '/publications' && (
                     <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
@@ -160,7 +190,18 @@ const Navbar = () => {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
                     </svg>
                   )}
+                  {item.path === '/notable-observations' && (
+                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                    </svg>
+                  )}
+                  {item.path === '/unexpected-insights' && (
+                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  )}
                   {item.label}
+
                 </div>
               </Link>
             </div>

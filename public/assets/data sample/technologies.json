@@ -431,14 +431,10 @@
     },
     "Skills Overview": {
       "AI & ML": [
-        "Python",
         "PyTorch",
         "TensorFlow",
         "Keras",
-        "Scikit-learn",
-        "Machine Learning",
-        "Deep Learning",
-        "Computer Vision"
+        "Scikit-learn"
       ],
       "Programming Languages": [
         "Python",
@@ -460,7 +456,10 @@
         "OpenCV",
         "LaTeX",
         "AWS",
-        "Firebase"
+        "Firebase",
+        "Git",
+        "Github",
+        "Gitlab"
       ],
       "Databases": [
         "PostgreSQL",

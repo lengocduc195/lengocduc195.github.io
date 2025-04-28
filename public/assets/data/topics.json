@@ -265,7 +265,8 @@
         "Speculative Decoding",
         "Beam Search",
         "Nucleus Sampling",
-        "Temperature Sampling"
+        "Temperature Sampling",
+        "Lookahead Decoding"
       ]
     },
     "Agentic AI": {
@@ -336,7 +337,7 @@
         "Graph & Tree-Based Thought"
       ],
       "Tool Integration": [
-        "Tool-Use (ReAct, Toolformer)",
+        "Tool-Use Frameworks",
         "Open-ended Tool Synthesis",
         "API Integration",
         "Function Calling"
@@ -352,7 +353,7 @@
       "Context Protocols": [
         "Model Context Protocol",
         "Context Window Expansion",
-        "Long Context Windows (MemGPT, Claude 3, Gemini)"
+        "Long Context Windows"
       ],
       "Context Processing": [
         "Compression & Summarization of Context",
@@ -360,7 +361,7 @@
         "Slot-based Context Modules"
       ],
       "Retrieval Systems": [
-        "Retrieval & Vector Databases (FAISS, ChromaDB)",
+        "Vector Database Paradigms",
         "Semantic Caching & Context Fusion",
         "Retrieval-Augmented Compression (RAC)",
         "Hybrid Search Strategies"
@@ -399,25 +400,109 @@
     }
   },
   "Data Structure": {},
+  "Query Processing": {
+    "Query Understanding": [
+      "Query Intent Classification",
+      "Query Segmentation",
+      "Query Tagging"
+    ],
+    "Query Transformation": [
+      "Query Expansion",
+      "Query Relaxation",
+      "Query Reformulation"
+    ],
+    "Relevance Feedback Methods": [
+      "Explicit Feedback",
+      "Implicit Feedback",
+      "Pseudo-Relevance Feedback"
+    ]
+  },
+  "Indexing Paradigms": {
+    "Inverted Indexing": [
+      "Term-based Indexing",
+      "Positional Indexing",
+      "Field-based Indexing"
+    ],
+    "Forward Indexing": [
+      "Document-term Matrices",
+      "Dense Vector Indexing"
+    ],
+    "Hybrid Indexing": [
+      "Combined Sparse-Dense Representations"
+    ]
+  },
+  "Evaluation Methodologies": {
+    "System-oriented Metrics": [
+      "Precision and Recall",
+      "F-measures",
+      "Mean Average Precision",
+      "Normalized Discounted Cumulative Gain"
+    ],
+    "User-oriented Metrics": [
+      "Click Models",
+      "Satisfaction Metrics",
+      "Engagement Measures"
+    ],
+    "Experimental Paradigms": [
+      "Cranfield Paradigm",
+      "A/B Testing",
+      "User Studies"
+    ]
+  },
   "Natural Language Processing": {
-    "Natural Language Understanding (NLU)": [
-      "Intent Recognition",
-      "Named Entity Recognition (NER)",
-      "Semantic Role Labeling",
-      "Coreference Resolution",
-      "Reading Comprehension",
-      "Sentiment Analysis",
-      "Emotion Recognition"
-    ],
-    "Natural Language Generation (NLG)": [
-      "Text Summarization",
-      "Machine Translation",
-      "Text-to-Speech Synthesis",
-      "Image Captioning",
-      "Text Generation",
-      "Conversational AI",
-      "Manipulating Decoding Penalties"
-    ],
+    "Natural Language Understanding": {
+      "Syntactic Analysis": [
+        "Part-of-Speech Tagging",
+        "Parsing",
+        "Dependency Parsing"
+      ],
+      "Semantic Analysis": [
+        "Intent Recognition",
+        "Word Sense Disambiguation",
+        "Semantic Role Labeling",
+        "Named Entity Recognition (NER)",
+        "Entity Linking",
+        "Sentiment Analysis",
+        "Emotion Recognition"
+      ],
+      "Pragmatic Analysis": [
+        "Coreference Resolution",
+        "Discourse Analysis",
+        "Pragmatic Inference"
+      ],
+      "Comprehension Tasks": [
+        "Reading Comprehension",
+        "Text Entailment",
+        "Question Answering"
+      ]
+    },
+    "Natural Language Generation": {
+      "Content Planning": [
+        "Discourse Planning",
+        "Content Selection",
+        "Document Planning"
+      ],
+      "Surface Realization": [
+        "Template-based Generation",
+        "Grammar-based Generation",
+        "Neural Generation"
+      ],
+      "Generation Control": [
+        "Manipulating Decoding Penalties",
+        "Controlled Text Generation",
+        "Constrained Decoding"
+      ],
+      "Generation Tasks": [
+        "Text Summarization",
+        "Machine Translation",
+        "Paraphrasing",
+        "Dialogue Generation",
+        "Story Generation",
+        "Text-to-Speech Synthesis",
+        "Image Captioning",
+        "Conversational AI"
+      ]
+    },
     "Information Retrieval (IR)": [
       "Document Retrieval",
       "Query-focused Summarization",
@@ -443,7 +528,25 @@
       "Cross-Lingual Natural Language Inference",
       "Word Translation",
       "Multilingual NLP"
-    ]
+    ],
+    "Knowledge-Enhanced NLP": {
+      "Knowledge Representation": [
+        "Symbolic KBs",
+        "Distributional Semantics",
+        "Neural Knowledge Encoding",
+        "Graph-based Data Structure"
+      ],
+      "Knowledge Integration": [
+        "Entity-centric Integration",
+        "Attention-based Integration",
+        "Graph Neural Networks"
+      ],
+      "Retrieval-Augmented Generation": [
+        "Retrieval Mechanisms",
+        "Integration Techniques",
+        "Advanced Methods"
+      ]
+    }
   },
   "Data Augmentation": {
     "Computer Vision": [
@@ -549,5 +652,46 @@
         "Green Data Augmentation (energy-efficient methods)"
       ]
     }
+  },
+  "Similarity Search": {
+    "Nearest Neighbor Search": [
+      "Exact Search Methods",
+      "Approximate Nearest Neighbor Search"
+    ]
+  },
+  "Retrieval-Augmented Generation (RAG)": {
+    "Architecture Components": [
+      "Retriever Module",
+      "Generator Module",
+      "Knowledge Base/Corpus"
+    ],
+    "Retrieval Methods": [
+      "Reranking",
+      "First-stage Retrieval",
+      "Multi-stage Retrieval"
+    ],
+    "RAG Applications": [
+      "Question Answering",
+      "Fact Verification",
+      "Knowledge-Intensive NLP",
+      "Chatbots & Conversational Systems"
+    ],
+    "Advanced RAG Techniques": [
+      "Self-RAG",
+      "Multi-Vector RAG",
+      "Reasoning-Enhanced RAG",
+      "Adaptive RAG"
+    ],
+    "Evaluation Frameworks": [
+      "Faithfulness Metrics",
+      "Relevance Assessment",
+      "Hallucination Detection"
+    ],
+    "Challenges": [
+      "Context Window Limitations",
+      "Knowledge Integration",
+      "Query Formulation",
+      "Retrieval Latency"
+    ]
   }
 }

@@ -1,9 +1,9 @@
 {
-    "id": "ai-image-generator",
+    "id": "uppromote-agents",
     "author": ["Ngoc Duc"],
     "highlight": true,
     "date": "2023-06-15",
-    "title": "AI Image Generator",
+    "title": "Uppromote Agents",
     "description": "A state-of-the-art AI image generator that uses deep learning to create realistic images from text descriptions.",
     "main_image": {
         "url": "https://cdn-front.freepik.com/images/ai/image-generator/advantages/image-generator-freepik-7.webp?w=1920&h=1920&q=75",

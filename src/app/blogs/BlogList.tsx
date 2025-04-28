@@ -101,13 +101,13 @@ export default function BlogList({ initialBlogs }: BlogListProps) {
 
       // Lọc theo technologies đã chọn
       // Tương tự như với topics
-      console.log("selectedTechnologies  --- ", selectedTechnologies)
+      // console.log("selectedTechnologies  --- ", selectedTechnologies)
       let technologiesMatch = selectedTechnologies.length === 0;
-      console.log("blog.technologies  --- ", blog.technologies)
+      // console.log("blog.technologies  --- ", blog.technologies)
       if (!technologiesMatch && Array.isArray(blog.technologies)) {
         // Lọc các technology hợp lệ (string) từ blog
         const validTechs = blog.technologies.filter(tech => typeof tech === 'string');
-        console.log("validTechs  --- ", validTechs)
+        // console.log("validTechs  --- ", validTechs)
         // Kiểm tra xem blog có chứa tất cả các technology được chọn không
         technologiesMatch = true; // Giả sử ban đầu là khớp
 

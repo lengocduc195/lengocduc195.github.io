@@ -94,7 +94,15 @@ export default async function HomePage() {
             {/* Notable Observations */}
             {notableObservations && notableObservations.length > 0 && (
               <div className="mb-6">
-                <h3 className="text-xl font-semibold text-purple-400 mb-3">Notable Observations</h3>
+                <div className="flex justify-between items-center mb-3">
+                  <h3 className="text-xl font-semibold text-purple-400">Notable Observations</h3>
+                  <Link href="/notable-observations" className="text-purple-300 hover:text-purple-200 text-sm flex items-center">
+                    View all
+                    <svg className="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                      <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd"></path>
+                    </svg>
+                  </Link>
+                </div>
                 <ul className="space-y-3">
                   {notableObservations.map((item, index) => (
                     <li key={`obs-${index}`} className="border-l-2 border-purple-500 pl-4 py-1">
@@ -132,7 +140,15 @@ export default async function HomePage() {
             {/* Unexpected Insights */}
             {unexpectedInsights && unexpectedInsights.length > 0 && (
               <div>
-                <h3 className="text-xl font-semibold text-green-400 mb-3">Unexpected Insights</h3>
+                <div className="flex justify-between items-center mb-3">
+                  <h3 className="text-xl font-semibold text-green-400">Unexpected Insights</h3>
+                  <Link href="/unexpected-insights" className="text-green-300 hover:text-green-200 text-sm flex items-center">
+                    View all
+                    <svg className="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                      <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd"></path>
+                    </svg>
+                  </Link>
+                </div>
                 <ul className="space-y-3">
                   {unexpectedInsights.map((item, index) => (
                     <li key={`ins-${index}`} className="border-l-2 border-green-500 pl-4 py-1">
@@ -281,50 +297,173 @@ export default async function HomePage() {
       </section>
 
       {/* Quick Links Section */}
-      <section className="py-16 bg-gray-900">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-12 text-center text-white">
-            Explore <span className="text-blue-500">More</span>
-          </h2>
+      <section className="py-20 bg-gradient-to-b from-black to-gray-900 relative overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-20 right-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse animation-delay-2000"></div>
+        </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Link href="/publications" className="bg-gray-800 p-6 rounded-xl text-center hover:bg-gray-700 transition duration-300 transform hover:-translate-y-2">
-              <svg className="w-12 h-12 mx-auto mb-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
+              Explore <span className="text-blue-500">More</span>
+            </h2>
+            <p className="text-gray-300 max-w-2xl mx-auto mb-8">
+              Discover different sections of my website and find what interests you the most
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-7 gap-4">
+            <Link href="/publications" className="bg-gray-800 p-4 rounded-xl text-center hover:bg-gray-700 transition duration-300 transform hover:-translate-y-2">
+              <svg className="w-8 h-8 mx-auto mb-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
               </svg>
-              <h3 className="text-xl font-bold mb-2 text-white">Publications</h3>
-              <p className="text-gray-400">Explore my research papers and academic publications.</p>
+              <h3 className="text-lg font-bold mb-1 text-white">Publications</h3>
             </Link>
 
-            <Link href="/products" className="bg-gray-800 p-6 rounded-xl text-center hover:bg-gray-700 transition duration-300 transform hover:-translate-y-2">
-              <svg className="w-12 h-12 mx-auto mb-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <Link href="/shop" className="bg-gray-800 p-4 rounded-xl text-center hover:bg-gray-700 transition duration-300 transform hover:-translate-y-2 relative overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute -top-1 -right-1 bg-yellow-500 text-xs font-bold text-gray-900 px-2 py-1 rounded-bl-lg transform rotate-3 shadow-md">Featured</div>
+              <svg className="w-8 h-8 mx-auto mb-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+              <h3 className="text-lg font-bold mb-1 text-white relative z-10">Shop</h3>
+            </Link>
+
+            <Link href="/products" className="bg-gray-800 p-4 rounded-xl text-center hover:bg-gray-700 transition duration-300 transform hover:-translate-y-2">
+              <svg className="w-8 h-8 mx-auto mb-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
               </svg>
-              <h3 className="text-xl font-bold mb-2 text-white">Products</h3>
-              <p className="text-gray-400">Check out products and tools I've developed.</p>
+              <h3 className="text-lg font-bold mb-1 text-white">Products</h3>
             </Link>
 
-            <Link href="/blogs" className="bg-gray-800 p-6 rounded-xl text-center hover:bg-gray-700 transition duration-300 transform hover:-translate-y-2">
-              <svg className="w-12 h-12 mx-auto mb-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <Link href="/blogs" className="bg-gray-800 p-4 rounded-xl text-center hover:bg-gray-700 transition duration-300 transform hover:-translate-y-2">
+              <svg className="w-8 h-8 mx-auto mb-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
               </svg>
-              <h3 className="text-xl font-bold mb-2 text-white">Blogs</h3>
-              <p className="text-gray-400">Read my thoughts and tutorials on various topics.</p>
+              <h3 className="text-lg font-bold mb-1 text-white">Blogs</h3>
             </Link>
 
-            <Link href="/journeys" className="bg-gray-800 p-6 rounded-xl text-center hover:bg-gray-700 transition duration-300 transform hover:-translate-y-2">
-              <svg className="w-12 h-12 mx-auto mb-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <Link href="/journeys" className="bg-gray-800 p-4 rounded-xl text-center hover:bg-gray-700 transition duration-300 transform hover:-translate-y-2">
+              <svg className="w-8 h-8 mx-auto mb-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
               </svg>
-              <h3 className="text-xl font-bold mb-2 text-white">Journeys</h3>
-              <p className="text-gray-400">Follow my professional journeys and milestones.</p>
+              <h3 className="text-lg font-bold mb-1 text-white">Journeys</h3>
+            </Link>
+
+            <Link href="/notable-observations" className="bg-gray-800 p-4 rounded-xl text-center hover:bg-gray-700 transition duration-300 transform hover:-translate-y-2">
+              <svg className="w-8 h-8 mx-auto mb-2 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+              </svg>
+              <h3 className="text-lg font-bold mb-1 text-white">Notable Observations</h3>
+            </Link>
+
+            <Link href="/unexpected-insights" className="bg-gray-800 p-4 rounded-xl text-center hover:bg-gray-700 transition duration-300 transform hover:-translate-y-2">
+              <svg className="w-8 h-8 mx-auto mb-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              <h3 className="text-lg font-bold mb-1 text-white">Unexpected Insights</h3>
             </Link>
           </div>
         </div>
       </section>
 
+      {/* Featured Shop Products Section */}
+      <section className="py-20 bg-gradient-to-b from-gray-900 to-indigo-900/50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 font-serif">
+              <span className="relative inline-block">
+                <span className="relative z-10">Discover</span>
+                <span className="absolute -bottom-2 left-0 w-full h-3 bg-gradient-to-r from-indigo-400 to-purple-500 opacity-50 rounded-lg"></span>
+              </span>
+              {" "}
+              <span className="text-indigo-400">Our Shop</span>
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto font-light">
+              Explore our carefully curated collection of premium products, from specialty coffee to artisanal crafts
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-gradient-to-b from-gray-800 to-gray-900 rounded-xl overflow-hidden shadow-xl transform transition duration-500 hover:scale-105 hover:shadow-2xl border border-gray-700 group">
+              <div className="h-48 relative overflow-hidden">
+                <div
+                  className="absolute inset-0 bg-cover bg-center transform group-hover:scale-110 transition-transform duration-700"
+                  style={{ backgroundImage: `url(https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?q=80&w=1000&auto=format&fit=crop)` }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-60"></div>
+                <div className="absolute bottom-4 left-4 bg-amber-500 text-xs font-bold text-gray-900 px-2 py-1 rounded shadow-md">
+                  BEST SELLER
+                </div>
+              </div>
+              <div className="p-6 relative z-10">
+                <h3 className="text-xl font-bold mb-2 text-white font-serif group-hover:text-indigo-300 transition-colors duration-300">Specialty Coffee</h3>
+                <p className="text-gray-300 mb-4">Premium coffee beans from the world's finest growing regions.</p>
+                <Link href="/shop?category=Coffee" className="inline-block px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-lg hover:from-indigo-600 hover:to-purple-700 transition duration-300 text-sm font-medium shadow-md">Explore Coffee</Link>
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-b from-gray-800 to-gray-900 rounded-xl overflow-hidden shadow-xl transform transition duration-500 hover:scale-105 hover:shadow-2xl border border-gray-700 group">
+              <div className="h-48 relative overflow-hidden">
+                <div
+                  className="absolute inset-0 bg-cover bg-center transform group-hover:scale-110 transition-transform duration-700"
+                  style={{ backgroundImage: `url(https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?q=80&w=1000&auto=format&fit=crop)` }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-60"></div>
+                <div className="absolute bottom-4 left-4 bg-green-500 text-xs font-bold text-gray-900 px-2 py-1 rounded shadow-md">
+                  HANDCRAFTED
+                </div>
+              </div>
+              <div className="p-6 relative z-10">
+                <h3 className="text-xl font-bold mb-2 text-white font-serif group-hover:text-indigo-300 transition-colors duration-300">Artisanal Crafts</h3>
+                <p className="text-gray-300 mb-4">Traditional handcrafted items made by skilled artisans.</p>
+                <Link href="/shop?category=Handicraft" className="inline-block px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-lg hover:from-indigo-600 hover:to-purple-700 transition duration-300 text-sm font-medium shadow-md">Explore Crafts</Link>
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-b from-gray-800 to-gray-900 rounded-xl overflow-hidden shadow-xl transform transition duration-500 hover:scale-105 hover:shadow-2xl border border-gray-700 group">
+              <div className="h-48 relative overflow-hidden">
+                <div
+                  className="absolute inset-0 bg-cover bg-center transform group-hover:scale-110 transition-transform duration-700"
+                  style={{ backgroundImage: `url(https://images.unsplash.com/photo-1607344645866-009c320c5ab0?q=80&w=1000&auto=format&fit=crop)` }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-60"></div>
+                <div className="absolute bottom-4 left-4 bg-pink-500 text-xs font-bold text-gray-900 px-2 py-1 rounded shadow-md">
+                  PERFECT GIFT
+                </div>
+              </div>
+              <div className="p-6 relative z-10">
+                <h3 className="text-xl font-bold mb-2 text-white font-serif group-hover:text-indigo-300 transition-colors duration-300">Gift Collections</h3>
+                <p className="text-gray-300 mb-4">Curated gift sets for every occasion and special someone.</p>
+                <Link href="/shop?category=Gift+Sets" className="inline-block px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-lg hover:from-indigo-600 hover:to-purple-700 transition duration-300 text-sm font-medium shadow-md">Explore Gifts</Link>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center mt-16">
+            <div className="relative inline-block group">
+              <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
+              <Link
+                href="/shop"
+                className="relative inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-white bg-gradient-to-r from-indigo-600 to-purple-700 rounded-full hover:from-indigo-700 hover:to-purple-800 transition-all duration-300 shadow-xl group-hover:shadow-2xl"
+              >
+                <span className="mr-3">Visit Our Shop</span>
+                <span className="relative flex h-6 w-6 items-center justify-center overflow-hidden rounded-full bg-white/30 group-hover:bg-white/40 transition-all duration-300">
+                  <svg className="h-4 w-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </span>
+              </Link>
+            </div>
+            <p className="mt-4 text-gray-400 text-sm">Free shipping on orders over $50</p>
+          </div>
+        </div>
+      </section>
+
       {/* Contact CTA Section */}
-      <section className="py-20 bg-gradient-to-b from-gray-900 to-black">
+      <section className="py-20 bg-gradient-to-b from-indigo-900/50 to-black">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
             Let's <span className="text-blue-500">Connect</span>

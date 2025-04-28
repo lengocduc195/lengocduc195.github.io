@@ -15,11 +15,9 @@
     }
   ],
   "topics": [
-    "Context & Memory"
+    "Reranking"
   ],
-  "technologies": [
-    "language models"
-  ],
+  "technologies": null,
   "readingTime": "10 min read",
   "videoUrl": "https://www.youtube.com/watch?v=eelI4mYxKsE",
   "githubUrl": "https://github.com/yourusername/image-recognition",
@@ -27,9 +25,7 @@
     "url": "https://cdn.prod.website-files.com/603164e08678e20760ec256c/67b80eadeddc78d9b61c907f_MCP_quality_assurance.png",
     "caption": "Model Context Protocol Applications"
   },
-  "notableObservations": [
-    "Visual language model is not necessary for sentiment analysis."
-  ],
+  "notableObservations": null,
   "unexpectedInsights": null,
   "images": [
     {

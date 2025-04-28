@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation'; // Để xử lý trường hợp kh
 // import remarkGfm from 'remark-gfm';
 import ProjectContent from './ProjectContent';
 import ProjectImages from './ProjectImages';
+import ProjectHighlights from './ProjectHighlights';
 
 interface PageProps {
   params: {
@@ -142,7 +143,14 @@ export default async function ProjectDetailPage({ params }: PageProps) {
 
 
 
-        <ProjectContent project={project} />
+        {/* Project Highlights Section */}
+        <ProjectHighlights project={project} />
+
+        {/* Original Content Section */}
+        <div className="mt-10 pt-6 border-t border-gray-200 dark:border-gray-700">
+          <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white">Project Details</h2>
+          <ProjectContent project={project} />
+        </div>
 
 
         {/* Project Links Section */}

@@ -942,126 +942,171 @@ export function generateBlogSlug(blog: Blog): string {
   return '';
 }
 
-// Hàm lấy các Notable Observations từ blogs, products và projects
-export async function getLatestNotableObservations(limit: number = 2): Promise<{title: string; observation: string; slug: string; date: string; type: 'blog' | 'product' | 'project'}[]> {
+// Interface for Notable Observation and Unexpected Insight items
+export interface ObservationItem {
+  title: string;
+  observation: string;
+  slug: string;
+  date: string;
+  type: 'blog' | 'product' | 'project';
+  topics?: string[];
+}
+
+export interface InsightItem {
+  title: string;
+  insight: string;
+  slug: string;
+  date: string;
+  type: 'blog' | 'product' | 'project';
+  topics?: string[];
+}
+
+// Hàm lấy tất cả Notable Observations từ blogs, products và projects
+export async function getAllNotableObservations(): Promise<ObservationItem[]> {
   const [blogs, products, projects] = await Promise.all([
     getBlogs(),
     getProducts(),
     getProjects()
   ]);
 
-  const allObservations: {title: string; observation: string; slug: string; date: string; type: 'blog' | 'product' | 'project'}[] = [];
+  const allObservations: ObservationItem[] = [];
 
-  // Lấy observations từ blogs
+  // Lấy tất cả observations từ blogs
   blogs
     .filter(blog => Array.isArray(blog.notableObservations) && blog.notableObservations.length > 0)
     .forEach(blog => {
-      if (Array.isArray(blog.notableObservations) && blog.notableObservations.length > 0) {
-        allObservations.push({
-          title: blog.title,
-          observation: blog.notableObservations[0],
-          slug: generateBlogSlug(blog),
-          date: blog.date || '',
-          type: 'blog'
+      if (Array.isArray(blog.notableObservations)) {
+        blog.notableObservations.forEach(observation => {
+          allObservations.push({
+            title: blog.title,
+            observation: observation,
+            slug: generateBlogSlug(blog),
+            date: blog.date || '',
+            type: 'blog',
+            topics: blog.topics || []
+          });
         });
       }
     });
 
-  // Lấy observations từ products
+  // Lấy tất cả observations từ products
   products
     .filter(product => Array.isArray(product.notableObservations) && product.notableObservations.length > 0)
     .forEach(product => {
-      if (Array.isArray(product.notableObservations) && product.notableObservations.length > 0) {
-        allObservations.push({
-          title: product.name,
-          observation: product.notableObservations[0],
-          slug: product.id.toString(),
-          date: product.date || '',
-          type: 'product'
+      if (Array.isArray(product.notableObservations)) {
+        product.notableObservations.forEach(observation => {
+          allObservations.push({
+            title: product.name,
+            observation: observation,
+            slug: product.id.toString(),
+            date: product.date || '',
+            type: 'product',
+            topics: product.topics || []
+          });
         });
       }
     });
 
-  // Lấy observations từ projects
+  // Lấy tất cả observations từ projects
   projects
     .filter(project => Array.isArray(project.notableObservations) && project.notableObservations.length > 0)
     .forEach(project => {
-      if (Array.isArray(project.notableObservations) && project.notableObservations.length > 0) {
-        allObservations.push({
-          title: project.title,
-          observation: project.notableObservations[0],
-          slug: project.id.toString(),
-          date: project.date || '',
-          type: 'project'
+      if (Array.isArray(project.notableObservations)) {
+        project.notableObservations.forEach(observation => {
+          allObservations.push({
+            title: project.title,
+            observation: observation,
+            slug: project.id.toString(),
+            date: project.date || '',
+            type: 'project',
+            topics: project.topics || []
+          });
         });
       }
     });
 
-  // Sắp xếp tất cả observations theo ngày mới nhất và lấy limit phần tử đầu tiên
-  return allObservations
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, limit);
+  // Sắp xếp tất cả observations theo ngày mới nhất
+  return allObservations.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
-// Hàm lấy các Unexpected Insights từ blogs, products và projects
-export async function getLatestUnexpectedInsights(limit: number = 2): Promise<{title: string; insight: string; slug: string; date: string; type: 'blog' | 'product' | 'project'}[]> {
+// Hàm lấy các Notable Observations từ blogs, products và projects với giới hạn số lượng
+export async function getLatestNotableObservations(limit: number = 2): Promise<ObservationItem[]> {
+  const allObservations = await getAllNotableObservations();
+  return allObservations.slice(0, limit);
+}
+
+// Hàm lấy tất cả Unexpected Insights từ blogs, products và projects
+export async function getAllUnexpectedInsights(): Promise<InsightItem[]> {
   const [blogs, products, projects] = await Promise.all([
     getBlogs(),
     getProducts(),
     getProjects()
   ]);
 
-  const allInsights: {title: string; insight: string; slug: string; date: string; type: 'blog' | 'product' | 'project'}[] = [];
+  const allInsights: InsightItem[] = [];
 
-  // Lấy insights từ blogs
+  // Lấy tất cả insights từ blogs
   blogs
     .filter(blog => Array.isArray(blog.unexpectedInsights) && blog.unexpectedInsights.length > 0)
     .forEach(blog => {
-      if (Array.isArray(blog.unexpectedInsights) && blog.unexpectedInsights.length > 0) {
-        allInsights.push({
-          title: blog.title,
-          insight: blog.unexpectedInsights[0],
-          slug: generateBlogSlug(blog),
-          date: blog.date || '',
-          type: 'blog'
+      if (Array.isArray(blog.unexpectedInsights)) {
+        blog.unexpectedInsights.forEach(insight => {
+          allInsights.push({
+            title: blog.title,
+            insight: insight,
+            slug: generateBlogSlug(blog),
+            date: blog.date || '',
+            type: 'blog',
+            topics: blog.topics || []
+          });
         });
       }
     });
 
-  // Lấy insights từ products
+  // Lấy tất cả insights từ products
   products
     .filter(product => Array.isArray(product.unexpectedInsights) && product.unexpectedInsights.length > 0)
     .forEach(product => {
-      if (Array.isArray(product.unexpectedInsights) && product.unexpectedInsights.length > 0) {
-        allInsights.push({
-          title: product.name,
-          insight: product.unexpectedInsights[0],
-          slug: product.id.toString(),
-          date: product.date || '',
-          type: 'product'
+      if (Array.isArray(product.unexpectedInsights)) {
+        product.unexpectedInsights.forEach(insight => {
+          allInsights.push({
+            title: product.name,
+            insight: insight,
+            slug: product.id.toString(),
+            date: product.date || '',
+            type: 'product',
+            topics: product.topics || []
+          });
         });
       }
     });
 
-  // Lấy insights từ projects
+  // Lấy tất cả insights từ projects
   projects
     .filter(project => Array.isArray(project.unexpectedInsights) && project.unexpectedInsights.length > 0)
     .forEach(project => {
-      if (Array.isArray(project.unexpectedInsights) && project.unexpectedInsights.length > 0) {
-        allInsights.push({
-          title: project.title,
-          insight: project.unexpectedInsights[0],
-          slug: project.id.toString(),
-          date: project.date || '',
-          type: 'project'
+      if (Array.isArray(project.unexpectedInsights)) {
+        project.unexpectedInsights.forEach(insight => {
+          allInsights.push({
+            title: project.title,
+            insight: insight,
+            slug: project.id.toString(),
+            date: project.date || '',
+            type: 'project',
+            topics: project.topics || []
+          });
         });
       }
     });
 
-  // Sắp xếp tất cả insights theo ngày mới nhất và lấy limit phần tử đầu tiên
-  return allInsights
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, limit);
+  // Sắp xếp tất cả insights theo ngày mới nhất
+  return allInsights.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+}
+
+// Hàm lấy các Unexpected Insights từ blogs, products và projects với giới hạn số lượng
+export async function getLatestUnexpectedInsights(limit: number = 2): Promise<InsightItem[]> {
+  const allInsights = await getAllUnexpectedInsights();
+  return allInsights.slice(0, limit);
 }
 
 // Interface JourneyEntry (Cập nhật để phù hợp với dữ liệu thực tế)

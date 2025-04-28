@@ -1,0 +1,34 @@
+{
+  "id": 4,
+  "name": "Giỏ Đan Tre Phú Vinh Truyền Thống",
+  "slug": "bamboo-basket-phu-vinh",
+  "description": "Giỏ đan tre truyền thống từ làng nghề Phú Vinh, được làm thủ công 100% từ tre già, bền đẹp và thân thiện với môi trường.",
+  "longDescription": "Giỏ Đan Tre Phú Vinh Truyền Thống là sản phẩm thủ công mỹ nghệ đặc trưng của làng nghề Phú Vinh, Hà Nội - một làng nghề đan lát có lịch sử hơn 400 năm. Mỗi sản phẩm đều được các nghệ nhân lành nghề tạo ra bằng đôi bàn tay khéo léo và tâm huyết.\n\nTre được chọn lọc kỹ càng, phải là tre già (trên 3 năm tuổi) để đảm bảo độ bền và tính thẩm mỹ. Sau khi thu hoạch, tre được xử lý tự nhiên bằng phương pháp ngâm nước và phơi khô, không sử dụng hóa chất, đảm bảo an toàn cho người sử dụng và thân thiện với môi trường.\n\nĐặc điểm nổi bật:\n- 100% thủ công từ khâu chọn nguyên liệu đến hoàn thiện sản phẩm\n- Mẫu mã độc đáo với họa tiết truyền thống của làng nghề Phú Vinh\n- Bền đẹp, chắc chắn, có thể sử dụng trong nhiều năm\n- Thân thiện với môi trường, có thể tái chế hoàn toàn\n- Mỗi sản phẩm đều là độc nhất, không có hai sản phẩm giống hệt nhau\n\nCông dụng:\n- Đựng trái cây, bánh kẹo, đồ khô\n- Làm giỏ quà tặng\n- Trang trí nhà cửa\n- Lưu trữ đồ dùng nhỏ",
+  "price": 350000,
+  "image": "https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?q=80&w=1000&auto=format&fit=crop",
+  "gallery": [
+    "https://images.unsplash.com/photo-1516847995948-c6523e229d02?q=80&w=1000&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1580440282860-8555b1ae102c?q=80&w=1000&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1528822855841-e8bf3134cdc9?q=80&w=1000&auto=format&fit=crop"
+  ],
+  "category": "Handicraft",
+  "features": [
+    "Làm thủ công 100% từ tre già",
+    "Thiết kế truyền thống từ làng nghề Phú Vinh",
+    "Xử lý tự nhiên, không hóa chất",
+    "Bền đẹp, chắc chắn",
+    "Thân thiện với môi trường"
+  ],
+  "specifications": {
+    "Xuất xứ": "Làng nghề Phú Vinh, Hà Nội",
+    "Chất liệu": "Tre già (trên 3 năm tuổi)",
+    "Kích thước": "Đường kính 30cm, cao 15cm",
+    "Màu sắc": "Màu tre tự nhiên",
+    "Bảo quản": "Nơi khô ráo, tránh ánh nắng trực tiếp và độ ẩm cao"
+  },
+  "inStock": true,
+  "rating": 4.6,
+  "reviews": 42,
+  "date": "2023-11-10",
+  "tags": ["Handicraft", "Bamboo", "Traditional", "Eco-friendly"]
+}

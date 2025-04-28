@@ -1,0 +1,34 @@
+{
+  "id": 2,
+  "name": "Mật Ong Rừng U Minh Nguyên Chất",
+  "slug": "organic-honey-u-minh",
+  "description": "Mật ong rừng U Minh được thu hoạch từ rừng tràm nguyên sinh, 100% tự nhiên không pha trộn, giàu dinh dưỡng và mang hương vị đặc trưng của hoa tràm.",
+  "longDescription": "Mật Ong Rừng U Minh Nguyên Chất được thu hoạch từ những cánh rừng tràm nguyên sinh tại Khu dự trữ sinh quyển U Minh, Cà Mau. Đây là loại mật ong đặc biệt với hương vị thơm ngon và giá trị dinh dưỡng cao.\n\nMật ong U Minh có màu vàng đậm đặc trưng, vị ngọt thanh tự nhiên kèm theo hương thơm nhẹ của hoa tràm. Khi để lâu, mật ong sẽ kết tinh tự nhiên, đây là đặc tính của mật ong nguyên chất và không ảnh hưởng đến chất lượng sản phẩm.\n\nĐặc điểm nổi bật:\n- 100% nguyên chất, không pha trộn đường hay các chất phụ gia\n- Giàu enzyme, vitamin, khoáng chất và chất chống oxy hóa\n- Có tác dụng tăng cường hệ miễn dịch, hỗ trợ tiêu hóa\n- Giúp làm đẹp da, chống lão hóa\n- Hỗ trợ điều trị ho, viêm họng\n\nCách sử dụng:\n- Dùng trực tiếp: 1-2 thìa mỗi ngày\n- Pha với nước ấm (không quá 40°C)\n- Dùng với các loại đồ uống, salad, bánh mì,...\n- Đắp mặt nạ dưỡng da",
+  "price": 180000,
+  "image": "https://images.unsplash.com/photo-1587049352851-8d4e89133924?q=80&w=1000&auto=format&fit=crop",
+  "gallery": [
+    "https://images.unsplash.com/photo-1555211652-5c6222f9cf62?q=80&w=1000&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1471943311424-646960669fbc?q=80&w=1000&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1601063458289-77247ba485ec?q=80&w=1000&auto=format&fit=crop"
+  ],
+  "category": "Honey",
+  "features": [
+    "100% mật ong nguyên chất từ rừng U Minh",
+    "Không pha trộn, không chất bảo quản",
+    "Đã qua kiểm nghiệm an toàn thực phẩm",
+    "Giàu enzyme và chất chống oxy hóa",
+    "Đóng chai thủy tinh cao cấp"
+  ],
+  "specifications": {
+    "Xuất xứ": "Rừng U Minh, Cà Mau",
+    "Dung tích": "500ml",
+    "Thành phần": "100% mật ong nguyên chất",
+    "Hạn sử dụng": "24 tháng kể từ ngày đóng chai",
+    "Bảo quản": "Nơi khô ráo, tránh ánh nắng trực tiếp"
+  },
+  "inStock": true,
+  "rating": 4.9,
+  "reviews": 89,
+  "date": "2023-09-20",
+  "tags": ["Honey", "Organic", "Natural", "Superfood"]
+}

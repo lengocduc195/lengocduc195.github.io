@@ -14,9 +14,7 @@
         "AKS",
         "GKE",
         "Slurm",
-        "Bare-metal",
-        "CUDA",
-        "TensorRT"
+        "Bare-metal"
       ],
       "Storage": [
         "S3",
@@ -111,6 +109,10 @@
           "Vision Model"
         ],
         "Architectures": [
+          "Qwen",
+          "GPT",
+          "Deepseek",
+          "Llama",
           "Qwen"
         ],
         "Training Methods": [
@@ -137,8 +139,6 @@
           "TPUv5",
           "NVLink",
           "RDMA",
-          "CUDA",
-          "TensorRT",
           "Raspberry Pi",
           "Arduino"
         ],
@@ -169,6 +169,8 @@
           "Docker",
           "Conda",
           "Git",
+          "Github",
+          "Gitlab",
           "LaTeX",
           "OpenFL"
         ]
@@ -384,8 +386,7 @@
           "NPUs",
           "DSPs",
           "MobileNet",
-          "TensorRT",
-          "CUDA"
+          "TensorRT"
         ],
         "Edge-Cloud": [
           "Split Computing",
@@ -422,14 +423,10 @@
     },
     "Skills Overview": {
       "AI & ML": [
-        "Python",
         "PyTorch",
         "TensorFlow",
         "Keras",
-        "Scikit-learn",
-        "Machine Learning",
-        "Deep Learning",
-        "Computer Vision"
+        "Scikit-learn"
       ],
       "Programming Languages": [
         "Python",
@@ -468,6 +465,288 @@
         "MuJoCo",
         "OpenFL",
         "RDKit"
+      ]
+    }
+  },
+  "Multithreaded Programming": {
+    "Languages & Frameworks": {
+      "Java": [
+        "Thread class",
+        "Executor Framework",
+        "Synchronized blocks",
+        "Concurrent Collections"
+      ],
+      "Python": [
+        "threading module",
+        "Global Interpreter Lock (GIL)",
+        "asyncio",
+        "multiprocessing"
+      ],
+      "C++": [
+        "std::thread",
+        "Thread Pools",
+        "Atomics",
+        "Memory Models"
+      ]
+    },
+    "Synchronization Mechanisms": {
+      "Locking": [
+        "Mutex",
+        "Semaphore",
+        "RLock",
+        "Spinlock"
+      ],
+      "Thread Communication": [
+        "Event objects",
+        "Condition variables",
+        "Queue",
+        "Barriers"
+      ],
+      "Lock-free Algorithms": [
+        "CAS operations",
+        "ABA problem",
+        "Hazard pointers"
+      ]
+    },
+    "Concurrency Patterns": [
+      "Producer-Consumer",
+      "Thread Pool",
+      "Future/Promise",
+      "Actor Model"
+    ]
+  },
+  "Multi-GPU Processing": {
+    "Computational Architecture": {
+      "SIMD/SIMT": [
+        "Vectorized processing",
+        "Warp scheduling",
+        "Thread divergence"
+      ],
+      "Memory Hierarchy": [
+        "Global memory",
+        "Shared memory",
+        "Unified Memory",
+        "L1/L2 cache"
+      ]
+    },
+    "Frameworks": {
+      "NVIDIA": [
+        "CUDA",
+        "cuDNN",
+        "cuBLAS",
+        "Thrust"
+      ],
+      "Open Standards": [
+        "OpenCL",
+        "SYCL",
+        "OpenACC"
+      ],
+      "AMD": [
+        "ROCm",
+        "HIP",
+        "MIOpen"
+      ]
+    },
+    "Optimization Techniques": [
+      "Memory coalescing",
+      "Kernel fusion",
+      "Occupancy tuning",
+      "Asynchronous execution"
+    ]
+  },
+  "Distributed Systems": {
+    "Architecture Models": {
+      "Client-Server": [
+        "RPC",
+        "REST API",
+        "WebSockets"
+      ],
+      "Peer-to-Peer": [
+        "Distributed hash tables",
+        "Gossip protocols",
+        "Blockchain"
+      ],
+      "Microservices": [
+        "Service mesh",
+        "API Gateway",
+        "Event-driven architecture"
+      ]
+    },
+    "Distributed Coordination": {
+      "Consensus Algorithms": [
+        "Paxos",
+        "Raft",
+        "ZAB"
+      ],
+      "Time Synchronization": [
+        "Vector clocks",
+        "Lamport timestamps",
+        "Google Spanner TrueTime"
+      ]
+    },
+    "Fault Tolerance": [
+      "Replication strategies",
+      "Byzantine Fault Tolerance",
+      "Circuit breakers",
+      "Bulkheading"
+    ]
+  },
+  "GPU Clusters": {
+    "Hardware Infrastructure": {
+      "Compute Nodes": [
+        "Multi-GPU servers",
+        "DGX systems",
+        "Custom solutions"
+      ],
+      "Networking": [
+        "InfiniBand",
+        "NVLink",
+        "RDMA",
+        "GPUDirect"
+      ]
+    },
+    "Resource Management": {
+      "Job Scheduling": [
+        "Slurm",
+        "Kubernetes",
+        "PBS",
+        "LSF"
+      ],
+      "Virtualization": [
+        "MIG",
+        "vGPU",
+        "Docker with GPU support"
+      ]
+    },
+    "Distributed Computing Frameworks": [
+      "Horovod",
+      "Dask",
+      "Ray",
+      "PyTorch Distributed"
+    ],
+    "Request Management Pipeline": {
+      "Submission Interfaces": [
+        "CLI tools",
+        "Web portals",
+        "API clients",
+        "SDK integration"
+      ],
+      "Request Queuing": [
+        "Priority queues",
+        "Fair sharing",
+        "Message brokers",
+        "Backpressure mechanisms"
+      ],
+      "Scheduling Algorithms": [
+        "Gang scheduling",
+        "Proximity-aware allocation",
+        "SJF-BSBF",
+        "Elastic scheduling"
+      ]
+    },
+    "Server Infrastructure": {
+      "Server Types": {
+        "Web Servers": [
+          "Nginx",
+          "Apache",
+          "Caddy",
+          "Load balancing"
+        ],
+        "Application Servers": [
+          "Tomcat",
+          "JBoss",
+          "uWSGI",
+          "Gunicorn"
+        ],
+        "Database Servers": [
+          "SQL Clusters",
+          "NoSQL Sharding",
+          "In-memory databases"
+        ]
+      },
+      "System Administration": {
+        "Configuration Management": [
+          "Ansible",
+          "Puppet",
+          "Chef"
+        ],
+        "Monitoring": [
+          "Prometheus",
+          "Grafana",
+          "ELK Stack",
+          "Datadog"
+        ]
+      },
+      "Security Architecture": [
+        "Identity management",
+        "Network segmentation",
+        "Encryption",
+        "Intrusion detection"
+      ]
+    }
+  },
+  "Data Engineering": {
+    "Big Data Processing": {
+      "Spark": [
+        "Spark SQL",
+        "Spark Streaming",
+        "MLlib",
+        "GraphX",
+        "Structured Streaming"
+      ],
+      "AWS Integration": [
+        "EMR (Elastic MapReduce)",
+        "Glue",
+        "Athena",
+        "Redshift",
+        "S3 data lakes"
+      ],
+      "ELT Workflows": [
+        "Data warehouse loading",
+        "Transformation jobs",
+        "Scheduled pipelines",
+        "Schema evolution",
+        "Data quality checks"
+      ]
+    },
+    "Cloud Data Platform": {
+      "Azure": [
+        "Azure Data Factory",
+        "Azure Synapse Analytics",
+        "Azure Data Lake",
+        "Azure HDInsight",
+        "Azure Functions"
+      ],
+      "Databricks": [
+        "Delta Lake",
+        "MLflow",
+        "Koalas",
+        "Databricks Runtime",
+        "Databricks Connect",
+        "Unity Catalog"
+      ]
+    },
+    "Microsoft Data Stack": {
+      "SSIS": [
+        "Integration Services",
+        "ETL Packages",
+        "Control Flow",
+        "Data Flow",
+        "Package Deployment"
+      ],
+      "MSQL": [
+        "SQL Server",
+        "T-SQL",
+        "Stored Procedures",
+        "Reporting Services",
+        "Analysis Services"
+      ],
+      "ELT Processes": [
+        "Staging tables",
+        "Bulk loading",
+        "In-database transformations",
+        "Incremental loading",
+        "SQL-based transformations"
       ]
     }
   }

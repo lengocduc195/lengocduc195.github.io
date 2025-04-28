@@ -1,0 +1,46 @@
+{
+  "id": "openvpn",
+  "title": "OpenVPN",
+  "description": "",
+  "author": "Duc Le",
+  "date": "2025-04-15",
+  "content": [
+    {
+      "type": "text",
+      "text": "**A. Aims**"
+    },
+    {
+      "type": "text",
+      "text": ""
+    },
+    {
+      "type": "image",
+      "url": "https://cdn.prod.website-files.com/63f416b32254e8679cd8af88/66ec2c601ae3ed6b0c2f4762_66ec2b198a121c61ddda1871_llm-streaming-animation.gif",
+      "caption": "The smart search interface is displaying results using a streaming response method for the question: 'What is the autoregression modeling technique?"
+    },
+    {
+      "type": "text",
+      "text": "**B. Install**"
+    },
+    {
+      "type": "text",
+      "text": "```bash\nsudo apt-get install openvpn\n```"
+    }
+  ],
+  "topics": null,
+  "technologies": [
+    "MongoDB"
+  ],
+  "readingTime": "10 min read",
+  "videoUrl": "",
+  "githubUrl": "",
+  "main_image": {
+    "url": "https://cdn.prod.website-files.com/63f416b32254e8679cd8af88/66ec2c601ae3ed6b0c2f4762_66ec2b198a121c61ddda1871_llm-streaming-animation.gif",
+    "caption": "The smart search interface is displaying results using a streaming response method for the question: 'What is the autoregression modeling technique?"
+  },
+  "notableObservations": null,
+  "unexpectedInsights": null,
+  "images": null,
+  "related": null,
+  "references": {}
+}
