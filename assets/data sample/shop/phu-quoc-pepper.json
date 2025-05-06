@@ -1,0 +1,36 @@
+{
+  "id": 5,
+  "name": "Tiêu Đen Hữu Cơ Phú Quốc",
+  "slug": "phu-quoc-black-pepper",
+  "description": "Tiêu đen hữu cơ Phú Quốc với hương thơm nồng đặc trưng và vị cay the mạnh mẽ, được trồng trên đảo Phú Quốc với chỉ dẫn địa lý được bảo hộ.",
+  "longDescription": "Tiêu Đen Hữu Cơ Phú Quốc là một trong những loại gia vị đặc sản nổi tiếng của Việt Nam, được trồng trên đảo Phú Quốc - nơi có điều kiện thổ nhưỡng và khí hậu lý tưởng cho cây tiêu phát triển. Tiêu Phú Quốc đã được cấp chỉ dẫn địa lý được bảo hộ tại châu Âu, khẳng định chất lượng và danh tiếng đặc biệt.\n\nTiêu đen Phú Quốc nổi bật với hạt to tròn đều, màu đen ánh nâu, có hương thơm nồng đặc trưng và vị cay the mạnh mẽ kéo dài. Đây là kết quả của quá trình canh tác hữu cơ, thu hoạch đúng thời điểm và chế biến tỉ mỉ theo phương pháp truyền thống.\n\nĐặc điểm nổi bật:\n- 100% hữu cơ, không thuốc trừ sâu, không phân bón hóa học\n- Thu hoạch khi quả tiêu chín đỏ 80-85%\n- Phơi khô tự nhiên dưới ánh nắng mặt trời\n- Hàm lượng tinh dầu và piperine cao\n- Hương thơm nồng đặc trưng, vị cay the mạnh mẽ\n\nCông dụng:\n- Gia vị không thể thiếu trong nấu ăn\n- Kích thích tiêu hóa, tăng cường trao đổi chất\n- Chống oxy hóa, giàu vitamin và khoáng chất\n- Hỗ trợ giảm viêm và tăng cường hệ miễn dịch",
+  "price": 120000,
+  "salePrice": 99000,
+  "image": "https://images.unsplash.com/photo-1599909366516-6c1d2d95ed28?q=80&w=1000&auto=format&fit=crop",
+  "gallery": [
+    "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?q=80&w=1000&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1615485290398-4f0689c7afc7?q=80&w=1000&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1615485290312-99881a15ead5?q=80&w=1000&auto=format&fit=crop"
+  ],
+  "category": "Spices",
+  "features": [
+    "100% hữu cơ từ đảo Phú Quốc",
+    "Chỉ dẫn địa lý được bảo hộ",
+    "Thu hoạch và chế biến thủ công",
+    "Hàm lượng tinh dầu và piperine cao",
+    "Đóng gói kín, giữ nguyên hương vị"
+  ],
+  "specifications": {
+    "Xuất xứ": "Đảo Phú Quốc, Kiên Giang",
+    "Loại": "Tiêu đen hữu cơ",
+    "Khối lượng": "200g",
+    "Chứng nhận": "Hữu cơ (Organic), Chỉ dẫn địa lý EU",
+    "Hạn sử dụng": "24 tháng kể từ ngày đóng gói",
+    "Bảo quản": "Nơi khô ráo, tránh ánh nắng trực tiếp"
+  },
+  "inStock": true,
+  "rating": 4.9,
+  "reviews": 78,
+  "date": "2023-12-01",
+  "tags": ["Spices", "Pepper", "Organic", "Phu Quoc"]
+}

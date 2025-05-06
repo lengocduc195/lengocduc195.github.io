@@ -1,0 +1,44 @@
+{
+  "id": "MongoDB-API",
+  "title": "MongoDB API",
+  "description": "What approaches are available for executing SQL statements to manage data within MongoDB?",
+  "author": "Duc Le",
+  "date": "2025-04-15",
+  "content": [
+    {
+      "type": "text",
+      "text": "**A. Aims**"
+    },
+    {
+      "type": "text",
+      "text": "Stream Back Results is a technique that allows the server to deliver parts of the answer to the user during the generation process of a large language model (LLM), typically token by token or in chunks, rather than waiting for the entire response. This enables users to see the answer as it is being generated, making the interaction feel more natural-similar to a conversation with a human-and allowing them to detect errors or unexpected responses early."
+    },
+    {
+      "type": "image",
+      "url": "https://cdn.prod.website-files.com/63f416b32254e8679cd8af88/66ec2c601ae3ed6b0c2f4762_66ec2b198a121c61ddda1871_llm-streaming-animation.gif",
+      "caption": "The smart search interface is displaying results using a streaming response method for the question: 'What is the autoregression modeling technique?"
+    },
+    {
+      "type": "text",
+      "text": "**B. Mechanism**"
+    },
+    {
+      "type": "text",
+      "text": "- Receive a request from the user.\n- Begin generating the answer token by token.\n- As each token is generated, immediately send it back to the user.\n- Display the output in real-time on the user’s console."
+    }
+  ],
+  "topics": null,
+  "technologies": null,
+  "readingTime": "10 min read",
+  "videoUrl": "",
+  "githubUrl": "",
+  "main_image": {
+    "url": "https://cdn.prod.website-files.com/63f416b32254e8679cd8af88/66ec2c601ae3ed6b0c2f4762_66ec2b198a121c61ddda1871_llm-streaming-animation.gif",
+    "caption": "The smart search interface is displaying results using a streaming response method for the question: 'What is the autoregression modeling technique?"
+  },
+  "notableObservations": null,
+  "unexpectedInsights": null,
+  "images": null,
+  "related": null,
+  "references": {}
+}

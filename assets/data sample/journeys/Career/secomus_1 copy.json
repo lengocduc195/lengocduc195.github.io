@@ -1,0 +1,42 @@
+{
+    "title": "Secomus euo",
+    "id": "secomus hkjhj",
+    "date": "2024-01-01",
+    "description": "A journey through Secomus Technology as a core AI Engineer",
+    "author": "Ngoc Duc",
+    "images": [
+        {
+            "url": "/images/project-3.jpg",
+            "caption": "Giao diện chính của Secomus AI Platform"
+        },
+        {
+            "url": "/images/project-4.jpg",
+            "caption": "Bảng điều khiển phân tích dữ liệu"
+        }
+    ],
+    "tags": [
+        "Secomus",
+        "My job"
+    ],
+    "content": "I joined Secomus Technology as a core AI Engineer. My role involves developing and implementing AI solutions to enhance our products and services. I work closely with a team of talented engineers and data scientists to create innovative solutions that leverage the power of artificial intelligence. My journey at Secomus has been both challenging and rewarding. I have had the opportunity to work on various projects, from natural language processing to computer vision. Each project has allowed me to expand my knowledge and skills in AI, and I am excited to continue growing in this field.",
+    "links": [
+        {
+            "title": "Secomus Technology",
+            "url": "https://secomus.com"
+        },
+        {
+            "title": "My LinkedIn",
+            "url": "https://www.linkedin.com/in/ngoc-duc/"
+        }
+    ],
+    "related": [
+        {
+            "title": "My first job",
+            "url": "/journeys/jobs/my-first-job.json"
+        },
+        {
+            "title": "AI Engineer",
+            "url": "/journeys/jobs/ai-engineer.json"
+        }
+    ]
+}

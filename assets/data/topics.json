@@ -1,0 +1,755 @@
+{
+  "Foundations": {
+    "Knowledge Representation": [
+      "Semantic Networks",
+      "Frames",
+      "Ontologies"
+    ],
+    "Reasoning and Inference": [
+      "Rule-Based Systems",
+      "Fuzzy Logic Systems",
+      "Probabilistic Reasoning"
+    ],
+    "Logic and Formal Methods": [
+      "Propositional Logic",
+      "First-Order Logic",
+      "Modal Logic"
+    ]
+  },
+  "Machine Learning and Deep Learning": {
+    "Supervised Learning": [
+      "Linear Regression",
+      "Logistic Regression",
+      "Support Vector Machines"
+    ],
+    "Unsupervised Learning": [
+      "K-Means Clustering",
+      "Hierarchical Clustering",
+      "Principal Component Analysis"
+    ],
+    "Reinforcement Learning": [
+      "Q-Learning",
+      "Deep Q-Networks",
+      "Policy Gradient Methods"
+    ],
+    "Feature Engineering": [
+      "Feature Extraction",
+      "Feature Selection",
+      "Dimensionality Reduction",
+      "Feature Transformation"
+    ],
+    "Predictive Modeling": [
+      "Classification",
+      "Regression",
+      "Time Series Forecasting",
+      "Risk Prediction"
+    ],
+    "Deep Learning": {
+      "Neural Networks": [
+        "Feedforward Neural Networks",
+        "Convolutional Neural Networks",
+        "Recurrent Neural Networks"
+      ],
+      "Generative Models": [
+        "Generative Adversarial Networks",
+        "Variational Autoencoders"
+      ]
+    },
+    "Advanced Learning Topics": {
+      "Meta Learning": [
+        "Model-Agnostic Meta-Learning (MAML)",
+        "Reptile",
+        "Few-Shot Learning"
+      ],
+      "Continual Learning": [
+        "Catastrophic Forgetting",
+        "Elastic Weight Consolidation (EWC)",
+        "Online Meta-Learning (OML)"
+      ],
+      "Curriculum Learning": [
+        "Self-Paced Learning",
+        "Competence-Based Curriculum",
+        "CurriculumNet"
+      ],
+      "Causal Inference in Machine Learning": [
+        "Structural Causal Models",
+        "Do-Calculus",
+        "Causal AI"
+      ],
+      "Out-of-Distribution Detection": [
+        "Anomaly Detection",
+        "Confidence Calibration",
+        "OOD Detection in Neural Networks"
+      ],
+      "Counterfactual Reasoning": [
+        "Counterfactual Inference",
+        "Causal Reasoning in Reinforcement Learning"
+      ]
+    }
+  },
+  "Applications": {
+    "Natural Language Processing": {
+      "Text Processing": [
+        "Tokenization",
+        "Stemming",
+        "Lemmatization"
+      ],
+      "Language Models": [
+        "n-gram Models",
+        "Transformer Models",
+        "BERT",
+        "GPT"
+      ],
+      "Applications": [
+        "Machine Translation",
+        "Sentiment Analysis",
+        "Chatbots"
+      ],
+      "LLM Applications": [
+        "Summarization",
+        "Question Answering",
+        "Dialogue Generation",
+        "Code Generation (Codex, CodeLlama)"
+      ]
+    },
+    "Computer Vision": {
+      "Image Processing": [
+        "Edge Detection",
+        "Image Segmentation",
+        "Object Detection"
+      ],
+      "Applications": [
+        "Facial Recognition",
+        "Autonomous Vehicles",
+        "Medical Image Analysis"
+      ],
+      "Explainable Computer Vision": [
+        "Visual Explanations",
+        "Counterfactual Explanations",
+        "Attention Visualization"
+      ]
+    },
+    "Multimodal AI": {
+      "Vision-Language Models": [
+        "Image-to-Text Retrieval",
+        "Text-to-Image Generation",
+        "Cross-modal Retrieval"
+      ],
+      "Multimodal Learning": [
+        "Feature Fusion",
+        "Cross-modal Attention",
+        "Joint Embeddings"
+      ],
+      "Applications": [
+        "Visual Question Answering",
+        "Image Captioning",
+        "Cross-modal Search"
+      ]
+    },
+    "Healthcare AI": {
+      "Clinical Applications": [
+        "Risk Prediction",
+        "Disease Diagnosis",
+        "Treatment Recommendation"
+      ],
+      "Healthcare Data": [
+        "Electronic Health Records",
+        "Medical Imaging",
+        "Clinical Notes"
+      ],
+      "Healthcare Informatics": [
+        "Clinical Decision Support",
+        "Health Monitoring",
+        "Predictive Analytics"
+      ]
+    },
+    "Robotics": {
+      "Motion Planning": [
+        "Path Planning",
+        "Trajectory Optimization"
+      ],
+      "Control Systems": [
+        "PID Controllers",
+        "Model Predictive Control"
+      ],
+      "Perception": [
+        "Sensor Fusion",
+        "SLAM (Simultaneous Localization and Mapping)"
+      ]
+    },
+    "Game AI and Simulated Intelligence": {
+      "Game Theory and Multi-agent Systems": [
+        "Nash Equilibrium in AI",
+        "Cooperative and Competitive Strategies",
+        "Evolutionary Game Theory in Multi-Agent Learning"
+      ],
+      "AI for Game Design": [
+        "Dynamic Difficulty Adjustment",
+        "Procedural Content Generation",
+        "Player Modeling and Personalization"
+      ],
+      "Learning through Simulation": [
+        "Sim2Real Transfer Learning",
+        "Embodied AI in Virtual Environments",
+        "Simulation-Based Training for Real-World Tasks"
+      ],
+      "Evolutionary Strategies in Game Environments": [
+        "Neuroevolution",
+        "Genetic Algorithms for Strategy Optimization",
+        "Coevolutionary Algorithms in Competitive Games"
+      ]
+    }
+  },
+  "Intelligent Systems": {
+    "Expert Systems": [
+      "Knowledge-Based Systems",
+      "Decision Support Systems"
+    ],
+    "Cognitive and Neuroscience-Inspired AI": {
+      "Neuro-symbolic Reasoning": [
+        "Integration of Neural Networks and Symbolic Logic",
+        "Explainable AI via Symbolic Representations"
+      ],
+      "Bayesian Brain Hypothesis": [
+        "Probabilistic Models of Neural Processing",
+        "Bayesian Inference in Sensory Perception"
+      ],
+      "Working Memory in Neural Networks": [
+        "Memory-Augmented Neural Networks",
+        "Neural Turing Machines",
+        "Differentiable Neural Computers"
+      ],
+      "Attention vs. Salience": [
+        "Mechanisms of Attention in Neural Models",
+        "Saliency Detection in Visual Processing"
+      ],
+      "Predictive Coding": [
+        "Hierarchical Predictive Models",
+        "Prediction Error Minimization"
+      ]
+    },
+    "AI and Randomness": {
+      "Generative Art and Stochastic Creativity": [
+        "Algorithmic Art Generation",
+        "Stochastic Processes in Creative Systems",
+        "Generative Adversarial Networks in Art"
+      ],
+      "Randomized Algorithms in AI": [
+        "Random Forests",
+        "Stochastic Gradient Descent",
+        "Reservoir Sampling"
+      ],
+      "Monte Carlo Tree Search (MCTS)": [
+        "Application in Game Playing AI",
+        "Exploration vs. Exploitation Trade-offs",
+        "Upper Confidence Bounds for Trees (UCT)"
+      ],
+      "Probabilistic Graphical Models (PGMs)": [
+        "Bayesian Networks",
+        "Markov Random Fields",
+        "Inference Algorithms"
+      ],
+      "Chaos Theory and AI": [
+        "Sensitivity to Initial Conditions",
+        "Predictive Modeling in Chaotic Systems"
+      ]
+    }
+  },
+  "Ethics and Philosophy": {
+    "AI Ethics": [
+      "Bias and Fairness",
+      "Privacy Concerns",
+      "Accountability"
+    ],
+    "Societal Impact": [
+      "Job Displacement",
+      "Surveillance",
+      "Autonomous Weapons"
+    ],
+    "Explainable AI": [
+      "Model Interpretability",
+      "Counterfactual Explanations",
+      "Feature Attribution",
+      "Visual Explanations",
+      "Attention Visualization"
+    ],
+    "Explainability vs. Transparency": [
+      "Interpretability of AI Models",
+      "Transparency in Decision-Making Processes"
+    ],
+    "Surveillance AI vs. Privacy-Preserving AI": [
+      "Ethical Implications of Surveillance Technologies",
+      "Techniques for Preserving Privacy in AI Systems"
+    ],
+    "AI Alignment and Value Learning": [
+      "Ensuring AI Systems Align with Human Values",
+      "Learning Human Preferences and Ethics"
+    ],
+    "Data Colonialism and Fairness": [
+      "Impacts of Data Collection Practices",
+      "Ensuring Fairness"
+    ]
+  },
+  "Foundation Models and LLM Ecosystem": {
+    "LLM Architectures": {
+      "Transformer Models": [
+        "Transformer",
+        "Decoder-Only",
+        "Encoder-Decoder",
+        "Encoder-Only"
+      ],
+      "Attention Mechanisms": [
+        "Sparse Attention Models",
+        "Flash Attention",
+        "Multi-head Attention",
+        "Sliding Window Attention"
+      ],
+      "Model Scaling": [
+        "Mixture of Experts (MoE)",
+        "Dense Scaling",
+        "Parameter-Efficient Architectures"
+      ],
+      "Alternative Architectures": [
+        "State-Space Models (Mamba, RWKV)",
+        "Recurrent Neural Networks",
+        "Convolutional Approaches"
+      ],
+      "Multimodal Capabilities": [
+        "Multimodal Transformers",
+        "Vision-Language Models",
+        "Audio-Text Integration"
+      ],
+      "Decoding Strategies": [
+        "Speculative Decoding",
+        "Beam Search",
+        "Nucleus Sampling",
+        "Temperature Sampling",
+        "Lookahead Decoding"
+      ]
+    },
+    "Agentic AI": {
+      "Agent Frameworks": [
+        "ReAct (Reason + Act)",
+        "AutoGPT / BabyAGI",
+        "OpenAgents / LangGraph / CrewAI",
+        "Agent Orchestration Systems"
+      ],
+      "Multi-Agent Systems": [
+        "Multi-Agent Communication & Planning",
+        "Collaborative Problem Solving",
+        "Agent Specialization",
+        "Emergent Behaviors"
+      ],
+      "Memory & State": [
+        "Stateful Agents with Episodic Memory",
+        "Long-term Memory Management",
+        "Working Memory Simulation"
+      ],
+      "Self-Improvement": [
+        "Self-Correcting Agents",
+        "Reflective Agent Architectures",
+        "Learning from Feedback",
+        "Autonomous Skill Acquisition"
+      ],
+      "Domain-Specific Agents": [
+        "Devin (Autonomous Coding Agent)",
+        "Research Agents",
+        "Creative Agents",
+        "Data Analysis Agents"
+      ]
+    },
+    "LLM Inference": {
+      "Inference Optimization": [
+        "Streaming Inference",
+        "Low-Latency Serving",
+        "Inference-Time Compute Scaling",
+        "Batching Strategies"
+      ],
+      "Efficiency & Sustainability": [
+        "Model Efficiency & Sustainability",
+        "Energy-Efficient Inference",
+        "Carbon Footprint Reduction"
+      ],
+      "Specialized Inference": [
+        "Multimodal Inference",
+        "Specialized/Domain-Specific LLMs",
+        "Edge Deployment",
+        "Mobile Optimization"
+      ],
+      "Cost Management": [
+        "Cost-Optimized Inference",
+        "Dynamic Resource Allocation",
+        "Caching Strategies"
+      ]
+    },
+    "Reasoning Optimization": {
+      "Prompting Techniques": [
+        "Chain-of-Thought Prompting",
+        "Zero/Few-Shot Prompting",
+        "Instruction Tuning"
+      ],
+      "Advanced Reasoning": [
+        "Tree of Thought",
+        "Graph of Thought",
+        "Self-Consistency Decoding",
+        "Graph & Tree-Based Thought"
+      ],
+      "Tool Integration": [
+        "Tool-Use Frameworks",
+        "Open-ended Tool Synthesis",
+        "API Integration",
+        "Function Calling"
+      ],
+      "Meta-Cognition": [
+        "Self-Reflective Reasoning",
+        "Autonomous Task Decomposition",
+        "Planning & Execution Monitoring",
+        "Error Detection & Recovery"
+      ]
+    },
+    "Context Management": {
+      "Context Protocols": [
+        "Model Context Protocol",
+        "Context Window Expansion",
+        "Long Context Windows"
+      ],
+      "Context Processing": [
+        "Compression & Summarization of Context",
+        "Hierarchical Context Injection",
+        "Slot-based Context Modules"
+      ],
+      "Retrieval Systems": [
+        "Vector Database Paradigms",
+        "Semantic Caching & Context Fusion",
+        "Retrieval-Augmented Compression (RAC)",
+        "Hybrid Search Strategies"
+      ]
+    },
+    "Foundation Model Operations": {
+      "Model Adaptation": [
+        "Fine-Tuning",
+        "LoRA + QLoRA + FlashAttention-2",
+        "Domain Adaptation",
+        "Continual Learning"
+      ],
+      "Evaluation & Quality": [
+        "Evaluation (HELM, MMLU, BIG-Bench)",
+        "Behavioral Evaluation (AgentBench, ArenaHard)",
+        "Benchmark Development",
+        "Human Evaluation Protocols"
+      ],
+      "Safety & Alignment": [
+        "Safety Guardrails",
+        "Alignment & RLHF",
+        "Constitutional AI",
+        "Red-Teaming"
+      ],
+      "Efficiency Techniques": [
+        "Model Distillation / Quantization",
+        "Pruning & Sparsity",
+        "Knowledge Distillation"
+      ],
+      "Responsible Generation": [
+        "Responsible RAG / Grounded Generation",
+        "Attribution & Citation",
+        "Factuality Verification",
+        "Hallucination Mitigation"
+      ]
+    }
+  },
+  "Data Structure": {},
+  "Query Processing": {
+    "Query Understanding": [
+      "Query Intent Classification",
+      "Query Segmentation",
+      "Query Tagging"
+    ],
+    "Query Transformation": [
+      "Query Expansion",
+      "Query Relaxation",
+      "Query Reformulation"
+    ],
+    "Relevance Feedback Methods": [
+      "Explicit Feedback",
+      "Implicit Feedback",
+      "Pseudo-Relevance Feedback"
+    ]
+  },
+  "Indexing Paradigms": {
+    "Inverted Indexing": [
+      "Term-based Indexing",
+      "Positional Indexing",
+      "Field-based Indexing"
+    ],
+    "Forward Indexing": [
+      "Document-term Matrices",
+      "Dense Vector Indexing"
+    ],
+    "Hybrid Indexing": [
+      "Combined Sparse-Dense Representations"
+    ]
+  },
+  "Evaluation Methodologies": {
+    "System-oriented Metrics": [
+      "Precision and Recall",
+      "F-measures",
+      "Mean Average Precision",
+      "Normalized Discounted Cumulative Gain"
+    ],
+    "User-oriented Metrics": [
+      "Click Models",
+      "Satisfaction Metrics",
+      "Engagement Measures"
+    ],
+    "Experimental Paradigms": [
+      "Cranfield Paradigm",
+      "A/B Testing",
+      "User Studies"
+    ]
+  },
+  "Natural Language Processing": {
+    "Natural Language Understanding": {
+      "Syntactic Analysis": [
+        "Part-of-Speech Tagging",
+        "Parsing",
+        "Dependency Parsing"
+      ],
+      "Semantic Analysis": [
+        "Intent Recognition",
+        "Word Sense Disambiguation",
+        "Semantic Role Labeling",
+        "Named Entity Recognition (NER)",
+        "Entity Linking",
+        "Sentiment Analysis",
+        "Emotion Recognition"
+      ],
+      "Pragmatic Analysis": [
+        "Coreference Resolution",
+        "Discourse Analysis",
+        "Pragmatic Inference"
+      ],
+      "Comprehension Tasks": [
+        "Reading Comprehension",
+        "Text Entailment",
+        "Question Answering"
+      ]
+    },
+    "Natural Language Generation": {
+      "Content Planning": [
+        "Discourse Planning",
+        "Content Selection",
+        "Document Planning"
+      ],
+      "Surface Realization": [
+        "Template-based Generation",
+        "Grammar-based Generation",
+        "Neural Generation"
+      ],
+      "Generation Control": [
+        "Manipulating Decoding Penalties",
+        "Controlled Text Generation",
+        "Constrained Decoding"
+      ],
+      "Generation Tasks": [
+        "Text Summarization",
+        "Machine Translation",
+        "Paraphrasing",
+        "Dialogue Generation",
+        "Story Generation",
+        "Text-to-Speech Synthesis",
+        "Image Captioning",
+        "Conversational AI"
+      ]
+    },
+    "Information Retrieval (IR)": [
+      "Document Retrieval",
+      "Query-focused Summarization",
+      "Search Engine Optimization",
+      "Spam Detection"
+    ],
+    "Speech Processing": [
+      "Speech Recognition",
+      "Speech Emotion Recognition",
+      "Lipreading"
+    ],
+    "Multimodal NLP": [
+      "Visual Entailment",
+      "Multimodal Emotion Recognition",
+      "Image-to-Text Retrieval"
+    ],
+    "Morphological and Syntactic Processing": [
+      "Part-of-Speech Tagging",
+      "Morphological Inflection",
+      "Dependency Parsing"
+    ],
+    "Cross-Lingual NLP": [
+      "Cross-Lingual Natural Language Inference",
+      "Word Translation",
+      "Multilingual NLP"
+    ],
+    "Knowledge-Enhanced NLP": {
+      "Knowledge Representation": [
+        "Symbolic KBs",
+        "Distributional Semantics",
+        "Neural Knowledge Encoding",
+        "Graph-based Data Structure"
+      ],
+      "Knowledge Integration": [
+        "Entity-centric Integration",
+        "Attention-based Integration",
+        "Graph Neural Networks"
+      ],
+      "Retrieval-Augmented Generation": [
+        "Retrieval Mechanisms",
+        "Integration Techniques",
+        "Advanced Methods"
+      ]
+    }
+  },
+  "Data Augmentation": {
+    "Computer Vision": [
+      "Image Transformations",
+      "Noise Injection",
+      "Cutout/Random Erasing",
+      "Mixing Techniques",
+      "Synthetic Data Generation",
+      "Neural Style Transfer",
+      "Domain Adaptation & Transfer Learning",
+      "Adversarial Augmentation"
+    ],
+    "Time Series": {
+      "Time Domain Transformations": [
+        "Time Warping",
+        "Window Slicing",
+        "Window Warping",
+        "Random Cropping"
+      ],
+      "Frequency Domain Transformations": [
+        "Fourier Transform Augmentation",
+        "Wavelet Transform Augmentation"
+      ],
+      "Noise Injection": [
+        "Gaussian Noise",
+        "Jittering"
+      ],
+      "Permutation": [
+        "Random Permutation of Segments"
+      ],
+      "Synthetic Data Generation": [
+        "SMOTE for Time Series",
+        "GAN-based Time Series Generation"
+      ],
+      "Trend/Seasonality Manipulation": [
+        "Trend Injection",
+        "Seasonal Pattern Augmentation"
+      ]
+    },
+    "Natural Language Processing": {
+      "Text Surface Transformations": [
+        "Synonym Replacement",
+        "Random Insertion/Deletion/Swap",
+        "Back-Translation",
+        "Paraphrase Generation",
+        "Word or Sentence Shuffling",
+        "Syntax-tree Manipulation"
+      ],
+      "Noise Injection": [
+        "Typo Injection",
+        "Random Character Swap"
+      ],
+      "Entity-Level Augmentation": [
+        "Entity Swapping",
+        "Entity Masking"
+      ],
+      "Synthetic Data Generation": [
+        "Language Model Sampling",
+        "GAN-based Text Generation"
+      ],
+      "Low-Resource Language Augmentation": [
+        "Cross-Lingual Transfer",
+        "Zero-Shot Data Generation"
+      ]
+    },
+    "Audio/Speech": {
+      "Noise Injection": [
+        "Gaussian Noise",
+        "Random Noise"
+      ],
+      "Time Shifting": [],
+      "Speed/Pitch Alteration": [
+        "Speed Change",
+        "Pitch Change"
+      ],
+      "Synthetic Data Generation": [
+        "GAN-based Audio Generation"
+      ]
+    },
+    "Trending & Advanced Topics": {
+      "Generative AI for Data Augmentation": [
+        "Diffusion Models",
+        "Large Language Models (LLMs) for Synthetic Data",
+        "Foundation Models for Cross-Modal Augmentation"
+      ],
+      "Edge Computing & Real-Time Augmentation": [
+        "On-device Augmentation",
+        "Federated Data Augmentation"
+      ],
+      "Privacy-Preserving Augmentation": [
+        "Differential Privacy in Augmentation",
+        "Synthetic Data for Privacy"
+      ],
+      "Augmented Analytics": [
+        "Automated Data Augmentation Pipelines",
+        "Augmentation in Data-Centric AI"
+      ],
+      "Quantum Data Augmentation": [
+        "Quantum-Generated Synthetic Data"
+      ],
+      "Ethical & Sustainable Augmentation": [
+        "Bias Mitigation in Augmentation",
+        "Green Data Augmentation (energy-efficient methods)"
+      ]
+    }
+  },
+  "Similarity Search": {
+    "Nearest Neighbor Search": [
+      "Exact Search Methods",
+      "Approximate Nearest Neighbor Search"
+    ]
+  },
+  "Retrieval-Augmented Generation (RAG)": {
+    "Architecture Components": [
+      "Retriever Module",
+      "Generator Module",
+      "Knowledge Base/Corpus"
+    ],
+    "Retrieval Methods": [
+      "Reranking",
+      "First-stage Retrieval",
+      "Multi-stage Retrieval"
+    ],
+    "RAG Applications": [
+      "Question Answering",
+      "Fact Verification",
+      "Knowledge-Intensive NLP",
+      "Chatbots & Conversational Systems"
+    ],
+    "Advanced RAG Techniques": [
+      "Self-RAG",
+      "Multi-Vector RAG",
+      "Reasoning-Enhanced RAG",
+      "Adaptive RAG"
+    ],
+    "Evaluation Frameworks": [
+      "Faithfulness Metrics",
+      "Relevance Assessment",
+      "Hallucination Detection"
+    ],
+    "Challenges": [
+      "Context Window Limitations",
+      "Knowledge Integration",
+      "Query Formulation",
+      "Retrieval Latency"
+    ]
+  }
+}

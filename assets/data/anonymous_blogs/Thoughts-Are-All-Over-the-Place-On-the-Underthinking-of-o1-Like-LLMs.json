@@ -1,0 +1,89 @@
+{
+  "id": "Thoughts-Are-All-Over-the-Place-On-the-Underthinking-of-o1-Like-LLMs",
+  "title": "Thoughts Are All Over the Place: On the Underthinking of o1-Like LLMs",
+  "description": "Is it a good practice to frequently change approaches when faced with challenges in order to solve a problem?",
+  "author": "Duc Le",
+  "date": "2025-04-15",
+  "content": [
+    {
+      "type": "text",
+      "text": "**A. Overview**"
+    },
+    {
+      "type": "text",
+      "text": "The paper shows that LLMs like o1 cost many time complexity for changing between different solution paths when face with a hard problem. By experiments, they claim that approximately 220% tokens generated without correct solution. "
+    },
+    {
+      "type": "text",
+      "text": ""
+    },
+    {
+      "type": "image",
+      "url": "https://lh3.googleusercontent.com/d/11jQbrP17QlQt1E58Xt0phVJ11d0ioalk",
+      "caption": "The LLM model persistently shifts its problem-solving approach when confronted with challenging tasks, without delving deeply into any particular solution. After more than twenty iterations of reasoning, it eventually halts and produces an irrelevant response."
+    },
+    {
+      "type": "text",
+      "text": "**B. The novel underthinking metric**"
+    },
+    {
+      "type": "text",
+      "text": "Based on the truth that, LLMs generate too much tokens, but few of them are correct. The paper propose a new metric to measure the efficiency of token generation, which focuses on how much tokens (at the beginning of the answer) are correct."
+    },
+    {
+      "type": "text",
+      "text": "$$UT = \\frac{1}{N}\\sum_{i=1}^N \\frac{\\hat{T_i}}{T_i}$$"
+    },
+    {
+      "type": "image",
+      "url": "https://lh3.googleusercontent.com/d/1errdip1fzFHExp9QVhJS_RiDph0ff5d_",
+      "caption": "The LLM model persistently shifts its problem-solving approach when confronted with challenging tasks, without delving deeply into any particular solution. After more than twenty iterations of reasoning, it eventually halts and produces an irrelevant response."
+    },
+    {
+      "type": "text",
+      "text": "It is fascinating to observe that, in challenging benchmarks such as MATH500-Hard (Level 5) and GPQA Diamond, methods with higher accuracy also tend to achieve higher UT scores. This phenomenon demonstrates that large-scale language models like Deepseek-671B often explore a greater number of solution paths when confronted with difficult problems, although many of these attempts result in incorrect answers. While this exploratory capability is generally considered an advantage of LLMs, it can become a drawback as computational complexity increases."
+    },
+    {
+      "type": "text",
+      "text": "**C. A novel methodology that imposes penalties on superficial reasoning**"
+    },
+    {
+      "type": "text",
+      "text": "The paper propose the strategy to modify the frequent of token of generation process to lower the probality of 'change' tokens (like 'Alternatively',...)." 
+    },
+    {
+      "type": "text",
+      "text": "**D. More ablation studies**"
+    },
+    {
+      "type": "image",
+      "url": "https://lh3.googleusercontent.com/d/1o-K7G8F3wg4dGTrvRXyhALSBieZ_Ob1t",
+      "caption": "The prompt primarily serves as a guide for the text generation process, contributing minimally to directing solutions or altering the model’s core reasoning mechanisms. This is particularly evident in complex mathematical problems requiring multi-step chains of thought, where benchmarks further highlight this limitation."
+    }
+  ],
+  "topics": [
+    "Inference-Time Compute Scaling",
+    "Manipulating Decoding Penalties"
+  ],
+  "technologies": [
+    "Python",
+    "Hugging Face",
+    "Qwen",
+    "Llama",
+    "Deepseek"
+  ],
+  "readingTime": "10 min read",
+  "videoUrl": "",
+  "githubUrl": "",
+  "main_image": {
+    "url": "https://lh3.googleusercontent.com/d/11jQbrP17QlQt1E58Xt0phVJ11d0ioalk",
+    "caption": "The LLM model persistently shifts its problem-solving approach when confronted with challenging tasks, without delving deeply into any particular solution. After more than twenty iterations of reasoning, it eventually halts and produces an irrelevant response."
+  },
+  "notableObservations": null,
+  "unexpectedInsights": null,
+  "images": null,
+  "related": null,
+  "references": {
+    "1": "Wang, Y., Liu, Q., Xu, J., Liang, T., Chen, X., He, Z., Song, L., Yu, D., Li, J., Zhang, Z. and Wang, R., 2025. Thoughts Are All Over the Place: On the Underthinking of o1-Like LLMs. arXiv preprint arXiv:2501.18585."
+  }
+}

@@ -1,0 +1,113 @@
+{
+    "id": "multi-scale-and-multi-level-attention-based-on-external-knowledge-in-ehrs",
+    "rank": "B",
+    "title": "Multi-scale and Multi-level Attention based on External knowledge in EHRs",
+    "authors": [
+      "Duc Le",
+      "Bac Le"
+    ],
+    "type": "Conference",
+    "isFirstAuthor": true,
+    "highlight": "Proposes a multi-level, multi-scale attention model incorporating external knowledge to improve risk prediction tasks on EHRs.",
+    "venue": "Asian Conference on Intelligent Information and Database Systems",
+    "abbreviation": "ACIIDS",
+    "year": "2024-04-01",
+    "abstract": "This paper proposes a multi-level, multi-scale attention model utilizing external knowledge to enhance diagnostic code prediction from longitudinal Electronic Health Records (EHRs). The model exploits hierarchical relationships among codes and mimics doctors' reasoning from general to detailed levels, achieving more than 2% F1-score improvement over baselines on the MIMIC-IV dataset.",
+    "problem": [
+      {
+        "type": "text",
+        "text": "Deep learning models often fail to exploit hierarchical relationships between diagnostic codes effectively, leading to dispersed attention across a large code space and bias towards frequently occurring codes."
+      },
+      {
+        "type": "text",
+        "text": "Current EHR prediction models mostly focus on temporal modeling, ignoring rich external knowledge that could enhance interpretability and accuracy."
+      }
+    ],
+    "gap": [
+      {
+        "type": "text",
+        "text": "Most existing methods do not sufficiently integrate external medical knowledge like hierarchical code relations (e.g., CCSR structure) into the model's attention mechanism."
+      },
+      {
+        "type": "text",
+        "text": "Interpretability is often compromised when trying to optimize model accuracy, creating a gap between model predictions and clinical trust."
+      }
+    ],
+    "solution": [
+      {
+        "type": "text",
+        "text": "We propose a Multi-scale and Multi-level Attention model that incorporates external hierarchical knowledge (CCSR), organizes diagnostic codes into meaningful levels, and leverages a single feature encoder to model general to detailed correlations."
+      },
+      {
+        "type": "image",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/8/88/Transformer.jpg",
+        "caption": "Overview of multi-level and multi-scale attention model architecture (illustrative)"
+      },
+      {
+        "type": "text",
+        "text": "The model uses Multi-level Attention across CCSR body systems, CCSR categories, and ICD-10 codes, combined with a Multi-scale Feature Synthesizer and Time-aware Dynamic Attention Fusion for enhanced risk prediction."
+      }
+    ],
+    "results": [
+      {
+        "type": "text",
+        "text": "The model achieves over 2% F1-score improvement compared to strong baselines like HiTANet on the MIMIC-IV dataset, confirming the effectiveness of multi-level hierarchical integration."
+      },
+      {
+        "type": "text",
+        "text": "Multi-scale attention fusion improves prediction consistency and interpretability by tracing attention allocation across patient visits and code groups."
+      }
+    ],
+    "insights": [
+      {
+        "type": "text",
+        "text": "Global attention mechanisms capture long-term health trends, while local attention mechanisms focus on visit-specific details, allowing the model to explain predictions at different abstraction levels."
+      },
+      {
+        "type": "text",
+        "text": "Incorporating external hierarchy (CCSR) effectively narrows the model's focus range, making training more stable and predictions more interpretable."
+      }
+    ],
+    "contributions": [
+      {
+        "type": "text",
+        "text": "1. Introduced a multi-scale, multi-level attention mechanism that improves EHR-based risk prediction accuracy while enhancing interpretability."
+      },
+      {
+        "type": "text",
+        "text": "2. Demonstrated the utility of CCSR-based external knowledge in organizing diagnostic codes into hierarchies for better model training."
+      },
+      {
+        "type": "text",
+        "text": "3. Provided a comprehensive experimental evaluation showing consistent improvements across multiple metrics compared to existing baselines."
+      }
+    ],
+    "topics": [
+      "Healthcare AI",
+      "Predictive Modeling",
+      "Deep Learning",
+      "Attention Mechanisms",
+      "Electronic Health Records"
+    ],
+    "doi": null,
+    "links": {
+      "website": null,
+      "youtube_demo": null,
+      "github_repository": "https://github.com/Haru-Lab-Space/MsTA",
+      "view_publication": "https://ceur-ws.org/Vol-3658/paper5.pdf"
+    },
+    "citationCount": 0,
+    "citationFormat": "Le, D., & Le, B. (2024). Multi-scale and Multi-level Attention based on External knowledge in EHRs. International Conference on Multimedia Information Processing and Retrieval (MIPR) 2024.",
+    "images": [],
+    "technologies": [
+      "PyTorch",
+      "Transformer",
+      "Attention Mechanism",
+      "Healthcare Data Analysis"
+    ],
+    "references": {
+      "1": "Ye, M., et al. MedPath: Augmenting Health Risk Prediction via Medical Knowledge Paths. WWW 2021.",
+      "2": "Choi, E., et al. GRAM: Graph-Based Attention Model for Healthcare Representation Learning. KDD 2017.",
+      "3": "Luo, J., et al. HiTANet: Hierarchical Time-Aware Attention Networks for Risk Prediction. KDD 2020."
+    }
+  }

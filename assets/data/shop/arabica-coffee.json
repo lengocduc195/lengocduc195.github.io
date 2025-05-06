@@ -1,0 +1,35 @@
+{
+  "id": 2,
+  "name": "Cà Phê Robusta Đắk Lắk Nhà Làm",
+  "slug": "robusta-coffee-daklak",
+  "description": "Hạt cà phê Robusta nguyên chất từ Đắk Lắk, được nhà làm thủ công, mang đến hương vị đậm đà, hậu vị mạnh mẽ và độ đắng đặc trưng.",
+  "longDescription": "Cà Phê Robusta Đắk Lắk Nhà Làm được tuyển chọn từ những hạt cà phê chín mọng, trồng tại cao nguyên Đắk Lắk - thủ phủ cà phê Việt Nam. Với quy trình thu hoạch và chế biến thủ công, sản phẩm giữ trọn vị tự nhiên đậm đà, đáp ứng kỳ vọng của những tín đồ yêu thích cà phê mạnh.\n\nHạt cà phê được sơ chế theo phương pháp khô (natural process) giúp lưu giữ trọn vẹn hương vị đậm đà đặc trưng của Robusta. Rang ở mức độ medium-dark nhằm làm nổi bật vị đắng nhẹ, ít chua và hậu vị kéo dài.\n\nĐặc điểm hương vị:\n- Hương thơm: Socola, hạt dẻ\n- Vị: Đậm đà, hậu vị mạnh\n- Hậu vị: Dài, vị đắng dễ chịu\n- Độ đậm: Cao\n- Độ chua: Thấp\n\nCách pha chế tốt nhất:\n- Phin truyền thống Việt Nam\n- Moka Pot\n- Espresso",
+  "price": 220000,
+  "salePrice": 180000,
+  "image": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=1000&auto=format&fit=crop",
+  "gallery": [
+    "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=1000&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1580933073521-dc49ac0d4e6a?q=80&w=1000&auto=format&fit=crop"
+  ],
+  "category": "Coffee",
+  "features": [
+    "Hạt cà phê Robusta nguyên chất từ Đắk Lắk",
+    "Rang mức Medium-Dark (vừa đến đậm)",
+    "Độ cao trồng: 500-800m",
+    "Chế biến khô (Natural Process)",
+    "Đóng gói: 1kg, bảo quản chân không"
+  ],
+  "specifications": {
+    "Xuất xứ": "Việt Nam",
+    "Vùng": "Đắk Lắk",
+    "Loại hạt": "Robusta",
+    "Độ rang": "Medium-Dark (Vừa đến đậm)",
+    "Khối lượng": "1kg",
+    "Hạn sử dụng": "12 tháng kể từ ngày rang"
+  },
+  "inStock": true,
+  "rating": 4.7,
+  "reviews": 98,
+  "date": "2024-04-15",
+  "tags": ["Coffee", "Robusta", "Daklak", "Vietnam Coffee", "Nhà làm"]
+}

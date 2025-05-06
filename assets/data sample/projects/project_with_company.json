@@ -1,0 +1,87 @@
+{
+  "id": 5,
+  "author": ["Duc Le"],
+  "highlight": true,
+  "date": "2023-06-15",
+  "title": "AI-Powered Image Recognition System",
+  "description": "Developed an advanced image recognition system using deep learning techniques to identify and classify objects in real-time.",
+  "main_image": {
+    "url": "/images/projects/project-1.jpg",
+    "caption": "AI Image Recognition Dashboard"
+  },
+  "content": [
+    {
+      "type": "text",
+      "text": "This project involved building a state-of-the-art image recognition system that can identify and classify objects in real-time with high accuracy. The system was built using **TensorFlow** and **PyTorch**, and was trained on a large dataset of images."
+    },
+    {
+      "type": "image",
+      "url": "/images/projects/project-1.jpg",
+      "caption": "AI Image Recognition Dashboard"
+    },
+    {
+      "type": "text",
+      "text": "Key features include:\n\n- Real-time object detection and classification\n- Support for multiple object classes\n- High accuracy and low latency\n- Mobile-friendly implementation\n- Integration with existing security systems"
+    },
+    {
+      "type": "image",
+      "url": "/images/projects/project-2.jpg",
+      "caption": "Object Detection in Action"
+    }
+  ],
+  "notableObservations": [
+    "The system achieved a 98% accuracy rate in controlled environments and 92% in real-world scenarios.",
+    "Processing time was reduced from 200ms to 50ms per frame through optimization techniques."
+  ],
+  "unexpectedInsights": [
+    "The system performed better in low-light conditions than anticipated, likely due to the diverse training dataset.",
+    "Users reported that the confidence scores provided with each detection were particularly useful for decision-making."
+  ],
+  "company": "TechVision AI",
+  "lab": "Computer Vision Research Lab",
+  "images": [
+    {
+      "url": "/images/projects/project-1.jpg",
+      "caption": "AI Image Recognition Dashboard"
+    },
+    {
+      "url": "/images/projects/project-2.jpg",
+      "caption": "Object Detection in Action"
+    }
+  ],
+  "topics": [
+    "AI",
+    "Computer Vision",
+    "Deep Learning"
+  ],
+  "technologies": [
+    "Python",
+    "TensorFlow",
+    "PyTorch",
+    "OpenCV",
+    "Docker"
+  ],
+  "productUrl": "https://ragaboutit.com/building-a-graph-rag-system-from-scratch-with-langchain-a-comprehensive-tutorial/",
+  "githubUrl": "https://github.com/lengocduc195/ai-image-recognition",
+  "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  "related": [
+    {
+      "title": "Natural Language Processing System",
+      "url": "/projects/2"
+    },
+    {
+      "title": "Automated Testing Framework",
+      "url": "/projects/3"
+    }
+  ],
+  "links": [
+    {
+      "title": "Project Documentation",
+      "url": "https://docs.example.com/ai-image-recognition"
+    },
+    {
+      "title": "Research Paper",
+      "url": "https://papers.example.com/ai-image-recognition"
+    }
+  ]
+}

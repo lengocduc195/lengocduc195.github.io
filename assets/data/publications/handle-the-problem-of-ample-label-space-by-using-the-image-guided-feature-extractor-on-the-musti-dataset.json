@@ -1,0 +1,90 @@
+{
+    "id": "handle-the-problem-of-ample-label-space-by-using-the-image-guided-feature-extractor-on-the-musti-dataset",
+    "rank": "B",
+    "title": "Handle the problem of ample label space by using the Image-guided Feature Extractor on the MUSTI dataset",
+    "authors": [
+      "Le Ngoc-Duc",
+      "Le Minh-Hung",
+      "Dinh Quang-Vinh"
+    ],
+    "type": "Workshop",
+    "isFirstAuthor": true,
+    "highlight": "Proposed an Image-guided Feature Extractor model that improves text-image retrieval performance in the field of olfactory perception.",
+    "venue": "MediaEval 2023 Workshop",
+    "abbreviation": "MMM",
+    "year": "2023-02-01",
+    "abstract": "This paper introduces the Image-guided Feature Extractor model to address the challenges of large label space and data imbalance in predicting alignment between images and olfactory-related text descriptions on the MUSTI dataset.",
+    "problem": [
+      {
+        "type": "text",
+        "text": "In multimedia tasks, olfactory perception is a rarely explored area. Major challenges include a large label space, small dataset size, and class imbalance."
+      },
+      {
+        "type": "text",
+        "text": "Extracting features from image and text independently results in rich representations but makes it hard for the model to focus on relevant content."
+      }
+    ],
+    "gap": [
+      {
+        "type": "text",
+        "text": "Previous approaches extract multimodal features in a fragmented manner, often causing confusion for models due to a lack of guided attention."
+      }
+    ],
+    "solution": [
+      {
+        "type": "text",
+        "text": "We propose the Image-guided Feature Extractor, which uses image information to guide textual feature extraction, helping the model focus on the most relevant parts of the input and improve performance."
+      }
+    ],
+    "results": [
+      {
+        "type": "text",
+        "text": "The proposed model outperforms baseline methods in predicting alignment between images and olfactory perception-related text on the MUSTI dataset."
+      }
+    ],
+    "insights": [
+      {
+        "type": "text",
+        "text": "Using visual information to guide textual feature extraction enables the model to focus better and generalize well in low-resource multimodal settings."
+      }
+    ],
+    "contributions": [
+      {
+        "type": "text",
+        "text": "1. Proposed an Image-guided Feature Extractor model that enhances performance in text-image retrieval tasks."
+      },
+      {
+        "type": "text",
+        "text": "2. Addressed the issues of large label space and class imbalance in the olfactory perception domain."
+      },
+      {
+        "type": "text",
+        "text": "3. Introduced a new research direction in cross-modal learning between vision and olfactory-related textual data."
+      }
+    ],
+    "topics": [
+      "Multimodal AI",
+      "Computer Vision",
+      "Feature Engineering",
+      "Natural Language Processing"
+    ],
+    "doi": null,
+    "links": {
+      "website": null,
+      "youtube_demo": null,
+      "github_repository": "https://github.com/Haru-Lab-Space/MMM2024.git",
+      "view_publication": "https://ceur-ws.org/Vol-3658/paper5.pdf"
+    },
+    "citationCount": 0,
+    "citationFormat": "Le, N.-D., Le, M.-H., & Dinh, Q.-V. (2023). Handle the problem of ample label space by using the Image-guided Feature Extractor on the MUSTI dataset. In MediaEval 2023 Workshop.",
+    "images": [],
+    "technologies": [
+      "PyTorch",
+      "Hugging Face Transformers",
+      "CLIP",
+      "Cross-Attention",
+      "Vision-Language Models",
+      "Image-to-Text"
+    ],
+    "references": {}
+  }

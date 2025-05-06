@@ -1,0 +1,92 @@
+1:"$Sreact.fragment"
+3:I[283,["2992","static/chunks/bc9e92e6-1c042a4cb7f7ee91.js","9507","static/chunks/457b8330-4b761ccea66ed9aa.js","7158","static/chunks/aa35ee89-a2c5fbd77e3fd8af.js","6874","static/chunks/6874-e99f1ffdde1ee6c4.js","883","static/chunks/883-1c432fd5a9417496.js","283","static/chunks/283-5caa64571be82a90.js","7177","static/chunks/app/layout-c6fdd31ec17bd76a.js"],"AuthProvider"]
+4:I[4126,["2992","static/chunks/bc9e92e6-1c042a4cb7f7ee91.js","9507","static/chunks/457b8330-4b761ccea66ed9aa.js","7158","static/chunks/aa35ee89-a2c5fbd77e3fd8af.js","6874","static/chunks/6874-e99f1ffdde1ee6c4.js","883","static/chunks/883-1c432fd5a9417496.js","283","static/chunks/283-5caa64571be82a90.js","7177","static/chunks/app/layout-c6fdd31ec17bd76a.js"],"AdminProvider"]
+5:I[7450,["2992","static/chunks/bc9e92e6-1c042a4cb7f7ee91.js","9507","static/chunks/457b8330-4b761ccea66ed9aa.js","7158","static/chunks/aa35ee89-a2c5fbd77e3fd8af.js","6874","static/chunks/6874-e99f1ffdde1ee6c4.js","883","static/chunks/883-1c432fd5a9417496.js","283","static/chunks/283-5caa64571be82a90.js","7177","static/chunks/app/layout-c6fdd31ec17bd76a.js"],"default"]
+6:I[1970,["2992","static/chunks/bc9e92e6-1c042a4cb7f7ee91.js","9507","static/chunks/457b8330-4b761ccea66ed9aa.js","7158","static/chunks/aa35ee89-a2c5fbd77e3fd8af.js","6874","static/chunks/6874-e99f1ffdde1ee6c4.js","883","static/chunks/883-1c432fd5a9417496.js","283","static/chunks/283-5caa64571be82a90.js","7177","static/chunks/app/layout-c6fdd31ec17bd76a.js"],"default"]
+7:I[7555,[],""]
+8:I[1295,[],""]
+9:I[6821,["2992","static/chunks/bc9e92e6-1c042a4cb7f7ee91.js","9507","static/chunks/457b8330-4b761ccea66ed9aa.js","7158","static/chunks/aa35ee89-a2c5fbd77e3fd8af.js","6874","static/chunks/6874-e99f1ffdde1ee6c4.js","883","static/chunks/883-1c432fd5a9417496.js","283","static/chunks/283-5caa64571be82a90.js","7177","static/chunks/app/layout-c6fdd31ec17bd76a.js"],"default"]
+a:I[4970,[],"ClientSegmentRoot"]
+b:I[1243,["2992","static/chunks/bc9e92e6-1c042a4cb7f7ee91.js","9507","static/chunks/457b8330-4b761ccea66ed9aa.js","7158","static/chunks/aa35ee89-a2c5fbd77e3fd8af.js","6874","static/chunks/6874-e99f1ffdde1ee6c4.js","883","static/chunks/883-1c432fd5a9417496.js","283","static/chunks/283-5caa64571be82a90.js","7581","static/chunks/app/admin/layout-591ace4573d77ef8.js"],"default"]
+d:I[894,[],"ClientPageRoot"]
+e:I[9998,["2992","static/chunks/bc9e92e6-1c042a4cb7f7ee91.js","9507","static/chunks/457b8330-4b761ccea66ed9aa.js","7158","static/chunks/aa35ee89-a2c5fbd77e3fd8af.js","6874","static/chunks/6874-e99f1ffdde1ee6c4.js","883","static/chunks/883-1c432fd5a9417496.js","283","static/chunks/283-5caa64571be82a90.js","8532","static/chunks/app/admin/analytics-dashboard/page-427dd25c4159fb4e.js"],"default"]
+11:I[9665,[],"MetadataBoundary"]
+13:I[9665,[],"OutletBoundary"]
+16:I[4911,[],"AsyncMetadataOutlet"]
+18:I[9665,[],"ViewportBoundary"]
+1a:I[6614,[],""]
+:HL["/_next/static/css/f30152c0704fba31.css","style"]
+:HL["/_next/static/css/4e6a86ce4da87928.css","style"]
+2:T90b,
+            // Hide any Firebase configuration check messages
+            (function() {
+              // Text to hide
+              const textToHide = 'Kiểm tra cấu hình Firebase';
+
+              // Function to hide Firebase messages
+              function hideFirebaseMessages() {
+                // Add a class to the body
+                if (document.body) {
+                  document.body.classList.add('firebase-messages-hidden');
+                }
+
+                // Simple approach: hide any element containing the text
+                const allElements = document.querySelectorAll('*');
+                allElements.forEach(function(el) {
+                  if (el.textContent && el.textContent.includes(textToHide)) {
+                    el.style.display = 'none';
+                  }
+                });
+
+                // Also hide elements with data attribute
+                const dataElements = document.querySelectorAll('[data-firebase-config-check]');
+                dataElements.forEach(function(el) {
+                  el.style.display = 'none';
+                });
+              }
+
+              // Run immediately if possible
+              if (document.readyState !== 'loading') {
+                hideFirebaseMessages();
+              } else {
+                document.addEventListener('DOMContentLoaded', hideFirebaseMessages);
+              }
+
+              // Also run on load
+              window.addEventListener('load', hideFirebaseMessages);
+
+              // Set up interval to keep checking
+              setInterval(hideFirebaseMessages, 1000);
+
+              // Set up MutationObserver for dynamic content
+              if (typeof MutationObserver !== 'undefined') {
+                const observer = new MutationObserver(hideFirebaseMessages);
+
+                // Start observing when body is available
+                function setupObserver() {
+                  if (document.body) {
+                    observer.observe(document.body, {
+                      childList: true,
+                      subtree: true,
+                      characterData: true
+                    });
+                  } else {
+                    setTimeout(setupObserver, 100);
+                  }
+                }
+
+                setupObserver();
+              }
+            })();
+          0:{"P":null,"b":"2VP04QkNGi4YZX3VS0ew6","p":"","c":["","admin","analytics-dashboard"],"i":false,"f":[[["",{"children":["admin",{"children":["analytics-dashboard",{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/f30152c0704fba31.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","link","1",{"rel":"stylesheet","href":"/_next/static/css/4e6a86ce4da87928.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"en","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"$2"}}]}],["$","body",null,{"className":"__variable_5cfdac __variable_9a8899 antialiased","style":{"backgroundColor":"#0a0a0a","color":"#ededed","visibility":"visible","display":"block"},"children":["$","$L3",null,{"children":["$","$L4",null,{"children":["$","$L5",null,{"children":["$","div",null,{"id":"app-content","style":{"minHeight":"100vh","display":"flex","flexDirection":"column"},"children":[["$","$L6",null,{}],["$","main",null,{"style":{"flex":"1 1 auto"},"children":["$","$L7",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L8",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}],["$","$L9",null,{}]]}]}]}]}]}]]}]]}],{"children":["admin",["$","$1","c",{"children":[null,["$","$La",null,{"Component":"$b","slots":{"children":["$","$L7",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L8",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]},"params":{},"promise":"$@c"}]]}],{"children":["analytics-dashboard",["$","$1","c",{"children":[null,["$","$L7",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L8",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":[["$","$Ld",null,{"Component":"$e","searchParams":{},"params":"$0:f:0:1:2:children:1:props:children:1:props:params","promises":["$@f","$@10"]}],["$","$L11",null,{"children":"$L12"}],null,["$","$L13",null,{"children":["$L14","$L15",["$","$L16",null,{"promise":"$@17"}]]}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","F69EcxnoRpjI2oRnYO02P",{"children":[["$","$L18",null,{"children":"$L19"}],null]}],null]}],false]],"m":"$undefined","G":["$1a","$undefined"],"s":false,"S":true}
+1b:"$Sreact.suspense"
+1c:I[4911,[],"AsyncMetadata"]
+c:{}
+f:{}
+10:{}
+12:["$","$1b",null,{"fallback":null,"children":["$","$L1c",null,{"promise":"$@1d"}]}]
+15:null
+19:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+14:null
+1d:{"metadata":[["$","title","0",{"children":"Duc Le | Personal Portfolio"}],["$","meta","1",{"name":"description","content":"Welcome to my personal portfolio showcasing my projects, publications, and professional journey."}],["$","meta","2",{"name":"author","content":"Duc Le"}],["$","meta","3",{"name":"keywords","content":"portfolio,developer,projects,publications,personal website"}],["$","meta","4",{"property":"og:title","content":"Duc Le | Personal Portfolio"}],["$","meta","5",{"property":"og:description","content":"Welcome to my personal portfolio showcasing my projects, publications, and professional journey."}],["$","meta","6",{"property":"og:url","content":"https://your-domain.com"}],["$","meta","7",{"property":"og:site_name","content":"Duc Le Portfolio"}],["$","meta","8",{"property":"og:locale","content":"en_US"}],["$","meta","9",{"property":"og:type","content":"website"}],["$","meta","10",{"name":"twitter:card","content":"summary"}],["$","meta","11",{"name":"twitter:title","content":"Duc Le | Personal Portfolio"}],["$","meta","12",{"name":"twitter:description","content":"Welcome to my personal portfolio showcasing my projects, publications, and professional journey."}],["$","link","13",{"rel":"icon","href":"/favicon.ico","type":"image/x-icon","sizes":"16x16"}]],"error":null,"digest":"$undefined"}
+17:{"metadata":"$1d:metadata","error":null,"digest":"$undefined"}

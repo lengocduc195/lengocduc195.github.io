@@ -1,0 +1,54 @@
+{
+  "id": "reranking-in-RAG",
+  "title": "Reranking in RAG",
+  "description": "",
+  "author": "Duc Le",
+  "date": "2025-04-13",
+  "content": [
+    {
+      "type": "text",
+      "text": "Why does Google can fetch answers in milliseconds while your AI-powered chatbot takes minutes?"
+    },
+    {
+      "type": "text",
+      "text": "**How is similar vectors?** \n Cosine Similarity: \n   - \n Dot Product Similarity \n Euclidean Distance"
+    }
+  ],
+  "topics": [
+    "Reranking"
+  ],
+  "technologies": null,
+  "readingTime": "10 min read",
+  "videoUrl": "https://www.youtube.com/watch?v=eelI4mYxKsE",
+  "githubUrl": "https://github.com/yourusername/image-recognition",
+  "main_image": {
+    "url": "https://cdn.prod.website-files.com/603164e08678e20760ec256c/67b80eadeddc78d9b61c907f_MCP_quality_assurance.png",
+    "caption": "Model Context Protocol Applications"
+  },
+  "notableObservations": null,
+  "unexpectedInsights": null,
+  "images": [
+    {
+      "url": "/images/project-1.jpg",
+      "caption": "Transformer Architecture for NLP"
+    },
+    {
+      "url": "/images/project-2.jpg",
+      "caption": "Transformer Architecture The for NLP"
+    }
+  ],
+  "related": [
+    {
+      "title": "Fine-tuning BERT for Custom NLP Tasks",
+      "url": "/blogs/fine-tuning-bert"
+    },
+    {
+      "title": "Prompt Engineering for Large Language Models",
+      "url": "/blogs/prompt-engineering"
+    }
+  ],
+  "references":{
+    "1": "Xun Zheng, Bryon Aragam, Pradeep K Ravikumar, and Eric P Xing. Dags with no tears: Continuous optimization for structure learning. Advances in Neural Information Processing Systems, 31,2018.",
+    "2": "Kun Zhang, Zhikun Wang, Jiji Zhang, and Bernhard Scholkopf. On estimation of functional causal models: general results and application to the post-nonlinear causal model. ACM Transactions on Intelligent Systems and Technology (TIST), 7(2):1–22, 2015."
+  }
+}

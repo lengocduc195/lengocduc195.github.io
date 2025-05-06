@@ -1,0 +1,89 @@
+1:"$Sreact.fragment"
+3:I[283,["2992","static/chunks/bc9e92e6-1c042a4cb7f7ee91.js","9507","static/chunks/457b8330-4b761ccea66ed9aa.js","7158","static/chunks/aa35ee89-a2c5fbd77e3fd8af.js","6874","static/chunks/6874-e99f1ffdde1ee6c4.js","883","static/chunks/883-1c432fd5a9417496.js","283","static/chunks/283-5caa64571be82a90.js","7177","static/chunks/app/layout-c6fdd31ec17bd76a.js"],"AuthProvider"]
+4:I[4126,["2992","static/chunks/bc9e92e6-1c042a4cb7f7ee91.js","9507","static/chunks/457b8330-4b761ccea66ed9aa.js","7158","static/chunks/aa35ee89-a2c5fbd77e3fd8af.js","6874","static/chunks/6874-e99f1ffdde1ee6c4.js","883","static/chunks/883-1c432fd5a9417496.js","283","static/chunks/283-5caa64571be82a90.js","7177","static/chunks/app/layout-c6fdd31ec17bd76a.js"],"AdminProvider"]
+5:I[7450,["2992","static/chunks/bc9e92e6-1c042a4cb7f7ee91.js","9507","static/chunks/457b8330-4b761ccea66ed9aa.js","7158","static/chunks/aa35ee89-a2c5fbd77e3fd8af.js","6874","static/chunks/6874-e99f1ffdde1ee6c4.js","883","static/chunks/883-1c432fd5a9417496.js","283","static/chunks/283-5caa64571be82a90.js","7177","static/chunks/app/layout-c6fdd31ec17bd76a.js"],"default"]
+6:I[1970,["2992","static/chunks/bc9e92e6-1c042a4cb7f7ee91.js","9507","static/chunks/457b8330-4b761ccea66ed9aa.js","7158","static/chunks/aa35ee89-a2c5fbd77e3fd8af.js","6874","static/chunks/6874-e99f1ffdde1ee6c4.js","883","static/chunks/883-1c432fd5a9417496.js","283","static/chunks/283-5caa64571be82a90.js","7177","static/chunks/app/layout-c6fdd31ec17bd76a.js"],"default"]
+7:I[7555,[],""]
+8:I[1295,[],""]
+9:I[6821,["2992","static/chunks/bc9e92e6-1c042a4cb7f7ee91.js","9507","static/chunks/457b8330-4b761ccea66ed9aa.js","7158","static/chunks/aa35ee89-a2c5fbd77e3fd8af.js","6874","static/chunks/6874-e99f1ffdde1ee6c4.js","883","static/chunks/883-1c432fd5a9417496.js","283","static/chunks/283-5caa64571be82a90.js","7177","static/chunks/app/layout-c6fdd31ec17bd76a.js"],"default"]
+b:I[9665,[],"MetadataBoundary"]
+d:I[9665,[],"OutletBoundary"]
+10:I[4911,[],"AsyncMetadataOutlet"]
+12:I[9665,[],"ViewportBoundary"]
+14:I[6614,[],""]
+:HL["/_next/static/css/f30152c0704fba31.css","style"]
+:HL["/_next/static/css/4e6a86ce4da87928.css","style"]
+2:T90b,
+            // Hide any Firebase configuration check messages
+            (function() {
+              // Text to hide
+              const textToHide = 'Kiểm tra cấu hình Firebase';
+
+              // Function to hide Firebase messages
+              function hideFirebaseMessages() {
+                // Add a class to the body
+                if (document.body) {
+                  document.body.classList.add('firebase-messages-hidden');
+                }
+
+                // Simple approach: hide any element containing the text
+                const allElements = document.querySelectorAll('*');
+                allElements.forEach(function(el) {
+                  if (el.textContent && el.textContent.includes(textToHide)) {
+                    el.style.display = 'none';
+                  }
+                });
+
+                // Also hide elements with data attribute
+                const dataElements = document.querySelectorAll('[data-firebase-config-check]');
+                dataElements.forEach(function(el) {
+                  el.style.display = 'none';
+                });
+              }
+
+              // Run immediately if possible
+              if (document.readyState !== 'loading') {
+                hideFirebaseMessages();
+              } else {
+                document.addEventListener('DOMContentLoaded', hideFirebaseMessages);
+              }
+
+              // Also run on load
+              window.addEventListener('load', hideFirebaseMessages);
+
+              // Set up interval to keep checking
+              setInterval(hideFirebaseMessages, 1000);
+
+              // Set up MutationObserver for dynamic content
+              if (typeof MutationObserver !== 'undefined') {
+                const observer = new MutationObserver(hideFirebaseMessages);
+
+                // Start observing when body is available
+                function setupObserver() {
+                  if (document.body) {
+                    observer.observe(document.body, {
+                      childList: true,
+                      subtree: true,
+                      characterData: true
+                    });
+                  } else {
+                    setTimeout(setupObserver, 100);
+                  }
+                }
+
+                setupObserver();
+              }
+            })();
+          0:{"P":null,"b":"2VP04QkNGi4YZX3VS0ew6","p":"","c":["","journeys","cau-giay-hanoi-ne"],"i":false,"f":[[["",{"children":["journeys",{"children":[["slug","cau-giay-hanoi-ne","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/f30152c0704fba31.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","link","1",{"rel":"stylesheet","href":"/_next/static/css/4e6a86ce4da87928.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"en","children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"$2"}}]}],["$","body",null,{"className":"__variable_5cfdac __variable_9a8899 antialiased","style":{"backgroundColor":"#0a0a0a","color":"#ededed","visibility":"visible","display":"block"},"children":["$","$L3",null,{"children":["$","$L4",null,{"children":["$","$L5",null,{"children":["$","div",null,{"id":"app-content","style":{"minHeight":"100vh","display":"flex","flexDirection":"column"},"children":[["$","$L6",null,{}],["$","main",null,{"style":{"flex":"1 1 auto"},"children":["$","$L7",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L8",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}],["$","$L9",null,{}]]}]}]}]}]}]]}]]}],{"children":["journeys",["$","$1","c",{"children":[null,["$","$L7",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L8",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["slug","cau-giay-hanoi-ne","d"],["$","$1","c",{"children":[null,["$","$L7",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L8",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$La",["$","$Lb",null,{"children":"$Lc"}],null,["$","$Ld",null,{"children":["$Le","$Lf",["$","$L10",null,{"promise":"$@11"}]]}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","G3_LeLbxmwtNfg40h9phX",{"children":[["$","$L12",null,{"children":"$L13"}],null]}],null]}],false]],"m":"$undefined","G":["$14","$undefined"],"s":false,"S":true}
+15:"$Sreact.suspense"
+16:I[4911,[],"AsyncMetadata"]
+c:["$","$15",null,{"fallback":null,"children":["$","$L16",null,{"promise":"$@17"}]}]
+f:null
+13:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+e:null
+17:{"metadata":[["$","title","0",{"children":"Duc Le | Personal Portfolio"}],["$","meta","1",{"name":"description","content":"Welcome to my personal portfolio showcasing my projects, publications, and professional journey."}],["$","meta","2",{"name":"author","content":"Duc Le"}],["$","meta","3",{"name":"keywords","content":"portfolio,developer,projects,publications,personal website"}],["$","meta","4",{"property":"og:title","content":"Duc Le | Personal Portfolio"}],["$","meta","5",{"property":"og:description","content":"Welcome to my personal portfolio showcasing my projects, publications, and professional journey."}],["$","meta","6",{"property":"og:url","content":"https://your-domain.com"}],["$","meta","7",{"property":"og:site_name","content":"Duc Le Portfolio"}],["$","meta","8",{"property":"og:locale","content":"en_US"}],["$","meta","9",{"property":"og:type","content":"website"}],["$","meta","10",{"name":"twitter:card","content":"summary"}],["$","meta","11",{"name":"twitter:title","content":"Duc Le | Personal Portfolio"}],["$","meta","12",{"name":"twitter:description","content":"Welcome to my personal portfolio showcasing my projects, publications, and professional journey."}],["$","link","13",{"rel":"icon","href":"/favicon.ico","type":"image/x-icon","sizes":"16x16"}]],"error":null,"digest":"$undefined"}
+11:{"metadata":"$17:metadata","error":null,"digest":"$undefined"}
+18:I[2232,["6874","static/chunks/6874-e99f1ffdde1ee6c4.js","502","static/chunks/app/journeys/%5Bslug%5D/page-e7a3282ff742e449.js"],"default"]
+19:I[1225,["6874","static/chunks/6874-e99f1ffdde1ee6c4.js","502","static/chunks/app/journeys/%5Bslug%5D/page-e7a3282ff742e449.js"],"default"]
+1a:I[6874,["6874","static/chunks/6874-e99f1ffdde1ee6c4.js","502","static/chunks/app/journeys/%5Bslug%5D/page-e7a3282ff742e449.js"],""]
+a:["$","div",null,{"className":"container mx-auto px-4 py-12","children":[["$","$L18",null,{}],["$","div",null,{"className":"max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md p-8 border border-gray-200 dark:border-gray-700","children":[["$","div",null,{"className":"relative mb-4","children":[["$","span",null,{"className":"absolute top-0 right-0 bg-gradient-to-r from-amber-500 to-yellow-400 text-white text-sm font-medium px-4 py-1.5 rounded-full shadow-md","children":"Relocation"}],["$","div",null,{"className":"pr-24","children":["$","h1",null,{"className":"text-3xl font-bold","children":"Cau Giay, Hanoi ne"}]}]]}],["$","div",null,{"className":"flex items-center mb-4 text-gray-600","children":[["$","svg",null,{"className":"w-5 h-5 mr-2 text-gray-500","fill":"currentColor","viewBox":"0 0 20 20","xmlns":"http://www.w3.org/2000/svg","children":["$","path",null,{"fillRule":"evenodd","d":"M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z","clipRule":"evenodd"}]}],["$","div",null,{"className":"flex flex-col","children":[["$","p",null,{"className":"text-blue-600 dark:text-blue-400 font-medium","children":["Jul 1, 2025"," - ","Dec 31, 2025"]}],["$","p",null,{"className":"text-gray-500 dark:text-gray-400 text-sm","children":[["$","span",null,{"className":"font-medium","children":"Duration:"}]," ",183," day","s"]}]]}]]}],["$","div",null,{"className":"mb-8","children":[["$","h2",null,{"className":"text-xl font-semibold mb-3","children":"Overview"}],["$","p",null,{"className":"text-gray-700 dark:text-gray-300 border-l-4 border-blue-500 pl-4 py-2","children":"About my roommate at 44, 66/18 Dich Vong Hau, Cau Giay, Hanoi"}]]}],["$","div",null,{"className":"mb-8","children":[["$","h2",null,{"className":"text-xl font-semibold mb-4 flex items-center","children":[["$","svg",null,{"className":"w-5 h-5 mr-2 text-blue-500","fill":"currentColor","viewBox":"0 0 20 20","xmlns":"http://www.w3.org/2000/svg","children":["$","path",null,{"fillRule":"evenodd","d":"M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z","clipRule":"evenodd"}]}],"Journey Details"]}],["$","div",null,{"className":"prose max-w-none","children":["$","div",null,{"className":"bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm","children":["$","$L19",null,{"text":"I joined Secomus Technology as a core AI Engineer. My role involves developing and implementing AI solutions to enhance our products and services. I work closely with a team of talented engineers and data scientists to create innovative solutions that leverage the power of artificial intelligence. My journey at Secomus has been both challenging and rewarding. I have had the opportunity to work on various projects, from natural language processing to computer vision. Each project has allowed me to expand my knowledge and skills in AI, and I am excited to continue growing in this field.","className":"text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-wrap"}]}]}]]}],false,"$undefined",["$","div",null,{"className":"mb-8","children":[["$","h2",null,{"className":"text-xl font-semibold mb-4 flex items-center","children":[["$","svg",null,{"className":"w-5 h-5 mr-2 text-blue-500","fill":"currentColor","viewBox":"0 0 20 20","xmlns":"http://www.w3.org/2000/svg","children":["$","path",null,{"fillRule":"evenodd","d":"M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z","clipRule":"evenodd"}]}],"Memories Gallery"]}],["$","div",null,{"className":"grid grid-cols-1 md:grid-cols-2 gap-6","children":[["$","div","0",{"className":"overflow-hidden rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1","children":[["$","div",null,{"className":"relative overflow-hidden","children":["$","img",null,{"src":"/images/project-3.jpg","alt":"Giao diện chính của Secomus AI Platform","className":"w-full h-64 object-cover object-center transition-transform duration-500 hover:scale-105 zoomable-image","data-caption":"Giao diện chính của Secomus AI Platform"}]}],["$","div",null,{"className":"p-4 border-t border-gray-200 dark:border-gray-700","children":["$","p",null,{"className":"text-gray-700 dark:text-gray-300 italic","children":[["$","svg",null,{"className":"w-4 h-4 inline-block mr-1 text-gray-500 dark:text-gray-400","fill":"currentColor","viewBox":"0 0 20 20","xmlns":"http://www.w3.org/2000/svg","children":["$","path",null,{"fillRule":"evenodd","d":"M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z","clipRule":"evenodd"}]}],"Giao diện chính của Secomus AI Platform"]}]}]]}],["$","div","1",{"className":"overflow-hidden rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1","children":[["$","div",null,{"className":"relative overflow-hidden","children":["$","img",null,{"src":"/images/project-4.jpg","alt":"Bảng điều khiển phân tích dữ liệu","className":"w-full h-64 object-cover object-center transition-transform duration-500 hover:scale-105 zoomable-image","data-caption":"Bảng điều khiển phân tích dữ liệu"}]}],["$","div",null,{"className":"p-4 border-t border-gray-200 dark:border-gray-700","children":["$","p",null,{"className":"text-gray-700 dark:text-gray-300 italic","children":[["$","svg",null,{"className":"w-4 h-4 inline-block mr-1 text-gray-500 dark:text-gray-400","fill":"currentColor","viewBox":"0 0 20 20","xmlns":"http://www.w3.org/2000/svg","children":["$","path",null,{"fillRule":"evenodd","d":"M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z","clipRule":"evenodd"}]}],"Bảng điều khiển phân tích dữ liệu"]}]}]]}]]}]]}],null,["$","div",null,{"className":"mt-8 pt-6 border-t border-gray-200 dark:border-gray-700","children":["$","$L1a",null,{"href":"/journeys","className":"text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors hover:underline","children":"← Back to Journeys"}]}]]}]]}]

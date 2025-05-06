@@ -1,0 +1,100 @@
+{
+  "name": "Duc Le",
+  "main role": "AI Engineer",
+  "roles": [
+    "Research Scientist",
+    "Machine Learning Engineer",
+    "Prompting Engineer",
+    "AI Product Manager",
+    "Data Scientist",
+    "MLOps Engineer"
+  ],
+  "ai_role_groups": [
+    {
+      "group": "Model Development",
+      "roles": ["AI Research Scientist", "Machine Learning Engineer", "AI Engineer"]
+    },
+    {
+      "group": "Data Analysis",
+      "roles": ["Data Scientist", "Applied Data Scientist"]
+    },
+    {
+      "group": "GenAI Interaction",
+      "roles": ["Prompt Engineer", "LLM Engineer"]
+    },
+    {
+      "group": "AI Product Management",
+      "roles": ["AI Product Manager", "AI Program Manager"]
+    },
+    {
+      "group": "Deployment & MLOps",
+      "roles": ["MLOps Engineer", "Software Engineer (AI Focused)"]
+    },
+    {
+      "group": "AI QA & Evaluation",
+      "roles": ["AI QA Engineer", "Model Validator"]
+    },
+    {
+      "group": "AI Ethics & Governance",
+      "roles": ["AI Ethics Specialist", "Responsible AI Officer"]
+    },
+    {
+      "group": "Data Infrastructure",
+      "roles": ["Data Engineer", "Data Architect"]
+    },
+    {
+      "group": "Leadership & Architecture",
+      "roles": ["AI Architect", "Chief AI Officer (CAIO)"]
+    }
+  ],
+  "bio": "I am a passionate researcher and developer specializing in machine learning and computer vision. With a background in computer science and artificial intelligence, I am dedicated to advancing the field of AI and making it more accessible to everyone.\n\nMy research interests include deep learning, computer vision, and natural language processing. I am particularly excited about the intersection of AI and healthcare, where I believe significant innovations can occur.\n\nWhen I'm not coding or researching, you can find me reading scientific papers, contributing to open-source projects, or exploring new technologies.",
+  "image": "/images/Duc_Le.jpg",
+  "location": "Ha Noi Capital, Vietnam",
+  "email": "lengocduc195@example.com",
+  "social": {
+    "github": "https://github.com/lengocduc195",
+    "linkedin": "https://linkedin.com/in/david-ducle",
+    "twitter": "https://twitter.com/david-ducle",
+    "researchgate": "https://www.researchgate.net/profile/Duc-Le",
+    "googleScholar": "https://scholar.google.com/citations?user=ABC123",
+    "orcid": "https://orcid.org/0000-0000-0000-0000"
+  },
+  "cv": {
+    "url": "/assets/cv/Duc_Le_CV.pdf",
+    "filename": "Duc_Le_CV.pdf"
+  },
+  "resume": {
+    "url": "/assets/cv/Duc_Le_resume.pdf",
+    "filename": "Duc_Le_resume.pdf"
+  },
+  "education": [
+    {
+      "degree": "Bachelor of Technology (BTech), Honors Program",
+      "school": "VNUHCM - University of Science",
+      "year": "Sep 2020 - Dec 2024",
+      "description": "Extensive experience in Explainable AI (XAI), trustworthy AI, and management, particularly in risk detection in the medical field. Expertise in Federated Learning and security. Activities: Volleyball, badminton, karate. Grade: 8.6."
+    }
+  ],
+  "experience": [
+    {
+      "title": "AI Engineer",
+      "company": "Secomus Technology",
+      "period": "Mar 2025 - Present",
+      "description": "As the AI Engineer, I spearhead the end-to-end lifecycle of AI-powered solutions that directly impact core business objectives. My role combines strategic vision with hands-on execution across key initiatives, including:\n   🚀 Driving the development of intelligent Chatbot systems that automate customer support, reduce response time, and significantly boost user satisfaction and engagement.\n   📊 Designing and optimizing customer intelligence platforms that unify fragmented data into actionable insights, enabling hyper-personalized services and data-driven decision-making.\n   🧠 Architecting advanced AI Agent systems for seamless exploration and management of complex enterprise databases, accelerating access to critical information across departments.\n  🧭 Leading AI research and strategy formulation, identifying innovative opportunities to enhance operational efficiency, support business growth, and establish a competitive technological edge."
+    },
+    {
+      "title": "AI Researcher",
+      "company": "Computer Science Lab - HCMUS",
+      "period": "Jun 2023 - Present",
+      "description": "Mentoring and advising research groups specializing in Explainable AI (XAI) for Computer Vision. Guiding researchers in developing interpretability techniques and evaluating AI model explanations. Focus on Natural Language Processing (NLP) and Computer Vision."
+    },
+    {
+      "title": "AI Researcher",
+      "company": "AI VIET NAM",
+      "period": "Oct 2023 - Mar 2024",
+      "description": "Developed and evaluated Large Language Models (LLMs) for the Vietnamese language. Enhanced understanding, generation, and adaptation of LLMs to Vietnamese by addressing linguistic and cultural nuances."
+    }
+  ],
+  "slogan": "I believe one good line of code can change how we think.",
+  "slogan_footer": "Researcher, developer, and innovator passionate about creating impactful solutions with cutting-edge technologies."
+}

@@ -1,0 +1,497 @@
+{
+  "AI_Architecture": {
+    "Foundation Infrastructure": {
+      "Cloud Platforms": [
+        "AWS",
+        "Azure",
+        "GCP",
+        "OCI",
+        "IBM Cloud",
+        "Firebase"
+      ],
+      "Compute": [
+        "EC2",
+        "AKS",
+        "GKE",
+        "Slurm",
+        "Bare-metal",
+        "CUDA",
+        "TensorRT"
+      ],
+      "Storage": [
+        "S3",
+        "Azure Blob",
+        "GCS",
+        "Ceph",
+        "HDFS",
+        "PostgreSQL",
+        "Firebase"
+      ],
+      "Networking": [
+        "VPCs",
+        "Service Meshes",
+        "Load Balancers"
+      ],
+      "Security": [
+        "IAM",
+        "KMS",
+        "VPC Peering",
+        "Private Link"
+      ],
+      "ML Services": [
+        "SageMaker",
+        "Vertex AI",
+        "Azure ML",
+        "Bedrock",
+        "OpenAI API",
+        "Hugging Face",
+        "OpenFL"
+      ],
+      "Data Services": [
+        "Glue",
+        "Dataflow",
+        "Synapse",
+        "Kafka",
+        "BigQuery"
+      ]
+    },
+    "Data Infrastructure": {
+      "Data Collection": [
+        "Kafka",
+        "Kinesis",
+        "Airflow",
+        "Fivetran",
+        "Scrapy",
+        "Playwright",
+        "OpenAI Gym",
+        "MuJoCo",
+        "sim-to-real"
+      ],
+      "Data Ingestion Patterns": [
+        "Batch",
+        "Streaming",
+        "CDC",
+        "IoT",
+        "Web",
+        "offline RL"
+      ],
+      "Data Storage": [
+        "Data Lakes",
+        "Warehouses",
+        "Delta Lake",
+        "Iceberg",
+        "Vector DBs",
+        "PostgreSQL",
+        "RDKit"
+      ],
+      "Feature Stores": [
+        "Feast",
+        "Tecton",
+        "SageMaker FS"
+      ],
+      "Processing Engines": [
+        "Spark",
+        "Dask",
+        "Ray",
+        "Flink"
+      ],
+      "Data Governance": [
+        "Amundsen",
+        "DataHub",
+        "Purview",
+        "OpenLineage",
+        "Soda"
+      ]
+    },
+    "Model Development": {
+      "Foundation Models": {
+        "Model Types": [
+          "LLMs",
+          "Multimodal",
+          "Diffusion",
+          "Graph Models",
+          "language models",
+          "vision transformers",
+          "multimodal learning",
+          "CLIP",
+          "GPT",
+          "BERT"
+        ],
+        "Architectures": [
+          "Transformer",
+          "MoE",
+          "ControlNet",
+          "CLIP",
+          "Reformer",
+          "DGL",
+          "PyTorch Geometric",
+          "PyTorch Mobile",
+          "robot learning"
+        ],
+        "Training Methods": [
+          "Pre-training",
+          "LoRA",
+          "RLHF",
+          "DPO",
+          "Distillation",
+          "self-supervised learning",
+          "imitation learning",
+          "offline RL"
+        ]
+      },
+      "Training Infrastructure": {
+        "Distributed Training": [
+          "Data Parallel",
+          "Tensor Parallel",
+          "Pipeline Parallel",
+          "FSDP"
+        ],
+        "Hardware": [
+          "A100",
+          "H100",
+          "TPUv5",
+          "NVLink",
+          "RDMA",
+          "CUDA",
+          "TensorRT",
+          "Raspberry Pi",
+          "Arduino"
+        ],
+        "Optimization": [
+          "Gradient Checkpointing",
+          "FlashAttention",
+          "BF16",
+          "Offloading",
+          "LoRA",
+          "Distillation"
+        ]
+      },
+      "Experiment Management": {
+        "Trackers": [
+          "MLflow",
+          "W&B",
+          "Comet",
+          "Captum"
+        ],
+        "Hyperparameter Tuning": [
+          "Optuna",
+          "Ray Tune",
+          "SigOpt"
+        ],
+        "Reproducibility": [
+          "Hydra",
+          "DVC",
+          "Docker",
+          "Conda",
+          "Git",
+          "LaTeX",
+          "OpenFL"
+        ]
+      }
+    },
+    "Deployment and Inference": {
+      "Model Serving": {
+        "Frameworks": [
+          "Triton",
+          "TorchServe",
+          "TF Serving",
+          "Flask",
+          "TensorFlow Lite"
+        ],
+        "Containers": [
+          "Docker",
+          "Helm",
+          "KubeFlow"
+        ],
+        "Scaling": [
+          "HPA",
+          "KEDA",
+          "Load Balancing"
+        ]
+      },
+      "Advanced Serving": {
+        "Techniques": [
+          "Speculative Decoding",
+          "Paged Attention",
+          "Tree Attention",
+          "LIME",
+          "SHAP",
+          "Captum",
+          "Foolbox"
+        ],
+        "Orchestration": [
+          "Router-Worker",
+          "Ensembles",
+          "Fallback Chains"
+        ]
+      },
+      "Inference APIs": {
+        "REST & Streaming": [
+          "OpenAPI",
+          "WebSockets",
+          "gRPC",
+          "Flask"
+        ],
+        "Management": [
+          "Rate Limiting",
+          "JWT",
+          "OAuth2",
+          "Audit Logs"
+        ]
+      }
+    },
+    "MLOps & Observability": {
+      "CI/CD Pipelines": [
+        "GitHub Actions",
+        "Jenkins",
+        "ArgoCD",
+        "Flux"
+      ],
+      "Testing": [
+        "Regression",
+        "Shadow",
+        "Chaos",
+        "Adversarial",
+        "Foolbox"
+      ],
+      "Monitoring": {
+        "Performance": [
+          "Prometheus",
+          "Grafana",
+          "GPU Usage",
+          "Carbon Footprint"
+        ],
+        "Model Quality": [
+          "Drift Detection",
+          "Calibration",
+          "Ground Truth Eval",
+          "SHAP",
+          "LIME"
+        ]
+      },
+      "Feedback Loops": {
+        "Annotation Tools": [
+          "Label Studio",
+          "Prodigy"
+        ],
+        "Human Feedback": [
+          "Pairwise Rating",
+          "Preference Collection"
+        ],
+        "Online Learning": [
+          "RLHF",
+          "A/B Testing",
+          "Reward Models"
+        ]
+      }
+    },
+    "Responsible AI": {
+      "Ethics & Safety": {
+        "Filtering": [
+          "Toxicity",
+          "Bias",
+          "Hallucination",
+          "Captum",
+          "LIME",
+          "SHAP"
+        ],
+        "Verification": [
+          "Fact Checking",
+          "Source Attribution",
+          "Uncertainty"
+        ]
+      },
+      "Fairness & Inclusion": {
+        "Bias Mitigation": [
+          "FairLearn",
+          "Equalized Odds",
+          "Demographic Parity"
+        ],
+        "Accessibility": [
+          "Multilingual",
+          "Screen Readers",
+          "Cultural Sensitivity"
+        ]
+      },
+      "Explainability & Governance": {
+        "Techniques": [
+          "SHAP",
+          "Integrated Gradients",
+          "Attention Viz",
+          "LIME",
+          "Captum"
+        ],
+        "Documentation": [
+          "Model Cards",
+          "Risk Reports",
+          "Audit Trails",
+          "LaTeX"
+        ]
+      }
+    },
+    "Advanced Architectures": {
+      "RAG": {
+        "Retrieval Systems": [
+          "HNSW",
+          "IVFPQ",
+          "Hybrid Search"
+        ],
+        "Pipeline Design": [
+          "Multi-stage Reranking",
+          "Semantic Chunking"
+        ]
+      },
+      "Agents": {
+        "Planning": [
+          "ReAct",
+          "Tree-of-Thought",
+          "Task Graphs"
+        ],
+        "Tools": [
+          "Function Calling",
+          "Toolformer",
+          "Plugin APIs"
+        ],
+        "Memory": [
+          "Episodic",
+          "Semantic",
+          "Hierarchical Summaries"
+        ]
+      },
+      "Multi-Modal": {
+        "Fusion Techniques": [
+          "Cross-Attention",
+          "Shared Embedding",
+          "multimodal learning",
+          "CLIP"
+        ],
+        "Conversion": [
+          "Text-to-Image",
+          "Image-to-Text",
+          "Audio-Visual",
+          "text-to-image",
+          "image-to-text"
+        ],
+        "Reasoning": [
+          "Scene Graphs",
+          "VQA",
+          "Speech Emotion",
+          "vision transformers"
+        ]
+      }
+    },
+    "Emerging Techniques": {
+      "Edge AI": {
+        "On-Device": [
+          "Quantization",
+          "Pruning",
+          "Distillation",
+          "PyTorch Mobile",
+          "TensorFlow Lite"
+        ],
+        "Acceleration": [
+          "NPUs",
+          "DSPs",
+          "MobileNet",
+          "TensorRT",
+          "CUDA"
+        ],
+        "Edge-Cloud": [
+          "Split Computing",
+          "Federated Learning",
+          "Raspberry Pi"
+        ]
+      },
+      "Neural Databases": {
+        "Learned Indices": [
+          "Neural B-trees",
+          "Cardinality Estimators"
+        ],
+        "Hybrid Querying": [
+          "In-Database ML",
+          "GPU Querying",
+          "Semantic Caching"
+        ]
+      },
+      "Neuromorphic Computing": {
+        "SNNs": [
+          "Temporal Coding",
+          "Event-based Spikes"
+        ],
+        "Hardware": [
+          "Loihi",
+          "Analog Chips",
+          "Memristors"
+        ],
+        "Algorithms": [
+          "Stochastic Logic",
+          "Fault Tolerance"
+        ]
+      }
+    },
+    "Skills Overview": {
+      "AI & ML": [
+        "PyTorch",
+        "TensorFlow",
+        "Keras",
+        "Scikit-learn"
+      ],
+      "Programming Languages": [
+        "Python",
+        "JavaScript",
+        "TypeScript"
+      ],
+      "Web Dev & UI": [
+        "Node.js",
+        "React",
+        "Next.js",
+        "Tailwind CSS",
+        "Flask"
+      ],
+      "Mobile Dev": [
+        "React Native"
+      ],
+      "Tools & DevOps": [
+        "Docker",
+        "OpenCV",
+        "LaTeX",
+        "AWS",
+        "Firebase",
+        "Git",
+        "Github",
+        "Gitlab"
+      ],
+      "Databases": [
+        "PostgreSQL",
+        "Firebase"
+      ],
+      "Libraries & Concepts": [
+        "Hugging Face",
+        "BERT",
+        "GPT",
+        "CLIP",
+        "language models",
+        "vision transformers",
+        "LIME",
+        "SHAP",
+        "Captum",
+        "Foolbox",
+        "DGL",
+        "PyTorch Geometric",
+        "PyTorch Mobile",
+        "OpenAI Gym",
+        "MuJoCo",
+        "OpenFL",
+        "RDKit",
+        "robot learning",
+        "ROS",
+        "sim-to-real",
+        "self-supervised learning",
+        "offline RL",
+        "imitation learning",
+        "spaCy",
+        "NLTK"
+      ]
+    }
+  }
+}

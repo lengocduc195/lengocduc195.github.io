@@ -1,0 +1,25 @@
+{
+    "title": "Cau Giay, Hanoi ne",
+    "id": "hanoi_1",
+    "start_date": "2025-07-01",
+    "end_date": "2025-12-31",
+    "description": "About my roommate at 44, 66/18 Dich Vong Hau, Cau Giay, Hanoi",
+    "author": "Ngoc Duc",
+    "category": "Relocation",
+    "images": [
+        {
+            "url": "/images/project-3.jpg",
+            "caption": "Giao diện chính của Secomus AI Platform"
+        },
+        {
+            "url": "/images/project-4.jpg",
+            "caption": "Bảng điều khiển phân tích dữ liệu"
+        }
+    ],
+    "tags": [
+        "Accommodation",
+        "Roommate",
+        "Life"
+    ],
+    "content": "I joined Secomus Technology as a core AI Engineer. My role involves developing and implementing AI solutions to enhance our products and services. I work closely with a team of talented engineers and data scientists to create innovative solutions that leverage the power of artificial intelligence. My journey at Secomus has been both challenging and rewarding. I have had the opportunity to work on various projects, from natural language processing to computer vision. Each project has allowed me to expand my knowledge and skills in AI, and I am excited to continue growing in this field."
+}
