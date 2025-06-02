@@ -1,7 +1,8 @@
 {
     "title": "Cau Giay, Hanoi ne",
     "id": "hanoi_1",
-    "date": "2025-07-01",
+    "start_date": "2025-07-01",
+    "end_date": "2025-12-31",
     "description": "About my roommate at 44, 66/18 Dich Vong Hau, Cau Giay, Hanoi",
     "author": "Ngoc Duc",
     "category": "Relocation",

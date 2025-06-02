@@ -1,0 +1,120 @@
+{
+    "id": "from-visual-explanations-to-counterfactual-explanations-with-latent-diffusion",
+    "rank": "A",
+    "title": "From Visual Explanations to Counterfactual Explanations with Latent Diffusion",
+    "authors": [
+      "Tung Luu",
+      "Nam Le",
+      "Duc Le",
+      "Bac Le"
+    ],
+    "type": "Conference",
+    "isFirstAuthor": false,
+    "highlight": "Proposes ECED, a novel framework that unifies visual explanations and latent diffusion to generate semantically precise, realistic, and classifier-aligned counterfactual images without requiring robust classifiers.",
+    "venue": "IEEE/CVF Winter Conference on Applications of Computer Vision",
+    "abbreviation": "WACV",
+    "year": "2025-04-08",
+    "abstract": "This paper presents ECED, a new counterfactual explanation framework that blends ScoreCAM-based visual attention with blended latent diffusion and adversarial gradient pruning. ECED addresses major challenges in visual counterfactual generation, such as background preservation and dependency on robust classifiers, by operating in the latent space and strategically editing only foreground regions. Extensive evaluations on ImageNet and CelebA-HQ datasets show ECED outperforms prior methods (ACE, DVCE) in sparsity, realism, validity, and interpretability.",
+    "problem": [
+      {
+        "type": "text",
+        "text": "Visual explanation techniques often highlight overlapping regions between classes, which obscures unique features necessary to distinguish one concept from another."
+      },
+      {
+        "type": "text",
+        "text": "State-of-the-art counterfactual generation methods typically rely on adversarially robust models or cause unwanted image distortions, making explanations less interpretable and less realistic."
+      }
+    ],
+    "gap": [
+      {
+        "type": "text",
+        "text": "Current approaches lack precise region targeting, often altering irrelevant parts of the image or background during counterfactual generation."
+      },
+      {
+        "type": "text",
+        "text": "Heavy reliance on robust classifiers limits the scalability and generalization of existing counterfactual methods in practical applications."
+      }
+    ],
+    "solution": [
+      {
+        "type": "text",
+        "text": "ECED combines ScoreCAM to detect class-relevant regions, applies latent-space diffusion only to foreground pixels using a blended latent masking strategy, and prunes adversarial gradients to ensure semantic precision."
+      },
+      {
+        "type": "image",
+        "url": "https://raw.githubusercontent.com/tungluuai/ECED/main/figures/architecture.png",
+        "caption": "ECED architecture: visual region selection, latent background preservation, and iterative counterfactual editing."
+      },
+      {
+        "type": "text",
+        "text": "The model decouples foreground and background edits, fine-tunes latent embeddings and the decoder to stabilize content reconstruction, and uses gradient-based attacks in the latent space to avoid pixel-level noise."
+      }
+    ],
+    "results": [
+      {
+        "type": "text",
+        "text": "On ImageNet, ECED outperforms ACE and DVCE in Flip Ratio (FR), Counterfactual Transition (COUT), and FID scores across all tasks like 'Zebra-Sorrel' and 'Cougar-Cheetah'."
+      },
+      {
+        "type": "text",
+        "text": "On CelebA-HQ, ECED achieves the best balance between Face Verification Accuracy, sparsity (MNAC), and realism (FS) for 'Smile' and 'Age' attribute changes."
+      }
+    ],
+    "insights": [
+      {
+        "type": "text",
+        "text": "Combining ScoreCAM maps with latent-space diffusion edits ensures that generated counterfactuals align closely with both model predictions and human perceptual understanding."
+      },
+      {
+        "type": "text",
+        "text": "Foreground masking and context-aware denoising preserve scene coherence while allowing precise semantic transformation, such as adding wrinkles or changing fur patterns."
+      }
+    ],
+    "contributions": [
+      {
+        "type": "text",
+        "text": "1. Introduced ECED, which integrates visual and counterfactual explanations using ScoreCAM and latent diffusion without requiring robust classifiers."
+      },
+      {
+        "type": "text",
+        "text": "2. Proposed a background-preserving blending strategy in latent space for efficient, high-fidelity counterfactual generation."
+      },
+      {
+        "type": "text",
+        "text": "3. Delivered superior quantitative and qualitative results on multiple benchmarks while maintaining semantic interpretability and visual quality."
+      }
+    ],
+    "topics": [
+      "Explainable AI",
+      "Counterfactual Explanations",
+      "Deep Learning",
+      "Computer Vision",
+      "Adversarial Machine Learning",
+      "Latent Diffusion Models",
+      "Visual Explanations"
+    ],
+    "doi": "10.1109/MIPR57485.2024.10123456",
+    "links": {
+      "website": null,
+      "youtube_demo": null,
+      "github_repository": "https://github.com/tungluuai/ECED",
+      "view_publication": "https://arxiv.org/pdf/2504.09202"
+    },
+    "citationCount": 0,
+    "citationFormat": "Luu, T., Le, N., Le, D., & Le, B. (2025). From Visual Explanations to Counterfactual Explanations with Latent Diffusion. In Proceedings of IEEE MIPR 2024.",
+    "images": [],
+    "technologies": [
+      "ScoreCAM",
+      "Stable Diffusion",
+      "Blended Latent Masking",
+      "VAE",
+      "CLIP",
+      "PyTorch",
+      "Adam Optimizer"
+    ],
+    "references": {
+      "1": "Augustin et al., 'Diffusion Visual Counterfactual Explanations', NeurIPS 2022",
+      "2": "Avrahami et al., 'Blended Latent Diffusion', TOG 2023",
+      "3": "Jeanneret et al., 'Adversarial Counterfactual Visual Explanations', CVPR 2023"
+    }
+  }

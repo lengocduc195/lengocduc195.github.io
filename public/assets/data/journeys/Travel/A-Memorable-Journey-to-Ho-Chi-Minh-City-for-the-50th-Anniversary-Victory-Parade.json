@@ -1,0 +1,272 @@
+{
+    "title": "A Memorable Journey to Ho Chi Minh City for the 50th Anniversary Victory Parade",
+    "id": "A-Memorable-Journey-to-Ho-Chi-Minh-City-for-the-50th-Anniversary-Victory-Parade",
+    "start_date": "2025-04-27",
+    "end_date": "2025-05-1",
+    "description": "A personal account of my journey to Ho Chi Minh City to witness the historic 50th anniversary victory parade, capturing the emotions, experiences, and reflections from this significant event.",
+    "author": "Ngoc Duc",
+    "category": "Travel",
+    "images": [
+        {
+            "url": "/images/project-3.jpg",
+            "caption": "Giao diện chính của Secomus AI Platform"
+        },
+        {
+            "url": "/images/project-4.jpg",
+            "caption": "Bảng điều khiển phân tích dữ liệu"
+        }
+    ],
+    "tags": [
+        "Vietnam",
+        "Ho Chi Minh City",
+        "Victory Parade",
+        "Historical Event",
+        "Travel Experience"
+    ],
+    "sections": [
+        {
+            "title": "Introduction",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "Recently, I had the chance to travel to Ho Chi Minh City to witness a historic and emotional event: the military parade celebrating the 50th anniversary of the great victory. I was accompanied by my close friend, a medical student from Pham Ngoc Thach University of Medicine, and one of their tutoring students."
+                },
+                {
+                    "type": "image",
+                    "url": "https://media.vietravel.com/images/Content/le-dieu-binh-30-4-tai-tphcm-1.png",
+                    "caption": "Aerial view of the parade preparations in Ho Chi Minh City"
+                }
+            ]
+        },
+        {
+            "title": "Arrival and First Impressions",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "As we arrived in District 1, we were greeted by a stunning sea of red and gold. Millions of people wearing red shirts with yellow stars stood shoulder to shoulder. Countless national flags lined the streets, creating a vibrant and powerful scene. This was a vivid testament to the patriotism of the Vietnamese people."
+                },
+                {
+                    "type": "text",
+                    "text": "Our accommodation was a small but comfortable hotel just a few blocks from the main parade route. The excitement in the air was palpable, with locals and tourists alike preparing for the historic celebration. Street vendors were selling commemorative items, and restaurants were packed with visitors from all over the country."
+                }
+            ]
+        },
+        {
+            "title": "The Parade Experience",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "The air was charged with emotion. One of the most unforgettable moments for me was when a formation of helicopters flew slowly overhead, carrying the Vietnamese national flag. That image stirred something deep within me—a sense of pride, gratitude, and indescribable emotion."
+                },
+                {
+                    "type": "text",
+                    "text": "The Su-30MK2 fighter jets were another highlight. Their movements were sharp, controlled, and powerful—more breathtaking than even the most thrilling scenes from American action movies. The skill and professionalism of the pilots left everyone in awe."
+                },
+                {
+                    "type": "image",
+                    "url": "https://storage.googleapis.com/blogvxr-uploads/2025/03/378002b8-le-dieu-binh-30-4-2025-2328969-1200x715.webp",
+                    "caption": "The impressive formation of Su-30MK2 fighter jets during the parade"
+                }
+            ]
+        },
+        {
+            "title": "Veterans' Stories",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "During the event, we also watched video messages from war veterans—those who had left home as mere teenagers to serve the country."
+                },
+                {
+                    "type": "quote",
+                    "text": "The first thing I thought of when we won was going home to my mother.",
+                    "author": "A veteran"
+                },
+                {
+                    "type": "text",
+                    "text": "As someone who deeply values family, I was touched by this simple but powerful expression of love."
+                },
+                {
+                    "type": "text",
+                    "text": "And then came a statement that struck me to the core. Former Vice President Nguyễn Thị Bình once said:"
+                },
+                {
+                    "type": "quote",
+                    "text": "The Americans are very good; they can go to the moon and return safely. But when they come to Vietnam, we are not sure they can return.",
+                    "author": "Former Vice President Nguyễn Thị Bình"
+                },
+                {
+                    "type": "text",
+                    "text": "That line captured the strength, bravery, and unyielding spirit of this nation."
+                }
+            ]
+        },
+        {
+            "title": "Cultural Experiences",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "Beyond the parade itself, our journey to Ho Chi Minh City was filled with rich cultural experiences. We visited the War Remnants Museum, which provided a sobering look at the impact of war on the Vietnamese people. The exhibits were powerful and moving, offering perspectives that are often overlooked in Western narratives."
+                },
+                {
+                    "type": "text",
+                    "text": "We also explored the vibrant street food scene, sampling local delicacies like bánh mì, phở, and cơm tấm. The flavors were incredible, and each meal was an opportunity to connect with locals and learn more about their daily lives and traditions."
+                }
+            ]
+        },
+        {
+            "title": "Reflections and Conclusion",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "This journey reminded me of how precious peace truly is—and the immense sacrifices that made it possible. I am deeply grateful for our veterans, and with all my heart, I vow to contribute to building this country—a land shaped by courage, love, and sacrifice."
+                },
+                {
+                    "type": "text",
+                    "text": "As we prepared to return home, I found myself reflecting on the connections between past and present, between sacrifice and freedom. The parade wasn't just a celebration of victory, but a reminder of the resilience and determination that continue to shape Vietnam's identity and future."
+                }
+            ]
+        }
+    ],
+    "itinerary": [
+        {
+            "day": 1,
+            "date": "2025-04-06",
+            "title": "Arrival in Ho Chi Minh City",
+            "activities": [
+                "Arrived at Tan Son Nhat International Airport",
+                "Checked in at District 1 hotel",
+                "Evening walk around Ben Thanh Market area",
+                "Dinner at a local restaurant"
+            ]
+        },
+        {
+            "day": 2,
+            "date": "2025-04-07",
+            "title": "City Exploration",
+            "activities": [
+                "Visited the War Remnants Museum",
+                "Lunch at Pho 2000",
+                "Explored the Notre-Dame Cathedral Basilica of Saigon",
+                "Shopping at Dong Khoi Street"
+            ]
+        },
+        {
+            "day": 3,
+            "date": "2025-04-08",
+            "title": "Cultural Immersion",
+            "activities": [
+                "Tour of the Reunification Palace",
+                "Vietnamese cooking class",
+                "Evening water puppet show"
+            ]
+        },
+        {
+            "day": 4,
+            "date": "2025-04-09",
+            "title": "Parade Preparations",
+            "activities": [
+                "Visited the parade preparation areas",
+                "Met with local veterans",
+                "Documentary screening about the war"
+            ]
+        },
+        {
+            "day": 5,
+            "date": "2025-04-10",
+            "title": "Victory Parade Day",
+            "activities": [
+                "Early morning arrival at viewing area",
+                "Witnessed the full military parade",
+                "Evening fireworks celebration"
+            ]
+        },
+        {
+            "day": 6,
+            "date": "2025-04-11",
+            "title": "Cu Chi Tunnels Excursion",
+            "activities": [
+                "Day trip to Cu Chi Tunnels",
+                "Learned about guerrilla warfare tactics",
+                "Traditional Vietnamese dinner"
+            ]
+        },
+        {
+            "day": 7,
+            "date": "2025-04-12",
+            "title": "Mekong Delta Tour",
+            "activities": [
+                "Boat tour of the Mekong Delta",
+                "Visited floating markets",
+                "Fruit orchard and honey farm tour"
+            ]
+        },
+        {
+            "day": 8,
+            "date": "2025-04-13",
+            "title": "Modern Vietnam",
+            "activities": [
+                "Tour of Bitexco Financial Tower",
+                "Shopping at modern malls",
+                "Evening street food tour"
+            ]
+        },
+        {
+            "day": 9,
+            "date": "2025-04-14",
+            "title": "Final Explorations",
+            "activities": [
+                "Visit to Jade Emperor Pagoda",
+                "Souvenir shopping",
+                "Farewell dinner cruise on Saigon River"
+            ]
+        },
+        {
+            "day": 10,
+            "date": "2025-04-15",
+            "title": "Departure",
+            "activities": [
+                "Final morning walk around the city",
+                "Departure from Tan Son Nhat International Airport"
+            ]
+        }
+    ],
+    "practical_info": {
+        "accommodation": {
+            "name": "Liberty Central Saigon Citypoint Hotel",
+            "address": "59 Pasteur Street, District 1, Ho Chi Minh City",
+            "notes": "4-star hotel with rooftop pool, centrally located near major attractions"
+        },
+        "transportation": [
+            {
+                "type": "Flight",
+                "details": "Vietnam Airlines VN123 from Hanoi to Ho Chi Minh City",
+                "date": "2025-04-06"
+            },
+            {
+                "type": "Local",
+                "details": "Primarily used Grab for getting around the city",
+                "notes": "Public buses were also convenient for longer distances"
+            },
+            {
+                "type": "Return Flight",
+                "details": "Vietnam Airlines VN456 from Ho Chi Minh City to Hanoi",
+                "date": "2025-04-15"
+            }
+        ],
+        "budget": {
+            "accommodation": "4,500,000 VND",
+            "food": "3,200,000 VND",
+            "transportation": "2,800,000 VND",
+            "activities": "2,500,000 VND",
+            "shopping": "1,800,000 VND",
+            "total": "14,800,000 VND"
+        },
+        "tips": [
+            "Book accommodation well in advance due to high demand during the parade period",
+            "Carry water and sun protection for the parade day",
+            "Learn basic Vietnamese phrases to enhance your experience",
+            "Be prepared for large crowds, especially on April 10th",
+            "Keep valuables secure in crowded areas"
+        ]
+    }
+}

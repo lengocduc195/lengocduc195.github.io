@@ -193,10 +193,9 @@
     "technologies": [
         "Python",
         "Hugging Face Transformers",
-        "SQLAlchemy",
         "Node.js",
         "Redis",
-        "Qwen/Qwen2.5-7B-Instruct"
+        "Qwen"
     ],
     "topics": [
         "AI",

@@ -1,6 +1,7 @@
 import { getShopProducts } from '@/lib/shopUtils';
 import ClientShopWrapper from './ClientShopWrapper';
 import CategoryLink from './CategoryLink';
+import ShopInfoSection from '@/components/shop/ShopInfoSection';
 
 export default async function ShopPage() {
   const products = await getShopProducts();
@@ -151,6 +152,9 @@ export default async function ShopPage() {
           <ClientShopWrapper initialProducts={products} />
         </div>
       </div>
+
+      {/* Shop Information Section */}
+      <ShopInfoSection />
 
       {/* Testimonials Section */}
       <div className="bg-gray-100 dark:bg-gray-900 py-16">

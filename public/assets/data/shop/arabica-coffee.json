@@ -1,36 +1,35 @@
 {
   "id": 1,
-  "name": "Cà Phê Arabica Ethiopia Yirgacheffe",
-  "slug": "arabica-coffee-ethiopia",
-  "description": "Hạt cà phê Arabica Ethiopia Yirgacheffe được trồng ở độ cao 1.800-2.200m, mang đến hương vị trái cây tươi mát với độ chua thanh nhẹ.",
-  "longDescription": "Cà Phê Arabica Ethiopia Yirgacheffe là một trong những loại cà phê được đánh giá cao nhất thế giới. Được trồng ở vùng Yirgacheffe, Ethiopia - quê hương của cà phê, những hạt cà phê này mang đến trải nghiệm thưởng thức đặc biệt cho những người yêu cà phê.\n\nHạt cà phê được thu hái thủ công khi chín và được chế biến theo phương pháp ướt, giúp bảo toàn hương vị tự nhiên của cà phê. Sau đó, chúng được rang ở mức độ trung bình để tạo ra sự cân bằng hoàn hảo giữa hương thơm và vị đắng.\n\nĐặc điểm hương vị:\n- Hương thơm: Hoa cỏ, trái cây tươi\n- Vị: Chua thanh, ngọt nhẹ với nốt hương cam quýt\n- Hậu vị: Kéo dài với vị ngọt của mật ong\n- Độ đậm: Trung bình\n- Độ chua: Cao, thanh nhẹ\n\nCách pha chế tốt nhất:\n- Pour Over (V60, Chemex)\n- AeroPress\n- Siphon",
-  "price": 250000,
-  "salePrice": 220000,
-  "image": "https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?q=80&w=1000&auto=format&fit=crop",
+  "name": "Cà Phê Robusta Mixed",
+  "slug": "robusta-coffee-daklak",
+  "description": "Hạt cà phê Robusta nguyên chất từ Đắk Lắk, được nhà làm thủ công, mang đến hương vị đậm đà, hậu vị mạnh mẽ và độ đắng đặc trưng.",
+  "longDescription": "Cà Phê Robusta Đắk Lắk Nhà Làm được tuyển chọn từ những hạt cà phê chín mọng, trồng tại cao nguyên Đắk Lắk - thủ phủ cà phê Việt Nam. Với quy trình thu hoạch và chế biến thủ công, sản phẩm giữ trọn vị tự nhiên đậm đà, đáp ứng kỳ vọng của những tín đồ yêu thích cà phê mạnh.\n\nHạt cà phê được sơ chế theo phương pháp khô (natural process) giúp lưu giữ trọn vẹn hương vị đậm đà đặc trưng của Robusta. Rang ở mức độ medium-dark nhằm làm nổi bật vị đắng nhẹ, ít chua và hậu vị kéo dài.\n\nĐặc điểm hương vị:\n- Hương thơm: Socola, hạt dẻ\n- Vị: Đậm đà, hậu vị mạnh\n- Hậu vị: Dài, vị đắng dễ chịu\n- Độ đậm: Cao\n- Độ chua: Thấp\n\nCách pha chế tốt nhất:\n- Phin truyền thống Việt Nam\n- Moka Pot\n- Espresso",
+  "price": 220000,
+  "salePrice": 180000,
+  "image": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=1000&auto=format&fit=crop",
   "gallery": [
     "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=1000&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1000&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1580933073521-dc49ac0d4e6a?q=80&w=1000&auto=format&fit=crop"
   ],
   "category": "Coffee",
   "features": [
-    "Hạt cà phê Arabica 100% từ Ethiopia",
-    "Rang mức Medium (trung bình)",
-    "Độ cao trồng: 1.800-2.200m",
-    "Chế biến ướt (Washed Process)",
-    "Đóng gói: 250g, bảo quản chân không"
+    "Hạt cà phê Robusta nguyên chất từ Đắk Lắk",
+    "Rang mức Medium-Dark (vừa đến đậm)",
+    "Độ cao trồng: 500-800m",
+    "Chế biến khô (Natural Process)",
+    "Đóng gói: 1kg, bảo quản chân không"
   ],
   "specifications": {
-    "Xuất xứ": "Ethiopia",
-    "Vùng": "Yirgacheffe",
-    "Loại hạt": "Arabica",
-    "Độ rang": "Medium (Trung bình)",
-    "Khối lượng": "250g",
+    "Xuất xứ": "Việt Nam",
+    "Vùng": "Đắk Lắk",
+    "Loại hạt": "Robusta",
+    "Độ rang": "Medium-Dark (Vừa đến đậm)",
+    "Khối lượng": "1kg",
     "Hạn sử dụng": "12 tháng kể từ ngày rang"
   },
   "inStock": true,
-  "rating": 4.8,
-  "reviews": 124,
-  "date": "2023-08-15",
-  "tags": ["Coffee", "Arabica", "Ethiopia", "Specialty Coffee"]
+  "rating": 4.7,
+  "reviews": 98,
+  "date": "2024-04-15",
+  "tags": ["Coffee", "Robusta", "Daklak", "Vietnam Coffee", "Nhà làm"]
 }

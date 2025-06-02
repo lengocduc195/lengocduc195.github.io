@@ -32,6 +32,18 @@
       "Deep Q-Networks",
       "Policy Gradient Methods"
     ],
+    "Feature Engineering": [
+      "Feature Extraction",
+      "Feature Selection",
+      "Dimensionality Reduction",
+      "Feature Transformation"
+    ],
+    "Predictive Modeling": [
+      "Classification",
+      "Regression",
+      "Time Series Forecasting",
+      "Risk Prediction"
+    ],
     "Deep Learning": {
       "Neural Networks": [
         "Feedforward Neural Networks",
@@ -110,6 +122,45 @@
         "Facial Recognition",
         "Autonomous Vehicles",
         "Medical Image Analysis"
+      ],
+      "Explainable Computer Vision": [
+        "Visual Explanations",
+        "Counterfactual Explanations",
+        "Attention Visualization"
+      ]
+    },
+    "Multimodal AI": {
+      "Vision-Language Models": [
+        "Image-to-Text Retrieval",
+        "Text-to-Image Generation",
+        "Cross-modal Retrieval"
+      ],
+      "Multimodal Learning": [
+        "Feature Fusion",
+        "Cross-modal Attention",
+        "Joint Embeddings"
+      ],
+      "Applications": [
+        "Visual Question Answering",
+        "Image Captioning",
+        "Cross-modal Search"
+      ]
+    },
+    "Healthcare AI": {
+      "Clinical Applications": [
+        "Risk Prediction",
+        "Disease Diagnosis",
+        "Treatment Recommendation"
+      ],
+      "Healthcare Data": [
+        "Electronic Health Records",
+        "Medical Imaging",
+        "Clinical Notes"
+      ],
+      "Healthcare Informatics": [
+        "Clinical Decision Support",
+        "Health Monitoring",
+        "Predictive Analytics"
       ]
     },
     "Robotics": {
@@ -214,6 +265,13 @@
       "Job Displacement",
       "Surveillance",
       "Autonomous Weapons"
+    ],
+    "Explainable AI": [
+      "Model Interpretability",
+      "Counterfactual Explanations",
+      "Feature Attribution",
+      "Visual Explanations",
+      "Attention Visualization"
     ],
     "Explainability vs. Transparency": [
       "Interpretability of AI Models",

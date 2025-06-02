@@ -2,6 +2,12 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
+
+// Dynamically import the VisitorCounter component to ensure it only loads on the client
+const VisitorCounter = dynamic(() => import('./analytics/VisitorCounter'), {
+  ssr: false,
+});
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -115,6 +121,9 @@ const Footer = () => {
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p>&copy; {currentYear} Duc Le. All rights reserved.</p>
+          <div className="mt-2">
+            <VisitorCounter />
+          </div>
         </div>
       </div>
     </footer>

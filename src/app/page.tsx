@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { getHighlightedProjects, getAboutData, getHighlightedPublications, getLatestNotableObservations, getLatestUnexpectedInsights, createSlug } from '@/lib/dataUtils';
+import AuthorTooltip from '@/components/AuthorTooltip';
 
 export default async function HomePage() {
   // Lấy danh sách các dự án nổi bật, thông tin about, publications nổi bật, và insights từ blogs
@@ -14,10 +15,9 @@ export default async function HomePage() {
     <main className="min-h-screen">
       {/* Hero Section */}
       <section className="relative h-screen flex items-center overflow-hidden">
-        <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/70 to-black/30">
+        <div className="absolute inset-0 z-0">
           {/* Background image */}
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-900 to-purple-900 opacity-80" />
-          <div className="absolute inset-0 bg-[url('/images/home_page_image.png')] bg-cover bg-center opacity-30" />
+          <div className="absolute inset-0 bg-[url('/images/home_page_image.png')] bg-cover bg-center opacity-80" />
         </div>
 
         <div className="container mx-auto px-4 z-10 flex flex-col md:flex-row items-center justify-between">
@@ -28,29 +28,138 @@ export default async function HomePage() {
                 {aboutData.name || 'Duc Le'}
               </span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-200 mb-8 animate-fade-in">
-              {aboutData.roles && aboutData.roles.length > 0
-                ? aboutData.roles.join(' • ')
-                : 'Research Scientist • Machine Learning Engineer'}
-            </p>
+            <div className="mb-8 animate-fade-in">
+              <div className="flex flex-col gap-3 justify-center md:justify-start">
+                {aboutData.roles && aboutData.ai_role_groups && (() => {
+                  // Define colors for each group - more muted and less bright
+                  const colors = [
+                    { dot: "bg-blue-600", text: "text-blue-400", bg: "bg-blue-900/50", textBadge: "text-blue-300", shadow: "shadow-blue-900/20", border: "border-blue-700/30" },
+                    { dot: "bg-green-600", text: "text-green-400", bg: "bg-green-900/50", textBadge: "text-green-300", shadow: "shadow-green-900/20", border: "border-green-700/30" },
+                    { dot: "bg-purple-600", text: "text-purple-400", bg: "bg-purple-900/50", textBadge: "text-purple-300", shadow: "shadow-purple-900/20", border: "border-purple-700/30" },
+                    { dot: "bg-amber-600", text: "text-amber-400", bg: "bg-amber-900/50", textBadge: "text-amber-300", shadow: "shadow-amber-900/20", border: "border-amber-700/30" },
+                    { dot: "bg-red-600", text: "text-red-400", bg: "bg-red-900/50", textBadge: "text-red-300", shadow: "shadow-red-900/20", border: "border-red-700/30" },
+                    { dot: "bg-indigo-600", text: "text-indigo-400", bg: "bg-indigo-900/50", textBadge: "text-indigo-300", shadow: "shadow-indigo-900/20", border: "border-indigo-700/30" },
+                    { dot: "bg-pink-600", text: "text-pink-400", bg: "bg-pink-900/50", textBadge: "text-pink-300", shadow: "shadow-pink-900/20", border: "border-pink-700/30" },
+                    { dot: "bg-teal-600", text: "text-teal-400", bg: "bg-teal-900/50", textBadge: "text-teal-300", shadow: "shadow-teal-900/20", border: "border-teal-700/30" },
+                    { dot: "bg-gray-600", text: "text-gray-400", bg: "bg-gray-900/50", textBadge: "text-gray-300", shadow: "shadow-gray-900/20", border: "border-gray-700/30" }
+                  ];
+
+                  // Map roles to their groups
+                  const roleToGroupMap = new Map();
+                  aboutData.ai_role_groups.forEach(group => {
+                    group.roles.forEach(role => {
+                      roleToGroupMap.set(role, group.group);
+                    });
+                  });
+
+                  // Group roles from aboutData.roles by their corresponding groups
+                  const groupedRoles = new Map();
+                  aboutData.roles.forEach(role => {
+                    // Find the closest matching role in the map
+                    let matchingRole = Array.from(roleToGroupMap.keys()).find(
+                      mapRole => mapRole.toLowerCase().includes(role.toLowerCase()) ||
+                                role.toLowerCase().includes(mapRole.toLowerCase())
+                    );
+
+                    if (matchingRole) {
+                      const group = roleToGroupMap.get(matchingRole);
+                      if (!groupedRoles.has(group)) {
+                        groupedRoles.set(group, []);
+                      }
+                      groupedRoles.get(group).push(role);
+                    } else {
+                      // If no matching group found, put in "Other"
+                      if (!groupedRoles.has("Other")) {
+                        groupedRoles.set("Other", []);
+                      }
+                      groupedRoles.get("Other").push(role);
+                    }
+                  });
+
+                  // Convert to array and limit to 4 groups
+                  const groupsArray = Array.from(groupedRoles.entries())
+                    .slice(0, 4)
+                    .map(([group, roles], index) => {
+                      const color = colors[index % colors.length];
+
+                      return (
+                        <div key={group} className="flex flex-wrap items-center">
+                          <div className={`w-4 h-4 rounded-full ${color.dot} mr-3`}></div>
+                          <span className={`text-base ${color.text} font-semibold mr-3`}>{group}:</span>
+                          <div className="flex flex-wrap gap-2">
+                            {roles.slice(0, 2).map((role, roleIndex) => (
+                              <span
+                                key={roleIndex}
+                                className={`px-4 py-1.5 ${color.bg} rounded-md text-base ${color.textBadge} font-semibold shadow-md ${color.shadow} border ${color.border}`}
+                              >
+                                {role}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      );
+                    });
+
+                  return groupsArray;
+                })()}
+
+                {(!aboutData.roles || !aboutData.ai_role_groups) && (
+                  <>
+                    {/* Fallback if roles or ai_role_groups is not available */}
+                    <div className="flex flex-wrap items-center">
+                      <div className="w-4 h-4 rounded-full bg-blue-600 mr-3"></div>
+                      <span className="text-base text-blue-400 font-semibold mr-3">Model Development:</span>
+                      <div className="flex flex-wrap gap-2">
+                        <span className="px-4 py-1.5 bg-blue-900/50 rounded-md text-base text-blue-300 font-semibold shadow-md shadow-blue-900/20 border border-blue-700/30">AI Research Scientist</span>
+                        <span className="px-4 py-1.5 bg-blue-900/50 rounded-md text-base text-blue-300 font-semibold shadow-md shadow-blue-900/20 border border-blue-700/30">Machine Learning Engineer</span>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-wrap items-center">
+                      <div className="w-4 h-4 rounded-full bg-green-600 mr-3"></div>
+                      <span className="text-base text-green-400 font-semibold mr-3">Data Analysis:</span>
+                      <div className="flex flex-wrap gap-2">
+                        <span className="px-4 py-1.5 bg-green-900/50 rounded-md text-base text-green-300 font-semibold shadow-md shadow-green-900/20 border border-green-700/30">Data Scientist</span>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-wrap items-center">
+                      <div className="w-4 h-4 rounded-full bg-purple-600 mr-3"></div>
+                      <span className="text-base text-purple-400 font-semibold mr-3">GenAI Interaction:</span>
+                      <div className="flex flex-wrap gap-2">
+                        <span className="px-4 py-1.5 bg-purple-900/50 rounded-md text-base text-purple-300 font-semibold shadow-md shadow-purple-900/20 border border-purple-700/30">Prompt Engineer</span>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-wrap items-center">
+                      <div className="w-4 h-4 rounded-full bg-amber-600 mr-3"></div>
+                      <span className="text-base text-amber-400 font-semibold mr-3">AI Product Management:</span>
+                      <div className="flex flex-wrap gap-2">
+                        <span className="px-4 py-1.5 bg-amber-900/50 rounded-md text-base text-amber-300 font-semibold shadow-md shadow-amber-900/20 border border-amber-700/30">AI Product Manager</span>
+                      </div>
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
 
             {/* Social Links */}
             <div className="mt-8 flex space-x-6">
               {aboutData.social?.github && (
-                <a href={aboutData.social.github} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">
+                <a href={aboutData.social.github} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-200 transition-colors">
                   <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
                   </svg>
                 </a>
               )}
               {aboutData.social?.linkedin && (
-                <a href={aboutData.social.linkedin} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">
+                <a href={aboutData.social.linkedin} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-200 transition-colors">
                   <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                   </svg>
                 </a>
               )}
-              <a href={`mailto:${aboutData.email || 'lengocduc195@gmail.com'}`} className="text-gray-300 hover:text-white transition-colors">
+              <a href={`mailto:${aboutData.email || 'lengocduc195@gmail.com'}`} className="text-gray-400 hover:text-gray-200 transition-colors">
                 <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" />
                   <path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z" />
@@ -82,8 +191,41 @@ export default async function HomePage() {
                       </p>
 
                       <div className="flex justify-between items-center mt-2">
-                        <span className="text-blue-300 text-sm">{pub.authors?.[0] || 'Duc Le'} et al.</span>
-                        <span className="text-gray-400 text-sm">{pub.year}</span>
+                        <AuthorTooltip authors={pub.authors || ['Duc Le']} />
+                        <div className="flex items-center">
+                          {pub.abbreviation && (
+                            <span className="text-gray-400 text-sm mr-2" title={pub.venue}>
+                              {pub.abbreviation}
+                              {pub.type && ` (${pub.type === 'Conference' ? 'Conf.' : pub.type === 'Journal' ? 'Jour.' : 'Work.'})`}
+                            </span>
+                          )}
+                          {!pub.abbreviation && pub.venue && (
+                            <span className="text-gray-400 text-sm mr-2" title={pub.venue}>
+                              {pub.venue.split(' ').map(word => word.charAt(0)).join('').substring(0, 4)}
+                              {pub.type && ` (${pub.type === 'Conference' ? 'Conf.' : pub.type === 'Journal' ? 'Jour.' : 'Work.'})`}
+                            </span>
+                          )}
+                          {!pub.abbreviation && !pub.venue && pub.type && (
+                            <span className="text-gray-400 text-sm mr-2">
+                              {pub.type === 'Conference' ? 'Conf.' : pub.type === 'Journal' ? 'Jour.' : 'Work.'}
+                            </span>
+                          )}
+                          {pub.rank && (
+                            <span className={`text-xs font-bold px-1.5 py-0.5 rounded ${
+                              pub.rank === 'A*' || pub.rank === 'A' ? 'bg-green-700/60 text-green-200' :
+                              pub.rank === 'B' ? 'bg-blue-700/60 text-blue-200' :
+                              pub.rank === 'C' ? 'bg-yellow-700/60 text-yellow-200' :
+                              'bg-gray-700/60 text-gray-200'
+                            } mr-2`}>
+                              {pub.rank}
+                            </span>
+                          )}
+                          <span className="text-gray-400 text-sm">
+                            {typeof pub.year === 'string' && pub.year.includes('-')
+                              ? new Date(pub.year).getFullYear()
+                              : pub.year}
+                          </span>
+                        </div>
                       </div>
                     </li>
                   ))}

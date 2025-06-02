@@ -48,14 +48,22 @@ export default function JourneyFilter({ journeys }: JourneyFilterProps) {
 
     switch (sortCriteria) {
       case 'date_asc':
-        filtered.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+        filtered.sort((a, b) => {
+          const dateA = a.start_date || a.date || '';
+          const dateB = b.start_date || b.date || '';
+          return new Date(dateA).getTime() - new Date(dateB).getTime();
+        });
         break;
       case 'category_asc':
          filtered.sort((a, b) => (a.category ?? '').localeCompare(b.category ?? ''));
         break;
       case 'date_desc':
       default:
-        filtered.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        filtered.sort((a, b) => {
+          const dateA = a.start_date || a.date || '';
+          const dateB = b.start_date || b.date || '';
+          return new Date(dateB).getTime() - new Date(dateA).getTime();
+        });
         break;
     }
 
@@ -230,23 +238,36 @@ export default function JourneyFilter({ journeys }: JourneyFilterProps) {
                 {/* Content card with hover effect and clickable area */}
                 <Link href={`/journeys/${slug}`}>
                   <div className="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:border-blue-300 dark:hover:border-blue-700 cursor-pointer">
-                    <div className="flex flex-wrap items-start justify-between mb-3 gap-2">
-                      <h3 className="text-xl font-bold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                        {journey.title || 'Untitled Journey'}
-                      </h3>
-
+                    <div className="relative mb-3">
+                      {/* Category badge positioned at absolute top right */}
                       {journey.category && (
-                        <span className={`bg-gradient-to-r ${gradientClass} text-white text-sm font-medium px-4 py-1.5 rounded-full shadow-md`}>
+                        <span className={`absolute top-0 right-0 bg-gradient-to-r ${gradientClass} text-white text-sm font-medium px-4 py-1.5 rounded-full shadow-md`}>
                           {journey.category}
                         </span>
                       )}
+
+                      <div className="pr-24"> {/* Add padding to the right to make space for the category badge */}
+                        <h3 className="text-xl font-bold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                          {journey.title || 'Untitled Journey'}
+                        </h3>
+                      </div>
                     </div>
 
                     <div className="flex items-center gap-2 mb-3 text-gray-500 dark:text-gray-400">
                       <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
                       </svg>
-                      <time className="text-sm">{journey.date || 'N/A'}</time>
+                      <time className="text-sm font-medium text-blue-600 dark:text-blue-400">
+                        {journey.start_date && journey.end_date ? (
+                          `${new Date(journey.start_date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })} - ${new Date(journey.end_date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}`
+                        ) : journey.start_date ? (
+                          `Started on ${new Date(journey.start_date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}`
+                        ) : journey.date ? (
+                          new Date(journey.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+                        ) : (
+                          'N/A'
+                        )}
+                      </time>
                     </div>
 
                     <p className="text-gray-700 dark:text-gray-300 mb-4">

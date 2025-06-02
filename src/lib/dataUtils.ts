@@ -122,11 +122,18 @@ export interface ExperienceEntry {
   description?: string | string[]; // Có thể là một chuỗi hoặc danh sách
 }
 
+export interface AIRoleGroup {
+  group: string;
+  roles: string[];
+  description?: string;
+}
+
 export interface AboutData {
   name?: string;
   title?: string;
   'main role'?: string;
   roles?: string[];
+  ai_role_groups?: AIRoleGroup[];
   bio?: string;
   image?: string;
   location?: string;
@@ -289,7 +296,7 @@ export async function getHighlightedProjects(): Promise<Project[]> {
 
 // Interface Publication (Cập nhật để khớp file mẫu publication_1.json)
 export interface Publication {
-    id: number;
+    id: number | string;
     rank?: string;
     title: string;
     authors: string[];
@@ -297,7 +304,7 @@ export interface Publication {
     highlight?: boolean; // Thêm trường highlight để đánh dấu publication nổi bật
     type?: 'Conference' | 'Journal' | 'Workshop'; // Thêm trường type để phân loại
     venue?: string;
-    year: number;
+    year: number | string; // Can be a number (2023) or a date string (2023-04-01)
     abstract?: string;
     fullText?: string;
     // 6 phần quan trọng của publication
@@ -342,24 +349,122 @@ export function createSlug(title: string | undefined, id: string | number | unde
 // Hàm lấy các publication nổi bật
 export async function getHighlightedPublications(limit: number = 2): Promise<Publication[]> {
     const publications = await getPublications();
-    // Lọc các publication có highlight và sắp xếp theo năm mới nhất
-    const highlightedPublications = publications
-        .filter(pub => pub.highlight)
-        .sort((a, b) => (b.year || 0) - (a.year || 0));
 
+    // Helper function to parse year to a comparable date value
+    const getPublicationDate = (pub: Publication): number => {
+        // If year is a string that looks like a date (YYYY-MM-DD)
+        if (typeof pub.year === 'string' && pub.year.includes('-')) {
+            return new Date(pub.year).getTime();
+        }
+        // If year is a number or can be converted to a number
+        return typeof pub.year === 'number' ? pub.year : parseInt(String(pub.year), 10) || 0;
+    };
 
-    // Nếu không có publication nào có highlight, trả về các publication mới nhất
-    if (highlightedPublications.length === 0) {
-        console.warn("No highlighted publications found. Returning latest publications instead.", publications);
-        return publications
-            .sort((a, b) => (b.year || 0) - (a.year || 0))
-            .slice(0, limit);
+    // Sort all publications by date (newest first)
+    const sortedPublications = publications.sort((a, b) => {
+        return getPublicationDate(b) - getPublicationDate(a);
+    });
+
+    // Get highlighted publications (sorted by date)
+    const highlightedPublications = sortedPublications.filter(pub => pub.highlight);
+
+    // If we have enough highlighted publications, return those
+    if (highlightedPublications.length >= limit) {
+        return highlightedPublications.slice(0, limit);
     }
-    // console.log("Highlighted publications:", highlightedPublications);
 
-    // Đảm bảo trả về các publication mới nhất trong số các publication được highlight
-    return highlightedPublications.slice(0, limit);
+    // Otherwise, return the most recent publications regardless of highlight status
+    return sortedPublications.slice(0, limit);
 }
+
+// Topic mapping to standardize similar topics
+export const standardizeTopicName = (topic: string): string => {
+    // Convert to lowercase for case-insensitive matching
+    const lowerTopic = topic.toLowerCase().trim();
+
+    // Deep Learning and related topics
+    if (lowerTopic.includes('deep learning') ||
+        lowerTopic.includes('neural network') ||
+        lowerTopic.includes('transformer')) {
+        return 'Deep Learning';
+    }
+
+    // Attention mechanisms
+    if (lowerTopic.includes('attention mechanism') ||
+        lowerTopic.includes('attention model') ||
+        lowerTopic.includes('attention-based')) {
+        return 'Attention Mechanisms';
+    }
+
+    // Explainable AI and related topics
+    if (lowerTopic.includes('explainable ai') ||
+        lowerTopic.includes('xai') ||
+        lowerTopic.includes('visual explanation') ||
+        lowerTopic.includes('model interpretation')) {
+        return 'Explainable AI';
+    }
+
+    // Counterfactual explanations
+    if (lowerTopic.includes('counterfactual') ||
+        lowerTopic.includes('counterfactual explanation')) {
+        return 'Counterfactual Explanations';
+    }
+
+    // Vision-Language Models
+    if (lowerTopic.includes('vision-language') ||
+        lowerTopic.includes('vision language') ||
+        lowerTopic.includes('image-to-text') ||
+        lowerTopic.includes('image to text') ||
+        lowerTopic.includes('multimodal')) {
+        return 'Multimodal AI';
+    }
+
+    // Healthcare topics
+    if (lowerTopic.includes('healthcare') ||
+        lowerTopic.includes('health record') ||
+        lowerTopic.includes('ehr') ||
+        lowerTopic.includes('medical')) {
+        return 'Healthcare AI';
+    }
+
+    // Risk prediction
+    if (lowerTopic.includes('risk prediction') ||
+        lowerTopic.includes('predictive model')) {
+        return 'Predictive Modeling';
+    }
+
+    // Feature extraction
+    if (lowerTopic.includes('feature extraction') ||
+        lowerTopic.includes('feature engineering')) {
+        return 'Feature Engineering';
+    }
+
+    // Computer Vision
+    if (lowerTopic.includes('computer vision') ||
+        lowerTopic.includes('image processing') ||
+        lowerTopic.includes('visual')) {
+        return 'Computer Vision';
+    }
+
+    // Natural Language Processing
+    if (lowerTopic.includes('nlp') ||
+        lowerTopic.includes('natural language') ||
+        lowerTopic.includes('text processing')) {
+        return 'Natural Language Processing';
+    }
+
+    // Adversarial Machine Learning
+    if (lowerTopic.includes('adversarial') ||
+        lowerTopic.includes('gan')) {
+        return 'Adversarial Machine Learning';
+    }
+
+    // Return the original topic if no mapping is found
+    // But capitalize first letter of each word for consistency
+    return topic.split(' ')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+        .join(' ');
+};
 
 // Hàm mới để lấy topics từ publications và đếm số lượng
 export async function getPublicationTopicsWithCounts(): Promise<{ topic: string; count: number }[]> {
@@ -375,8 +480,9 @@ export async function getPublicationTopicsWithCounts(): Promise<{ topic: string;
         if (Array.isArray(pub.topics)) {
             pub.topics.forEach(item => {
                 if (typeof item === 'string' && item.trim() !== '') {
-                    const trimmedTopic = item.trim();
-                    topicCounts[trimmedTopic] = (topicCounts[trimmedTopic] || 0) + 1;
+                    // Standardize the topic name
+                    const standardizedTopic = standardizeTopicName(item.trim());
+                    topicCounts[standardizedTopic] = (topicCounts[standardizedTopic] || 0) + 1;
                 }
             });
         }
@@ -403,16 +509,15 @@ export async function getOngoingExplorationTopics(): Promise<{ topic: string; co
     if (Array.isArray(blogs)) {
         blogs.forEach(blog => {
             if (Array.isArray(blog.topics)) {
-                // console.log("Processing blog topics:", blog.topics);
                 blog.topics.forEach(item => {
                     if (typeof item === 'string' && item.trim() !== '') {
-                        const trimmedTopic = item.trim();
-                        // console.log("Processing blog topics trimmedTopic:", trimmedTopic);
-                        if (!topicCounts[trimmedTopic]) {
-                            topicCounts[trimmedTopic] = { count: 0, source: new Set() };
+                        // Standardize the topic name
+                        const standardizedTopic = standardizeTopicName(item.trim());
+                        if (!topicCounts[standardizedTopic]) {
+                            topicCounts[standardizedTopic] = { count: 0, source: new Set() };
                         }
-                        topicCounts[trimmedTopic].count += 1;
-                        topicCounts[trimmedTopic].source.add('blog');
+                        topicCounts[standardizedTopic].count += 1;
+                        topicCounts[standardizedTopic].source.add('blog');
                     }
                 });
             }
@@ -424,21 +529,20 @@ export async function getOngoingExplorationTopics(): Promise<{ topic: string; co
         projects.forEach(project => {
             if (Array.isArray(project.topics)) {
                 project.topics.forEach(item => {
-                    // console.log("Processing project topics:", project.topics);
                     if (typeof item === 'string' && item.trim() !== '') {
-                        const trimmedTopic = item.trim();
-                        // console.log("Processing project topics trimmedTopic:", trimmedTopic);
-                        if (!topicCounts[trimmedTopic]) {
-                            topicCounts[trimmedTopic] = { count: 0, source: new Set() };
+                        // Standardize the topic name
+                        const standardizedTopic = standardizeTopicName(item.trim());
+                        if (!topicCounts[standardizedTopic]) {
+                            topicCounts[standardizedTopic] = { count: 0, source: new Set() };
                         }
-                        topicCounts[trimmedTopic].count += 1;
-                        topicCounts[trimmedTopic].source.add('project');
+                        topicCounts[standardizedTopic].count += 1;
+                        topicCounts[standardizedTopic].source.add('project');
                     }
                 });
             }
         });
     }
-    // console.log("topicCounts:", topicCounts);
+
     // Chuyển đổi thành mảng và sắp xếp
     const sortedTopics = Object.entries(topicCounts)
         .map(([topic, { count, source }]) => ({
@@ -1114,7 +1218,9 @@ export interface JourneyEntry {
     id?: number | string; // Có thể là number hoặc string
     title: string;
     description?: string;
-    date: string; // YYYY-MM-DD
+    date?: string; // YYYY-MM-DD (legacy field, kept for backward compatibility)
+    start_date?: string; // YYYY-MM-DD (start date of journey)
+    end_date?: string; // YYYY-MM-DD (end date of journey)
     tags?: string[];
     category?: string; // Thêm từ tên thư mục nếu không có
     images?: { url: string; caption: string }[] | string[];

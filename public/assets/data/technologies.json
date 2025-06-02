@@ -23,7 +23,9 @@
         "Ceph",
         "HDFS",
         "PostgreSQL",
-        "Firebase"
+        "Firebase",
+        "MongoDB",
+        "Redis"
       ],
       "Networking": [
         "VPCs",
@@ -43,7 +45,9 @@
         "Bedrock",
         "OpenAI API",
         "Hugging Face",
-        "OpenFL"
+        "OpenFL",
+        "Hugging Face Transformers",
+        "Crisp API"
       ],
       "Data Services": [
         "Glue",
@@ -67,11 +71,13 @@
       ],
       "Data Ingestion Patterns": [
         "Batch",
+        "Batch Processing",
         "Streaming",
         "CDC",
         "IoT",
         "Web",
-        "offline RL"
+        "offline RL",
+        "Parallel Processing"
       ],
       "Data Storage": [
         "Data Lakes",
@@ -110,10 +116,11 @@
         ],
         "Architectures": [
           "Qwen",
+          "Qwen2.5",
           "GPT",
           "Deepseek",
           "Llama",
-          "Qwen"
+          "LLaVA"
         ],
         "Training Methods": [
           "Pre-training",
@@ -145,10 +152,12 @@
         "Optimization": [
           "Gradient Checkpointing",
           "FlashAttention",
+          "Flash Attention 2",
           "BF16",
           "Offloading",
           "LoRA",
-          "Distillation"
+          "Distillation",
+          "Caching (cachetools)"
         ]
       },
       "Experiment Management": {
@@ -168,11 +177,14 @@
           "DVC",
           "Docker",
           "Conda",
+          "Conda/pip",
           "Git",
+          "Git (Version Control)",
           "Github",
           "Gitlab",
           "LaTeX",
-          "OpenFL"
+          "OpenFL",
+          "YAML-based Configuration"
         ]
       }
     },
@@ -183,12 +195,16 @@
           "TorchServe",
           "TF Serving",
           "Flask",
-          "TensorFlow Lite"
+          "FastAPI",
+          "TensorFlow Lite",
+          "CLI Interface",
+          "Nginx"
         ],
         "Containers": [
           "Docker",
           "Helm",
-          "KubeFlow"
+          "KubeFlow",
+          "Kubernetes"
         ],
         "Scaling": [
           "HPA",
@@ -204,7 +220,9 @@
           "LIME",
           "SHAP",
           "Captum",
-          "Foolbox"
+          "Foolbox",
+          "Task-based System",
+          "Agent-based Architecture"
         ],
         "Orchestration": [
           "Router-Worker",
@@ -246,7 +264,9 @@
           "Prometheus",
           "Grafana",
           "GPU Usage",
-          "Carbon Footprint"
+          "Carbon Footprint",
+          "concurrent-log-handler",
+          "tqdm"
         ],
         "Model Quality": [
           "Drift Detection",
@@ -325,13 +345,18 @@
         ]
       },
       "RAG": {
-        "Retrieval Systems": [],
+        "Retrieval Systems": [
+          "LlamaIndex (RAG & Knowledge Graph)",
+          "Langchain"
+        ],
         "Vector Databases": [
-          "Faiss"
+          "Faiss",
+          "sentence-transformers"
         ],
         "Pipeline Design": [
           "Multi-stage Reranking",
-          "Semantic Chunking"
+          "Semantic Chunking",
+          "json-repair"
         ]
       },
       "Agents": {
@@ -369,7 +394,9 @@
           "Scene Graphs",
           "VQA",
           "Speech Emotion",
-          "vision transformers"
+          "vision transformers",
+          "BLIP",
+          "LLaVA"
         ]
       }
     },
@@ -402,7 +429,8 @@
         "Hybrid Querying": [
           "In-Database ML",
           "GPU Querying",
-          "Semantic Caching"
+          "Semantic Caching",
+          "Caching"
         ]
       },
       "Neuromorphic Computing": {
@@ -426,19 +454,31 @@
         "PyTorch",
         "TensorFlow",
         "Keras",
-        "Scikit-learn"
+        "Scikit-learn",
+        "Hugging Face Transformers",
+        "NumPy",
+        "Langchain",
+        "LlamaIndex",
+        "Flash Attention 2",
+        "CUDA"
       ],
       "Programming Languages": [
         "Python",
+        "Python 3.8+",
         "JavaScript",
-        "TypeScript"
+        "TypeScript",
+        "SQLAlchemy"
       ],
       "Web Dev & UI": [
         "Node.js",
         "React",
         "Next.js",
         "Tailwind CSS",
-        "Flask"
+        "Flask",
+        "FastAPI",
+        "Nginx",
+        "CLI Interface",
+        "matplotlib"
       ],
       "Mobile Dev": [
         "React Native"
@@ -448,12 +488,26 @@
         "OpenCV",
         "LaTeX",
         "AWS",
-        "Firebase"
+        "AWS S3",
+        "Firebase",
+        "Git (Version Control)",
+        "Kubernetes",
+        "Conda/pip",
+        "YAML-based Configuration",
+        "Task-based System",
+        "Agent-based Architecture",
+        "Batch Processing",
+        "Parallel Processing",
+        "tqdm",
+        "concurrent-log-handler"
       ],
       "Databases": [
         "PostgreSQL",
         "Firebase",
-        "MongoDB"
+        "MongoDB",
+        "MongoDB (Crawler Integration)",
+        "Redis",
+        "SQLAlchemy"
       ],
       "Libraries & Concepts": [
         "Captum",
@@ -464,7 +518,14 @@
         "OpenAI Gym",
         "MuJoCo",
         "OpenFL",
-        "RDKit"
+        "RDKit",
+        "networkx",
+        "sentence-transformers",
+        "json-repair",
+        "BLIP",
+        "LLaVA",
+        "Qwen2.5",
+        "Crisp API"
       ]
     }
   },

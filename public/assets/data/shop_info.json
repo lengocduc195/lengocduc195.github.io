@@ -1,0 +1,66 @@
+{
+  "shipping": {
+    "title": "Thông tin vận chuyển",
+    "items": [
+      "Miễn phí vận chuyển cho đơn hàng trên 500.000đ",
+      "Giao hàng trong 2-3 ngày làm việc",
+      "Đổi trả trong vòng 7 ngày"
+    ]
+  },
+  "support": {
+    "title": "Hỗ trợ khách hàng",
+    "items": [
+      "Hotline: 0378871736",
+      "Email: support@example.com",
+      "Chat trực tuyến: 8h-22h hàng ngày"
+    ]
+  },
+  "payment": {
+    "title": "Phương thức thanh toán",
+    "items": [
+      "Thanh toán khi nhận hàng (COD)",
+      "Chuyển khoản ngân hàng",
+      "Thẻ tín dụng/Thẻ ghi nợ",
+      "Ví điện tử (MoMo, ZaloPay, VNPay)"
+    ]
+  },
+  "policy": {
+    "title": "Chính sách",
+    "items": [
+      "Bảo mật thông tin",
+      "Chính sách đổi trả",
+      "Điều khoản sử dụng",
+      "Chính sách vận chuyển"
+    ]
+  },
+  "orderStatus": {
+    "title": "Trạng thái đơn hàng",
+    "statuses": [
+      {
+        "code": "pending",
+        "text": "Chờ xác nhận",
+        "color": "yellow"
+      },
+      {
+        "code": "processing",
+        "text": "Đang xử lý",
+        "color": "blue"
+      },
+      {
+        "code": "shipped",
+        "text": "Đang giao hàng",
+        "color": "purple"
+      },
+      {
+        "code": "delivered",
+        "text": "Đã giao hàng",
+        "color": "green"
+      },
+      {
+        "code": "cancelled",
+        "text": "Đã hủy",
+        "color": "red"
+      }
+    ]
+  }
+}

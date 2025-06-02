@@ -2,13 +2,14 @@
 
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
+import { usePathname } from 'next/navigation';
+import UserProfileButton from './auth/UserProfileButton';
 
 interface NavItem {
   path: string;
   label: string;
   highlight?: boolean;
 }
-import { usePathname } from 'next/navigation';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -63,7 +64,7 @@ const Navbar = () => {
   return (
     <nav
       ref={navRef}
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-gray-900/95 shadow-lg backdrop-blur-sm py-2' : hasHeroGradient ? 'bg-gray-900/30 backdrop-blur-sm shadow-md py-4' : 'bg-transparent py-4'}`}
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-gray-900/95 shadow-lg backdrop-blur-sm py-2' : hasHeroGradient ? 'bg-gray-900/50 backdrop-blur-sm shadow-md py-4' : 'bg-gray-900/70 backdrop-blur-sm py-4'}`}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
         <Link href="/" className="text-white text-2xl font-bold drop-shadow-md flex items-center group">
@@ -92,47 +93,59 @@ const Navbar = () => {
         </button>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex space-x-1 relative">
-          {navItems.map((item) => (
-            <div key={item.path} className="relative px-1">
-              <Link
-                href={item.path}
-                className={`relative px-3 py-2 rounded-md text-sm font-medium transition-all duration-200
-                  ${pathname === item.path ? 'text-white' : item.highlight ? 'text-indigo-300 hover:text-white' : 'text-gray-300 hover:text-white'}
-                  ${item.highlight ? 'bg-gradient-to-r from-indigo-600/20 to-purple-600/20 hover:from-indigo-600/30 hover:to-purple-600/30 border-b border-indigo-500/30' : ''}
-                `}
-                onMouseEnter={() => setActiveItem(item.path)}
-                onMouseLeave={() => setActiveItem(pathname)}
-              >
-                {item.highlight && (
-                  <>
-                    <span className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 rounded-md blur-sm"></span>
-                    <span className="absolute -right-1 -top-1 w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
-                  </>
-                )}
-                {item.label}
+        <div className="hidden md:flex items-center">
+          <div className="flex space-x-1 relative mr-4">
+            {navItems.map((item) => (
+              <div key={item.path} className="relative px-1">
+                <Link
+                  href={item.path}
+                  className={`relative px-3 py-2 rounded-md text-sm font-medium transition-all duration-200
+                    ${pathname === item.path ? 'text-white' : item.highlight ? 'text-indigo-300 hover:text-white' : 'text-gray-300 hover:text-white'}
+                    ${item.highlight ? 'bg-gradient-to-r from-indigo-600/20 to-purple-600/20 hover:from-indigo-600/30 hover:to-purple-600/30 border-b border-indigo-500/30' : ''}
+                  `}
+                  onMouseEnter={() => setActiveItem(item.path)}
+                  onMouseLeave={() => setActiveItem(pathname)}
+                >
+                  {item.highlight && (
+                    <>
+                      <span className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 rounded-md blur-sm"></span>
+                      <span className="absolute -right-1 -top-1 w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
+                    </>
+                  )}
+                  {item.label}
 
-                {pathname === item.path && (
+                  {pathname === item.path && (
+                    <span
+                      className={`absolute bottom-0 left-0 h-0.5 w-full opacity-100 transition-opacity duration-300 ${item.highlight ? 'bg-gradient-to-r from-indigo-500 to-purple-600' : 'bg-gradient-to-r from-blue-500 to-purple-600'}`}
+                    />
+                  )}
+                </Link>
+                {activeItem === item.path && activeItem !== pathname && (
                   <span
-                    className={`absolute bottom-0 left-0 h-0.5 w-full opacity-100 transition-opacity duration-300 ${item.highlight ? 'bg-gradient-to-r from-indigo-500 to-purple-600' : 'bg-gradient-to-r from-blue-500 to-purple-600'}`}
+                    className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-blue-400/70 to-purple-500/70 w-full opacity-100 transition-opacity duration-200"
                   />
                 )}
-              </Link>
-              {activeItem === item.path && activeItem !== pathname && (
-                <span
-                  className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-blue-400/70 to-purple-500/70 w-full opacity-100 transition-opacity duration-200"
-                />
-              )}
-            </div>
-          ))}
+              </div>
+            ))}
+          </div>
+
+          {/* User Profile Button */}
+          <UserProfileButton />
         </div>
       </div>
 
       {/* Mobile Navigation */}
       <div
-        className={`md:hidden overflow-hidden transition-all duration-300 ${mobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
+        className={`md:hidden overflow-hidden transition-all duration-300 ${mobileMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}
       >
         <div className="bg-gray-900/95 backdrop-blur-sm px-4 py-2 mt-2 space-y-1 rounded-b-lg shadow-lg">
+          {/* User Profile Section (Mobile) */}
+          <div className="py-3 border-b border-gray-800 mb-2">
+            <div className="px-3">
+              <UserProfileButton />
+            </div>
+          </div>
+
           {navItems.map((item) => (
             <div
               key={item.path}

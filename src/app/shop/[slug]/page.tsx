@@ -17,7 +17,9 @@ export async function generateStaticParams() {
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
-  const { slug } = params;
+  // Đảm bảo params đã được giải quyết trước khi sử dụng
+  const resolvedParams = await Promise.resolve(params);
+  const { slug } = resolvedParams;
   const product = await getShopProductBySlug(slug);
 
   if (!product) {

@@ -13,22 +13,22 @@ interface ShopProductListProps {
 export default function ShopProductList({ initialProducts }: ShopProductListProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  
+
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string>(searchParams.get('category') || 'all');
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [sortCriteria, setSortCriteria] = useState<'price_asc' | 'price_desc' | 'name_asc' | 'newest'>('newest');
 
   // Lấy tất cả các danh mục từ sản phẩm
   const categories = useMemo(() => {
     const categorySet = new Set<string>();
     categorySet.add('all');
-    
+
     initialProducts.forEach(product => {
       if (product.category) {
         categorySet.add(product.category);
       }
     });
-    
+
     return Array.from(categorySet);
   }, [initialProducts]);
 
@@ -41,6 +41,21 @@ export default function ShopProductList({ initialProducts }: ShopProductListProp
     }
   }, [selectedCategory, router]);
 
+  // Xử lý tham số URL category khi trang được tải
+  useEffect(() => {
+    const categoryParam = searchParams.get('category');
+    if (categoryParam) {
+      // Tìm danh mục phù hợp (không phân biệt chữ hoa/thường)
+      const matchedCategory = categories.find(
+        cat => cat.toLowerCase() === categoryParam.toLowerCase()
+      );
+
+      if (matchedCategory) {
+        setSelectedCategory(matchedCategory);
+      }
+    }
+  }, [searchParams, categories]);
+
   const filteredAndSortedProducts = useMemo(() => {
     if (!Array.isArray(initialProducts)) return [];
 
@@ -50,10 +65,10 @@ export default function ShopProductList({ initialProducts }: ShopProductListProp
       // Lọc theo từ khóa tìm kiếm
       const nameMatch = product.name.toLowerCase().includes(lowerSearchTerm);
       const descMatch = product.description.toLowerCase().includes(lowerSearchTerm);
-      
+
       // Lọc theo danh mục
       const categoryMatch = selectedCategory === 'all' || product.category === selectedCategory;
-      
+
       return (nameMatch || descMatch) && categoryMatch;
     });
 
@@ -97,7 +112,7 @@ export default function ShopProductList({ initialProducts }: ShopProductListProp
       'accessories': 'bg-blue-500',
       'gift-sets': 'bg-pink-500'
     };
-    
+
     return colorMap[category.toLowerCase()] || 'bg-gray-500';
   };
 
@@ -109,6 +124,7 @@ export default function ShopProductList({ initialProducts }: ShopProductListProp
           {categories.map(category => (
             <button
               key={category}
+              data-category={category}
               onClick={() => setSelectedCategory(category)}
               className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
                 selectedCategory === category
@@ -179,16 +195,16 @@ export default function ShopProductList({ initialProducts }: ShopProductListProp
               >
                 {/* Product Image */}
                 <div className="relative h-48 overflow-hidden">
-                  <div 
+                  <div
                     className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
                     style={{ backgroundImage: `url(${product.image})` }}
                   />
-                  
+
                   {/* Category Badge */}
                   <div className={`absolute top-3 left-3 ${getCategoryColor(product.category)} text-white text-xs font-bold px-2 py-1 rounded-md`}>
                     {product.category}
                   </div>
-                  
+
                   {/* Sale Badge */}
                   {product.salePrice && (
                     <div className="absolute top-3 right-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-md">
@@ -205,7 +221,7 @@ export default function ShopProductList({ initialProducts }: ShopProductListProp
                   <p className="text-sm text-gray-600 dark:text-gray-300 mt-2 line-clamp-2 flex-grow">
                     {product.description}
                   </p>
-                  
+
                   {/* Price */}
                   <div className="mt-4 flex items-center">
                     {product.salePrice ? (

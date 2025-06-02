@@ -1,0 +1,98 @@
+{
+  "id": "daily-job-scheduling-methods",
+  "title": "Run Code Daily at 9AM: Methods & Trade-offs",
+  "description": "An exhaustive comparison of techniques to schedule code execution at 9AM daily using cron jobs, Python schedulers, Docker, and cloud-native services. Includes examples, use cases, pros and cons.",
+  "author": "Duc Le",
+  "date": "2025-05-21",
+  "content": [
+    {
+      "type": "text",
+      "text": "You want to execute code every day at 9AM — it seems simple, but the best solution depends on your environment, scaling needs, reliability, and infrastructure. Below are popular methods broken down."
+    },
+    {
+      "type": "text",
+      "text": "**A. Cron Job (Linux/macOS)**\n- 📌 Syntax: `0 9 * * * /usr/bin/python3 /home/user/job.py`\n- ✅ Native, fast, low overhead\n- ❌ No retry/logging unless manually added\n- 🧠 Use When: You run a server or Raspberry Pi and need system-level scheduling.\n- 🔧 Setup:\n  1. Run `crontab -e`\n  2. Add the line above\n  3. Make sure `job.py` is executable and logs somewhere"
+    },
+    {
+      "type": "text",
+      "text": "**B. Windows Task Scheduler**\n- 📌 GUI-based or use `schtasks` command\n- ✅ Beginner-friendly, GUI interface\n- ❌ Less control, not cross-platform\n- 🧠 Use When: You're on Windows and want to run local scripts easily\n- 🔧 Setup:\n  1. Open Task Scheduler\n  2. Create Basic Task → Trigger: Daily @ 9AM → Action: Start Program → `python` + path to `.py` file"
+    },
+    {
+      "type": "text",
+      "text": "**C. Python `schedule` Library**\n- 📌 Code sample:\n```python\nimport schedule, time\nschedule.every().day.at(\"09:00\").do(job)\nwhile True:\n    schedule.run_pending()\n    time.sleep(1)\n```\n- ✅ Easy to use, readable\n- ❌ Must run continuously (needs a long-running process)\n- 🧠 Use When: Lightweight automation on a server or during development"
+    },
+    {
+      "type": "text",
+      "text": "**D. APScheduler (Advanced Python Scheduler)**\n- 📌 Code sample:\n```python\nfrom apscheduler.schedulers.blocking import BlockingScheduler\nscheduler = BlockingScheduler()\nscheduler.add_job(job, 'cron', hour=9)\nscheduler.start()\n```\n- ✅ Supports cron, background threads, DB persistence\n- ❌ Slightly heavier, may require config for production\n- 🧠 Use When: Running inside Flask, FastAPI, or Django apps"
+    },
+    {
+      "type": "text",
+      "text": "**E. AWS Lambda + CloudWatch Events**\n- 📌 Set CloudWatch rule: `cron(0 9 * * ? *)`\n- ✅ Serverless, scales automatically, low-cost\n- ❌ Requires IAM roles, deployment pipeline\n- 🧠 Use When: Cloud-native workloads with scalability or no infrastructure\n- 🔧 Setup:\n  1. Write Lambda code\n  2. Create CloudWatch Rule → Target: Lambda\n  3. Attach permissions"
+    },
+    {
+      "type": "text",
+      "text": "**F. Google Cloud Functions + Cloud Scheduler**\n- 📌 Cron syntax: `0 9 * * *`\n- ✅ Great GCP integration, easy to trigger via Pub/Sub or HTTP\n- ❌ GCP-specific, billing applies\n- 🧠 Use When: On Google Cloud and want minimal ops\n- 🔧 Setup:\n  1. Deploy function\n  2. Create Cloud Scheduler job → Trigger HTTP or Pub/Sub"
+    },
+    {
+      "type": "text",
+      "text": "**G. Docker + Cron Inside Container**\n- 📌 Dockerfile example:\n```dockerfile\nFROM python:3.10\nCOPY . /app\nRUN apt-get update && apt-get install -y cron\nCOPY my-crontab /etc/cron.d/my-cron\nRUN chmod 0644 /etc/cron.d/my-cron && crontab /etc/cron.d/my-cron\nCMD cron -f\n```\n- ✅ Reproducible, good for CI/CD or teams\n- ❌ Logging & debugging inside container can be tricky\n- 🧠 Use When: You're deploying with containers and want repeatable environments"
+    },
+    {
+      "type": "text",
+      "text": "**H. Airflow / Prefect / Dagster**\n- 📌 Example DAG (Airflow):\n```python\n@dag(schedule_interval='0 9 * * *', start_date=...) \ndef my_daily_job(): ...\n```\n- ✅ Logging, retries, visualization, dependency handling\n- ❌ Overkill for simple jobs, requires setup and orchestration\n- 🧠 Use When: You have multiple jobs, pipelines, or ML tasks"
+    }
+  ],
+  "topics": [
+    "Job Scheduling",
+    "Automation",
+    "DevOps",
+    "Cloud",
+    "Python"
+  ],
+  "technologies": [
+    "Linux",
+    "Windows",
+    "Python",
+    "Docker",
+    "AWS Lambda",
+    "GCP",
+    "Airflow"
+  ],
+  "readingTime": "12 min read",
+  "videoUrl": "https://www.youtube.com/watch?v=ZHhC6PzZ2hY",
+  "githubUrl": "https://github.com/yourusername/cron-schedulers-guide",
+  "main_image": {
+    "url": "https://cdn.prod.website-files.com/603164e08678e20760ec256c/6552d369c35f72881a3dd6e2_job-scheduling-guide.png",
+    "caption": "Scheduling Strategies: From Local Cron to Cloud Orchestration"
+  },
+  "notableObservations": "Serverless options (Lambda, Cloud Functions) eliminate maintenance overhead and are cost-effective for infrequent jobs.",
+  "unexpectedInsights": "Incorporating retry mechanisms or monitoring is often neglected in simple cron setups but becomes crucial in production.",
+  "images": [
+    {
+      "url": "/images/scheduler-comparison-table.png",
+      "caption": "Comparative Summary: Cron vs Serverless vs Orchestrators"
+    },
+    {
+      "url": "/images/apscheduler-diagram.png",
+      "caption": "APScheduler Modes and Workflow"
+    }
+  ],
+  "related": [
+    {
+      "title": "From Scripts to Pipelines: When to Use Orchestrators",
+      "url": "/blogs/pipeline-orchestration"
+    },
+    {
+      "title": "Build Resilient Schedulers with Retry and Alerting",
+      "url": "/blogs/scheduler-retry-alerting"
+    }
+  ],
+  "references": {
+    "1": "https://crontab.guru",
+    "2": "https://schedule.readthedocs.io",
+    "3": "https://apscheduler.readthedocs.io/en/stable/",
+    "4": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html",
+    "5": "https://cloud.google.com/scheduler/docs",
+    "6": "https://airflow.apache.org/docs/apache-airflow/stable/index.html"
+  }
+}

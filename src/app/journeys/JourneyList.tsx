@@ -43,14 +43,24 @@ export default function JourneyList({ initialJourneys }: JourneyListProps) {
 
     switch (sortCriteria) {
       case 'date_asc':
-        filtered.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+        filtered.sort((a, b) => {
+          // Use start_date if available, otherwise fall back to date
+          const dateA = a.start_date || a.date || '';
+          const dateB = b.start_date || b.date || '';
+          return new Date(dateA).getTime() - new Date(dateB).getTime();
+        });
         break;
       case 'category_asc':
          filtered.sort((a, b) => (a.category ?? '').localeCompare(b.category ?? ''));
         break;
       case 'date_desc':
       default:
-        filtered.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        filtered.sort((a, b) => {
+          // Use start_date if available, otherwise fall back to date
+          const dateA = a.start_date || a.date || '';
+          const dateB = b.start_date || b.date || '';
+          return new Date(dateB).getTime() - new Date(dateA).getTime();
+        });
         break;
     }
     return filtered;
@@ -75,7 +85,7 @@ export default function JourneyList({ initialJourneys }: JourneyListProps) {
               className="w-full pl-10 px-4 py-3 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
             />
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="relative">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Category</label>
@@ -96,7 +106,7 @@ export default function JourneyList({ initialJourneys }: JourneyListProps) {
                 </div>
               </div>
             </div>
-            
+
             <div className="relative">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Sort By</label>
               <div className="relative">
@@ -138,16 +148,16 @@ export default function JourneyList({ initialJourneys }: JourneyListProps) {
               setSelectedCategory('all');
               setSortCriteria('date_desc');
             }}
-            className="px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+            className="px-6 py-3 bg-gradient-to-r from-gray-500 to-gray-600 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50"
           >
             Reset Filters
           </button>
         </div>
       ) : (
-        <div className="relative border-l-4 border-blue-500 dark:border-blue-700 ml-6 space-y-12 animate-fade-in">
+        <div className="relative border-l-4 border-gray-200 dark:border-gray-700 ml-6 space-y-12 animate-fade-in">
           {/* Timeline header with decorative elements */}
-          <div className="absolute -left-3 -top-3 w-6 h-6 bg-blue-500 dark:bg-blue-700 rounded-full shadow-md z-10"></div>
-          <div className="absolute -left-3 -bottom-3 w-6 h-6 bg-blue-500 dark:bg-blue-700 rounded-full shadow-md z-10"></div>
+          <div className="absolute -left-3 -top-3 w-6 h-6 bg-gray-200 dark:bg-gray-700 rounded-full shadow-md z-10"></div>
+          <div className="absolute -left-3 -bottom-3 w-6 h-6 bg-gray-200 dark:bg-gray-700 rounded-full shadow-md z-10"></div>
           {filteredAndSortedJourneys.map((entry, index) => {
              // Create slug from title or id
             let slug: string | null = null;
@@ -217,71 +227,95 @@ export default function JourneyList({ initialJourneys }: JourneyListProps) {
 
             // Add animation delay based on index for staggered appearance
             const animationDelay = `${index * 0.1}s`;
-            
+
             return (
                 <div key={itemKey} className="ml-10 relative group" style={{ animationDelay }}>
                   {/* Enhanced timeline dot with animation */}
-                  <span className={`absolute flex items-center justify-center w-10 h-10 bg-gradient-to-br ${gradientClass} rounded-full -left-14 ring-4 ring-white dark:ring-gray-900 shadow-lg group-hover:scale-110 transition-all duration-300 z-10`}>
-                    <span className="text-white">
+                  <span className="absolute flex items-center justify-center w-10 h-10 bg-gray-200 dark:bg-gray-700 rounded-full -left-14 ring-4 ring-white dark:ring-gray-900 shadow-lg group-hover:scale-110 transition-all duration-300 z-10">
+                    <span className="text-gray-600 dark:text-gray-300">
                       {categoryIcon}
                     </span>
                   </span>
 
-                  {/* Animated pulse effect around timeline dot */}
-                  <span className={`absolute w-10 h-10 -left-14 rounded-full bg-gradient-to-br ${gradientClass} opacity-30 animate-ping`}
-                    style={{ animationDuration: '3s', animationIterationCount: 'infinite' }}></span>
-
-                  {/* Timeline connector line with animation */}
-                  <span className="absolute w-3 h-3 bg-blue-500 rounded-full -left-10 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                  {/* Animated pulse effect around timeline dot - removed */}
 
                   {/* Enhanced content card with hover effect and clickable area */}
                   <div
-                    className="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:border-blue-300 dark:hover:border-blue-700 cursor-pointer"
+                    className="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:border-gray-300 dark:hover:border-gray-600 cursor-pointer"
                     onClick={() => journeyDetailUrl && window.location.href = journeyDetailUrl}
                   >
-                    {/* Card header with improved layout */}
-                    <div className="flex flex-wrap items-start justify-between mb-3 gap-2">
-                      <div className="flex-1">
-                        <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                    {/* Card header with improved layout - Category badge at top right */}
+                    <div className="relative mb-3">
+                      {/* Category badge positioned at absolute top right */}
+                      {entry.category && (
+                        <span className="absolute top-0 right-0 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-sm font-medium px-4 py-1.5 rounded-full shadow-md transform transition-transform duration-300 group-hover:scale-105 flex items-center">
+                          {entry.category}
+                        </span>
+                      )}
+
+                      <div className="pr-24"> {/* Add padding to the right to make space for the category badge */}
+                        <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white transition-colors">
                           {journeyDetailUrl ? (
-                            <Link href={journeyDetailUrl} className="hover:underline decoration-2 decoration-blue-500 underline-offset-2">
+                            <Link href={journeyDetailUrl} className="hover:underline decoration-2 decoration-gray-500 underline-offset-2">
                               {entry.title ?? 'Untitled Entry'}
                             </Link>
                           ) : (
                             <span>{entry.title ?? 'Untitled Entry'}</span>
                           )}
                         </h3>
-                        
-                        {/* Date and author with improved layout */}
-                        <div className="flex items-center flex-wrap gap-2 mt-2 text-gray-500 dark:text-gray-400">
+                      </div>
+                    </div>
+
+                    {/* Date and author with improved layout */}
+                    <div className="flex items-center flex-wrap gap-2 mt-2 mb-3 text-gray-500 dark:text-gray-400">
+                      <div className="flex items-center">
+                        <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                          <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
+                        </svg>
+                        <time className="text-sm">
+                          {entry.start_date && entry.end_date ? (
+                            (() => {
+                              const startDate = new Date(entry.start_date);
+                              const endDate = new Date(entry.end_date);
+                              const diffTime = Math.abs(endDate.getTime() - startDate.getTime());
+                              const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                              return (
+                                <span className="flex flex-col">
+                                  <span className="font-medium text-gray-700 dark:text-gray-300">
+                                    {startDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })} - {endDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+                                  </span>
+                                  <span className="text-gray-500 dark:text-gray-400 text-xs">
+                                    Duration: {diffDays} day{diffDays !== 1 ? 's' : ''}
+                                  </span>
+                                </span>
+                              );
+                            })()
+                          ) : entry.start_date ? (
+                            <span className="font-medium text-gray-700 dark:text-gray-300">
+                              Started on {new Date(entry.start_date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+                            </span>
+                          ) : entry.date ? (
+                            <span className="font-medium text-gray-700 dark:text-gray-300">
+                              {new Date(entry.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+                            </span>
+                          ) : (
+                            'N/A'
+                          )}
+                        </time>
+                      </div>
+
+                      {entry.author && (
+                        <>
+                          <span className="text-gray-400 hidden md:inline">•</span>
                           <div className="flex items-center">
                             <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                              <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
+                              <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
                             </svg>
-                            <time className="text-sm">{entry.date ?? 'N/A'}</time>
+                            <span className="text-sm">
+                              {Array.isArray(entry.author) ? entry.author.join(', ') : entry.author}
+                            </span>
                           </div>
-                          
-                          {entry.author && (
-                            <>
-                              <span className="text-gray-400 hidden md:inline">•</span>
-                              <div className="flex items-center">
-                                <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                  <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
-                                </svg>
-                                <span className="text-sm">
-                                  {Array.isArray(entry.author) ? entry.author.join(', ') : entry.author}
-                                </span>
-                              </div>
-                            </>
-                          )}
-                        </div>
-                      </div>
-                      
-                      {/* Category badge with improved styling */}
-                      {entry.category && (
-                        <span className={`bg-gradient-to-r ${gradientClass} text-white text-sm font-medium px-4 py-1.5 rounded-full shadow-md transform transition-transform duration-300 group-hover:scale-105 flex items-center`}>
-                          {entry.category}
-                        </span>
+                        </>
                       )}
                     </div>
 
@@ -299,7 +333,7 @@ export default function JourneyList({ initialJourneys }: JourneyListProps) {
                           typeof tag === 'string' && (
                             <span
                               key={tag}
-                              className="bg-gray-100 text-gray-800 text-xs font-medium px-3 py-1.5 rounded-full dark:bg-gray-700 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-blue-900/30 hover:text-blue-800 dark:hover:text-blue-300 transition-colors cursor-pointer transform hover:scale-105 transition-transform duration-200"
+                              className="bg-gray-100 text-gray-800 text-xs font-medium px-3 py-1.5 rounded-full dark:bg-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 hover:text-gray-900 dark:hover:text-gray-100 transition-colors cursor-pointer transform hover:scale-105 transition-transform duration-200"
                               onClick={(e) => {
                                 e.stopPropagation();
                                 setSearchTerm(tag);
